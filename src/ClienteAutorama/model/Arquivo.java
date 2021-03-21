@@ -12,5 +12,7 @@ public class Arquivo implements Serializable{
         arquivo = arq;    
     }
            
-    
+    public File getArquivo(){
+        return arquivo;
+    }
 }
