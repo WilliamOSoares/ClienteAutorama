@@ -54,50 +54,25 @@ public class Comunication {
             String line;
             OutputStream os = cliente.getOutputStream();
             while ((line = br.readLine()) != null) {
-               // process the line.
-               String rawString = line;
-               ByteBuffer buffer = StandardCharsets.UTF_8.encode(rawString); 
-               System.out.println(line);
+                // process the line.
+                String rawString = line.concat("\n");
+                ByteBuffer buffer = StandardCharsets.UTF_8.encode(rawString); 
+                System.out.println(line);
+                System.out.println(buffer.array().length);
+                // A cada 8 bytes ele envia um 0x00 no final da mensagem, este if tira este caracter
+                if(buffer.array().length <= 8){
+                    os.write(buffer.array(), 0, buffer.array().length);
+                } else {
+                    os.write(buffer.array(), 0, buffer.array().length -1);
+                }
                
-               os.write(buffer.array(), 0, buffer.array().length);
-               os.flush();
-               
+                for(int i = 0; i<10000;i++){/*Wait*/}
+                os.flush();
             }
             os.close();
-            /*
-            String rawString = "Entwickeln Sie mit Vergnügen";
-            ByteBuffer buffer = StandardCharsets.UTF_8.encode(rawString); 
-            
-            String utf8EncodedString = StandardCharsets.UTF_8.decode(buffer).toString();
-            assertEquals(rawString, utf8EncodedString);
-            
-            BufferedOutputStream bf = new BufferedOutputStream(cliente.getOutputStream());
-            byte[] bytea = new byte[(int)msg.getArquivo().length()];
-            FileInputStream fis = new FileInputStream(msg.getArquivo());
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            bis.read(bytea,0,bytea.length);
-            OutputStream os = cliente.getOutputStream();
-            System.out.println("Enviando...");
-            os.write(bytea,0,bytea.length);
-            os.flush();
-            bytea = serializarArquivo(msg);
-            bf.write(bytea);
-            bf.flush();
-            bf.close();
-            //socket.close();
-            */
         } catch (IOException ex) {
             Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
         }
-        /*
-            PrintStream saida;
-            try{
-            saida = new PrintStream(cliente.getOutputStream());
-            saida.println(msg);
-            }catch(IOException ex){
-            System.out.println(ex);
-            }
-        */
     }
     
     

@@ -117,6 +117,12 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel11.setText("Potência da leitura");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 250, -1, -1));
+
+        textPortaSerial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textPortaSerialActionPerformed(evt);
+            }
+        });
         getContentPane().add(textPortaSerial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 170, 30));
 
         textAntena.addActionListener(new java.awt.event.ActionListener() {
@@ -180,6 +186,10 @@ public class Principal extends javax.swing.JFrame {
     private void textAntenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textAntenaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textAntenaActionPerformed
+
+    private void textPortaSerialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPortaSerialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textPortaSerialActionPerformed
 
     
     public static void main(String args[]) {
