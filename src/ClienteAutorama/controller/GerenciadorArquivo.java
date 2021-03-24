@@ -1,4 +1,3 @@
-
 package ClienteAutorama.controller;
 
 import java.io.File;
@@ -29,6 +28,7 @@ public class GerenciadorArquivo {
             configInicial.createNewFile();
             //FileOutputStream arq = new FileOutputStream(configInicial.getPath(), true);
             PrintWriter escrita = new PrintWriter(configInicial); 
+            escrita.println("configLeitor");
             escrita.println(portaSerial);
             escrita.println(baudrate);
             escrita.println(regiao);

@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 import ClienteAutorama.controller.Comunication;
 import ClienteAutorama.controller.Corrida;
 import ClienteAutorama.controller.GerenciadorArquivo;
-import ClienteAutorama.model.Arquivo;
 import java.io.File;
 
 
@@ -19,7 +18,8 @@ public class Principal extends javax.swing.JFrame {
     private static Socket cliente;
     Comunication comunicacao = Comunication.getInstance();
     GerenciadorArquivo arquivo = GerenciadorArquivo.getInstance();
-    Arquivo mensagem;
+    Corrida corrida = Corrida.getInstance();
+    File mensagem;
     
     public Principal() {
         //comunicacao.iniciaCliente();
@@ -76,9 +76,11 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(resultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 270, 30));
         getContentPane().add(msgServer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 280, 30));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 51, 153));
         jLabel1.setText("AUTORAMA COM RFID");
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 130, 30));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 190, 40));
         getContentPane().add(msgCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 270, 30));
 
         jLabel2.setText("IP");
@@ -148,7 +150,7 @@ public class Principal extends javax.swing.JFrame {
         });
         getContentPane().add(textPower, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 270, 130, 30));
 
-        setSize(new java.awt.Dimension(725, 484));
+        setSize(new java.awt.Dimension(716, 469));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -158,17 +160,26 @@ public class Principal extends javax.swing.JFrame {
 
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        this.setVisible(false);
+        TelaInicial telaInicial = new TelaInicial();
+        telaInicial.setLocationRelativeTo(this);
+        telaInicial.setVisible(true);
+        
+        
         if (!textIP.getText().isEmpty() && !textPorta.getText().isEmpty() && !textPortaSerial.getText().isEmpty() && !textBaudrate.getText().isEmpty() && !textRegiao.getText().isEmpty() && !textAntena.getText().isEmpty() && !textProtocolo.getText().isEmpty() && !textPower.getText().isEmpty()){
             comunicacao.iniciaCliente(textIP.getText(), textPorta.getText());
-            mensagem = new Arquivo(arquivo.configInicialLeitor(textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText()));
+            mensagem = arquivo.configInicialLeitor(textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText());
             comunicacao.enviaMensagem(mensagem);
         }
-        
-        
         msgCliente.setText("Cliente: ''" + textIP.getText()+"''");
         //comunicacao.enviaMensagem(textIP.getText());
         resultado.setText("Servidor: ''recebi''");
-        msgServer.setText(comunicacao.recebeMensagem());
+        msgServer.setText("AAAAAAAAAAAAAAH");
+        corrida.getEPC(comunicacao.recebeMensagem());
+        //this.setEnabled(false);
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void textPortaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPortaActionPerformed

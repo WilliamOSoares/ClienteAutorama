@@ -1,14 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ClienteAutorama.controller;
 
-/**
- *
- * @author willi
- */
+import java.util.ArrayList;
+
 public class Corrida {
+    
+    private Corrida() {
+    }
+    
+    private static Corrida uniqueInstance = new Corrida();
+
+    public static Corrida getInstance() {
+	return uniqueInstance;
+    }  
+    
+    ArrayList<String> arrayEPC;
+       
+    
+    public void getEPC(ArrayList<String> array){
+        arrayEPC = new ArrayList(array);
+    }
     
 }
