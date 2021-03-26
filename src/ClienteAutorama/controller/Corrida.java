@@ -18,7 +18,11 @@ public class Corrida {
        
     
     public void getEPC(ArrayList<String> array){
-        arrayEPC = new ArrayList(array);
+        if (array != null){
+            arrayEPC = new ArrayList(array);
+        } else {
+            System.out.println("não foi");
+        }
     }
     
 }

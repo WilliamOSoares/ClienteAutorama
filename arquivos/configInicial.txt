@@ -1,6 +1,6 @@
-dddddddddddddddddddddddddd
-aaaaaaaaaaaaaaaa
-dddddd
-ggggggggggggggg
-hhhhhhhhhhh
-jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+tmr:///dev/ttyUSB0
+230400
+NA2
+1
+GEN2
+1500

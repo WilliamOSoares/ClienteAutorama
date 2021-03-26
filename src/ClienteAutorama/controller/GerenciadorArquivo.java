@@ -10,10 +10,14 @@ import java.util.logging.Logger;
 
 public class GerenciadorArquivo {
     
-    public File configInicial; 
+    public File configInicial;
+    public File carros;
+    public File pilotos;
+    public File pistas;
+    public File equipe;
     
     private GerenciadorArquivo() {
-        configInicial = new File("arquivos\\configInicial.txt");
+        
     }
     
     private static GerenciadorArquivo uniqueInstance = new GerenciadorArquivo();
@@ -22,20 +26,18 @@ public class GerenciadorArquivo {
 	return uniqueInstance;
     }
     
-    public File configInicialLeitor(String portaSerial, String baudrate, String regiao, String antena, String protocolo, String power){
+    public void configInicialLeitor(String portaSerial, String baudrate, String regiao, String antena, String protocolo, String power){
         
         try { 
+            configInicial = new File("arquivos\\configInicial.txt");
             configInicial.createNewFile();
-            //FileOutputStream arq = new FileOutputStream(configInicial.getPath(), true);
             PrintWriter escrita = new PrintWriter(configInicial); 
-            escrita.println("configLeitor");
             escrita.println(portaSerial);
             escrita.println(baudrate);
             escrita.println(regiao);
             escrita.println(antena);
             escrita.println(protocolo);
             escrita.println(power);
-            
             escrita.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GerenciadorArquivo.class.getName()).log(Level.SEVERE, null, ex);
@@ -43,7 +45,6 @@ public class GerenciadorArquivo {
             Logger.getLogger(GerenciadorArquivo.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return configInicial;
     }
     
 }

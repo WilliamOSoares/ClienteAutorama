@@ -161,23 +161,42 @@ public class Principal extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        this.setVisible(false);
-        TelaInicial telaInicial = new TelaInicial();
-        telaInicial.setLocationRelativeTo(this);
-        telaInicial.setVisible(true);
-        
-        
         if (!textIP.getText().isEmpty() && !textPorta.getText().isEmpty() && !textPortaSerial.getText().isEmpty() && !textBaudrate.getText().isEmpty() && !textRegiao.getText().isEmpty() && !textAntena.getText().isEmpty() && !textProtocolo.getText().isEmpty() && !textPower.getText().isEmpty()){
+            textIP.setText("augusto.ddns.net");
+            textPorta.setText("2020");
+            textPortaSerial.setText("tmr:///dev/ttyUSB0");
+            textBaudrate.setText("230400");
+            textRegiao.setText("NA2");
+            textAntena.setText("1");
+            textProtocolo.setText("GEN2");
+            textPower.setText("1500");
+            
             comunicacao.iniciaCliente(textIP.getText(), textPorta.getText());
-            mensagem = arquivo.configInicialLeitor(textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText());
-            comunicacao.enviaMensagem(mensagem);
+            comunicacao.start();
+            arquivo.configInicialLeitor(textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText());
+            comunicacao.POSTconfigLeitor(textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText());
+            while(true){
+                Scanner s = new Scanner(System.in);
+                System.out.printf("fala:");
+                int k = s.nextInt();
+                if(k == 1){
+                    break;
+                }
+            }
+            comunicacao.testando();
+            
         }
+        
         msgCliente.setText("Cliente: ''" + textIP.getText()+"''");
         //comunicacao.enviaMensagem(textIP.getText());
         resultado.setText("Servidor: ''recebi''");
         msgServer.setText("AAAAAAAAAAAAAAH");
-        corrida.getEPC(comunicacao.recebeMensagem());
+        //corrida.getEPC(comunicacao.recebeMensagem());
         //this.setEnabled(false);
+        //this.setVisible(false);
+        //TelaInicial telaInicial = new TelaInicial();
+        //telaInicial.setLocationRelativeTo(this);
+        //telaInicial.setVisible(true);
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
