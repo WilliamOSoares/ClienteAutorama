@@ -1,19 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ClienteAutorama.view;
 
-/**
- *
- * @author willi
- */
+import ClienteAutorama.controller.GerenciadorTelas;
+
 public class Cadastro extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Cadastro
-     */
+    GerenciadorTelas gerenciador;
+    
     public Cadastro() {
         initComponents();
     }
@@ -153,6 +145,11 @@ public class Cadastro extends javax.swing.JFrame {
         });
 
         jButton5.setText("Voltar para o menu");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 204));
@@ -976,6 +973,12 @@ public class Cadastro extends javax.swing.JFrame {
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
         this.jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_jButton22ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        gerenciador = GerenciadorTelas.getInstance();
+        gerenciador.setTelaCadastro(this);
+        gerenciador.abrirTelaInicialDoCadastro();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments

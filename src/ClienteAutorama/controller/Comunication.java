@@ -7,16 +7,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 
-public class Comunication implements Observer{//implements Runnable{
+public class Comunication{
     public static Socket cliente;  
     public String ip;
     public int door;    
@@ -39,13 +35,11 @@ public class Comunication implements Observer{//implements Runnable{
     //Inicia a conexão com o ip dado e a porta para se conectar
     public void iniciaCliente(String ip, String porta){
         try {
-            int door = Integer.parseInt(porta);
             this.ip = ip;
-            this.door = door;
-            cliente = new Socket(ip, door); //augusto.ddns.net 
+            this.door = Integer.parseInt(porta);
+            cliente = new Socket(ip, door);
             saida = new BufferedWriter(new OutputStreamWriter(cliente.getOutputStream()));
             entrada = new BufferedReader (new InputStreamReader(cliente.getInputStream()));
-            //thread.start(entrada);
             System.out.println("Conectado");
         } catch (IOException ex) {
             System.out.println(ex);
@@ -53,7 +47,6 @@ public class Comunication implements Observer{//implements Runnable{
     }
     
     public void POSTconfigLeitor(String portaSerial, String baudrate, String regiao, String antena, String protocolo, String power){
-        
         JSONObject configLeitor = new JSONObject();
         configLeitor.put("METODO", "POST");
         configLeitor.put("URL", "configLeitor");
@@ -63,7 +56,6 @@ public class Comunication implements Observer{//implements Runnable{
         configLeitor.put("antena", antena);
         configLeitor.put("protocolo", protocolo);
         configLeitor.put("power", power);
-        teste = new JSONObject(configLeitor.toString());
         try {
             saida.write(configLeitor.toString());
             saida.flush();
@@ -72,62 +64,16 @@ public class Comunication implements Observer{//implements Runnable{
         }
         
     }
-    
-    
-    @Override
-    public void update(Observable o, Object o1) {
-        ThreadEscutaServidor servidor = (ThreadEscutaServidor)o;
-        String str = String.valueOf(o1);
-        recebido = new JSONObject(str);
-    }
-    
-    /*
-    public ArrayList<String> recebeMensagem(){
-        ArrayList<String> arrayEPC = new ArrayList();        
-        System.out.println("tentou");
-        //cliente = new Socket(ip, door);
-        //int i=0;
-        while(entrada.hasNextLine()){
-            String igual = entrada.nextLine();
-            System.out.println(igual);
-            arrayEPC.add(igual);
-        }
-        entrada.close();
-        return arrayEPC;
-    }    
-
-    @Override
-    public void run() {
-        while(online){
-            if(flag){
-                while(entrada.hasNextLine()){
-                    String chegou = entrada.nextLine();
-                    System.out.println(chegou);
-                    if(chegou.equals(teste.toString())){
-                        recebido = new JSONObject(chegou);
-                    } else{
-                        System.out.println("é nulo");
-                        System.out.println(chegou.length());
-                        System.out.println(chegou.isEmpty());
-                    }                
-                }
-            }    
-            System.out.println("Rodando");
-        }
-    }
-    
-    public void start(){
-        if(!online){
-            this.online = true;
-            new Thread(this).start();
+  
+    public void recebeMensagem(JSONObject msg){
+        if(msg != null){
+            this.recebido = msg;
+        } else {
+            System.out.println("null");
         }
         
-    }
-    
-    public void stop(){
-        this.online = false;        
-    }
-    
+    }    
+    /*
     public static void main(String[] args) {
         String s = "{" + "Protocolo" + ":" + "POST"+ "}";
         System.out.println(s);
@@ -138,11 +84,7 @@ public class Comunication implements Observer{//implements Runnable{
     */
     
     public void testando(){
-        //if(!recebido.isEmpty()){
-        //    System.out.println(recebido.toString() + "aqui");
-        //}
-        //System.out.println("Recebido está vazio");
         System.out.println(recebido.toString());
     }
-
+    
 }

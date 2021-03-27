@@ -1,14 +1,5 @@
-   /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ClienteAutorama.model;
 
-/**
- *
- * @author willi
- */
 public class Pista {
     
     private String id, nome, pais, tempoRecordPista;

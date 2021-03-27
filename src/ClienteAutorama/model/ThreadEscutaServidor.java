@@ -3,38 +3,34 @@ package ClienteAutorama.model;
 import ClienteAutorama.controller.Comunication;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Observable;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONObject;
 
-public class ThreadEscutaServidor extends Observable implements Runnable{
+public class ThreadEscutaServidor implements Runnable{
 
-    Comunication comunicacao = Comunication.getInstance();
+    Comunication comunicacao;
     public BufferedReader entrada;
     public boolean online = false;
+    public JSONObject msg;
     
     public ThreadEscutaServidor() {
         
     }
     
-    
     @Override
     public void run() {
+        
         while(online){
+            
             try {
-                //while(entrada.ready()){
-                    String chegou = entrada.readLine();
-                    if(chegou != null){    
-                        System.out.println(chegou);
-                        comunicacao.recebido = new JSONObject(chegou);
-                        setChanged();
-                        notifyObservers(chegou);
-                    } else {
-                        this.stop();
-                    }
-                //}
+                String chegou = entrada.readLine();
+                if(chegou != null){
+                    msg = new JSONObject(chegou);
+                    System.out.println(msg.toString());
+                    comunicacao = Comunication.getInstance();
+                    comunicacao.recebeMensagem(msg);
+                }
             } catch (IOException ex) {
                 Logger.getLogger(ThreadEscutaServidor.class.getName()).log(Level.SEVERE, null, ex);
             }
