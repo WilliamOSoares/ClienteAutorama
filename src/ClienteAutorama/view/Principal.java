@@ -34,10 +34,7 @@ public class Principal extends javax.swing.JFrame {
 
         textIP = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        resultado = new javax.swing.JLabel();
-        msgServer = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        msgCliente = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -55,6 +52,7 @@ public class Principal extends javax.swing.JFrame {
         textProtocolo = new javax.swing.JTextField();
         textRegiao = new javax.swing.JTextField();
         textPower = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -73,15 +71,12 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 390, 140, 30));
-        getContentPane().add(resultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 270, 30));
-        getContentPane().add(msgServer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 280, 30));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 153));
         jLabel1.setText("AUTORAMA COM RFID");
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 190, 40));
-        getContentPane().add(msgCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 270, 30));
 
         jLabel2.setText("IP");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, -1));
@@ -150,6 +145,14 @@ public class Principal extends javax.swing.JFrame {
         });
         getContentPane().add(textPower, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 270, 130, 30));
 
+        jButton2.setText("Teste");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, -1, -1));
+
         setSize(new java.awt.Dimension(716, 469));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -172,25 +175,21 @@ public class Principal extends javax.swing.JFrame {
             textPower.setText("1500");
             
             comunicacao.iniciaCliente(textIP.getText(), textPorta.getText());
-            comunicacao.start();
+            comunicacao.thread.start(comunicacao.entrada);//comunicacao.start();
             arquivo.configInicialLeitor(textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText());
-            comunicacao.POSTconfigLeitor(textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText());
+            //comunicacao.POSTconfigLeitor(textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText());
+            /*
             while(true){
-                Scanner s = new Scanner(System.in);
-                System.out.printf("fala:");
-                int k = s.nextInt();
-                if(k == 1){
+                System.out.println("chegou antes do if");
+                if(comunicacao.recebido != null && !comunicacao.recebido.isEmpty()){
+                    System.out.println("entrou no if");
                     break;
                 }
-            }
-            comunicacao.testando();
+            }*/
+            //comunicacao.testando();
             
         }
         
-        msgCliente.setText("Cliente: ''" + textIP.getText()+"''");
-        //comunicacao.enviaMensagem(textIP.getText());
-        resultado.setText("Servidor: ''recebi''");
-        msgServer.setText("AAAAAAAAAAAAAAH");
         //corrida.getEPC(comunicacao.recebeMensagem());
         //this.setEnabled(false);
         //this.setVisible(false);
@@ -221,6 +220,12 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textPortaSerialActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        comunicacao.POSTconfigLeitor(textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText());
+        comunicacao.testando();
+                
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -250,14 +255,16 @@ public class Principal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Principal().setVisible(true);
+                
             }
-        });
+        });        
     }
     
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -269,9 +276,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel msgCliente;
-    private javax.swing.JLabel msgServer;
-    private javax.swing.JLabel resultado;
     private javax.swing.JTextField textAntena;
     private javax.swing.JTextField textBaudrate;
     private javax.swing.JTextField textIP;
