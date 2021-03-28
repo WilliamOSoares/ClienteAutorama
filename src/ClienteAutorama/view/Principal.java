@@ -10,6 +10,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         //comunicacao.iniciaCliente();
         initComponents();
+        this.setTitle("Autorama");
     }
     
     /**
@@ -20,6 +21,7 @@ public class Principal extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         textIP = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -44,14 +46,23 @@ public class Principal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setName("Autorama"); // NOI18N
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         textIP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textIPActionPerformed(evt);
             }
         });
-        getContentPane().add(textIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 170, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.ipadx = 164;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
+        getContentPane().add(textIP, gridBagConstraints);
 
         jButton1.setText("Configurar Leitor");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -59,80 +70,209 @@ public class Principal extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 330, -1, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 49;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(30, 20, 70, 0);
+        getContentPane().add(jButton1, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 153));
         jLabel1.setText("AUTORAMA COM RFID");
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 190, 40));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 35;
+        gridBagConstraints.ipadx = 7;
+        gridBagConstraints.ipady = 18;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(jLabel1, gridBagConstraints);
 
         jLabel2.setText("IP");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 40, 0, 0);
+        getContentPane().add(jLabel2, gridBagConstraints);
 
         jLabel3.setText("Configuração da conexão");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 12;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 30, 0, 0);
+        getContentPane().add(jLabel3, gridBagConstraints);
 
         jLabel4.setText("Configuração do leitor");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(30, 40, 0, 0);
+        getContentPane().add(jLabel4, gridBagConstraints);
 
         textPorta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textPortaActionPerformed(evt);
             }
         });
-        getContentPane().add(textPorta, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 120, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 36;
+        gridBagConstraints.ipadx = 114;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 5, 0, 0);
+        getContentPane().add(textPorta, gridBagConstraints);
 
         jLabel5.setText("Porta");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 22;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 18;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 7, 0, 0);
+        getContentPane().add(jLabel5, gridBagConstraints);
 
         jLabel6.setText("Porta Serial");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 90, 0, 0);
+        getContentPane().add(jLabel6, gridBagConstraints);
 
         jLabel7.setText("Baudrate");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, -1, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipady = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 70, 0, 0);
+        getContentPane().add(jLabel7, gridBagConstraints);
 
         jLabel8.setText("Região");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 49;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 60, 0, 0);
+        getContentPane().add(jLabel8, gridBagConstraints);
 
         jLabel9.setText("Número de antenas");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 70, 0, 0);
+        getContentPane().add(jLabel9, gridBagConstraints);
 
         jLabel10.setText("Protocolo");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 70, 0, 0);
+        getContentPane().add(jLabel10, gridBagConstraints);
 
         jLabel11.setText("Potência da leitura");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 250, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 49;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 30, 0, 0);
+        getContentPane().add(jLabel11, gridBagConstraints);
 
         textPortaSerial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textPortaSerialActionPerformed(evt);
             }
         });
-        getContentPane().add(textPortaSerial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 170, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 164;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 40, 0, 0);
+        getContentPane().add(textPortaSerial, gridBagConstraints);
 
         textAntena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textAntenaActionPerformed(evt);
             }
         });
-        getContentPane().add(textAntena, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 170, 30));
-        getContentPane().add(textBaudrate, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 150, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 164;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 40, 0, 0);
+        getContentPane().add(textAntena, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 17;
+        gridBagConstraints.ipadx = 144;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
+        getContentPane().add(textBaudrate, gridBagConstraints);
 
         textProtocolo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textProtocoloActionPerformed(evt);
             }
         });
-        getContentPane().add(textProtocolo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 150, 30));
-        getContentPane().add(textRegiao, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, 130, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 17;
+        gridBagConstraints.ipadx = 144;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 20, 0, 0);
+        getContentPane().add(textProtocolo, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 49;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 124;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 60);
+        getContentPane().add(textRegiao, gridBagConstraints);
 
         textPower.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textPowerActionPerformed(evt);
             }
         });
-        getContentPane().add(textPower, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 270, 130, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 49;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 124;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 0, 60);
+        getContentPane().add(textPower, gridBagConstraints);
 
         jButton2.setText("Sair");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -140,7 +280,15 @@ public class Principal extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 130, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 79;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(30, 60, 70, 0);
+        getContentPane().add(jButton2, gridBagConstraints);
 
         setSize(new java.awt.Dimension(716, 469));
         setLocationRelativeTo(null);
@@ -155,6 +303,7 @@ public class Principal extends javax.swing.JFrame {
         if (!textIP.getText().isEmpty() && !textPorta.getText().isEmpty() && !textPortaSerial.getText().isEmpty() && !textBaudrate.getText().isEmpty() && !textRegiao.getText().isEmpty() && !textAntena.getText().isEmpty() && !textProtocolo.getText().isEmpty() && !textPower.getText().isEmpty()){
                        
         }
+        
         textIP.setText("augusto.ddns.net");
         textPorta.setText("2020");
         textPortaSerial.setText("tmr:///dev/ttyUSB0");
@@ -164,7 +313,7 @@ public class Principal extends javax.swing.JFrame {
         textProtocolo.setText("GEN2");
         textPower.setText("1500");
 
-        gerenciador.conectConfiguraLeitor(textIP.getText(), textPorta.getText(), textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText());
+        gerenciador.postConectConfiguraLeitor(textIP.getText(), textPorta.getText(), textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText());
         gerenciador.setTelaPrincipal(this);
         gerenciador.abrirTelaInicial();                 
     }//GEN-LAST:event_jButton1ActionPerformed

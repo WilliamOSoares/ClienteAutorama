@@ -73,7 +73,40 @@ public class Comunication{
         }
         
     }    
+    
+    public String getDadosCorrida(){
+        JSONObject configLeitor = new JSONObject();
+        configLeitor.put("METODO", "GET");
+        configLeitor.put("URL", "dadosCorrida");
+        //configLeitor.put("qualificatorio", "5");
+        //configLeitor.put("voltas", "10");
+        try {
+            saida.write(configLeitor.toString());
+            saida.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        while(!recebido.has("URL")){ System.out.println(recebido.has("URL")); }
+        return recebido.getString("EPC1");
+    }
     /*
+        if(recebido.has("EPC1")){
+            recebido.getString("EPC1");
+            recebido.getString("rssi1");
+            recebido.getString("time1");
+        }
+        if(recebido.has("EPC2")){
+            recebido.getString("EPC2");
+            recebido.getString("rssi2");
+            recebido.getString("time2");
+        }
+        if(recebido.has("EPC3")){
+            recebido.getString("EPC3");
+            recebido.getString("rssi3");
+            recebido.getString("time3");
+        }
+    
+    
     public static void main(String[] args) {
         String s = "{" + "Protocolo" + ":" + "POST"+ "}";
         System.out.println(s);

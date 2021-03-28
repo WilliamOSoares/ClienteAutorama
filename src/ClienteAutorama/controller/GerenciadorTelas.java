@@ -23,10 +23,14 @@ public class GerenciadorTelas {
 	return uniqueInstance;
     }
     
-    public void conectConfiguraLeitor(String ip, String porta,String portaSerial, String baudrate, String regiao, String antena, String protocolo, String power){
+    public void postConectConfiguraLeitor(String ip, String porta,String portaSerial, String baudrate, String regiao, String antena, String protocolo, String power){
         comunicacao.iniciaCliente(ip, porta);
         comunicacao.thread.start(comunicacao.entrada);
         comunicacao.POSTconfigLeitor(portaSerial, baudrate, regiao, antena, protocolo, power);
+    }
+    
+    public String getDadosCorrida(){
+        return comunicacao.getDadosCorrida();
     }
     
     public void setTelaPrincipal(Principal tela){
