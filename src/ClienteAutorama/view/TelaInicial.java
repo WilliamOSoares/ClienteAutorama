@@ -25,9 +25,9 @@ public class TelaInicial extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         botaoCorrida = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        resultado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(700, 430));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -36,11 +36,10 @@ public class TelaInicial extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 11;
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 293, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(26, 309, 0, 0);
         getContentPane().add(jLabel1, gridBagConstraints);
 
         jButton1.setText("CADASTRO");
@@ -51,12 +50,12 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 108;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 101;
         gridBagConstraints.ipady = 21;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 252, 0, 253);
+        gridBagConstraints.insets = new java.awt.Insets(11, 268, 0, 277);
         getContentPane().add(jButton1, gridBagConstraints);
 
         botaoCorrida.setText("CORRIDA");
@@ -67,12 +66,12 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 116;
-        gridBagConstraints.ipady = 23;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 113;
+        gridBagConstraints.ipady = 30;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(35, 252, 0, 253);
+        gridBagConstraints.insets = new java.awt.Insets(34, 268, 0, 277);
         getContentPane().add(botaoCorrida, gridBagConstraints);
 
         jButton3.setText("SAIR");
@@ -83,21 +82,13 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 138;
         gridBagConstraints.ipady = 24;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(35, 252, 118, 253);
+        gridBagConstraints.insets = new java.awt.Insets(29, 268, 145, 277);
         getContentPane().add(jButton3, gridBagConstraints);
-
-        resultado.setText("resultado");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(48, 330, 0, 0);
-        getContentPane().add(resultado, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -114,7 +105,8 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void botaoCorridaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCorridaActionPerformed
         gerenciador = GerenciadorTelas.getInstance();
-        resultado.setText(gerenciador.getDadosCorrida());
+        gerenciador.setTelaInicial(this);
+        gerenciador.abrirTelaConfigCorrida();
     }//GEN-LAST:event_botaoCorridaActionPerformed
 
     /**
@@ -157,6 +149,5 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel resultado;
     // End of variables declaration//GEN-END:variables
 }

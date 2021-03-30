@@ -1,5 +1,9 @@
 package ClienteAutorama.controller;
 
+import ClienteAutorama.model.Carro;
+import ClienteAutorama.model.Equipe;
+import ClienteAutorama.model.Piloto;
+import ClienteAutorama.model.Pista;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

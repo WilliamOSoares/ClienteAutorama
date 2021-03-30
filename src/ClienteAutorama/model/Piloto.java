@@ -12,6 +12,12 @@ public class Piloto {
         this.nacionalidade = nacionalidade;
         this.equipe = equipe;
     }
+    
+    public Piloto(String id, String nome, String nacionalidade) {
+        this.id = id;
+        this.nome = nome;
+        this.nacionalidade = nacionalidade;
+    }
 
     public String getId() {
         return id;
