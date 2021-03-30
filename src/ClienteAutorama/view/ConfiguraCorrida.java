@@ -10,9 +10,7 @@ import javax.swing.JOptionPane;
 
 public class ConfiguraCorrida extends javax.swing.JFrame {
 
-    GerenciadorBD bd;
     GerenciadorTelas gerenciador;
-    Corrida corrida;
     
     /**
      * Creates new form CofiguraCorrida
@@ -20,22 +18,16 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
     public ConfiguraCorrida() {
         initComponents();
         this.setTitle("Autorama");
-        bd = GerenciadorBD.getInstance();
-        ArrayList<Piloto> pilotos = new ArrayList<Piloto>();// = bd.getBdPilotos();
-        ArrayList<Pista> pistas = new ArrayList<Pista>();// = bd.getBdPistas();
-        pilotos.add(new Piloto("123", "Césinha", "Santo Estevão"));
-        pilotos.add(new Piloto("456", "Will", "Feira de Sacana"));
-        pilotos.add(new Piloto("789", "El vinho", "Santo Estevão"));
-        pistas.add(new Pista("123", "Interlagos", "Brasil"));
-        pistas.add(new Pista("456", "Monza", "Itália"));
-        pistas.add(new Pista("789", "Monaco", "França"));
+        gerenciador = GerenciadorTelas.getInstance();
+        ArrayList<Piloto> pilotos = gerenciador.bancoDados.getBdPilotos();
+        ArrayList<Pista> pistas = gerenciador.bancoDados.getBdPistas();
         
         for(int i = 0; i<pilotos.size(); i++){
-            piloto1.addItem(pilotos.get(i).getNome());
-            piloto2.addItem(pilotos.get(i).getNome());
-            piloto3.addItem(pilotos.get(i).getNome());
-            piloto4.addItem(pilotos.get(i).getNome());
-            piloto5.addItem(pilotos.get(i).getNome());
+            piloto1.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
+            piloto2.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
+            piloto3.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
+            piloto4.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
+            piloto5.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
         }
         for(int i = 0; i<pistas.size(); i++){
             localDaCorrida.addItem(pistas.get(i).getNome()+" - "+pistas.get(i).getPais());
@@ -70,8 +62,8 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
         tQuali = new javax.swing.JSpinner();
         localDaCorrida = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        voltarMenu = new javax.swing.JButton();
+        avancar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(700, 430));
@@ -104,29 +96,31 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(piloto3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(piloto4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(piloto3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(piloto1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(piloto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(piloto2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(73, 73, 73))
+                        .addComponent(piloto2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(piloto4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(50, 50, 50))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(171, 171, 171)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(piloto5, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(piloto5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -186,7 +180,7 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 .addGap(162, 162, 162)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(localDaCorrida, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(localDaCorrida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -204,17 +198,17 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton1.setText("Voltar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        voltarMenu.setText("Voltar");
+        voltarMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                voltarMenuActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Avançar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        avancar.setText("Avançar");
+        avancar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                avancarActionPerformed(evt);
             }
         });
 
@@ -228,9 +222,9 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 .addContainerGap(190, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(82, 82, 82)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(voltarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(avancar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -250,31 +244,31 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(voltarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(avancar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void voltarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarMenuActionPerformed
         gerenciador = GerenciadorTelas.getInstance();
         gerenciador.setTelaConfig(this);
         gerenciador.abrirTelaInicialDoConfig();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_voltarMenuActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void avancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avancarActionPerformed
         int i = 0;
         if(piloto1.getSelectedItem().equals("<Selecione um piloto>") && piloto2.getSelectedItem().equals("<Selecione um piloto>") && piloto3.getSelectedItem().equals("<Selecione um piloto>") && piloto4.getSelectedItem().equals("<Selecione um piloto>") && piloto5.getSelectedItem().equals("<Selecione um piloto>")){
             JOptionPane.showMessageDialog(null, "Por favor escolha pelo menos um piloto", null, WIDTH);
             i++;
         }
-        if(nVoltas.getValue().equals(0)){
+        if(nVoltas.getValue().equals(0) || (int)nVoltas.getValue()<0){
             JOptionPane.showMessageDialog(null, "Por favor escolha pelo menos uma volta", null, WIDTH);
             i++;
         } 
-        if(tQuali.getValue().equals(0)){
+        if(tQuali.getValue().equals(0) || (int)tQuali.getValue()<0){
             JOptionPane.showMessageDialog(null, "Por favor escolha pelo menos um minuto para o Qualificatório", null, WIDTH);
             i++;
         } 
@@ -296,7 +290,7 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
         }
         
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_avancarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -335,8 +329,7 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton avancar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -356,5 +349,6 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> piloto4;
     private javax.swing.JComboBox<String> piloto5;
     private javax.swing.JSpinner tQuali;
+    private javax.swing.JButton voltarMenu;
     // End of variables declaration//GEN-END:variables
 }
