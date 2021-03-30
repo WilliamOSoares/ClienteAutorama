@@ -1,6 +1,6 @@
 package ClienteAutorama.view;
 
-import ClienteAutorama.controller.GerenciadorArquivo;
+import ClienteAutorama.controller.GerenciadorBD;
 import ClienteAutorama.controller.GerenciadorTelas;
 import ClienteAutorama.controller.Corrida;
 import ClienteAutorama.model.Piloto;
@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 public class ConfiguraCorrida extends javax.swing.JFrame {
 
-    GerenciadorArquivo bd;
+    GerenciadorBD bd;
     GerenciadorTelas gerenciador;
     Corrida corrida;
     
@@ -20,7 +20,7 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
     public ConfiguraCorrida() {
         initComponents();
         this.setTitle("Autorama");
-        bd = GerenciadorArquivo.getInstance();
+        bd = GerenciadorBD.getInstance();
         ArrayList<Piloto> pilotos = new ArrayList<Piloto>();// = bd.getBdPilotos();
         ArrayList<Pista> pistas = new ArrayList<Pista>();// = bd.getBdPistas();
         pilotos.add(new Piloto("123", "Césinha", "Santo Estevão"));

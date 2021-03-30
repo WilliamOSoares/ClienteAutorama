@@ -1,6 +1,7 @@
 package ClienteAutorama.view;
 
 import ClienteAutorama.controller.GerenciadorTelas;
+import javax.swing.JOptionPane;
 
 public class TelaInicial extends javax.swing.JFrame {
 
@@ -22,9 +23,9 @@ public class TelaInicial extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        cadastro = new javax.swing.JButton();
         botaoCorrida = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        sair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(700, 430));
@@ -42,10 +43,10 @@ public class TelaInicial extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(26, 309, 0, 0);
         getContentPane().add(jLabel1, gridBagConstraints);
 
-        jButton1.setText("CADASTRO");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cadastro.setText("CADASTRO");
+        cadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cadastroActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -56,7 +57,7 @@ public class TelaInicial extends javax.swing.JFrame {
         gridBagConstraints.ipady = 21;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(11, 268, 0, 277);
-        getContentPane().add(jButton1, gridBagConstraints);
+        getContentPane().add(cadastro, gridBagConstraints);
 
         botaoCorrida.setText("CORRIDA");
         botaoCorrida.addActionListener(new java.awt.event.ActionListener() {
@@ -74,10 +75,10 @@ public class TelaInicial extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(34, 268, 0, 277);
         getContentPane().add(botaoCorrida, gridBagConstraints);
 
-        jButton3.setText("SAIR");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        sair.setText("SAIR");
+        sair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                sairActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -88,25 +89,30 @@ public class TelaInicial extends javax.swing.JFrame {
         gridBagConstraints.ipady = 24;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(29, 268, 145, 277);
-        getContentPane().add(jButton3, gridBagConstraints);
+        getContentPane().add(sair, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroActionPerformed
         gerenciador = GerenciadorTelas.getInstance();
         gerenciador.setTelaInicial(this);
         gerenciador.abrirTelaCadastro();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_cadastroActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_sairActionPerformed
 
     private void botaoCorridaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCorridaActionPerformed
         gerenciador = GerenciadorTelas.getInstance();
-        gerenciador.setTelaInicial(this);
-        gerenciador.abrirTelaConfigCorrida();
+        if(gerenciador.flag == 2){
+            JOptionPane.showMessageDialog(null, "O banco de dados está vazio, por favor faça os cadastros", null, WIDTH);
+        } else {
+            gerenciador.setTelaInicial(this);
+            gerenciador.abrirTelaConfigCorrida();
+        }
+            
     }//GEN-LAST:event_botaoCorridaActionPerformed
 
     /**
@@ -146,8 +152,8 @@ public class TelaInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCorrida;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton cadastro;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton sair;
     // End of variables declaration//GEN-END:variables
 }

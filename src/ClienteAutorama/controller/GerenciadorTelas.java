@@ -1,6 +1,10 @@
 
 package ClienteAutorama.controller;
 
+import ClienteAutorama.model.Carro;
+import ClienteAutorama.model.Equipe;
+import ClienteAutorama.model.Piloto;
+import ClienteAutorama.model.Pista;
 import ClienteAutorama.view.Cadastro;
 import ClienteAutorama.view.ConfiguraCorrida;
 import ClienteAutorama.view.Principal;
@@ -10,7 +14,7 @@ import ClienteAutorama.view.TelaInicial;
 public class GerenciadorTelas {
     
     public Comunication comunicacao = Comunication.getInstance();
-    public GerenciadorArquivo arquivo = GerenciadorArquivo.getInstance();
+    public GerenciadorBD bancoDados = GerenciadorBD.getInstance();
     public Corrida corrida = Corrida.getInstance();
     public Principal telaPrincipal;
     public TelaInicial telaInicial = new TelaInicial();
@@ -18,6 +22,7 @@ public class GerenciadorTelas {
     public ConfiguraCorrida telaConfig;
     public Qualificatorio telaQuali;
     public Corrida telaCorrida;
+    public int flag = 2;
     
     private GerenciadorTelas() {
     }
@@ -45,6 +50,7 @@ public class GerenciadorTelas {
     public void abrirTelaInicial(){
         telaPrincipal.setEnabled(false);
         telaPrincipal.setVisible(false);
+        flag = bancoDados.desserealiza();
         telaInicial.setLocationRelativeTo(telaPrincipal);
         telaInicial.setVisible(true);
     }
@@ -68,6 +74,7 @@ public class GerenciadorTelas {
     public void abrirTelaInicialDoCadastro(){
         telaCadastro.setEnabled(false);
         telaCadastro.setVisible(false);
+        flag = bancoDados.desserealiza();
         telaInicial.setLocationRelativeTo(telaCadastro);
         telaInicial.setEnabled(true);
         telaInicial.setVisible(true);
@@ -102,6 +109,42 @@ public class GerenciadorTelas {
         telaQuali.setLocationRelativeTo(telaQuali);
         telaQuali.setEnabled(true);
         telaQuali.setVisible(true);
+    }
+
+    public int cadastrarPiloto(String ID, String nome, String nacio) {
+        Piloto novoPiloto = new Piloto(ID, nome, nacio);        
+        return bancoDados.salvaPiloto(novoPiloto);
+    }
+
+    public int cadastrarEquipe(String ID, String nome, String nacio, String ano) {
+        Equipe novaEquipe = new Equipe(ID, nome, nacio, ano);        
+        return bancoDados.salvaEquipe(novaEquipe);
+    }
+
+    public int cadastrarPista(String ID, String nome, String pais) {
+        Pista novaPista = new Pista(ID, nome, pais);
+        return bancoDados.salvaPista(novaPista);
+    }
+
+    public int cadastrarCarro(String EPC, String n) {
+        Carro novoCarro = new Carro(EPC, n);
+        return bancoDados.salvaCarro(novoCarro);
+    }
+
+    public int cadastrarPilotoEquipe(String IDpiloto, String IDequipe) {
+        return bancoDados.salvaPilotoEquipe(IDpiloto, IDequipe);
+    }
+
+    public int cadastrarCarroEquipe(String IDcarro, String IDequipe) {
+        return bancoDados.salvaCarroEquipe(IDcarro, IDequipe);
+    }
+
+    public int cadastrarPilotoCarro(String IDpiloto, String IDcarro) {
+        return bancoDados.salvaPilotoCarro(IDpiloto, IDcarro);
+    }
+
+    public int salvarCadastro() {
+        return bancoDados.serealiza();
     }
     
 }

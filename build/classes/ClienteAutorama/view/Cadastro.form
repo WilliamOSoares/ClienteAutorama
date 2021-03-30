@@ -21,7 +21,18 @@
     <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-82,0,0,2,-68"/>
   </AuxValues>
 
-  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jTabbedPane1" min="-2" max="-2" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jTabbedPane1" min="-2" max="-2" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+  </Layout>
   <SubComponents>
     <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
       <Properties>
@@ -32,11 +43,6 @@
           <Dimension value="[700, 430]"/>
         </Property>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-          <BorderConstraints direction="Center"/>
-        </Constraint>
-      </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
@@ -53,34 +59,37 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jButton1" min="-2" pref="177" max="-2" attributes="0"/>
-                          <Component id="jButton3" min="-2" pref="177" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton2" min="-2" pref="177" max="-2" attributes="0"/>
-                          <Component id="jButton4" min="-2" pref="177" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="232" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="185" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton5" min="-2" pref="160" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="91" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="94" max="32767" attributes="0"/>
                       <Component id="jButton15" min="-2" pref="206" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                       <Component id="jButton14" min="-2" pref="232" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jButton1" min="-2" pref="177" max="-2" attributes="0"/>
+                                  <Component id="jButton3" min="-2" pref="177" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jButton2" min="-2" pref="177" max="-2" attributes="0"/>
+                                  <Component id="jButton4" min="-2" pref="177" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
+                              <Component id="salvaVolta" min="-2" pref="267" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -104,9 +113,9 @@
                           <Component id="jButton15" alignment="3" min="-2" pref="55" max="-2" attributes="0"/>
                           <Component id="jButton14" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                      <Component id="jButton5" min="-2" pref="38" max="-2" attributes="0"/>
-                      <EmptySpace pref="59" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="salvaVolta" min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace pref="80" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -144,12 +153,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton5">
+            <Component class="javax.swing.JButton" name="salvaVolta">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Voltar para o menu"/>
+                <Property name="text" type="java.lang.String" value="Salvar e voltar para o menu"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salvaVoltaActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
@@ -193,6 +202,26 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="jButton6" min="-2" pref="123" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="201" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="EPCcarroC" max="32767" attributes="0"/>
+                                  <Component id="Ncarro" max="32767" attributes="0"/>
+                                  <Component id="jLabel2" alignment="0" pref="155" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                      <Component id="cadastrarCarro" min="-2" pref="116" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -200,34 +229,11 @@
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="307" max="-2" attributes="0"/>
-                              <Component id="jLabel3" min="-2" pref="70" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="336" max="-2" attributes="0"/>
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="jButton6" min="-2" pref="123" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="198" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="IDcarroC" max="32767" attributes="0"/>
-                                  <Component id="Ncarro" max="32767" attributes="0"/>
-                                  <Component id="jLabel2" alignment="0" pref="155" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="resultCadCarro" min="-2" pref="130" max="-2" attributes="0"/>
-                          <Component id="jButton7" min="-2" pref="116" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -239,19 +245,17 @@
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="IDcarroC" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="EPCcarroC" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Ncarro" min="-2" pref="32" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Component id="resultCadCarro" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton7" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="cadastrarCarro" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="jButton6" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="92" max="32767" attributes="0"/>
+                      <EmptySpace pref="93" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -268,9 +272,9 @@
                 <Property name="text" type="java.lang.String" value="Cadastre um Carro"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="IDcarroC">
+            <Component class="javax.swing.JTextField" name="EPCcarroC">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IDcarroCActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EPCcarroCActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="Ncarro">
@@ -286,27 +290,22 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton7">
+            <Component class="javax.swing.JButton" name="cadastrarCarro">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadastrarCarroActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Identifica&#xe7;&#xe3;o"/>
+                <Property name="text" type="java.lang.String" value="EPC"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="N&#xfa;mero"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="resultCadCarro">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="66" red="0" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Cadastrado com Sucesso"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -346,10 +345,10 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="142" max="32767" attributes="0"/>
+                      <EmptySpace pref="145" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="nomeEquipe" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
-                          <Component id="anoEquipe" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
+                          <Component id="anoE" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
@@ -365,11 +364,8 @@
                       <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
                       <Component id="jButton8" min="-2" pref="119" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="resultCadEquipe" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton9" min="-2" pref="115" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
+                      <Component id="cadastrarEquipe" min="-2" pref="115" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -401,14 +397,12 @@
                           <Group type="102" attributes="0">
                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="anoEquipe" min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="anoE" min="-2" pref="28" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="resultCadEquipe" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="54" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton9" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="cadastrarEquipe" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="jButton8" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
@@ -436,10 +430,13 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton9">
+            <Component class="javax.swing.JButton" name="cadastrarEquipe">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadastrarEquipeActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
@@ -467,15 +464,7 @@
                 <Property name="text" type="java.lang.String" value="Ano"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="anoEquipe">
-            </Component>
-            <Component class="javax.swing.JLabel" name="resultCadEquipe">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="66" red="0" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Cadastrado com sucesso"/>
-              </Properties>
+            <Component class="javax.swing.JTextField" name="anoE">
             </Component>
           </SubComponents>
         </Container>
@@ -493,19 +482,6 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Component id="IDpilotoP" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="248" max="-2" attributes="0"/>
-                                      <Component id="jLabel10" min="-2" pref="164" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="306" max="-2" attributes="0"/>
-                                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
@@ -536,15 +512,26 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="resultCadPiloto" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jButton11" min="-2" pref="103" max="-2" attributes="0"/>
+                                      <Component id="cadastrarPiloto" min="-2" pref="103" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="272" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel10" min="-2" pref="151" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="IDpilotoP" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="148" pref="159" max="32767" attributes="0"/>
+                      <EmptySpace pref="135" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -570,11 +557,9 @@
                               <Component id="nomePiloto" min="-2" pref="31" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                      <Component id="resultCadPiloto" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton11" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="cadastrarPiloto" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="jButton10" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="61" max="32767" attributes="0"/>
@@ -602,10 +587,13 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton10ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton11">
+            <Component class="javax.swing.JButton" name="cadastrarPiloto">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadastrarPilotoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
@@ -627,14 +615,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="nacPiloto">
-            </Component>
-            <Component class="javax.swing.JLabel" name="resultCadPiloto">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="66" red="0" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Cadastrado com sucesso"/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -689,15 +669,12 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="resultCadPista" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jButton13" min="-2" pref="108" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="cadastrarPista" min="-2" pref="108" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="174" max="32767" attributes="0"/>
+                      <EmptySpace pref="177" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -723,14 +700,12 @@
                               <Component id="paisPista" min="-2" pref="33" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="57" max="32767" attributes="0"/>
-                      <Component id="resultCadPista" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace pref="87" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton13" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="cadastrarPista" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="jButton12" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="61" max="32767" attributes="0"/>
+                      <EmptySpace pref="63" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -755,10 +730,13 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton12ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton13">
+            <Component class="javax.swing.JButton" name="cadastrarPista">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadastrarPistaActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel15">
               <Properties>
@@ -781,14 +759,6 @@
             </Component>
             <Component class="javax.swing.JTextField" name="paisPista">
             </Component>
-            <Component class="javax.swing.JLabel" name="resultCadPista">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="99" red="0" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Cadastrado com sucesso"/>
-              </Properties>
-            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel6">
@@ -804,7 +774,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="235" max="32767" attributes="0"/>
+                      <EmptySpace pref="238" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -815,17 +785,13 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="IDequipeEC" min="-2" pref="133" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="resultCadCE" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jButton19" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jButton18" alignment="0" pref="112" max="32767" attributes="0"/>
-                                      <Component id="jButton17" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="resultCadPE" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="cadastroPE" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cadastrarCE" alignment="0" pref="112" max="32767" attributes="0"/>
+                                  <Component id="jButton17" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -847,9 +813,9 @@
                                   </Group>
                                   <Component id="IDcarroCE" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                                       <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
                                       <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -877,11 +843,7 @@
                                   <Component id="IDequipeEP" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="resultCadPE" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton19" min="-2" pref="37" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="cadastroPE" alignment="1" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Component id="jLabel18" min="-2" pref="33" max="-2" attributes="0"/>
@@ -890,17 +852,15 @@
                           <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                      <Component id="resultCadCE" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="IDequipeEC" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="jButton18" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="cadastrarCE" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="IDcarroCE" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="jButton17" min="-2" pref="41" max="-2" attributes="0"/>
-                      <EmptySpace pref="58" max="32767" attributes="0"/>
+                      <EmptySpace pref="52" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -948,7 +908,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel22">
               <Properties>
-                <Property name="text" type="java.lang.String" value="ID do carro"/>
+                <Property name="text" type="java.lang.String" value="N&#xfa;mero do carro"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel23">
@@ -967,31 +927,21 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IDequipeEPActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton18">
+            <Component class="javax.swing.JButton" name="cadastrarCE">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadastrarCEActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton19">
+            <Component class="javax.swing.JButton" name="cadastroPE">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="resultCadCE">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="66" red="0" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Cadastrado com sucesso"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="resultCadPE">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="66" red="0" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Cadastrado com sucesso"/>
-              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadastroPEActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -1007,15 +957,18 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="168" max="32767" attributes="0"/>
+                      <Component id="jButton20" min="-2" pref="114" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
+                      <Component id="cadastrarCP" min="-2" pref="108" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="184" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="226" max="-2" attributes="0"/>
                               <Component id="jLabel24" min="-2" pref="220" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="306" max="-2" attributes="0"/>
-                              <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="307" max="-2" attributes="0"/>
@@ -1028,18 +981,12 @@
                                   <Component id="IDpilotoPC" min="-2" pref="156" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="288" max="-2" attributes="0"/>
+                              <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="124" max="32767" attributes="0"/>
-                      <Component id="jButton20" min="-2" pref="114" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="192" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="resultCadCP" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton21" min="-2" pref="108" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1056,14 +1003,12 @@
                       <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="IDpilotoPC" min="-2" pref="41" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                      <Component id="resultCadCP" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButton20" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                          <Component id="jButton21" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="cadastrarCP" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="85" max="32767" attributes="0"/>
+                      <EmptySpace pref="79" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1082,7 +1027,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel25">
               <Properties>
-                <Property name="text" type="java.lang.String" value="ID do carro"/>
+                <Property name="text" type="java.lang.String" value="N&#xfa;mero do carro"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel26">
@@ -1098,22 +1043,17 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton20ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton21">
+            <Component class="javax.swing.JButton" name="cadastrarCP">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastro"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadastrarCPActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="IDpilotoPC">
             </Component>
             <Component class="javax.swing.JTextField" name="IDcarroCP">
-            </Component>
-            <Component class="javax.swing.JLabel" name="resultCadCP">
-              <Properties>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="66" red="0" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Cadastrado com sucesso"/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>

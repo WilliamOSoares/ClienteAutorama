@@ -1,22 +1,16 @@
 package ClienteAutorama.model;
 
-public class Carro {
+import java.io.Serializable;
+
+public class Carro implements Serializable {
     
-    private String id, EPC, numero; 
+    private String EPC, numero; 
     private Piloto piloto;
     private Equipe equipe;
 
-    public Carro(String id, String numero) {
-        this.id = id;
+    public Carro(String EPC, String numero) {
+        this.EPC = EPC;
         this.numero = numero;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getEPC() {

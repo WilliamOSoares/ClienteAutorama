@@ -1,6 +1,8 @@
 package ClienteAutorama.model;
 
-public class Pista {
+import java.io.Serializable;
+
+public class Pista implements Serializable {
     
     private String id, nome, pais, tempoRecordPista;
     private Piloto recordista;

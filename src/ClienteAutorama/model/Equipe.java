@@ -1,40 +1,39 @@
 package ClienteAutorama.model;
 
-public class Equipe {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Equipe implements Serializable {
     private String id, nome, nacionalidade, ano; 
 
-    private Piloto pilotos[];
-    private Carro carros[];
+    private ArrayList<Piloto> Pilotos;
+    private ArrayList<Carro> Carros;
 
     public Equipe(String id, String nome, String nacionalidade, String ano) {
         this.id = id;
         this.nome = nome;
         this.nacionalidade = nacionalidade;
         this.ano = ano;
-    }
-    
-    public Piloto[] getPilotos() {
-        return pilotos;
-    }
-    
-    public Piloto getPilotosIndice(int i) {
-        return pilotos[i];
-    }   
-    public void setPilotos(Piloto[] pilotos) {
-        this.pilotos = pilotos;
+        this.Carros = new ArrayList();
+        this.Pilotos = new ArrayList();
     }
 
-    public Carro[] getCarros() {
-        return carros;
+    public ArrayList<Piloto> getPilotos() {
+        return Pilotos;
     }
-    
-    public Carro getCarrosIndice(int i) {
-        return carros[i];
+
+    public void addPilotos(Piloto Piloto) {
+        this.Pilotos.add(Piloto);
     }
-    public void setCarros(Carro[] carros) {
-        this.carros = carros;
-    }    
-    
+
+    public ArrayList<Carro> getCarros() {
+        return Carros;
+    }
+
+    public void addCarros(Carro Carro) {
+        this.Carros.add(Carro);
+    }
+
     public String getId() {
         return id;
     }

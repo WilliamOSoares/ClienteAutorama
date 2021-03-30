@@ -1,22 +1,23 @@
 package ClienteAutorama.model;
 
-public class Piloto {
-    
+import java.io.Serializable;
+
+public class Piloto implements Serializable {
+
     private String id, nome, nacionalidade;
     private Carro carro;
     private Equipe equipe;
 
+    public Piloto(String id, String nome, String nacionalidade) {
+        this.id = id;
+        this.nome = nome;
+        this.nacionalidade = nacionalidade;
+    }
     public Piloto(String id, String nome, String nacionalidade, Equipe equipe) {
         this.id = id;
         this.nome = nome;
         this.nacionalidade = nacionalidade;
         this.equipe = equipe;
-    }
-    
-    public Piloto(String id, String nome, String nacionalidade) {
-        this.id = id;
-        this.nome = nome;
-        this.nacionalidade = nacionalidade;
     }
 
     public String getId() {
@@ -58,6 +59,6 @@ public class Piloto {
     public void setEquipe(Equipe equipe) {
         this.equipe = equipe;
     }
-    
-    
+
+
 }
