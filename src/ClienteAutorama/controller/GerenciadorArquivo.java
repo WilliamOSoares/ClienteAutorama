@@ -51,7 +51,7 @@ public class GerenciadorArquivo {
             else if(bdEquipes.get(i).getAno().equals(equipe.getAno())){
                 return 4;
             }
-        }
+        }///
         
         bdEquipes.add(equipe);
         
