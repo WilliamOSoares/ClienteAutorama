@@ -1,6 +1,8 @@
 package ClienteAutorama.model;
 
-public class Carro {
+import java.io.Serializable;
+
+public class Carro implements Serializable {
     
     private String id, EPC, numero; 
     private Piloto piloto;

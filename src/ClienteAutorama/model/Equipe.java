@@ -1,6 +1,8 @@
 package ClienteAutorama.model;
 
-public class Equipe {
+import java.io.Serializable;
+
+public class Equipe implements Serializable {
     private String id, nome, nacionalidade, ano; 
 
     private Piloto pilotos[];
