@@ -74,20 +74,20 @@ public class Comunication{
         
     }    
     
-    public String getDadosCorrida(){
+    public String getDadosCorrida(String quali, String voltas){
         JSONObject configLeitor = new JSONObject();
         configLeitor.put("METODO", "GET");
         configLeitor.put("URL", "dadosCorrida");
-        //configLeitor.put("qualificatorio", "5");
-        //configLeitor.put("voltas", "10");
+        configLeitor.put("qualificatorio", quali);
+        configLeitor.put("voltas", voltas);
         try {
             saida.write(configLeitor.toString());
             saida.flush();
         } catch (IOException ex) {
             Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
         }
-        while(!recebido.has("URL")){ System.out.println(recebido.has("URL")); }
-        return recebido.getString("EPC1");
+        while(!recebido.has("return")){ System.out.println(recebido.has("return")); }
+        return recebido.getString("return");
     }
     /*
         if(recebido.has("EPC1")){
