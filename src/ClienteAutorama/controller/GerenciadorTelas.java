@@ -10,6 +10,7 @@ import ClienteAutorama.view.ConfiguraCorrida;
 import ClienteAutorama.view.Principal;
 import ClienteAutorama.view.Qualificatorio;
 import ClienteAutorama.view.TelaInicial;
+import java.util.ArrayList;
 
 public class GerenciadorTelas {
     
@@ -102,7 +103,9 @@ public class GerenciadorTelas {
         telaInicial.setVisible(true);
     }
 
-    public void abrirQualificatorio() {
+    public void abrirQualificatorio(ArrayList<Piloto> corredores, int nVoltas, String tQuali, Pista pista) {
+        corrida = Corrida.getInstance();
+        corrida.dadosCorrida(corredores, nVoltas, tQuali, pista);        
         telaConfig.setEnabled(false);
         telaConfig.setVisible(false);
         telaQuali = new Qualificatorio();

@@ -180,6 +180,30 @@ public class GerenciadorBD {
         }
         return 2; //não existe Carro
     }
+    
+    public int salvaPilotoRecordista(String idPista, String idPiloto){
+        Piloto pilotoAux = null;
+        
+        for(int i = 0; i<bdPilotos.size(); i++){
+            if(bdPilotos.get(i).getId().equals(idPiloto)){
+                pilotoAux = bdPilotos.get(i);
+            }   
+        }
+        
+        if(pilotoAux == null){
+            return 1; //não achou o piloto
+        }
+        
+        for(int i = 0; i<bdPistas.size(); i++){
+            if(bdPistas.get(i).getId().endsWith(idPista)){
+                bdPistas.get(i).setRecordista(pilotoAux);
+                return 0; // Salvou o piloto recordista da pista
+            }
+        }
+        
+        return 2; //Não achou a pista correta
+    }
+    
     public int serealiza(){
         
         if(equipes.exists()){
@@ -261,7 +285,7 @@ public class GerenciadorBD {
         
         return 0; // Deu certo a desserealização
     }
-
+    
     public ArrayList<Carro> getBdCarros() {
         return bdCarros;
     }

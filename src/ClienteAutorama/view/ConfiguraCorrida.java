@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 public class ConfiguraCorrida extends javax.swing.JFrame {
 
     GerenciadorTelas gerenciador;
+    ArrayList<Pista> pistas = new ArrayList<Pista>();
+    ArrayList<Piloto> pilotos = new ArrayList<Piloto>();
     
     /**
      * Creates new form CofiguraCorrida
@@ -19,8 +21,8 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Autorama");
         gerenciador = GerenciadorTelas.getInstance();
-        ArrayList<Piloto> pilotos = gerenciador.bancoDados.getBdPilotos();
-        ArrayList<Pista> pistas = gerenciador.bancoDados.getBdPistas();
+        pilotos = gerenciador.bancoDados.getBdPilotos();
+        pistas = gerenciador.bancoDados.getBdPistas();
         
         for(int i = 0; i<pilotos.size(); i++){
             piloto1.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
@@ -277,15 +279,63 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
             i++;
         }             
         if(i==0){
-            //corrida = Corrida.getInstance();
-            //corrida.setDados();
+            ArrayList<Piloto> participantes = new ArrayList<Piloto>();
+            if(!piloto1.getSelectedItem().equals("<Selecione um piloto>")){
+                String[] s = piloto1.getSelectedItem().toString().split(" - ");
+                for(int y = 0; y<this.pilotos.size(); y++){
+                    if(pilotos.get(y).getNome().equals(s[0])){
+                       participantes.add(pilotos.get(y));
+                    }                    
+                }
+            }
+            if(!piloto2.getSelectedItem().equals("<Selecione um piloto>")){
+                String[] s = piloto2.getSelectedItem().toString().split(" - ");
+                for(int y = 0; y<this.pilotos.size(); y++){
+                    if(pilotos.get(y).getNome().equals(s[0])){
+                       participantes.add(pilotos.get(y));
+                    }                    
+                }
+            }
+            if(!piloto3.getSelectedItem().equals("<Selecione um piloto>")){
+                String[] s = piloto3.getSelectedItem().toString().split(" - ");
+                for(int y = 0; y<this.pilotos.size(); y++){
+                    if(pilotos.get(y).getNome().equals(s[0])){
+                       participantes.add(pilotos.get(y));
+                    }                    
+                }
+            }
+            if(!piloto4.getSelectedItem().equals("<Selecione um piloto>")){
+                String[] s = piloto4.getSelectedItem().toString().split(" - ");
+                for(int y = 0; y<this.pilotos.size(); y++){
+                    if(pilotos.get(y).getNome().equals(s[0])){
+                       participantes.add(pilotos.get(y));
+                    }                    
+                }
+            }
+            if(!piloto5.getSelectedItem().equals("<Selecione um piloto>")){
+                String[] s = piloto5.getSelectedItem().toString().split(" - ");
+                for(int y = 0; y<this.pilotos.size(); y++){
+                    if(pilotos.get(y).getNome().equals(s[0])){
+                       participantes.add(pilotos.get(y));
+                    }                    
+                }
+            }
+            Pista local = null;
+            if(!localDaCorrida.getSelectedItem().equals("<Selecione uma pista>")){
+                String[] s = localDaCorrida.getSelectedItem().toString().split(" - ");
+                for(int y = 0; y<this.pistas.size(); y++){
+                    if(pistas.get(y).getNome().equals(s[0])){
+                       local = pistas.get(y);
+                    }                    
+                }
+            }            
             gerenciador = GerenciadorTelas.getInstance();
             String s = gerenciador.getDadosCorrida(tQuali.getValue().toString(), nVoltas.getValue().toString());
             JOptionPane.showMessageDialog(null, s, null, WIDTH);
             if(s.equals("OK")){    
                 gerenciador = GerenciadorTelas.getInstance();
                 gerenciador.setTelaConfig(this);
-                gerenciador.abrirQualificatorio();
+                gerenciador.abrirQualificatorio(participantes, (int)nVoltas.getValue(), tQuali.getValue().toString(), local);
             }
         }
         

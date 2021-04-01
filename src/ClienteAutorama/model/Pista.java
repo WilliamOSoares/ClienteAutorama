@@ -11,6 +11,8 @@ public class Pista implements Serializable {
         this.id = id;
         this.nome = nome;
         this.pais = pais;
+        this.recordista = null;
+        this.tempoRecordPista = "Nenhum";
     }
 
     public String getId() {
