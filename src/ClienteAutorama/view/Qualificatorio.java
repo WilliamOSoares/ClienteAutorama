@@ -1,6 +1,7 @@
 package ClienteAutorama.view;
 
 import ClienteAutorama.controller.GerenciadorTelas;
+import ClienteAutorama.model.ModeloTabela;
 
 public class Qualificatorio extends javax.swing.JFrame {
     
@@ -21,7 +22,8 @@ public class Qualificatorio extends javax.swing.JFrame {
             autorRecord.setText(gerenciador.corrida.pistaLocal.getRecordista().getNome());
         }
         tempo.setText(gerenciador.corrida.getTempQuali()+":00");
-        
+        ModeloTabela modelo = new ModeloTabela(gerenciador.corrida.pilotos);
+        tabelaQuali.setModel(modelo);
     }
 
     /**
