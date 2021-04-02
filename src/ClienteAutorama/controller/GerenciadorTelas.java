@@ -11,6 +11,7 @@ import ClienteAutorama.view.Principal;
 import ClienteAutorama.view.Qualificatorio;
 import ClienteAutorama.view.TelaInicial;
 import java.util.ArrayList;
+import org.json.JSONObject;
 
 public class GerenciadorTelas {
     
@@ -124,8 +125,8 @@ public class GerenciadorTelas {
         return bancoDados.salvaEquipe(novaEquipe);
     }
 
-    public int cadastrarPista(String ID, String nome, String pais) {
-        Pista novaPista = new Pista(ID, nome, pais);
+    public int cadastrarPista(String ID, String nome, String pais, String tempoMin) {
+        Pista novaPista = new Pista(ID, nome, pais, tempoMin);
         return bancoDados.salvaPista(novaPista);
     }
 
@@ -148,6 +149,10 @@ public class GerenciadorTelas {
 
     public int salvarCadastro() {
         return bancoDados.serealiza();
+    }
+
+    public JSONObject getEPC() {
+        return comunicacao.getEPC();
     }
     
 }

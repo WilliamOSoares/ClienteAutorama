@@ -1,8 +1,6 @@
 package ClienteAutorama.view;
 
-import ClienteAutorama.controller.GerenciadorBD;
 import ClienteAutorama.controller.GerenciadorTelas;
-import ClienteAutorama.controller.Corrida;
 import ClienteAutorama.model.Piloto;
 import ClienteAutorama.model.Pista;
 import java.util.ArrayList;
@@ -11,8 +9,8 @@ import javax.swing.JOptionPane;
 public class ConfiguraCorrida extends javax.swing.JFrame {
 
     GerenciadorTelas gerenciador;
-    ArrayList<Pista> pistas = new ArrayList<Pista>();
-    ArrayList<Piloto> pilotos = new ArrayList<Piloto>();
+    ArrayList<Pista> pistas = new ArrayList<>();
+    ArrayList<Piloto> pilotos = new ArrayList<>();
     
     /**
      * Creates new form CofiguraCorrida
@@ -279,7 +277,7 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
             i++;
         }             
         if(i==0){
-            ArrayList<Piloto> participantes = new ArrayList<Piloto>();
+            ArrayList<Piloto> participantes = new ArrayList<>();
             if(!piloto1.getSelectedItem().equals("<Selecione um piloto>")){
                 String[] s = piloto1.getSelectedItem().toString().split(" - ");
                 for(int y = 0; y<this.pilotos.size(); y++){

@@ -119,5 +119,19 @@ public class Comunication{
     public void testando(){
         System.out.println(recebido.toString());
     }
+
+    public JSONObject getEPC() {
+        JSONObject configLeitor = new JSONObject();
+        configLeitor.put("METODO", "GET");
+        configLeitor.put("URL", "retornaEPC");
+        try {
+            saida.write(configLeitor.toString());
+            saida.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        while(!recebido.has("EPC0")){ System.out.println(recebido.has("EPC0")); }
+        return recebido;
+    }
     
 }

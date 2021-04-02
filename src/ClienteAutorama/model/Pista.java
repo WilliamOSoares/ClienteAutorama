@@ -4,17 +4,26 @@ import java.io.Serializable;
 
 public class Pista implements Serializable {
     
-    private String id, nome, pais, tempoRecordPista;
+    private String id, nome, pais, tempoRecordPista, tempoMin;
     private Piloto recordista;
 
-    public Pista(String id, String nome, String pais) {
+    public Pista(String id, String nome, String pais, String tempoMin) {
         this.id = id;
         this.nome = nome;
         this.pais = pais;
+        this.tempoMin = tempoMin;
         this.recordista = null;
         this.tempoRecordPista = "Nenhum";
     }
 
+    public String getTempoMin() {
+        return tempoMin;
+    }
+
+    public void setTempoMin(String tempoMin) {
+        this.tempoMin = tempoMin;
+    }
+    
     public String getId() {
         return id;
     }
