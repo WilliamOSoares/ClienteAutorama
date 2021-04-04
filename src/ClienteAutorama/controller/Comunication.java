@@ -74,14 +74,15 @@ public class Comunication{
         
     }    
     
-    public String getDadosCorrida(String quali, String voltas){
-        JSONObject configLeitor = new JSONObject();
-        configLeitor.put("METODO", "GET");
-        configLeitor.put("URL", "dadosCorrida");
-        configLeitor.put("qualificatorio", quali);
-        configLeitor.put("voltas", voltas);
+    public String getDadosCorrida(String quali, String voltas, String tempoMIN){
+        JSONObject dadosCorrida = new JSONObject();
+        dadosCorrida.put("METODO", "GET");
+        dadosCorrida.put("URL", "dadosCorrida");
+        dadosCorrida.put("Quali", quali);
+        dadosCorrida.put("Voltas", voltas);
+        dadosCorrida.put("TempoMin", tempoMIN);
         try {
-            saida.write(configLeitor.toString());
+            saida.write(dadosCorrida.toString());
             saida.flush();
         } catch (IOException ex) {
             Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
@@ -89,49 +90,31 @@ public class Comunication{
         while(!recebido.has("return")){ System.out.println(recebido.has("return")); }
         return recebido.getString("return");
     }
-    /*
-        if(recebido.has("EPC1")){
-            recebido.getString("EPC1");
-            recebido.getString("rssi1");
-            recebido.getString("time1");
-        }
-        if(recebido.has("EPC2")){
-            recebido.getString("EPC2");
-            recebido.getString("rssi2");
-            recebido.getString("time2");
-        }
-        if(recebido.has("EPC3")){
-            recebido.getString("EPC3");
-            recebido.getString("rssi3");
-            recebido.getString("time3");
-        }
-    
-    
-    public static void main(String[] args) {
-        String s = "{" + "Protocolo" + ":" + "POST"+ "}";
-        System.out.println(s);
-        JSONObject t = new JSONObject(s);
-        System.out.println(t.toString());
-        
-    }
-    */
-    
-    public void testando(){
-        System.out.println(recebido.toString());
-    }
 
     public JSONObject getEPC() {
-        JSONObject configLeitor = new JSONObject();
-        configLeitor.put("METODO", "GET");
-        configLeitor.put("URL", "retornaEPC");
+        JSONObject getEPC = new JSONObject();
+        getEPC.put("METODO", "GET");
+        getEPC.put("URL", "retornaEPC");
         try {
-            saida.write(configLeitor.toString());
+            saida.write(getEPC.toString());
             saida.flush();
         } catch (IOException ex) {
             Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
         }
         while(!recebido.has("EPC0")){ System.out.println(recebido.has("EPC0")); }
         return recebido;
+    }
+
+    public void getComecaQuali() {
+        JSONObject comecaQuali = new JSONObject();
+        comecaQuali.put("METODO", "GET");
+        comecaQuali.put("URL", "comecaQuali");
+        try {
+            saida.write(comecaQuali.toString());
+            saida.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
+        }    
     }
     
 }

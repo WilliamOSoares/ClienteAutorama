@@ -328,7 +328,7 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 }
             }            
             gerenciador = GerenciadorTelas.getInstance();
-            String s = gerenciador.getDadosCorrida(tQuali.getValue().toString(), nVoltas.getValue().toString());
+            String s = gerenciador.getDadosCorrida(tQuali.getValue().toString(), nVoltas.getValue().toString(), local.getTempoMin());
             JOptionPane.showMessageDialog(null, s, null, WIDTH);
             if(s.equals("OK")){    
                 gerenciador = GerenciadorTelas.getInstance();

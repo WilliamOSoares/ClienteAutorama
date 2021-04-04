@@ -5,6 +5,7 @@ import ClienteAutorama.model.Carro;
 import ClienteAutorama.model.Equipe;
 import ClienteAutorama.model.Piloto;
 import ClienteAutorama.model.Pista;
+import ClienteAutorama.view.ApertouBotao;
 import ClienteAutorama.view.Cadastro;
 import ClienteAutorama.view.ConfiguraCorrida;
 import ClienteAutorama.view.Principal;
@@ -24,6 +25,7 @@ public class GerenciadorTelas {
     public ConfiguraCorrida telaConfig;
     public Qualificatorio telaQuali;
     public Corrida telaCorrida;
+    public ApertouBotao telaBotao;
     public int flag = 2;
     
     private GerenciadorTelas() {
@@ -41,8 +43,8 @@ public class GerenciadorTelas {
         comunicacao.POSTconfigLeitor(portaSerial, baudrate, regiao, antena, protocolo, power);
     }
     
-    public String getDadosCorrida(String quali, String voltas){
-        return comunicacao.getDadosCorrida(quali, voltas);
+    public String getDadosCorrida(String quali, String voltas, String tempoMIN){
+        return comunicacao.getDadosCorrida(quali, voltas, tempoMIN);
     }
     
     public void setTelaPrincipal(Principal tela){
@@ -111,6 +113,18 @@ public class GerenciadorTelas {
         telaConfig.setVisible(false);
         telaQuali = new Qualificatorio();
         telaQuali.setLocationRelativeTo(telaQuali);
+        telaQuali.setEnabled(false);
+        telaQuali.setVisible(false);
+        telaBotao = new ApertouBotao(0);
+        telaBotao.setLocationRelativeTo(telaQuali);
+        telaBotao.setEnabled(true);
+        telaBotao.setVisible(true);
+    }
+    
+    public void mostrarQualificatorio(){
+        comunicacao.getComecaQuali();
+        telaBotao.setEnabled(false);
+        telaBotao.setVisible(false);
         telaQuali.setEnabled(true);
         telaQuali.setVisible(true);
     }

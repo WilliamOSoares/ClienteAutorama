@@ -34,9 +34,15 @@ public class ModeloTabela extends AbstractTableModel{
             case 2: 
                 return corredores.get(linha).getEquipe().getNome();
             case 3:
-                return "??:??:???";//corrida.getIsntance; corrida.getCorredorTempo(linha);
+                if(linha==0){
+                    return corredores.get(linha).getTempoVolta();
+                } else {
+                float result;
+                    result = corredores.get(0).getTempoVolta() - corredores.get(linha).getTempoVolta();
+                    return "+" + result;
+                }//return corredores.get(linha).getTempoVolta();//"??:??:???";//corrida.getIsntance; corrida.getCorredorTempo(linha);
             case 4:
-                return "??";//corrida.getIsntance; corrida.getCorredorVolta(linha);
+                return corredores.get(linha).getVoltas();//"??";//corrida.getIsntance; corrida.getCorredorVolta(linha);
         }
         
         return null;
@@ -46,15 +52,14 @@ public class ModeloTabela extends AbstractTableModel{
     public String getColumnName(int column) {
         return colunas[column]; //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public void addRow(Piloto p){
-        this.corredores.add(p);
+    /*
+    public void addRow(){//Piloto p
+        //this.corredores.add(p);
         this.fireTableDataChanged();
     }
     
-    public void removeRow(int linha){
-        this.corredores.remove(linha);
-        this.fireTableRowsDeleted(linha, linha);
-    }
-    
+    public void setArray(int linha){
+        //this.corredores.remove(linha);
+        this.fireTableDataChanged();
+    }*/
 }
