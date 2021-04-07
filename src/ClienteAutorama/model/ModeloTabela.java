@@ -35,14 +35,24 @@ public class ModeloTabela extends AbstractTableModel{
                 return corredores.get(linha).getEquipe().getNome();
             case 3:
                 if(linha==0){
-                    return corredores.get(linha).getTempoVolta();
+                    if(corredores.get(linha).getTempoVolta()==null){
+                        return "00:00.000000";
+                    } else{
+                        return corredores.get(linha).getTempoVolta();
+                    }
                 } else {
-                float result;
-                    result = corredores.get(0).getTempoVolta() - corredores.get(linha).getTempoVolta();
-                    return "+" + result;
-                }//return corredores.get(linha).getTempoVolta();//"??:??:???";//corrida.getIsntance; corrida.getCorredorTempo(linha);
+                    if(corredores.get(0).getTempoVolta()==null){
+                        return "+00.000000";
+                    } else if (corredores.get(linha).getTempoVolta()==null){
+                        return "00.000000";
+                    } else{                 
+                        int first = corredores.get(0).getTempoSec() - corredores.get(linha).getTempoSec();
+                        int second = corredores.get(0).getTempoMili() - corredores.get(linha).getTempoMili();                    
+                        return "+" + first +"."+ second;
+                    }
+                }
             case 4:
-                return corredores.get(linha).getVoltas();//"??";//corrida.getIsntance; corrida.getCorredorVolta(linha);
+                return corredores.get(linha).getVoltas();
         }
         
         return null;
@@ -52,14 +62,10 @@ public class ModeloTabela extends AbstractTableModel{
     public String getColumnName(int column) {
         return colunas[column]; //To change body of generated methods, choose Tools | Templates.
     }
-    /*
-    public void addRow(){//Piloto p
-        //this.corredores.add(p);
+    
+    public void setArray(ArrayList<Piloto> novo){
+        this.corredores = novo;
         this.fireTableDataChanged();
     }
     
-    public void setArray(int linha){
-        //this.corredores.remove(linha);
-        this.fireTableDataChanged();
-    }*/
 }

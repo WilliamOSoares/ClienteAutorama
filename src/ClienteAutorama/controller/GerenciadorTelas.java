@@ -113,10 +113,11 @@ public class GerenciadorTelas {
         telaConfig.setVisible(false);
         telaQuali = new Qualificatorio();
         telaQuali.setLocationRelativeTo(telaQuali);
-        telaQuali.setEnabled(false);
-        telaQuali.setVisible(false);
+        telaQuali.setEnabled(true); 
+        telaQuali.setVisible(true); 
         telaBotao = new ApertouBotao(0);
         telaBotao.setLocationRelativeTo(telaQuali);
+        telaBotao.setSize(436, 166); 
         telaBotao.setEnabled(true);
         telaBotao.setVisible(true);
     }
@@ -125,8 +126,7 @@ public class GerenciadorTelas {
         comunicacao.getComecaQuali();
         telaBotao.setEnabled(false);
         telaBotao.setVisible(false);
-        telaQuali.setEnabled(true);
-        telaQuali.setVisible(true);
+        telaQuali.atualizaTabela();
     }
 
     public int cadastrarPiloto(String ID, String nome, String nacio) {

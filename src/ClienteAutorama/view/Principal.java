@@ -305,7 +305,7 @@ public class Principal extends javax.swing.JFrame {
         }
         
         textIP.setText("augusto.ddns.net");
-        textPorta.setText("2020");
+        textPorta.setText("5021");
         textPortaSerial.setText("tmr:///dev/ttyUSB0");
         textBaudrate.setText("230400");
         textRegiao.setText("NA2");

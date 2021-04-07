@@ -1,30 +1,27 @@
 package ClienteAutorama.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Piloto implements Serializable {
 
-    private String id, nome, nacionalidade;
+    private String id, nome, nacionalidade, tempoVolta;
     private Carro carro;
     private Equipe equipe;
     private int voltas = 0;
-    private float tempoVolta = 0;
+    private int tempoSec = 0;
+    private int tempoMili = 0;
+    private LocalDateTime tempoInit;
+    private LocalDateTime tempoFinal;
+    private boolean primeiraLeitura = true;
     private int posicao;
 
     public Piloto(String id, String nome, String nacionalidade) {
         this.id = id;
         this.nome = nome;
         this.nacionalidade = nacionalidade;
-        //this.voltas=0;
-        //this.tempoVolta=0;
     }
-    /*
-    public Piloto(String id, String nome, String nacionalidade, Equipe equipe) {
-        this.id = id;
-        this.nome = nome;
-        this.nacionalidade = nacionalidade;
-        this.equipe = equipe;
-    }*/
 
     public String getId() {
         return id;
@@ -74,14 +71,35 @@ public class Piloto implements Serializable {
         this.voltas = voltas;
     }
 
-    public float getTempoVolta() {
+    public String getTempoVolta() {
         return tempoVolta;
     }
 
-    public void setTempoVolta(float tempoVolta) {
-        this.tempoVolta = tempoVolta;
+    public void setTempoVolta() {
+        LocalDateTime aux;
+        aux = this.tempoFinal.minusHours(this.tempoInit.getHour()).minusMinutes(this.tempoInit.getMinute()).minusNanos(this.tempoInit.getNano());
+        int mili = aux.getNano()/1000;
+        this.setTempoMili(mili);
+        this.tempoVolta = aux.getMinute() + ":" + aux.getSecond() + "." + mili;
+        this.setTempoSec((aux.getMinute()*60)+aux.getSecond());        
     }
 
+    public int getTempoMili() {
+        return tempoMili;
+    }
+
+    public void setTempoMili(int tempoMili) {
+        this.tempoMili = tempoMili;
+    }
+    
+    public int getTempoSec() {
+        return tempoSec;
+    }
+
+    public void setTempoSec(int tempoSec) {
+        this.tempoSec = tempoSec;
+    }
+    
     public int getPosicao() {
         return posicao;
     }
@@ -90,5 +108,46 @@ public class Piloto implements Serializable {
         this.posicao = posicao;
     }
 
-    
+    public LocalDateTime getTempoInit() {
+        return tempoInit;
+    }
+
+    public void setTempoInit(LocalDateTime tempoInit) {
+        this.tempoInit = tempoInit;
+    }
+
+    public LocalDateTime getTempoFinal() {
+        return tempoFinal;
+    }
+
+    public void setTempoFinal(LocalDateTime tempoFinal) {
+        this.tempoFinal = tempoFinal;
+    }
+
+    public boolean isPrimeiraLeitura() {
+        return primeiraLeitura;
+    }
+
+    public void setPrimeiraLeitura(boolean primeiraLeitura) {
+        this.primeiraLeitura = primeiraLeitura;
+    }
+    /*
+    public static void main(String[] args) {
+        String s = "2021-04-03 18:48:30.123456";
+        String t = "2021-04-03 18:52:30.654321";
+        
+        Piloto p = new Piloto("a","b","c");
+        
+        p.setTempoInit(LocalDateTime.parse(s, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"))); 
+        p.setTempoFinal(LocalDateTime.parse(t, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS")));
+        LocalDateTime aux;
+        System.out.println(p.getTempoInit());
+        System.out.println(p.getTempoFinal());
+        p.setTempoVolta();
+        System.out.println(p.getTempoVolta());
+        System.out.println(p.getTempoSec());
+        System.out.println(p.getTempoMili());
+        
+    }
+    */
 }

@@ -23,11 +23,13 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
         pistas = gerenciador.bancoDados.getBdPistas();
         
         for(int i = 0; i<pilotos.size(); i++){
-            piloto1.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
-            piloto2.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
-            piloto3.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
-            piloto4.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
-            piloto5.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
+            if(pilotos.get(i).getCarro() != null){
+                piloto1.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
+                piloto2.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
+                piloto3.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
+                piloto4.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
+                piloto5.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
+            }
         }
         for(int i = 0; i<pistas.size(); i++){
             localDaCorrida.addItem(pistas.get(i).getNome()+" - "+pistas.get(i).getPais());
@@ -73,6 +75,11 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
         jLabel5.setText("Piloto 1:");
 
         piloto1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione um piloto>" }));
+        piloto1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                piloto1ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Piloto 2:");
 
@@ -339,6 +346,10 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_avancarActionPerformed
+
+    private void piloto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piloto1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_piloto1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -44,7 +44,7 @@ public class ApertouBotao extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 101;
         gridBagConstraints.ipady = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(51, 240, 147, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 110, 34, 0);
         getContentPane().add(simulaBotao, gridBagConstraints);
 
         mensagem.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -55,9 +55,9 @@ public class ApertouBotao extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 20;
-        gridBagConstraints.ipady = 44;
+        gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(87, 184, 0, 189);
+        gridBagConstraints.insets = new java.awt.Insets(24, 44, 0, 56);
         getContentPane().add(mensagem, gridBagConstraints);
 
         pack();
