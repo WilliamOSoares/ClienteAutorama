@@ -7,8 +7,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class Corrida {
+public class Corrida implements Runnable{
     
     GerenciadorTelas gerenciador;
     public ArrayList<Piloto> pilotos = new ArrayList<Piloto>();
@@ -18,6 +20,7 @@ public class Corrida {
     public String tempQuali;
     public boolean fimQuali = false;
     public boolean fimCorrida = false;
+    public boolean online = false;
     
     
     public Corrida() {
@@ -88,25 +91,33 @@ public class Corrida {
         pistaLocal = pista;
     }    
 
-    public ArrayList<Piloto> getAtualizacao() {
+    public  void getAtualizacao() {//ArrayList<Piloto> getAtualizacao() {
         gerenciador = GerenciadorTelas.getInstance();
+        //teste
+        while(!isFimQuali()){
+        //teste
         while(!gerenciador.comunicacao.recebido.has("CicloLeitura") && !gerenciador.comunicacao.recebido.has("status")){             
-            System.out.println(gerenciador.comunicacao.recebido.toString());
-            System.out.println("esperando"); 
+            //System.out.println(gerenciador.comunicacao.recebido.toString());
+            //System.out.println("esperando no while da primeira leitura");
+            gerenciador.telaQuali.pilotos = this.pilotos;
         }
         String obj = Integer.toString(ciclo);
         System.out.println(obj);
-        while(!gerenciador.comunicacao.recebido.get("CicloLeitura").equals(obj) && !gerenciador.comunicacao.recebido.has("status")){
-            System.out.println("esperando");
-            System.out.println(gerenciador.comunicacao.recebido.get("CicloLeitura"));
+        if(ciclo>0){
+            while(!gerenciador.comunicacao.recebido.get("CicloLeitura").equals(obj) && !gerenciador.comunicacao.recebido.has("status")){
+               // System.out.println("esperando no while da segunda leitura");
+                //System.out.println(gerenciador.comunicacao.recebido.get("CicloLeitura"));
+                //System.out.println(ciclo);
+                gerenciador.telaQuali.pilotos = this.pilotos;
+            }
         }
         
         if(gerenciador.comunicacao.recebido.has("CARRO0")){
-            String s = "CARRO";
-            String t = "TEMPO";
+            String a = "CARRO";
+            String b = "TEMPO";
             for(int i = 0; i<5; i++){
-                s.concat(Integer.toString(i));
-                t.concat(Integer.toString(i));
+                String s = a+i;
+                String t = b+i;
                 System.out.println(s+","+t);
                 if(gerenciador.comunicacao.recebido.has(s)){
                     for(int j = 0; j<this.pilotos.size(); j++){
@@ -119,7 +130,10 @@ public class Corrida {
                                 System.out.println(gerenciador.comunicacao.recebido.get(t).toString());
                                 this.pilotos.get(j).setTempoFinal(LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData));
                                 this.pilotos.get(j).setTempoVolta();
-                                this.pilotos.get(j).setPrimeiraLeitura(true);
+                                System.out.println(this.pilotos.get(j).getTempoVolta());
+                                this.pilotos.get(j).setVoltas(this.ciclo);
+                                this.pilotos.get(j).setTempoInit(LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData));
+                                //this.pilotos.get(j).setPrimeiraLeitura(true);
                             }
                         }
                     }
@@ -129,11 +143,69 @@ public class Corrida {
         } else if (gerenciador.comunicacao.recebido.has("status")){
             this.fimQuali = true;
             ciclo = 0;
-        }
-        ciclo++;
+            this.stop();
+        }// ciclo++;
+        
+        for(int i = 0; i<pilotos.size(); i++){System.out.println(this.pilotos.get(i).getNome());}
+        this.pilotos = this.insertionSort(pilotos);
+        for(int i = 0; i<pilotos.size(); i++){System.out.println(this.pilotos.get(i).getNome());}
+        gerenciador.telaQuali.pilotos = this.pilotos;
         System.out.println(gerenciador.comunicacao.recebido.toString());
-        return this.pilotos;
+        //return this.pilotos;
+        //teste
+        //gerenciador.telaQuali.modelo.setArray(pilotos);      
+        }
+        System.out.println("Passou direto");
+        //teste
+    }
+    /*
+    public static void main(String[] args) {
+        String s = "CARRO";
+        String t = "TEMPO";
+        for(int i = 0; i<5; i++){
+            System.out.println(Integer.toString(i));
+            String x = Integer.toString(i);
+            String a = s+x;
+            String b = t+x;
+            //s.concat(x);
+            //t.concat(x);
+            System.out.println(a+","+b);
+        }
+    }
+    */
+    
+    public ArrayList<Piloto> insertionSort(ArrayList<Piloto> vetor) {
+        int j;
+        Piloto key;
+        int i;
+
+            for (j = 1; j < vetor.size(); j++){
+                key = vetor.get(j);
+                for (i = j - 1; (i >= 0) && (vetor.get(i).getTempoSec() > key.getTempoSec()); i--){
+                    vetor.set((i+1),vetor.get(i));
+                }
+                vetor.set((i+1), key);
+            }
+        return vetor;
+    }
+
+    @Override
+    public void run() {
+        while(online){
+            this.getAtualizacao();
+        }
     }
     
+    public void start(){
+        if(!online){
+            this.online = true;
+            new Thread(this).start();
+        }
+        
+    }
+    
+    public void stop(){
+        this.online = false;        
+    }
     
 }

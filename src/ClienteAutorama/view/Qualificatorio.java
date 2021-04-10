@@ -4,18 +4,31 @@ import ClienteAutorama.controller.GerenciadorTelas;
 import ClienteAutorama.model.ModeloTabela;
 import ClienteAutorama.model.Piloto;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.SwingWorker;
 
 public class Qualificatorio extends javax.swing.JFrame {
     
     GerenciadorTelas gerenciador;
-    ModeloTabela modelo;
+    public ModeloTabela modelo;
+    public int tempoQuali;
+    public ArrayList<Piloto> pilotos; 
     
     /**
      * Creates new form Qualificatorio
      */
     public Qualificatorio() {
         initComponents();
-        this.setTitle("Autorama");
+        this.setTitle("Autorama");/*
+        tempoQuali = 2;
+        pilotos = new ArrayList<>();
+        pilotos.add(new Piloto("a","b","c"));
+        gerenciador = GerenciadorTelas.getInstance();
+        gerenciador.setTelaQuali(this);
+        this.modelo = new ModeloTabela(pilotos);
+        tabelaQuali.setModel(modelo);*/
+        ///*
         gerenciador = GerenciadorTelas.getInstance();
         localCorrida.setText(gerenciador.corrida.pistaLocal.getNome()+" - "+gerenciador.corrida.pistaLocal.getPais());
         tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());
@@ -24,9 +37,31 @@ public class Qualificatorio extends javax.swing.JFrame {
         } else{
             autorRecord.setText(gerenciador.corrida.pistaLocal.getRecordista().getNome());
         }
+        tempoQuali = Integer.parseInt(gerenciador.corrida.getTempQuali());
         tempo.setText(gerenciador.corrida.getTempQuali()+":00");
-        this.modelo = new ModeloTabela(gerenciador.corrida.pilotos);
+        this.pilotos = gerenciador.corrida.pilotos;//
+        this.modelo = new ModeloTabela(pilotos);
         tabelaQuali.setModel(modelo);
+        gerenciador.setTelaQuali(this);
+        this.start();
+        /*
+        new Thread() {
+            @Override
+            public void run() {
+                GerenciadorTelas gerenciador;
+                gerenciador = GerenciadorTelas.getInstance();
+                ArrayList<Piloto> array = new ArrayList<>();
+                array.add(new Piloto("id","nome","nac"));
+                array.add(new Piloto("id2","nome2","nac2"));
+                int i = 1;
+                while(true){
+                    array.get(0).setVoltas(i);
+                    array.get(1).setVoltas(i);
+                    i++;
+                    gerenciador.telaQuali.pilotos = array;
+                }                
+            }
+        }.start();*/
         
     }
 
@@ -227,17 +262,59 @@ public class Qualificatorio extends javax.swing.JFrame {
     private javax.swing.JLabel tempoRecord;
     // End of variables declaration//GEN-END:variables
 
+   /* 
     public void atualizaTabela() {
         gerenciador = GerenciadorTelas.getInstance();
         while(!gerenciador.corrida.isFimQuali()){
             ArrayList<Piloto> atualizado;            
             //tabelaQuali.setModel(modelo);
             atualizado = gerenciador.corrida.getAtualizacao();
-            this.setModelo(atualizado);
+            //this.modelo = new ModeloTabela(atualizado);//.setArray(atualizado);
+            //this.modelo.fireTableRowsUpdated(0, atualizado.size());//DataChanged();
+            this.modelo.setArray(atualizado);
+            tabelaQuali.revalidate();
+            try {
+                Thread.currentThread().sleep(5000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Qualificatorio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("tabela atualizada");
         }
     }
+    */
     
-    public void setModelo(ArrayList<Piloto> novo){
-        modelo.setArray(novo);    
+    private void start(){
+        SwingWorker worker = new SwingWorker() {
+            @Override
+            protected Void doInBackground() throws Exception {
+            // Simulate doing something useful.
+                GerenciadorTelas gerenciador;
+                gerenciador = GerenciadorTelas.getInstance();
+                while(tempoQuali>=0){
+                    System.out.println("está rodando o tempo");
+                    int sec = 60;
+                    tempoQuali--;
+                    //tempo.setText(tempoQuali + ":" + sec);
+                    while(sec>0){
+                        System.out.println("está rodando o segundos antes do sleep");
+                        Thread.sleep(1000);
+                        System.out.println("está rodando o segundos depois do sleep");
+                        sec--;
+                        if(sec<10){
+                            tempo.setText(tempoQuali + ":0" + sec);
+                        } else{
+                            tempo.setText(tempoQuali + ":" + sec);
+                        }  
+                        gerenciador.telaQuali.modelo.setArray(gerenciador.telaQuali.pilotos);//gerenciador.corrida.pilotos);
+                    }            
+                }
+
+            return null;
+            }
+        };
+
+        worker.execute();
     }
+
+    
 }

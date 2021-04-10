@@ -12,6 +12,8 @@ public class Piloto implements Serializable {
     private int voltas = 0;
     private int tempoSec = 0;
     private int tempoMili = 0;
+    private int melhorSec = 0;
+    private int melhorMili = 0;
     private LocalDateTime tempoInit;
     private LocalDateTime tempoFinal;
     private boolean primeiraLeitura = true;
@@ -77,11 +79,22 @@ public class Piloto implements Serializable {
 
     public void setTempoVolta() {
         LocalDateTime aux;
-        aux = this.tempoFinal.minusHours(this.tempoInit.getHour()).minusMinutes(this.tempoInit.getMinute()).minusNanos(this.tempoInit.getNano());
-        int mili = aux.getNano()/1000;
+        aux = this.tempoFinal.minusHours(this.tempoInit.getHour()).minusMinutes(this.tempoInit.getMinute()).minusSeconds(this.tempoInit.getSecond()).minusNanos(this.tempoInit.getNano());
+        System.out.println(aux);
+        int mili = aux.getNano()/1000000;
         this.setTempoMili(mili);
-        this.tempoVolta = aux.getMinute() + ":" + aux.getSecond() + "." + mili;
+        if(this.tempoMili<10){
+            this.tempoVolta = aux.getMinute() + ":" + aux.getSecond() + ".00" + mili;
+        } else if(this.tempoMili<100){
+            this.tempoVolta = aux.getMinute() + ":" + aux.getSecond() + ".0" + mili;
+        }else{
+            this.tempoVolta = aux.getMinute() + ":" + aux.getSecond() + "." + mili;
+        }
         this.setTempoSec((aux.getMinute()*60)+aux.getSecond());        
+    }
+    
+    public void comparar(){
+        
     }
 
     public int getTempoMili() {

@@ -24,6 +24,7 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
         
         for(int i = 0; i<pilotos.size(); i++){
             if(pilotos.get(i).getCarro() != null){
+                System.out.println(pilotos.get(i).getNome()+" - "+ pilotos.get(i).getCarro().getEPC());
                 piloto1.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
                 piloto2.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
                 piloto3.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());

@@ -32,6 +32,7 @@ public class ModeloTabela extends AbstractTableModel{
             case 1:
                 return corredores.get(linha).getNome();
             case 2: 
+                //return "equipe";
                 return corredores.get(linha).getEquipe().getNome();
             case 3:
                 if(linha==0){
@@ -45,9 +46,15 @@ public class ModeloTabela extends AbstractTableModel{
                         return "+00.000000";
                     } else if (corredores.get(linha).getTempoVolta()==null){
                         return "00.000000";
-                    } else{                 
-                        int first = corredores.get(0).getTempoSec() - corredores.get(linha).getTempoSec();
-                        int second = corredores.get(0).getTempoMili() - corredores.get(linha).getTempoMili();                    
+                    } else{
+                        int first, second;
+                        if(corredores.get(linha).getTempoMili() < corredores.get(0).getTempoMili()){
+                            second = (corredores.get(linha).getTempoMili()+1000) - corredores.get(0).getTempoMili();
+                            first = (corredores.get(linha).getTempoSec()-1) - corredores.get(0).getTempoSec();
+                        } else{
+                            first = corredores.get(linha).getTempoSec() - corredores.get(0).getTempoSec();
+                            second = corredores.get(linha).getTempoMili() - corredores.get(0).getTempoMili();  
+                        }                                          
                         return "+" + first +"."+ second;
                     }
                 }

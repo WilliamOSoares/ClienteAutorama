@@ -122,11 +122,16 @@ public class GerenciadorTelas {
         telaBotao.setVisible(true);
     }
     
+    public void setTelaQuali(Qualificatorio tela) {
+        telaQuali = tela;
+    }
+    
     public void mostrarQualificatorio(){
         comunicacao.getComecaQuali();
         telaBotao.setEnabled(false);
         telaBotao.setVisible(false);
-        telaQuali.atualizaTabela();
+        //corrida.getAtualizacao();
+        this.corrida.start();
     }
 
     public int cadastrarPiloto(String ID, String nome, String nacio) {
@@ -168,5 +173,5 @@ public class GerenciadorTelas {
     public JSONObject getEPC() {
         return comunicacao.getEPC();
     }
-    
+
 }
