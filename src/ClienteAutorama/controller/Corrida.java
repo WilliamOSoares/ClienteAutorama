@@ -1,6 +1,7 @@
 
 package ClienteAutorama.controller;
 
+import ClienteAutorama.model.Carro;
 import ClienteAutorama.model.Piloto;
 import ClienteAutorama.model.Pista;
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.JSONObject;
 
 public class Corrida implements Runnable{
     
@@ -16,11 +18,12 @@ public class Corrida implements Runnable{
     public ArrayList<Piloto> pilotos = new ArrayList<Piloto>();
     public DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
     public Pista pistaLocal;
-    public int numVoltas, ciclo = 0;
+    public int numVoltas, ciclo = 0, nVolta = 0;
     public String tempQuali;
     public boolean fimQuali = false;
     public boolean fimCorrida = false;
     public boolean online = false;
+    public ArrayList<Carro> leitura = new ArrayList<>();
     
     
     public Corrida() {
@@ -99,7 +102,7 @@ public class Corrida implements Runnable{
         while(!gerenciador.comunicacao.recebido.has("CicloLeitura") && !gerenciador.comunicacao.recebido.has("status")){             
             //System.out.println(gerenciador.comunicacao.recebido.toString());
             //System.out.println("esperando no while da primeira leitura");
-            gerenciador.telaQuali.pilotos = this.pilotos;
+            //gerenciador.telaQuali.pilotos = this.pilotos;
         }
         String obj = Integer.toString(ciclo);
         System.out.println(obj);
@@ -108,52 +111,89 @@ public class Corrida implements Runnable{
                // System.out.println("esperando no while da segunda leitura");
                 //System.out.println(gerenciador.comunicacao.recebido.get("CicloLeitura"));
                 //System.out.println(ciclo);
-                gerenciador.telaQuali.pilotos = this.pilotos;
+                //gerenciador.telaQuali.pilotos = this.pilotos;
             }
         }
         
-        if(gerenciador.comunicacao.recebido.has("CARRO0")){
-            String a = "CARRO";
-            String b = "TEMPO";
-            for(int i = 0; i<5; i++){
-                String s = a+i;
-                String t = b+i;
-                System.out.println(s+","+t);
-                if(gerenciador.comunicacao.recebido.has(s)){
-                    for(int j = 0; j<this.pilotos.size(); j++){
-                        if(gerenciador.comunicacao.recebido.get(s).equals(this.pilotos.get(j).getCarro().getEPC())){
-                            if(this.pilotos.get(j).isPrimeiraLeitura()){
-                                System.out.println(gerenciador.comunicacao.recebido.get(t).toString());
-                                this.pilotos.get(j).setTempoInit(LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData));
-                                this.pilotos.get(j).setPrimeiraLeitura(false);
-                            } else {
-                                System.out.println(gerenciador.comunicacao.recebido.get(t).toString());
-                                this.pilotos.get(j).setTempoFinal(LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData));
+        if(validaLeitura()){
+            System.out.println("VALIDOU A LEITURA");
+            for (int i = 0; i < leitura.size(); i++) {
+                System.out.println(leitura.get(i).getEPC()+" - "+ leitura.get(i).getTempoVolta().toString());
+            }
+            for (int i = 0; i < leitura.size(); i++) {
+                for (int j = 0; j < pilotos.size(); j++) {
+                    if(leitura.get(i).getEPC().equals(pilotos.get(j).getCarro().getEPC())){
+                        if(this.pilotos.get(j).isPrimeiraLeitura()){
+                            this.pilotos.get(j).setTempoInit(leitura.get(i).getTempoVolta());
+                            this.pilotos.get(j).setPrimeiraLeitura(false);
+                        } else{
+                            System.out.println("Passei no else, mas não entrei no if");
+                            if(leitura.get(i).getTempoVolta().getMinute() != pilotos.get(j).getTempoInit().getMinute()){
+                                System.out.println("Alterou o tempo");
+                                System.out.println(leitura.get(i).getTempoVolta().toString());
+                                System.out.println(pilotos.get(j).getTempoInit().toString());
+                                this.pilotos.get(j).setTempoFinal(leitura.get(i).getTempoVolta());
                                 this.pilotos.get(j).setTempoVolta();
                                 System.out.println(this.pilotos.get(j).getTempoVolta());
-                                this.pilotos.get(j).setVoltas(this.ciclo);
-                                this.pilotos.get(j).setTempoInit(LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData));
-                                //this.pilotos.get(j).setPrimeiraLeitura(true);
+                                this.pilotos.get(j).setVoltas(this.pilotos.get(j).getVoltas()+1);
+                                this.pilotos.get(j).setTempoInit(leitura.get(i).getTempoVolta());
                             }
                         }
                     }
                 }
             }
-            ciclo++;
-        } else if (gerenciador.comunicacao.recebido.has("status")){
-            this.fimQuali = true;
-            ciclo = 0;
-            this.stop();
-        }// ciclo++;
+            /*
+            if(gerenciador.comunicacao.recebido.has("CARRO0")){
+                String a = "CARRO";
+                String b = "TEMPO";
+                for(int i = 0; i<5; i++){
+                    String s = a+i;
+                    String t = b+i;
+                    System.out.println(s+","+t);
+                    if(gerenciador.comunicacao.recebido.has(s)){
+                        for(int j = 0; j<this.pilotos.size(); j++){
+                            if(gerenciador.comunicacao.recebido.get(s).equals(this.pilotos.get(j).getCarro().getEPC())){
+                                if(this.pilotos.get(j).isPrimeiraLeitura()){
+                                    System.out.println(gerenciador.comunicacao.recebido.get(t).toString());
+                                    this.pilotos.get(j).setTempoInit(LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData));
+                                    this.pilotos.get(j).setPrimeiraLeitura(false);
+                                } else {
+                                    System.out.println(gerenciador.comunicacao.recebido.get(t).toString());
+                                    this.pilotos.get(j).setTempoFinal(LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData));
+                                    this.pilotos.get(j).setTempoVolta();
+                                    System.out.println(this.pilotos.get(j).getTempoVolta());
+                                    nVolta++;
+                                    this.pilotos.get(j).setVoltas(nVolta);
+                                    this.pilotos.get(j).setTempoInit(LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData));
+                                    //this.pilotos.get(j).setPrimeiraLeitura(true);
+                                }
+                            }
+                        }
+                    }
+                }
+                //ciclo++;
+            } else*/ if (gerenciador.comunicacao.recebido.has("status")){
+                this.fimQuali = true;
+                ciclo = 0;
+                this.stop();
+                for (int i = 0; i < gerenciador.bancoDados.getBdPistas().size(); i++) {
+                    if(gerenciador.bancoDados.bdPistas.get(i).getNome().equals(pistaLocal.getNome())){
+                        gerenciador.bancoDados.bdPistas.set(i, pistaLocal);
+                    }
+                }                
+            } 
+            //for(int i = 0; i<pilotos.size(); i++){System.out.println(this.pilotos.get(i).getNome());}
+            
+            //for(int i = 0; i<pilotos.size(); i++){System.out.println(this.pilotos.get(i).getNome());}
+            if(pilotos.get(0).getVoltas()>0){
+                this.pilotos = this.insertionSort(pilotos);
+                pistaLocal.novoRecord(pilotos.get(0));
+            }            
+            gerenciador.telaQuali.pilotos = this.pilotos;
+            System.out.println(gerenciador.comunicacao.recebido.toString());
+        }
         
-        for(int i = 0; i<pilotos.size(); i++){System.out.println(this.pilotos.get(i).getNome());}
-        this.pilotos = this.insertionSort(pilotos);
-        for(int i = 0; i<pilotos.size(); i++){System.out.println(this.pilotos.get(i).getNome());}
-        gerenciador.telaQuali.pilotos = this.pilotos;
-        System.out.println(gerenciador.comunicacao.recebido.toString());
-        //return this.pilotos;
-        //teste
-        //gerenciador.telaQuali.modelo.setArray(pilotos);      
+        ciclo++;
         }
         System.out.println("Passou direto");
         //teste
@@ -206,6 +246,59 @@ public class Corrida implements Runnable{
     
     public void stop(){
         this.online = false;        
+    }
+
+    private boolean validaLeitura() {
+        gerenciador = GerenciadorTelas.getInstance();
+        if(leitura==null){
+            String a = "CARRO";
+            String b = "TEMPO";
+            for(int i = 0; i<5; i++){
+                    String s = a+i;
+                    String t = b+i;
+                    //System.out.println(s+","+t);
+                    if(gerenciador.comunicacao.recebido.has(s)){
+                        for(int j = 0; j<this.pilotos.size(); j++){
+                            if(gerenciador.comunicacao.recebido.get(s).equals(this.pilotos.get(j).getCarro().getEPC())){
+                                leitura.add(new Carro(gerenciador.comunicacao.recebido.get(s).toString(), LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData)));
+                            }
+                        }
+                    }
+            }
+            return true;
+        } else if(leitura!=null){ 
+            String a = "CARRO";
+            String b = "TEMPO";
+            boolean retorno = false;            
+            for(int i = 0; i<5; i++){
+                    String s = a+i;
+                    String t = b+i;
+                    //System.out.println(s+","+t);   
+                    int x = 0;
+                    if(gerenciador.comunicacao.recebido.has(s)){
+                        for(int j = 0; j<this.leitura.size(); j++){
+                            if(gerenciador.comunicacao.recebido.get(s).equals(this.leitura.get(j).getEPC())){
+                                x++;
+                                LocalDateTime tempoBase = LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData);
+                                LocalDateTime aux;
+                                aux = tempoBase.minusHours(this.leitura.get(j).getTempoVolta().getHour()).minusMinutes(this.leitura.get(j).getTempoVolta().getMinute()).minusSeconds(this.leitura.get(j).getTempoVolta().getSecond()).minusNanos(this.leitura.get(j).getTempoVolta().getNano());
+                                System.out.println(aux.toString());
+                                if(aux.getMinute()>=Integer.parseInt(pistaLocal.getTempoMin())){
+                                    this.leitura.get(j).setTempoVolta(tempoBase);
+                                    retorno = true;
+                                }
+                            }                            
+                        }
+                        if(x==0){
+                            leitura.add(new Carro(gerenciador.comunicacao.recebido.get(s).toString(), LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData)));
+                            retorno = true;
+                        }
+                    }                    
+            }
+            return retorno;
+        }else{        
+            return false;
+        }        
     }
     
 }

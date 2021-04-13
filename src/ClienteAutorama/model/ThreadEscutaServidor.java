@@ -27,7 +27,7 @@ public class ThreadEscutaServidor implements Runnable{
                 String chegou = entrada.readLine();
                 if(chegou != null){
                     msg = new JSONObject(chegou);
-                    System.out.println(msg.toString());
+                    //System.out.println(msg.toString());
                     comunicacao = Comunication.getInstance();
                     comunicacao.recebeMensagem(msg);
                 }

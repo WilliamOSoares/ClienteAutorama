@@ -180,7 +180,7 @@ public class GerenciadorBD {
         }
         return 2; //não existe Carro
     }
-    
+    /*
     public int salvaPilotoRecordista(String idPista, String idPiloto){
         Piloto pilotoAux = null;
         
@@ -202,7 +202,7 @@ public class GerenciadorBD {
         }
         
         return 2; //Não achou a pista correta
-    }
+    }*/
     
     public int serealiza(){
         

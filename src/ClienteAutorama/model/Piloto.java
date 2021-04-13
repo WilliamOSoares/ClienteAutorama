@@ -90,7 +90,8 @@ public class Piloto implements Serializable {
         }else{
             this.tempoVolta = aux.getMinute() + ":" + aux.getSecond() + "." + mili;
         }
-        this.setTempoSec((aux.getMinute()*60)+aux.getSecond());        
+        this.setTempoSec((aux.getMinute()*60)+aux.getSecond());
+        System.out.println("sec-mili"+this.getTempoSec() + "-" +this.getTempoMili());
     }
     
     public void comparar(){
@@ -144,23 +145,5 @@ public class Piloto implements Serializable {
     public void setPrimeiraLeitura(boolean primeiraLeitura) {
         this.primeiraLeitura = primeiraLeitura;
     }
-    /*
-    public static void main(String[] args) {
-        String s = "2021-04-03 18:48:30.123456";
-        String t = "2021-04-03 18:52:30.654321";
-        
-        Piloto p = new Piloto("a","b","c");
-        
-        p.setTempoInit(LocalDateTime.parse(s, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS"))); 
-        p.setTempoFinal(LocalDateTime.parse(t, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS")));
-        LocalDateTime aux;
-        System.out.println(p.getTempoInit());
-        System.out.println(p.getTempoFinal());
-        p.setTempoVolta();
-        System.out.println(p.getTempoVolta());
-        System.out.println(p.getTempoSec());
-        System.out.println(p.getTempoMili());
-        
-    }
-    */
+    
 }

@@ -37,25 +37,37 @@ public class ModeloTabela extends AbstractTableModel{
             case 3:
                 if(linha==0){
                     if(corredores.get(linha).getTempoVolta()==null){
-                        return "00:00.000000";
+                        return "00:00.000";
                     } else{
                         return corredores.get(linha).getTempoVolta();
                     }
                 } else {
                     if(corredores.get(0).getTempoVolta()==null){
-                        return "+00.000000";
+                        return "+00.000";
                     } else if (corredores.get(linha).getTempoVolta()==null){
-                        return "00.000000";
+                        return "00.000";
                     } else{
                         int first, second;
+                        String s = ".";
                         if(corredores.get(linha).getTempoMili() < corredores.get(0).getTempoMili()){
                             second = (corredores.get(linha).getTempoMili()+1000) - corredores.get(0).getTempoMili();
                             first = (corredores.get(linha).getTempoSec()-1) - corredores.get(0).getTempoSec();
+                            if(second <10){
+                                s = ".00";
+                            } else if(second<100){
+                                s = ".0";
+                            }
                         } else{
                             first = corredores.get(linha).getTempoSec() - corredores.get(0).getTempoSec();
-                            second = corredores.get(linha).getTempoMili() - corredores.get(0).getTempoMili();  
+                            second = corredores.get(linha).getTempoMili() - corredores.get(0).getTempoMili();
+                            if(second <10){
+                                s = ".00";
+                            } else if(second<100){
+                                s = ".0";
+                            }
+                            
                         }                                          
-                        return "+" + first +"."+ second;
+                        return "+" + first + s + second;
                     }
                 }
             case 4:
