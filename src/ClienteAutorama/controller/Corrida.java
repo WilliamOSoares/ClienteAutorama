@@ -7,10 +7,6 @@ import ClienteAutorama.model.Pista;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.json.JSONObject;
 
 public class Corrida implements Runnable{
     
@@ -94,32 +90,23 @@ public class Corrida implements Runnable{
         pistaLocal = pista;
     }    
 
-    public  void getAtualizacao() {//ArrayList<Piloto> getAtualizacao() {
+    public  void getAtualizacao() {
         gerenciador = GerenciadorTelas.getInstance();
-        //teste
         while(!isFimQuali()){
-        //teste
         while(!gerenciador.comunicacao.recebido.has("CicloLeitura") && !gerenciador.comunicacao.recebido.has("status")){             
-            //System.out.println(gerenciador.comunicacao.recebido.toString());
-            //System.out.println("esperando no while da primeira leitura");
-            //gerenciador.telaQuali.pilotos = this.pilotos;
+            
         }
         String obj = Integer.toString(ciclo);
-        System.out.println(obj);
+        //System.out.println(obj);
         if(ciclo>0){
             while(!gerenciador.comunicacao.recebido.get("CicloLeitura").equals(obj) && !gerenciador.comunicacao.recebido.has("status")){
-               // System.out.println("esperando no while da segunda leitura");
-                //System.out.println(gerenciador.comunicacao.recebido.get("CicloLeitura"));
-                //System.out.println(ciclo);
-                //gerenciador.telaQuali.pilotos = this.pilotos;
+               
             }
         }
         
         if(validaLeitura()){
-            System.out.println("VALIDOU A LEITURA");
-            for (int i = 0; i < leitura.size(); i++) {
-                System.out.println(leitura.get(i).getEPC()+" - "+ leitura.get(i).getTempoVolta().toString());
-            }
+            //System.out.println("VALIDOU A LEITURA");
+            
             for (int i = 0; i < leitura.size(); i++) {
                 for (int j = 0; j < pilotos.size(); j++) {
                     if(leitura.get(i).getEPC().equals(pilotos.get(j).getCarro().getEPC())){
@@ -129,12 +116,12 @@ public class Corrida implements Runnable{
                         } else{
                             System.out.println("Passei no else, mas não entrei no if");
                             if(leitura.get(i).getTempoVolta().getMinute() != pilotos.get(j).getTempoInit().getMinute()){
-                                System.out.println("Alterou o tempo");
-                                System.out.println(leitura.get(i).getTempoVolta().toString());
-                                System.out.println(pilotos.get(j).getTempoInit().toString());
+                                //System.out.println("Alterou o tempo");
+                                //System.out.println(leitura.get(i).getTempoVolta().toString());
+                                //System.out.println(pilotos.get(j).getTempoInit().toString());
                                 this.pilotos.get(j).setTempoFinal(leitura.get(i).getTempoVolta());
                                 this.pilotos.get(j).setTempoVolta();
-                                System.out.println(this.pilotos.get(j).getTempoVolta());
+                                //System.out.println(this.pilotos.get(j).getTempoVolta());
                                 this.pilotos.get(j).setVoltas(this.pilotos.get(j).getVoltas()+1);
                                 this.pilotos.get(j).setTempoInit(leitura.get(i).getTempoVolta());
                             }
@@ -142,37 +129,7 @@ public class Corrida implements Runnable{
                     }
                 }
             }
-            /*
-            if(gerenciador.comunicacao.recebido.has("CARRO0")){
-                String a = "CARRO";
-                String b = "TEMPO";
-                for(int i = 0; i<5; i++){
-                    String s = a+i;
-                    String t = b+i;
-                    System.out.println(s+","+t);
-                    if(gerenciador.comunicacao.recebido.has(s)){
-                        for(int j = 0; j<this.pilotos.size(); j++){
-                            if(gerenciador.comunicacao.recebido.get(s).equals(this.pilotos.get(j).getCarro().getEPC())){
-                                if(this.pilotos.get(j).isPrimeiraLeitura()){
-                                    System.out.println(gerenciador.comunicacao.recebido.get(t).toString());
-                                    this.pilotos.get(j).setTempoInit(LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData));
-                                    this.pilotos.get(j).setPrimeiraLeitura(false);
-                                } else {
-                                    System.out.println(gerenciador.comunicacao.recebido.get(t).toString());
-                                    this.pilotos.get(j).setTempoFinal(LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData));
-                                    this.pilotos.get(j).setTempoVolta();
-                                    System.out.println(this.pilotos.get(j).getTempoVolta());
-                                    nVolta++;
-                                    this.pilotos.get(j).setVoltas(nVolta);
-                                    this.pilotos.get(j).setTempoInit(LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData));
-                                    //this.pilotos.get(j).setPrimeiraLeitura(true);
-                                }
-                            }
-                        }
-                    }
-                }
-                //ciclo++;
-            } else*/ if (gerenciador.comunicacao.recebido.has("status")){
+            if (gerenciador.comunicacao.recebido.has("status")){
                 this.fimQuali = true;
                 ciclo = 0;
                 this.stop();
@@ -183,12 +140,11 @@ public class Corrida implements Runnable{
                 }                
             } 
             //for(int i = 0; i<pilotos.size(); i++){System.out.println(this.pilotos.get(i).getNome());}
-            
-            //for(int i = 0; i<pilotos.size(); i++){System.out.println(this.pilotos.get(i).getNome());}
             if(pilotos.get(0).getVoltas()>0){
                 this.pilotos = this.insertionSort(pilotos);
                 pistaLocal.novoRecord(pilotos.get(0));
             }            
+            //for(int i = 0; i<pilotos.size(); i++){System.out.println(this.pilotos.get(i).getNome());}
             gerenciador.telaQuali.pilotos = this.pilotos;
             System.out.println(gerenciador.comunicacao.recebido.toString());
         }
@@ -196,36 +152,30 @@ public class Corrida implements Runnable{
         ciclo++;
         }
         System.out.println("Passou direto");
-        //teste
     }
-    /*
-    public static void main(String[] args) {
-        String s = "CARRO";
-        String t = "TEMPO";
-        for(int i = 0; i<5; i++){
-            System.out.println(Integer.toString(i));
-            String x = Integer.toString(i);
-            String a = s+x;
-            String b = t+x;
-            //s.concat(x);
-            //t.concat(x);
-            System.out.println(a+","+b);
-        }
-    }
-    */
     
     public ArrayList<Piloto> insertionSort(ArrayList<Piloto> vetor) {
-        int j;
-        Piloto key;
-        int i;
-
-            for (j = 1; j < vetor.size(); j++){
-                key = vetor.get(j);
-                for (i = j - 1; (i >= 0) && (vetor.get(i).getTempoSec() > key.getTempoSec()); i--){
-                    vetor.set((i+1),vetor.get(i));
-                }
-                vetor.set((i+1), key);
+        ///*
+        for(int i = 0; i<vetor.size();i++){
+            Piloto aux = vetor.get(i);
+            for(int j = i+1; j<=vetor.size()-1;j++){
+                Piloto compara = vetor.get(j);
+                if (compara.getMelhorSec()<= aux.getMelhorSec()){
+                    if(compara.getMelhorSec()== aux.getMelhorSec()){
+                        if(compara.getMelhorMili()< aux.getMelhorMili()){
+                             vetor.set((i),compara);
+                             vetor.set((j),aux);
+                             aux = vetor.get(i);
+                        }
+                    }else {
+                        vetor.set((i),compara);
+                        vetor.set((j),aux);
+                        aux = vetor.get(i);
+                    }   
+                }      
             }
+        
+        }
         return vetor;
     }
 
@@ -256,7 +206,6 @@ public class Corrida implements Runnable{
             for(int i = 0; i<5; i++){
                     String s = a+i;
                     String t = b+i;
-                    //System.out.println(s+","+t);
                     if(gerenciador.comunicacao.recebido.has(s)){
                         for(int j = 0; j<this.pilotos.size(); j++){
                             if(gerenciador.comunicacao.recebido.get(s).equals(this.pilotos.get(j).getCarro().getEPC())){
@@ -273,13 +222,17 @@ public class Corrida implements Runnable{
             for(int i = 0; i<5; i++){
                     String s = a+i;
                     String t = b+i;
-                    //System.out.println(s+","+t);   
                     int x = 0;
                     if(gerenciador.comunicacao.recebido.has(s)){
                         for(int j = 0; j<this.leitura.size(); j++){
                             if(gerenciador.comunicacao.recebido.get(s).equals(this.leitura.get(j).getEPC())){
                                 x++;
-                                LocalDateTime tempoBase = LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData);
+                                LocalDateTime tempoBase;
+                                if(gerenciador.comunicacao.recebido.get(t).toString().length()<20){
+                                    tempoBase = LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+                                } else{
+                                    tempoBase = LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData);
+                                }                                
                                 LocalDateTime aux;
                                 aux = tempoBase.minusHours(this.leitura.get(j).getTempoVolta().getHour()).minusMinutes(this.leitura.get(j).getTempoVolta().getMinute()).minusSeconds(this.leitura.get(j).getTempoVolta().getSecond()).minusNanos(this.leitura.get(j).getTempoVolta().getNano());
                                 System.out.println(aux.toString());
@@ -300,5 +253,4 @@ public class Corrida implements Runnable{
             return false;
         }        
     }
-    
 }

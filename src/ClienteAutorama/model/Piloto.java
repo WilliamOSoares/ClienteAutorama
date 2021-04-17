@@ -91,7 +91,34 @@ public class Piloto implements Serializable {
             this.tempoVolta = aux.getMinute() + ":" + aux.getSecond() + "." + mili;
         }
         this.setTempoSec((aux.getMinute()*60)+aux.getSecond());
+        if(this.melhorSec == 0 && this.melhorMili == 0){
+            this.melhorSec = this.tempoSec;
+            this.melhorMili = this.tempoMili;
+        } else {
+            if(this.tempoSec<this.melhorSec){
+                this.melhorSec = this.tempoSec;
+                this.melhorMili = this.tempoMili;
+            } else if(this.tempoSec==this.melhorSec && this.melhorMili>this.tempoMili){
+                    this.melhorMili = this.tempoMili;
+            }        
+        }
         System.out.println("sec-mili"+this.getTempoSec() + "-" +this.getTempoMili());
+    }
+
+    public int getMelhorSec() {
+        return melhorSec;
+    }
+
+    public void setMelhorSec(int melhorSec) {
+        this.melhorSec = melhorSec;
+    }
+
+    public int getMelhorMili() {
+        return melhorMili;
+    }
+
+    public void setMelhorMili(int melhorMili) {
+        this.melhorMili = melhorMili;
     }
     
     public void comparar(){

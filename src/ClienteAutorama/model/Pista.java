@@ -64,40 +64,32 @@ public class Pista implements Serializable {
         this.recordista = recordista;
     }
 
-    public boolean novoRecord(Piloto piloto){
-        System.out.println(piloto.getTempoSec() +"-piloto-"+piloto.getTempoMili());
+    public void novoRecord(Piloto piloto){
+        System.out.println(piloto.getMelhorSec() +"-piloto-"+piloto.getMelhorMili());
         System.out.println(melhorSec+"-pista-"+melhorMili);
-        if(piloto.getTempoSec()<this.melhorSec){
-            this.melhorSec = piloto.getTempoSec();
-            this.melhorMili = piloto.getTempoMili();
-            this.setRecordista(piloto.getNome());
+        if(this.melhorSec == 0){
+            this.melhorSec = piloto.getMelhorSec();
+            this.melhorMili = piloto.getMelhorMili();
             int min = this.melhorSec/60;
             int sec = this.melhorSec%60;
             this.setTempoRecordPista(min+":"+sec +"."+this.melhorMili);
-            System.out.println(min+"-min,sec-"+sec);
-            System.out.println(piloto.getTempoSec() +"-piloto-"+piloto.getTempoMili());
-            System.out.println(melhorSec+"-pista-"+melhorMili);
-            return true;
-        } else if(piloto.getTempoSec()==this.melhorSec){
-            if(piloto.getTempoMili()<this.melhorMili){
-                this.melhorMili = piloto.getTempoMili();
+        } else{
+            if(piloto.getMelhorSec()<this.melhorSec){
+                this.melhorSec = piloto.getMelhorSec();
+                this.melhorMili = piloto.getMelhorMili();
                 this.setRecordista(piloto.getNome());
                 int min = this.melhorSec/60;
                 int sec = this.melhorSec%60;
                 this.setTempoRecordPista(min+":"+sec +"."+this.melhorMili);
-                System.out.println(min+"-min,sec-"+sec);
-                System.out.println(piloto.getTempoSec() +"-piloto-"+piloto.getTempoMili());
-                System.out.println(melhorSec+"-pista-"+melhorMili);
-                return true;
-            } else{
-                System.out.println(piloto.getTempoSec() +"-piloto-"+piloto.getTempoMili());
-                System.out.println(melhorSec+"-pista-"+melhorMili);
-                return false;
-            }          
-        }else{
-            System.out.println(piloto.getTempoSec() +"-piloto-"+piloto.getTempoMili());
-            System.out.println(melhorSec+"-pista-"+melhorMili);
-            return false;
-        }        
+            } else if(piloto.getMelhorSec()==this.melhorSec){
+                if(piloto.getMelhorMili()<this.melhorMili){
+                    this.melhorMili = piloto.getMelhorMili();
+                    this.setRecordista(piloto.getNome());
+                    int min = this.melhorSec/60;
+                    int sec = this.melhorSec%60;
+                    this.setTempoRecordPista(min+":"+sec +"."+this.melhorMili);
+                }
+            } 
+        }
     }
 }

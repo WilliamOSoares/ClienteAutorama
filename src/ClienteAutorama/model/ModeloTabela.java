@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 public class ModeloTabela extends AbstractTableModel{
 
     private ArrayList<Piloto> corredores = new ArrayList<Piloto>();
-    private String[] colunas = {"Pos","Piloto","Equipe","Tempo de volta","Voltas"};
+    private String[] colunas = {"Pos","Piloto","Equipe","Melhor volta","Voltas"};
 
     public ModeloTabela(ArrayList<Piloto> pilotos) {
         corredores = pilotos;
@@ -39,7 +39,10 @@ public class ModeloTabela extends AbstractTableModel{
                     if(corredores.get(linha).getTempoVolta()==null){
                         return "00:00.000";
                     } else{
-                        return corredores.get(linha).getTempoVolta();
+                        int segundo = corredores.get(linha).getMelhorSec();
+                        int min = segundo/60;
+                        int sec = segundo%60;
+                        return min +":"+sec+"."+corredores.get(linha).getMelhorMili();
                     }
                 } else {
                     if(corredores.get(0).getTempoVolta()==null){
@@ -49,17 +52,17 @@ public class ModeloTabela extends AbstractTableModel{
                     } else{
                         int first, second;
                         String s = ".";
-                        if(corredores.get(linha).getTempoMili() < corredores.get(0).getTempoMili()){
-                            second = (corredores.get(linha).getTempoMili()+1000) - corredores.get(0).getTempoMili();
-                            first = (corredores.get(linha).getTempoSec()-1) - corredores.get(0).getTempoSec();
+                        if(corredores.get(linha).getMelhorMili() < corredores.get(0).getMelhorMili()){
+                            second = (corredores.get(linha).getMelhorMili()+1000) - corredores.get(0).getMelhorMili();
+                            first = (corredores.get(linha).getMelhorSec()-1) - corredores.get(0).getMelhorSec();
                             if(second <10){
                                 s = ".00";
                             } else if(second<100){
                                 s = ".0";
                             }
                         } else{
-                            first = corredores.get(linha).getTempoSec() - corredores.get(0).getTempoSec();
-                            second = corredores.get(linha).getTempoMili() - corredores.get(0).getTempoMili();
+                            first = corredores.get(linha).getMelhorSec() - corredores.get(0).getMelhorSec();
+                            second = corredores.get(linha).getMelhorMili() - corredores.get(0).getMelhorMili();
                             if(second <10){
                                 s = ".00";
                             } else if(second<100){

@@ -74,13 +74,14 @@ public class Comunication{
         
     }    
     
-    public String getDadosCorrida(String quali, String voltas, String tempoMIN){
+    public String getDadosCorrida(String quali, String voltas, String tempoMIN, String nPilotos){
         JSONObject dadosCorrida = new JSONObject();
         dadosCorrida.put("METODO", "GET");
         dadosCorrida.put("URL", "dadosCorrida");
         dadosCorrida.put("Quali", quali);
         dadosCorrida.put("Voltas", voltas);
         dadosCorrida.put("TempoMin", tempoMIN);
+        dadosCorrida.put("CarrosQuant", nPilotos);
         try {
             saida.write(dadosCorrida.toString());
             saida.flush();

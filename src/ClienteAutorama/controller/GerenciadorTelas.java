@@ -43,8 +43,8 @@ public class GerenciadorTelas {
         comunicacao.POSTconfigLeitor(portaSerial, baudrate, regiao, antena, protocolo, power);
     }
     
-    public String getDadosCorrida(String quali, String voltas, String tempoMIN){
-        return comunicacao.getDadosCorrida(quali, voltas, tempoMIN);
+    public String getDadosCorrida(String quali, String voltas, String tempoMIN, String nPilotos){
+        return comunicacao.getDadosCorrida(quali, voltas, tempoMIN, nPilotos);
     }
     
     public void setTelaPrincipal(Principal tela){
@@ -130,7 +130,6 @@ public class GerenciadorTelas {
         comunicacao.getComecaQuali();
         telaBotao.setEnabled(false);
         telaBotao.setVisible(false);
-        //corrida.getAtualizacao();
         this.corrida.start();
     }
 

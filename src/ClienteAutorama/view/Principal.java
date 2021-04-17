@@ -1,6 +1,8 @@
 package ClienteAutorama.view;
 
 import ClienteAutorama.controller.GerenciadorTelas;
+import static java.awt.image.ImageObserver.WIDTH;
+import javax.swing.JOptionPane;
 
 
 public class Principal extends javax.swing.JFrame {
@@ -21,7 +23,6 @@ public class Principal extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         textIP = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -44,25 +45,16 @@ public class Principal extends javax.swing.JFrame {
         textRegiao = new javax.swing.JTextField();
         textPower = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        padraoBotao = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Autorama"); // NOI18N
-        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         textIP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textIPActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 164;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
-        getContentPane().add(textIP, gridBagConstraints);
 
         jButton1.setText("Configurar Leitor");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -70,209 +62,61 @@ public class Principal extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 49;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipady = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 20, 70, 0);
-        getContentPane().add(jButton1, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 153));
         jLabel1.setText("AUTORAMA COM RFID");
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 35;
-        gridBagConstraints.ipadx = 7;
-        gridBagConstraints.ipady = 18;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        getContentPane().add(jLabel1, gridBagConstraints);
 
         jLabel2.setText("IP");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 40, 0, 0);
-        getContentPane().add(jLabel2, gridBagConstraints);
 
         jLabel3.setText("Configuração da conexão");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 12;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 30, 0, 0);
-        getContentPane().add(jLabel3, gridBagConstraints);
 
         jLabel4.setText("Configuração do leitor");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 40, 0, 0);
-        getContentPane().add(jLabel4, gridBagConstraints);
 
         textPorta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textPortaActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 13;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 36;
-        gridBagConstraints.ipadx = 114;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 5, 0, 0);
-        getContentPane().add(textPorta, gridBagConstraints);
 
         jLabel5.setText("Porta");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 22;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 18;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 7, 0, 0);
-        getContentPane().add(jLabel5, gridBagConstraints);
 
         jLabel6.setText("Porta Serial");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 90, 0, 0);
-        getContentPane().add(jLabel6, gridBagConstraints);
 
         jLabel7.setText("Baudrate");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipady = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 70, 0, 0);
-        getContentPane().add(jLabel7, gridBagConstraints);
 
         jLabel8.setText("Região");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 49;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 60, 0, 0);
-        getContentPane().add(jLabel8, gridBagConstraints);
 
         jLabel9.setText("Número de antenas");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 70, 0, 0);
-        getContentPane().add(jLabel9, gridBagConstraints);
 
         jLabel10.setText("Protocolo");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 70, 0, 0);
-        getContentPane().add(jLabel10, gridBagConstraints);
 
         jLabel11.setText("Potência da leitura");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 49;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 30, 0, 0);
-        getContentPane().add(jLabel11, gridBagConstraints);
 
         textPortaSerial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textPortaSerialActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 164;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 40, 0, 0);
-        getContentPane().add(textPortaSerial, gridBagConstraints);
 
         textAntena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textAntenaActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 164;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 40, 0, 0);
-        getContentPane().add(textAntena, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 17;
-        gridBagConstraints.ipadx = 144;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
-        getContentPane().add(textBaudrate, gridBagConstraints);
 
         textProtocolo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textProtocoloActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridwidth = 17;
-        gridBagConstraints.ipadx = 144;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 20, 0, 0);
-        getContentPane().add(textProtocolo, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 49;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 124;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 60);
-        getContentPane().add(textRegiao, gridBagConstraints);
 
         textPower.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textPowerActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 49;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 124;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 10, 0, 60);
-        getContentPane().add(textPower, gridBagConstraints);
 
         jButton2.setText("Sair");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -280,15 +124,120 @@ public class Principal extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 79;
-        gridBagConstraints.ipady = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 60, 70, 0);
-        getContentPane().add(jButton2, gridBagConstraints);
+
+        padraoBotao.setText("Padrão");
+        padraoBotao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                padraoBotaoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(252, 252, 252)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(282, 282, 282)
+                .addComponent(jLabel3))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(241, 241, 241)
+                .addComponent(jLabel2)
+                .addGap(182, 182, 182)
+                .addComponent(jLabel5))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addComponent(textIP, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(textPorta, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(292, 292, 292)
+                .addComponent(jLabel4))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addComponent(jLabel6)
+                .addGap(182, 182, 182)
+                .addComponent(jLabel7)
+                .addGap(196, 196, 196)
+                .addComponent(jLabel8))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(textPortaSerial, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
+                .addComponent(textBaudrate, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90)
+                .addComponent(textRegiao, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(jLabel9)
+                .addGap(158, 158, 158)
+                .addComponent(jLabel10)
+                .addGap(163, 163, 163)
+                .addComponent(jLabel11))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(textAntena, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(71, 71, 71)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(padraoBotao, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(115, 115, 115)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(textProtocolo, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(90, 90, 90)
+                        .addComponent(textPower, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel3)
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textIP, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textPorta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(jLabel4)
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textPortaSerial, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textBaudrate, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textRegiao, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textAntena, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textProtocolo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textPower, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(padraoBotao, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         setSize(new java.awt.Dimension(716, 469));
         setLocationRelativeTo(null);
@@ -301,21 +250,12 @@ public class Principal extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (!textIP.getText().isEmpty() && !textPorta.getText().isEmpty() && !textPortaSerial.getText().isEmpty() && !textBaudrate.getText().isEmpty() && !textRegiao.getText().isEmpty() && !textAntena.getText().isEmpty() && !textProtocolo.getText().isEmpty() && !textPower.getText().isEmpty()){
-                       
-        }
-        
-        textIP.setText("augusto.ddns.net");
-        textPorta.setText("5021");
-        textPortaSerial.setText("tmr:///dev/ttyUSB0");
-        textBaudrate.setText("230400");
-        textRegiao.setText("NA2");
-        textAntena.setText("1");
-        textProtocolo.setText("GEN2");
-        textPower.setText("1500");
-
-        gerenciador.postConectConfiguraLeitor(textIP.getText(), textPorta.getText(), textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText());
-        gerenciador.setTelaPrincipal(this);
-        gerenciador.abrirTelaInicial();                 
+            gerenciador.postConectConfiguraLeitor(textIP.getText(), textPorta.getText(), textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText());
+            gerenciador.setTelaPrincipal(this);
+            gerenciador.abrirTelaInicial();             
+        } else{
+            JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos ou use a configuração padrão", null, WIDTH);
+        }                       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void textPortaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPortaActionPerformed
@@ -341,6 +281,17 @@ public class Principal extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void padraoBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_padraoBotaoActionPerformed
+        textIP.setText("augusto.ddns.net"); //augusto.ddns.net
+        textPorta.setText("5021");
+        textPortaSerial.setText("tmr:///dev/ttyUSB0");
+        textBaudrate.setText("230400");
+        textRegiao.setText("NA2");
+        textAntena.setText("1");
+        textProtocolo.setText("GEN2");
+        textPower.setText("1500");
+    }//GEN-LAST:event_padraoBotaoActionPerformed
 
     
     public static void main(String args[]) {
@@ -391,6 +342,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton padraoBotao;
     private javax.swing.JTextField textAntena;
     private javax.swing.JTextField textBaudrate;
     private javax.swing.JTextField textIP;
