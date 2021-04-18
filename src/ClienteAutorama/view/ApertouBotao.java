@@ -47,7 +47,7 @@ public class ApertouBotao extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(18, 110, 34, 0);
         getContentPane().add(simulaBotao, gridBagConstraints);
 
-        mensagem.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        mensagem.setFont(new java.awt.Font("Ink Free", 1, 24)); // NOI18N
         mensagem.setForeground(new java.awt.Color(204, 0, 0));
         mensagem.setText("Esperando o aperto do botão!!!");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -69,8 +69,10 @@ public class ApertouBotao extends javax.swing.JFrame {
             gerenciador.mostrarQualificatorio();
         } else if(code == 1){
             gerenciador = GerenciadorTelas.getInstance();
-        } else{
+            gerenciador.mostrarCorrida();
+        } else if(code == 2){
             gerenciador = GerenciadorTelas.getInstance();
+            gerenciador.iniciarCorrida();
         }
     }//GEN-LAST:event_simulaBotaoActionPerformed
 

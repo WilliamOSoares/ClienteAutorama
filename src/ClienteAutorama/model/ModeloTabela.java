@@ -32,17 +32,22 @@ public class ModeloTabela extends AbstractTableModel{
             case 1:
                 return corredores.get(linha).getNome();
             case 2: 
-                //return "equipe";
                 return corredores.get(linha).getEquipe().getNome();
             case 3:
                 if(linha==0){
                     if(corredores.get(linha).getTempoVolta()==null){
                         return "00:00.000";
                     } else{
+                        String s = ".";
                         int segundo = corredores.get(linha).getMelhorSec();
                         int min = segundo/60;
                         int sec = segundo%60;
-                        return min +":"+sec+"."+corredores.get(linha).getMelhorMili();
+                        if(corredores.get(linha).getMelhorMili() <10){
+                            s = ".00";
+                        } else if(corredores.get(linha).getMelhorMili() <100){
+                            s = ".0";
+                        }
+                        return min +":"+sec+s+corredores.get(linha).getMelhorMili();
                     }
                 } else {
                     if(corredores.get(0).getTempoVolta()==null){

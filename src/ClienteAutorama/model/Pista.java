@@ -65,29 +65,46 @@ public class Pista implements Serializable {
     }
 
     public void novoRecord(Piloto piloto){
-        System.out.println(piloto.getMelhorSec() +"-piloto-"+piloto.getMelhorMili());
-        System.out.println(melhorSec+"-pista-"+melhorMili);
         if(this.melhorSec == 0){
+            String s = ".";
+            this.setRecordista(piloto.getNome());
             this.melhorSec = piloto.getMelhorSec();
             this.melhorMili = piloto.getMelhorMili();
             int min = this.melhorSec/60;
             int sec = this.melhorSec%60;
-            this.setTempoRecordPista(min+":"+sec +"."+this.melhorMili);
+            if(melhorMili <10){
+                s = ".00";
+            } else if(melhorMili <100){
+                s = ".0";
+            }
+            this.setTempoRecordPista(min+":"+sec +s+this.melhorMili);
         } else{
             if(piloto.getMelhorSec()<this.melhorSec){
+                String s = ".";
                 this.melhorSec = piloto.getMelhorSec();
                 this.melhorMili = piloto.getMelhorMili();
                 this.setRecordista(piloto.getNome());
                 int min = this.melhorSec/60;
                 int sec = this.melhorSec%60;
-                this.setTempoRecordPista(min+":"+sec +"."+this.melhorMili);
+                if(melhorMili <10){
+                    s = ".00";
+                } else if(melhorMili <100){
+                    s = ".0";
+                }
+                this.setTempoRecordPista(min+":"+sec +s+this.melhorMili);
             } else if(piloto.getMelhorSec()==this.melhorSec){
                 if(piloto.getMelhorMili()<this.melhorMili){
+                    String s = ".";
                     this.melhorMili = piloto.getMelhorMili();
                     this.setRecordista(piloto.getNome());
                     int min = this.melhorSec/60;
                     int sec = this.melhorSec%60;
-                    this.setTempoRecordPista(min+":"+sec +"."+this.melhorMili);
+                    if(melhorMili <10){
+                        s = ".00";
+                    } else if(melhorMili <100){
+                        s = ".0";
+                    }
+                    this.setTempoRecordPista(min+":"+sec +s+this.melhorMili);
                 }
             } 
         }

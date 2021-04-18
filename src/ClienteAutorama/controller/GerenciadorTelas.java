@@ -10,8 +10,12 @@ import ClienteAutorama.view.Cadastro;
 import ClienteAutorama.view.ConfiguraCorrida;
 import ClienteAutorama.view.Principal;
 import ClienteAutorama.view.Qualificatorio;
+import ClienteAutorama.view.TelaCorrida;
 import ClienteAutorama.view.TelaInicial;
 import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.JSONObject;
 
 public class GerenciadorTelas {
@@ -20,12 +24,13 @@ public class GerenciadorTelas {
     public GerenciadorBD bancoDados = GerenciadorBD.getInstance();
     public Corrida corrida = Corrida.getInstance();
     public Principal telaPrincipal;
-    public TelaInicial telaInicial = new TelaInicial();
+    public TelaInicial telaInicial;
     public Cadastro telaCadastro = new Cadastro();
     public ConfiguraCorrida telaConfig;
     public Qualificatorio telaQuali;
-    public Corrida telaCorrida;
+    public TelaCorrida telaCorrida;
     public ApertouBotao telaBotao;
+    public Semaphore semaforo;
     public int flag = 2;
     
     private GerenciadorTelas() {
@@ -55,6 +60,7 @@ public class GerenciadorTelas {
         telaPrincipal.setEnabled(false);
         telaPrincipal.setVisible(false);
         flag = bancoDados.desserealiza();
+        telaInicial = new TelaInicial();
         telaInicial.setLocationRelativeTo(telaPrincipal);
         telaInicial.setVisible(true);
     }
@@ -130,7 +136,7 @@ public class GerenciadorTelas {
         comunicacao.getComecaQuali();
         telaBotao.setEnabled(false);
         telaBotao.setVisible(false);
-        this.corrida.start();
+        this.corrida.start();     
     }
 
     public int cadastrarPiloto(String ID, String nome, String nacio) {
@@ -171,6 +177,39 @@ public class GerenciadorTelas {
 
     public JSONObject getEPC() {
         return comunicacao.getEPC();
+    }
+
+    public void abrirBotaoParaCorrida() {
+        telaBotao = new ApertouBotao(1);
+        telaBotao.setLocationRelativeTo(telaQuali);
+        telaBotao.setSize(436, 166); 
+        telaBotao.setEnabled(true);
+        telaBotao.setVisible(true);
+    }
+
+    public void mostrarCorrida() {
+        telaBotao.setEnabled(false);
+        telaBotao.setVisible(false);
+        corrida = Corrida.getInstance();        
+        telaQuali.setEnabled(false);
+        telaQuali.setVisible(false);
+        telaCorrida = new TelaCorrida();
+        telaCorrida.setLocationRelativeTo(telaQuali);
+        telaCorrida.setEnabled(true); 
+        telaCorrida.setVisible(true); 
+        telaBotao = new ApertouBotao(2);
+        telaBotao.setLocationRelativeTo(telaCorrida);
+        telaBotao.setSize(436, 166); 
+        telaBotao.setEnabled(true);
+        telaBotao.setVisible(true);
+    }
+
+    public void iniciarCorrida() {
+        System.out.println("iiiiiiiiii COMEÇOOOOOOOOUUUU");
+    }
+
+    public void setTelaCorrida(TelaCorrida telaCorrida) {
+        this.telaCorrida = telaCorrida;
     }
 
 }

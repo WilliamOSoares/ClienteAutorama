@@ -7,6 +7,9 @@ import ClienteAutorama.model.Pista;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Corrida implements Runnable{
     
@@ -93,69 +96,58 @@ public class Corrida implements Runnable{
     public  void getAtualizacao() {
         gerenciador = GerenciadorTelas.getInstance();
         while(!isFimQuali()){
-        while(!gerenciador.comunicacao.recebido.has("CicloLeitura") && !gerenciador.comunicacao.recebido.has("status")){             
+            while(!gerenciador.comunicacao.recebido.has("CicloLeitura") && !gerenciador.comunicacao.recebido.has("status")){ }
+            String obj = Integer.toString(ciclo);
             
-        }
-        String obj = Integer.toString(ciclo);
-        //System.out.println(obj);
-        if(ciclo>0){
-            while(!gerenciador.comunicacao.recebido.get("CicloLeitura").equals(obj) && !gerenciador.comunicacao.recebido.has("status")){
-               
+            if(ciclo>0){
+                while(!gerenciador.comunicacao.recebido.get("CicloLeitura").equals(obj) && !gerenciador.comunicacao.recebido.has("status")){ }
             }
-        }
-        
-        if(validaLeitura()){
-            //System.out.println("VALIDOU A LEITURA");
             
-            for (int i = 0; i < leitura.size(); i++) {
-                for (int j = 0; j < pilotos.size(); j++) {
-                    if(leitura.get(i).getEPC().equals(pilotos.get(j).getCarro().getEPC())){
-                        if(this.pilotos.get(j).isPrimeiraLeitura()){
-                            this.pilotos.get(j).setTempoInit(leitura.get(i).getTempoVolta());
-                            this.pilotos.get(j).setPrimeiraLeitura(false);
-                        } else{
-                            System.out.println("Passei no else, mas não entrei no if");
-                            if(leitura.get(i).getTempoVolta().getMinute() != pilotos.get(j).getTempoInit().getMinute()){
-                                //System.out.println("Alterou o tempo");
-                                //System.out.println(leitura.get(i).getTempoVolta().toString());
-                                //System.out.println(pilotos.get(j).getTempoInit().toString());
-                                this.pilotos.get(j).setTempoFinal(leitura.get(i).getTempoVolta());
-                                this.pilotos.get(j).setTempoVolta();
-                                //System.out.println(this.pilotos.get(j).getTempoVolta());
-                                this.pilotos.get(j).setVoltas(this.pilotos.get(j).getVoltas()+1);
+            if(validaLeitura()){            
+                for (int i = 0; i < leitura.size(); i++) {
+                    for (int j = 0; j < pilotos.size(); j++) {
+                        if(leitura.get(i).getEPC().equals(pilotos.get(j).getCarro().getEPC())){
+                            if(this.pilotos.get(j).isPrimeiraLeitura()){
                                 this.pilotos.get(j).setTempoInit(leitura.get(i).getTempoVolta());
+                                this.pilotos.get(j).setPrimeiraLeitura(false);
+                            } else{
+                                if(leitura.get(i).getTempoVolta().getMinute() != pilotos.get(j).getTempoInit().getMinute()){
+                                    this.pilotos.get(j).setTempoFinal(leitura.get(i).getTempoVolta());
+                                    this.pilotos.get(j).setTempoVolta();
+                                    this.pilotos.get(j).setVoltas(this.pilotos.get(j).getVoltas()+1);
+                                    this.pilotos.get(j).setTempoInit(leitura.get(i).getTempoVolta());
+                                }
                             }
                         }
                     }
                 }
             }
+            
+            if(pilotos.get(0).getVoltas()>0){
+                this.pilotos = this.insertionSort(pilotos);
+                pistaLocal.novoRecord(pilotos.get(0));
+            }            
+            gerenciador.telaQuali.pilotos = this.pilotos;
+            System.out.println(gerenciador.comunicacao.recebido.toString());
+            ciclo++;
+            
             if (gerenciador.comunicacao.recebido.has("status")){
-                this.fimQuali = true;
+                setFimQuali(true);
                 ciclo = 0;
                 this.stop();
                 for (int i = 0; i < gerenciador.bancoDados.getBdPistas().size(); i++) {
                     if(gerenciador.bancoDados.bdPistas.get(i).getNome().equals(pistaLocal.getNome())){
                         gerenciador.bancoDados.bdPistas.set(i, pistaLocal);
                     }
-                }                
-            } 
-            //for(int i = 0; i<pilotos.size(); i++){System.out.println(this.pilotos.get(i).getNome());}
-            if(pilotos.get(0).getVoltas()>0){
-                this.pilotos = this.insertionSort(pilotos);
-                pistaLocal.novoRecord(pilotos.get(0));
-            }            
-            //for(int i = 0; i<pilotos.size(); i++){System.out.println(this.pilotos.get(i).getNome());}
-            gerenciador.telaQuali.pilotos = this.pilotos;
-            System.out.println(gerenciador.comunicacao.recebido.toString());
-        }
-        
-        ciclo++;
+                } 
+                gerenciador.bancoDados.serealiza();
+                gerenciador.abrirBotaoParaCorrida();
+            }             
         }
         System.out.println("Passou direto");
     }
     
     public ArrayList<Piloto> insertionSort(ArrayList<Piloto> vetor) {
-        ///*
         for(int i = 0; i<vetor.size();i++){
             Piloto aux = vetor.get(i);
             for(int j = i+1; j<=vetor.size()-1;j++){
@@ -195,7 +187,7 @@ public class Corrida implements Runnable{
     }
     
     public void stop(){
-        this.online = false;        
+        this.online = false;       
     }
 
     private boolean validaLeitura() {
@@ -235,7 +227,6 @@ public class Corrida implements Runnable{
                                 }                                
                                 LocalDateTime aux;
                                 aux = tempoBase.minusHours(this.leitura.get(j).getTempoVolta().getHour()).minusMinutes(this.leitura.get(j).getTempoVolta().getMinute()).minusSeconds(this.leitura.get(j).getTempoVolta().getSecond()).minusNanos(this.leitura.get(j).getTempoVolta().getNano());
-                                System.out.println(aux.toString());
                                 if(aux.getMinute()>=Integer.parseInt(pistaLocal.getTempoMin())){
                                     this.leitura.get(j).setTempoVolta(tempoBase);
                                     retorno = true;
@@ -249,7 +240,7 @@ public class Corrida implements Runnable{
                     }                    
             }
             return retorno;
-        }else{        
+        }else{     
             return false;
         }        
     }

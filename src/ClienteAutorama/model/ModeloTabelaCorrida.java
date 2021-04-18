@@ -32,13 +32,31 @@ public class ModeloTabelaCorrida extends AbstractTableModel{
             case 1:
                 return corredores.get(linha).getNome();
             case 2: 
-                return "equiPIADA";//corredores.get(linha).getEquipe().getNome();
+                return corredores.get(linha).getEquipe().getNome();
             case 3:
                 return "0:00:00.000000";
             case 4:
-                return "00:00.000000";
+                String r = ".";
+                int segundos = corredores.get(linha).getTempoSec();
+                int minu = segundos/60;
+                int secs = segundos%60;
+                if(corredores.get(linha).getTempoMili() <10){
+                    r = ".00";
+                } else if(corredores.get(linha).getTempoMili() <100){
+                    r = ".0";
+                }
+                return minu +":"+secs+r+corredores.get(linha).getTempoMili();
             case 5:
-                return "00:00.000000";
+                String s = ".";
+                int segundo = corredores.get(linha).getMelhorSec();
+                int min = segundo/60;
+                int sec = segundo%60;
+                if(corredores.get(linha).getMelhorMili() <10){
+                    s = ".00";
+                } else if(corredores.get(linha).getMelhorMili() <100){
+                    s = ".0";
+                }
+                return min +":"+sec+s+corredores.get(linha).getMelhorMili();
             case 6:
                 return corredores.get(linha).getVoltas();
         }

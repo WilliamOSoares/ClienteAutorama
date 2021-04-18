@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONObject;
@@ -22,6 +23,7 @@ public class Comunication{
     public boolean online = false;
     public JSONObject teste;
     public ThreadEscutaServidor thread = new ThreadEscutaServidor();
+    public Semaphore semaforo = new Semaphore(1);
     
     private Comunication() {
     }
@@ -61,6 +63,7 @@ public class Comunication{
             saida.flush();
         } catch (IOException ex) {
             Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
         
     }
@@ -115,7 +118,8 @@ public class Comunication{
             saida.flush();
         } catch (IOException ex) {
             Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
-        }    
+            System.out.println(ex);
+        }   
     }
     
 }

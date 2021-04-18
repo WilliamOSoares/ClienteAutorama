@@ -27,12 +27,12 @@ public class ThreadEscutaServidor implements Runnable{
                 String chegou = entrada.readLine();
                 if(chegou != null){
                     msg = new JSONObject(chegou);
-                    //System.out.println(msg.toString());
                     comunicacao = Comunication.getInstance();
                     comunicacao.recebeMensagem(msg);
                 }
             } catch (IOException ex) {
                 Logger.getLogger(ThreadEscutaServidor.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex);
             }
             System.out.println("Rodando");
         }
