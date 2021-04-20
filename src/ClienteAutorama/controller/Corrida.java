@@ -34,9 +34,7 @@ public class Corrida implements Runnable{
 	return uniqueInstance;
     }  
 
-    public void setDados() {
-        
-    }
+
 
     public ArrayList<Piloto> getPilotos() {
         return pilotos;
@@ -109,6 +107,7 @@ public class Corrida implements Runnable{
                         if(leitura.get(i).getEPC().equals(pilotos.get(j).getCarro().getEPC())){
                             if(this.pilotos.get(j).isPrimeiraLeitura()){
                                 this.pilotos.get(j).setTempoInit(leitura.get(i).getTempoVolta());
+                                this.pilotos.get(j).setTempoGeral(leitura.get(i).getTempoVolta());
                                 this.pilotos.get(j).setPrimeiraLeitura(false);
                             } else{
                                 if(leitura.get(i).getTempoVolta().getMinute() != pilotos.get(j).getTempoInit().getMinute()){
@@ -147,6 +146,9 @@ public class Corrida implements Runnable{
         System.out.println("Passou direto");
     }
     
+    public ArrayList<Piloto> insertionSortCorrida(ArrayList<Piloto> vetor) {
+        return vetor;
+    }
     public ArrayList<Piloto> insertionSort(ArrayList<Piloto> vetor) {
         for(int i = 0; i<vetor.size();i++){
             Piloto aux = vetor.get(i);

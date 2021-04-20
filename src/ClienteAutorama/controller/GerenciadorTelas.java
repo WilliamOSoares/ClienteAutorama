@@ -206,6 +206,11 @@ public class GerenciadorTelas {
 
     public void iniciarCorrida() {
         System.out.println("iiiiiiiiii COMEÇOOOOOOOOUUUU");
+        comunicacao.getComecaCorrida();
+        telaBotao.setEnabled(false);
+        telaBotao.setVisible(false);
+        System.out.println("Aqui inicia a corrida");
+        this.corrida.start();
     }
 
     public void setTelaCorrida(TelaCorrida telaCorrida) {

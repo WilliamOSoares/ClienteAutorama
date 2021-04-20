@@ -12,7 +12,8 @@ public class TelaCorrida extends javax.swing.JFrame {
 
     GerenciadorTelas gerenciador;
     ModeloTabelaCorrida modelo;
-    public ArrayList<Piloto> pilotos; 
+    public ArrayList<Piloto> pilotos;
+    public int voltas = 0, VoltasN =0;
 
     /**
      * Creates new form Corrida
@@ -25,6 +26,7 @@ public class TelaCorrida extends javax.swing.JFrame {
         tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());
         autorRecord.setText(gerenciador.corrida.pistaLocal.getRecordista());
         nVoltas.setText("0 de "+Integer.toString(gerenciador.corrida.numVoltas)+" Voltas");
+        voltas = gerenciador.corrida.getNumVoltas();
         this.pilotos = gerenciador.corrida.pilotos;
         for (int i = 0; i < this.pilotos.size(); i++) {
             pilotos.get(i).setMelhorMili(0);
@@ -224,7 +226,7 @@ public class TelaCorrida extends javax.swing.JFrame {
             }
         });
     }
-    /*
+   
     private void start(){
         SwingWorker worker = new SwingWorker() {
             @Override
@@ -232,31 +234,23 @@ public class TelaCorrida extends javax.swing.JFrame {
             // Simulate doing something useful.
                 GerenciadorTelas gerenciador;
                 gerenciador = GerenciadorTelas.getInstance();
-                while(tempoQuali>0){
-                    int sec = 60;
-                    tempoQuali--;
-                    //tempo.setText(tempoQuali + ":" + sec);
-                    while(sec>0){
-                        Thread.sleep(1000);
-                        sec--;
-                        if(sec<10){
-                            tempo.setText(tempoQuali + ":0" + sec);
-                        } else{
-                            tempo.setText(tempoQuali + ":" + sec);
-                        }  
-                        gerenciador.telaQuali.modelo.setArray(gerenciador.telaQuali.pilotos);//gerenciador.corrida.pilotos); 
-                        gerenciador.telaQuali.tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());
-                        gerenciador.telaQuali.autorRecord.setText(gerenciador.corrida.pistaLocal.getRecordista());
+                while(voltas>=0){
+                    int voltaPrim = pilotos.get(0).getVoltas();
+                    voltas--;
+                    while(voltaPrim == voltas){
+                        gerenciador.telaCorrida.modelo.setArray(gerenciador.telaCorrida.pilotos);
+                        gerenciador.telaCorrida.autorRecord.setText(gerenciador.corrida.pistaLocal.getRecordista());
+                        gerenciador.telaCorrida.tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());
                     }
+                    VoltasN++;
+                    nVoltas.setText(Integer.toString(VoltasN)+ " de " + Integer.toString(gerenciador.corrida.getNumVoltas()) + " Voltas");
                 }
-                while (tempoQuali==0){
-                    tempo.setText("0:00");
-                    gerenciador.telaQuali.modelo.setArray(gerenciador.telaQuali.pilotos);//gerenciador.corrida.pilotos);
-                    if(gerenciador.corrida.fimQuali){
-                        tempoQuali--;
-                    }
-                    gerenciador.telaQuali.tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());
-                    gerenciador.telaQuali.autorRecord.setText(gerenciador.corrida.pistaLocal.getRecordista());
+                nVoltas.setText("Acabou a corrida");
+                
+                while (!gerenciador.corrida.isFimCorrida()){
+                   gerenciador.telaCorrida.modelo.setArray(gerenciador.telaCorrida.pilotos);
+                   gerenciador.telaCorrida.autorRecord.setText(gerenciador.corrida.pistaLocal.getRecordista());
+                   gerenciador.telaCorrida.tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());
                 }
 
             return null;
@@ -264,7 +258,7 @@ public class TelaCorrida extends javax.swing.JFrame {
         };
 
         worker.execute();
-    }*/
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel autorRecord;

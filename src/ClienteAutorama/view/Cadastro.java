@@ -1066,13 +1066,15 @@ public class Cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_cadastrarPistaActionPerformed
 
     private void cadastroPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroPEActionPerformed
-        if(!IDpilotoPE.getText().isEmpty() && IDequipeEP.getText().isEmpty()){
+        if(!IDpilotoPE.getText().isEmpty() && !IDequipeEP.getText().isEmpty()){
             gerenciador = GerenciadorTelas.getInstance();
             int alerta = gerenciador.cadastrarPilotoEquipe(IDpilotoPE.getText(), IDequipeEP.getText());
             if(alerta == 1){
                 JOptionPane.showMessageDialog(null, "O ID do piloto não existe", null, WIDTH);
             }else if(alerta == 2){
                 JOptionPane.showMessageDialog(null, "O ID da equipe não existe", null, WIDTH);
+            }else if(alerta ==3){
+                JOptionPane.showMessageDialog(null, "Piloto ja castrado na Equipe", null, WIDTH);
             } else{
                 JOptionPane.showMessageDialog(null, "Piloto atribuido na equipe com sucesso", null, WIDTH);
             } 
@@ -1089,7 +1091,9 @@ public class Cadastro extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "O ID do carro não existe", null, WIDTH);
             }else if(alerta == 2){
                 JOptionPane.showMessageDialog(null, "O ID da equipe não existe", null, WIDTH);
-            } else{
+            }else if(alerta ==3){
+                JOptionPane.showMessageDialog(null, "Carro ja castrado na Equipe", null, WIDTH); 
+            }else{
                 JOptionPane.showMessageDialog(null, "Carro atribuido na equipe com sucesso", null, WIDTH);
             } 
         } else {

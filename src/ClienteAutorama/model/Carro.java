@@ -9,7 +9,7 @@ public class Carro implements Serializable {
     private Piloto piloto;
     private Equipe equipe;
     private LocalDateTime tempoVolta;
-            
+       
     public Carro(String EPC, String numero) {
         this.EPC = EPC;
         this.numero = numero;

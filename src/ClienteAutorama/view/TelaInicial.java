@@ -18,7 +18,7 @@ public class TelaInicial extends javax.swing.JFrame {
         try {
             File music = new File("src//audio//TopGear.wav");
             
-            if(music.exists()){
+            if(!music.exists()){
                 AudioInputStream audio = AudioSystem.getAudioInputStream(music);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audio);
