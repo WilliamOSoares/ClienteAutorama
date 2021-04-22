@@ -22,8 +22,8 @@ public class TelaInicial extends javax.swing.JFrame {
                 AudioInputStream audio = AudioSystem.getAudioInputStream(music);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audio);
-                clip.start();
-                clip.loop(clip.LOOP_CONTINUOUSLY);
+                //clip.start();
+                //clip.loop(clip.LOOP_CONTINUOUSLY);
                 
             } else {
                 System.out.println("Sem musica");

@@ -121,5 +121,16 @@ public class Comunication{
             System.out.println(ex);
         }   
     }
-    
+    public void getComecaCorrida() {
+        JSONObject comecaCorrida = new JSONObject();
+        comecaCorrida.put("METODO", "GET");
+        comecaCorrida.put("URL", "comecaCorrida");
+        try {
+            saida.write(comecaCorrida.toString());
+            saida.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }  
+    }
 }

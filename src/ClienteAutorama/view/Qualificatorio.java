@@ -25,6 +25,9 @@ public class Qualificatorio extends javax.swing.JFrame {
         autorRecord.setText(gerenciador.corrida.pistaLocal.getRecordista());
         tempoQuali = Integer.parseInt(gerenciador.corrida.getTempQuali());
         tempo.setText(gerenciador.corrida.getTempQuali()+":00");
+        gerenciador.corrida.setFimQuali(false);
+        gerenciador.corrida.setFimCorrida(true);
+        gerenciador.corrida.leitura.clear();
         this.pilotos = gerenciador.corrida.pilotos;//
         this.modelo = new ModeloTabela(pilotos);
         tabelaQuali.setModel(modelo);
@@ -263,7 +266,6 @@ public class Qualificatorio extends javax.swing.JFrame {
         SwingWorker worker = new SwingWorker() {
             @Override
             protected Void doInBackground() throws Exception {
-            // Simulate doing something useful.
                 GerenciadorTelas gerenciador;
                 gerenciador = GerenciadorTelas.getInstance();
                 while(tempoQuali>0){

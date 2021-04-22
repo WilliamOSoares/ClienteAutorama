@@ -340,6 +340,8 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, s, null, WIDTH);
             if(s.equals("OK")){    
                 gerenciador = GerenciadorTelas.getInstance();
+                gerenciador.corrida.setFimQuali(false);
+                gerenciador.corrida.setFimCorrida(false);
                 gerenciador.setTelaConfig(this);
                 gerenciador.abrirQualificatorio(participantes, (int)nVoltas.getValue(), tQuali.getValue().toString(), local);
             }

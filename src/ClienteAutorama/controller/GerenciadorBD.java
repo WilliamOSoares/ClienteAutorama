@@ -45,12 +45,6 @@ public class GerenciadorBD {
             else if(bdEquipes.get(i).getNome().equals(equipe.getNome())){
                 return 2; //Nome da equipe igual
             }
-//            else if(bdEquipes.get(i).getNacionalidade().equals(equipe.getNacionalidade())){
-//                return 3;
-//            }
-//            else if(bdEquipes.get(i).getAno().equals(equipe.getAno())){
-//                return 4;
-//            }
         }
         
         bdEquipes.add(equipe);
@@ -67,9 +61,6 @@ public class GerenciadorBD {
             else if(bdPilotos.get(i).getNome().equals(piloto.getNome())){
                 return 2; // nome do piloto ja existe
             }
-//            else if(bdPilotos.get(i).getNacionalidade().equals(piloto.getNacionalidade())){
-//                return 2;
-//            }
         }
         
         bdPilotos.add(piloto);
@@ -124,6 +115,11 @@ public class GerenciadorBD {
         
         for(int i = 0; i<bdEquipes.size(); i++){
             if(bdEquipes.get(i).getId().equals(idEquipe)){
+                for(int j = 0; j<bdEquipes.get(i).getPilotos().size(); j++){
+                    if(bdEquipes.get(i).getPilotos().get(j).getId().equals(idPiloto)){
+                        return 3; //piloto na equipe
+                    }
+                }
                 bdEquipes.get(i).addPilotos(pilotoAux);
                 bdPilotos.get(indiceAux).setEquipe(bdEquipes.get(i));
                 return 0; // Conseguiu fazer o cadastro
@@ -148,6 +144,11 @@ public class GerenciadorBD {
         
         for(int i = 0; i<bdEquipes.size(); i++){
             if(bdEquipes.get(i).getId().equals(idEquipe)){
+                for(int j = 0; j<bdEquipes.get(i).getCarros().size(); j++){
+                    if(bdEquipes.get(i).getCarros().get(j).getNumero().equals(idCarro)){
+                        return 3; //carro na equipe
+                    }
+                }
                 bdEquipes.get(i).addCarros(carroAux);
                 bdCarros.get(indiceAux).setEquipe(bdEquipes.get(i));
                 return 0; // Conseguiu fazer o cadastro
@@ -180,29 +181,6 @@ public class GerenciadorBD {
         }
         return 2; //não existe Carro
     }
-    /*
-    public int salvaPilotoRecordista(String idPista, String idPiloto){
-        Piloto pilotoAux = null;
-        
-        for(int i = 0; i<bdPilotos.size(); i++){
-            if(bdPilotos.get(i).getId().equals(idPiloto)){
-                pilotoAux = bdPilotos.get(i);
-            }   
-        }
-        
-        if(pilotoAux == null){
-            return 1; //não achou o piloto
-        }
-        
-        for(int i = 0; i<bdPistas.size(); i++){
-            if(bdPistas.get(i).getId().endsWith(idPista)){
-                bdPistas.get(i).setRecordista(pilotoAux);
-                return 0; // Salvou o piloto recordista da pista
-            }
-        }
-        
-        return 2; //Não achou a pista correta
-    }*/
     
     public int serealiza(){
         

@@ -17,7 +17,7 @@ public class Corrida implements Runnable{
     public ArrayList<Piloto> pilotos = new ArrayList<Piloto>();
     public DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
     public Pista pistaLocal;
-    public int numVoltas, ciclo = 0, nVolta = 0;
+    public int numVoltas, ciclo = 0, nVolta = 0, retorno = 0;
     public String tempQuali;
     public boolean fimQuali = false;
     public boolean fimCorrida = false;
@@ -95,7 +95,7 @@ public class Corrida implements Runnable{
 
     public  void getAtualizacao() {
         gerenciador = GerenciadorTelas.getInstance();
-        while(!isFimQuali()){
+        while(!isFimQuali() || !isFimCorrida()){
             while(!gerenciador.comunicacao.recebido.has("CicloLeitura") && !gerenciador.comunicacao.recebido.has("status")){ }
             String obj = Integer.toString(ciclo);
             
@@ -108,8 +108,9 @@ public class Corrida implements Runnable{
                     for (int j = 0; j < pilotos.size(); j++) {
                         if(leitura.get(i).getEPC().equals(pilotos.get(j).getCarro().getEPC())){
                             if(this.pilotos.get(j).isPrimeiraLeitura()){
-                                this.pilotos.get(j).setTempoInit(leitura.get(i).getTempoVolta());
-                                this.pilotos.get(j).setPrimeiraLeitura(false);
+                                this.pilotos.get(j).setTempoInit(leitura.get(i).getTempoVolta());                                
+                                this.pilotos.get(j).setTempoGeral(leitura.get(i).getTempoVolta());
+                                this.pilotos.get(j).setPrimeiraLeitura(false);                              
                             } else{
                                 if(leitura.get(i).getTempoVolta().getMinute() != pilotos.get(j).getTempoInit().getMinute()){
                                     this.pilotos.get(j).setTempoFinal(leitura.get(i).getTempoVolta());
@@ -121,30 +122,127 @@ public class Corrida implements Runnable{
                         }
                     }
                 }
-            }
-            
-            if(pilotos.get(0).getVoltas()>0){
+            }           
+                        
+            if(pilotos.get(0).getVoltas()>0 && !isFimQuali()){
+                System.out.println("Ordena quali");
                 this.pilotos = this.insertionSort(pilotos);
-                pistaLocal.novoRecord(pilotos.get(0));
-            }            
+                if (pilotos.get(0).getMelhorSec()!=0){
+                    pistaLocal.novoRecord(pilotos.get(0));
+                }                
+            }    
+            
+            if(pilotos.get(0).getVoltas()>0 && !isFimCorrida()){
+                System.out.println("Ordena corrida");
+                this.pilotos = this.insertionSortCorrida(pilotos);
+                for (int i = 0; i <pilotos.size(); i++) {
+                    pistaLocal.novoRecord(pilotos.get(i));
+                } 
+            } 
+            
             gerenciador.telaQuali.pilotos = this.pilotos;
             System.out.println(gerenciador.comunicacao.recebido.toString());
             ciclo++;
             
             if (gerenciador.comunicacao.recebido.has("status")){
-                setFimQuali(true);
-                ciclo = 0;
-                this.stop();
-                for (int i = 0; i < gerenciador.bancoDados.getBdPistas().size(); i++) {
-                    if(gerenciador.bancoDados.bdPistas.get(i).getNome().equals(pistaLocal.getNome())){
-                        gerenciador.bancoDados.bdPistas.set(i, pistaLocal);
+                if (gerenciador.comunicacao.recebido.get("URL").equals("finalQuali")){    
+                    setFimQuali(true);
+                    setFimCorrida(true);
+                    gerenciador.comunicacao.recebido.clear();
+                    ciclo = 0;
+                    this.stop();
+                    for (int i = 0; i < gerenciador.bancoDados.getBdPistas().size(); i++) {
+                        if(gerenciador.bancoDados.bdPistas.get(i).getNome().equals(pistaLocal.getNome())){
+                            gerenciador.bancoDados.bdPistas.set(i, pistaLocal);
+                        }
+                    } 
+                    gerenciador.bancoDados.serealiza();
+                    gerenciador.abrirBotaoParaCorrida();
+                } else if (gerenciador.comunicacao.recebido.get("URL").equals("finalCorrida")){
+                    setFimQuali(true);
+                    setFimCorrida(true);
+                    gerenciador.comunicacao.recebido.clear();
+                    ciclo = 0;
+                    for (int i = 0; i < pilotos.size(); i++) {
+                        pilotos.get(i).setPrimeiraLeitura(true);
                     }
-                } 
-                gerenciador.bancoDados.serealiza();
-                gerenciador.abrirBotaoParaCorrida();
+                    this.stop();
+                    for (int i = 0; i < gerenciador.bancoDados.getBdPistas().size(); i++) {
+                        if(gerenciador.bancoDados.bdPistas.get(i).getNome().equals(pistaLocal.getNome())){
+                            gerenciador.bancoDados.bdPistas.set(i, pistaLocal);
+                        }
+                    }
+                    gerenciador.bancoDados.serealiza();
+                    gerenciador.abrirBotaoParaInicio();
+                }                
             }             
         }
         System.out.println("Passou direto");
+    }
+    
+    public ArrayList<Piloto> insertionSortCorrida(ArrayList<Piloto> vetor) {
+        for(int i = 0; i<vetor.size();i++){
+            Piloto aux = vetor.get(i);
+            String divide = vetor.get(i).getTempoGeral();
+            String[] resto, geral = divide.split(":");
+            resto = geral[geral.length-1].split("\\.");
+            int[] atual = new int[geral.length+1];
+            atual[0] = Integer.parseInt(geral[0]); //Horas corridas do piloto
+            atual[1] = Integer.parseInt(geral[1]); //Minutos corridas do piloto
+            atual[2] = Integer.parseInt(resto[0]); //Segundos corridas do piloto
+            atual[3] = Integer.parseInt(resto[1]); //Milesimos corridas do piloto
+            for(int j = i+1; j<=vetor.size()-1;j++){
+                Piloto compara = vetor.get(j);
+                String separa = vetor.get(j).getTempoGeral();
+                String[] parte, todo = separa.split(":");
+                parte = todo[todo.length-1].split("\\.");
+                int[] comparado = new int[todo.length+1];
+                comparado[0] = Integer.parseInt(todo[0]);
+                comparado[1] = Integer.parseInt(todo[1]);
+                comparado[2] = Integer.parseInt(parte[0]);
+                comparado[3] = Integer.parseInt(parte[1]);
+                if(compara.getVoltas()>=aux.getVoltas()){
+                    if(compara.getVoltas()==aux.getVoltas()){
+                        if(comparado[0]<=atual[0]){ //Comparando hora
+                            if(comparado[0]==atual[0]){
+                                if(comparado[1]<=atual[1]){ //Comparando minuto
+                                    if(comparado[1]==atual[1]){
+                                        if(comparado[2]<=atual[2]){ //Comparando segundo
+                                            if(comparado[2]==atual[2]){
+                                                if(comparado[3]<=atual[3]){ //Comparando milesimo
+                                                    if(comparado[3]<atual[3]){
+                                                        vetor.set((i),compara);
+                                                        vetor.set((j),aux);
+                                                        aux = vetor.get(i);
+                                                    }  
+                                                }
+                                            } else{
+                                                vetor.set((i),compara);
+                                                vetor.set((j),aux);
+                                                aux = vetor.get(i);
+                                            }  
+                                        }
+                                    } else{
+                                        vetor.set((i),compara);
+                                        vetor.set((j),aux);
+                                        aux = vetor.get(i);
+                                    }
+                                }
+                            } else{
+                                vetor.set((i),compara);
+                                vetor.set((j),aux);
+                                aux = vetor.get(i);
+                            } 
+                        }  
+                    } else{
+                        vetor.set((i),compara);
+                        vetor.set((j),aux);
+                        aux = vetor.get(i);
+                    }
+                }    
+            }        
+        }
+        return vetor;
     }
     
     public ArrayList<Piloto> insertionSort(ArrayList<Piloto> vetor) {
@@ -165,8 +263,7 @@ public class Corrida implements Runnable{
                         aux = vetor.get(i);
                     }   
                 }      
-            }
-        
+            }        
         }
         return vetor;
     }
@@ -202,15 +299,20 @@ public class Corrida implements Runnable{
                         for(int j = 0; j<this.pilotos.size(); j++){
                             if(gerenciador.comunicacao.recebido.get(s).equals(this.pilotos.get(j).getCarro().getEPC())){
                                 leitura.add(new Carro(gerenciador.comunicacao.recebido.get(s).toString(), LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData)));
+                                retorno++;
                             }
                         }
                     }
             }
-            return true;
+            if (retorno>=pilotos.size()) {
+                retorno = 0;
+                return true;
+            } else {
+                return false;
+            }
         } else if(leitura!=null){ 
             String a = "CARRO";
-            String b = "TEMPO";
-            boolean retorno = false;            
+            String b = "TEMPO";           
             for(int i = 0; i<5; i++){
                     String s = a+i;
                     String t = b+i;
@@ -229,19 +331,21 @@ public class Corrida implements Runnable{
                                 aux = tempoBase.minusHours(this.leitura.get(j).getTempoVolta().getHour()).minusMinutes(this.leitura.get(j).getTempoVolta().getMinute()).minusSeconds(this.leitura.get(j).getTempoVolta().getSecond()).minusNanos(this.leitura.get(j).getTempoVolta().getNano());
                                 if(aux.getMinute()>=Integer.parseInt(pistaLocal.getTempoMin())){
                                     this.leitura.get(j).setTempoVolta(tempoBase);
-                                    retorno = true;
+                                    retorno++;
                                 }
                             }                            
                         }
                         if(x==0){
                             leitura.add(new Carro(gerenciador.comunicacao.recebido.get(s).toString(), LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData)));
-                            retorno = true;
+                            retorno++;
                         }
                     }                    
             }
-            return retorno;
-        }else{     
+        }if (retorno>=pilotos.size()) {
+            retorno = 0;
+            return true;
+        } else {
             return false;
-        }        
-    }
+        }       
+    } 
 }

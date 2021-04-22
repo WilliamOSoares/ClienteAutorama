@@ -1,11 +1,13 @@
 package ClienteAutorama.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Pista implements Serializable {
     
     private String id, nome, pais, tempoRecordPista, tempoMin, recordista;
-    private int melhorSec = 1000, melhorMili = 1000;
+    private int melhorSec = 0, melhorMili = 0;
 
     public Pista(String id, String nome, String pais, String tempoMin) {
         this.id = id;
@@ -66,6 +68,7 @@ public class Pista implements Serializable {
 
     public void novoRecord(Piloto piloto){
         if(this.melhorSec == 0){
+            System.out.println("recordista zerado" +melhorSec+"-"+melhorMili);
             String s = ".";
             this.setRecordista(piloto.getNome());
             this.melhorSec = piloto.getMelhorSec();
@@ -78,8 +81,10 @@ public class Pista implements Serializable {
                 s = ".0";
             }
             this.setTempoRecordPista(min+":"+sec +s+this.melhorMili);
+            System.out.println("recordista novo" +melhorSec+"-"+melhorMili);
         } else{
             if(piloto.getMelhorSec()<this.melhorSec){
+                System.out.println("recordista com menor segundo" +melhorSec+"-"+melhorMili);
                 String s = ".";
                 this.melhorSec = piloto.getMelhorSec();
                 this.melhorMili = piloto.getMelhorMili();
@@ -92,8 +97,10 @@ public class Pista implements Serializable {
                     s = ".0";
                 }
                 this.setTempoRecordPista(min+":"+sec +s+this.melhorMili);
+                System.out.println("recordista novo" +melhorSec+"-"+melhorMili);
             } else if(piloto.getMelhorSec()==this.melhorSec){
                 if(piloto.getMelhorMili()<this.melhorMili){
+                    System.out.println("recordista com menor mili" +melhorSec+"-"+melhorMili);
                     String s = ".";
                     this.melhorMili = piloto.getMelhorMili();
                     this.setRecordista(piloto.getNome());
@@ -105,6 +112,7 @@ public class Pista implements Serializable {
                         s = ".0";
                     }
                     this.setTempoRecordPista(min+":"+sec +s+this.melhorMili);
+                    System.out.println("recordista novo" +melhorSec+"-"+melhorMili);
                 }
             } 
         }

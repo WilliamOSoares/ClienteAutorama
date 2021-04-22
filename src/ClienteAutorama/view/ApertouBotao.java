@@ -73,7 +73,11 @@ public class ApertouBotao extends javax.swing.JFrame {
         } else if(code == 2){
             gerenciador = GerenciadorTelas.getInstance();
             gerenciador.iniciarCorrida();
+        } else if (code == 3){
+            gerenciador = GerenciadorTelas.getInstance();
+            gerenciador.voltarParaTelaInicial();
         }
+        
     }//GEN-LAST:event_simulaBotaoActionPerformed
 
     /**

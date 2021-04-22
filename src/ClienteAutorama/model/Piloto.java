@@ -15,7 +15,8 @@ public class Piloto implements Serializable {
     private int melhorSec = 0;
     private int melhorMili = 0;
     private LocalDateTime tempoInit;
-    private LocalDateTime tempoFinal;
+    private LocalDateTime tempoFinal;    
+    private LocalDateTime tempoGeral;
     private boolean primeiraLeitura = true;
     private int posicao;
 
@@ -77,10 +78,53 @@ public class Piloto implements Serializable {
         return tempoVolta;
     }
 
+    public String getTempoGeral() {
+        LocalDateTime aux;
+        int hora, min, sec, mili;
+        String horas, mins, secs, milis;
+        
+        aux = this.tempoFinal.minusHours(this.tempoGeral.getHour()).minusMinutes(this.tempoGeral.getMinute()).minusSeconds(this.tempoGeral.getSecond()).minusNanos(this.tempoGeral.getNano());
+        hora = aux.getHour();
+        min = aux.getMinute();
+        sec = aux.getSecond();
+        mili = aux.getNano()/1000000;
+        
+        if(hora<10){
+            horas =  "0" + Integer.toString(hora);
+        } else{
+            horas = Integer.toString(hora);
+        }
+        
+        if(min<10){
+            mins = "0" + Integer.toString(min);
+        } else{
+            mins = Integer.toString(min);
+        }
+        
+        if(sec<10){
+            secs = "0" + Integer.toString(sec);
+        }else{
+            secs = Integer.toString(sec);
+        }
+        
+        if(mili<10){
+            milis =  "00" + Integer.toString(mili);
+        } else if(mili<100){
+            milis =  "0" + Integer.toString(mili);
+        }else{
+            milis = Integer.toString(mili);
+        }
+        
+        return (horas + ":" + mins + ":" + secs + "." + milis);
+    }   
+    
+    public void setTempoGeral(LocalDateTime tempoGeral) {
+        this.tempoGeral = tempoGeral;
+    }
+    
     public void setTempoVolta() {
         LocalDateTime aux;
         aux = this.tempoFinal.minusHours(this.tempoInit.getHour()).minusMinutes(this.tempoInit.getMinute()).minusSeconds(this.tempoInit.getSecond()).minusNanos(this.tempoInit.getNano());
-        System.out.println(aux);
         int mili = aux.getNano()/1000000;
         this.setTempoMili(mili);
         if(this.tempoMili<10){
@@ -102,7 +146,6 @@ public class Piloto implements Serializable {
                     this.melhorMili = this.tempoMili;
             }        
         }
-        System.out.println("sec-mili"+this.getTempoSec() + "-" +this.getTempoMili());
     }
 
     public int getMelhorSec() {

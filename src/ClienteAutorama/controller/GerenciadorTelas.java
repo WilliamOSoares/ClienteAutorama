@@ -205,11 +205,43 @@ public class GerenciadorTelas {
     }
 
     public void iniciarCorrida() {
-        System.out.println("iiiiiiiiii COMEÇOOOOOOOOUUUU");
+        comunicacao.getComecaCorrida();
+        telaBotao.setEnabled(false);
+        telaBotao.setVisible(false);
+        this.corrida.start();
     }
 
     public void setTelaCorrida(TelaCorrida telaCorrida) {
         this.telaCorrida = telaCorrida;
     }
+
+    public void abrirBotaoParaInicio() {
+        telaBotao = new ApertouBotao(3);
+        telaBotao.setLocationRelativeTo(telaCorrida);
+        telaBotao.setSize(436, 166); 
+        telaBotao.setEnabled(true);
+        telaBotao.setVisible(true);
+    }
+
+    public void voltarParaTelaInicial() {
+        for (int i = 0; i < this.corrida.pilotos.size(); i++) {
+            corrida.pilotos.get(i).setMelhorMili(0);
+            corrida.pilotos.get(i).setMelhorSec(0);
+            corrida.pilotos.get(i).setVoltas(0);
+            corrida.pilotos.get(i).setTempoSec(0);
+            corrida.pilotos.get(i).setTempoMili(0);
+            corrida.pilotos.get(i).setPrimeiraLeitura(true);
+        }
+        bancoDados.serealiza();
+        telaCorrida.setEnabled(false);
+        telaCorrida.setVisible(false);
+        telaBotao.setEnabled(false);
+        telaBotao.setVisible(false);
+        telaInicial.setLocationRelativeTo(telaCadastro);
+        telaInicial.setEnabled(true);
+        telaInicial.setVisible(true);      
+                
+    }  
+    
 
 }

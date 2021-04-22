@@ -13,6 +13,7 @@ public class TelaCorrida extends javax.swing.JFrame {
     GerenciadorTelas gerenciador;
     ModeloTabelaCorrida modelo;
     public ArrayList<Piloto> pilotos; 
+    public int voltas = 0, VoltasN =0;
 
     /**
      * Creates new form Corrida
@@ -26,6 +27,7 @@ public class TelaCorrida extends javax.swing.JFrame {
         autorRecord.setText(gerenciador.corrida.pistaLocal.getRecordista());
         nVoltas.setText("0 de "+Integer.toString(gerenciador.corrida.numVoltas)+" Voltas");
         this.pilotos = gerenciador.corrida.pilotos;
+        voltas = gerenciador.corrida.getNumVoltas();
         for (int i = 0; i < this.pilotos.size(); i++) {
             pilotos.get(i).setMelhorMili(0);
             pilotos.get(i).setMelhorSec(0);
@@ -34,10 +36,15 @@ public class TelaCorrida extends javax.swing.JFrame {
             pilotos.get(i).setTempoMili(0);
             pilotos.get(i).setPrimeiraLeitura(true);
         }
+        gerenciador.corrida.pilotos = this.pilotos;
         gerenciador.bancoDados.serealiza();
+        gerenciador.corrida.setFimQuali(true);
+        gerenciador.corrida.setFimCorrida(false);
+        gerenciador.corrida.leitura.clear();
         this.modelo = new ModeloTabelaCorrida(pilotos);
         tabelaCorrida.setModel(modelo);
         gerenciador.setTelaCorrida(this);
+        this.start();
     }
 
     /**
@@ -224,39 +231,34 @@ public class TelaCorrida extends javax.swing.JFrame {
             }
         });
     }
-    /*
+    
     private void start(){
         SwingWorker worker = new SwingWorker() {
             @Override
             protected Void doInBackground() throws Exception {
-            // Simulate doing something useful.
                 GerenciadorTelas gerenciador;
                 gerenciador = GerenciadorTelas.getInstance();
-                while(tempoQuali>0){
-                    int sec = 60;
-                    tempoQuali--;
-                    //tempo.setText(tempoQuali + ":" + sec);
-                    while(sec>0){
-                        Thread.sleep(1000);
-                        sec--;
-                        if(sec<10){
-                            tempo.setText(tempoQuali + ":0" + sec);
-                        } else{
-                            tempo.setText(tempoQuali + ":" + sec);
-                        }  
-                        gerenciador.telaQuali.modelo.setArray(gerenciador.telaQuali.pilotos);//gerenciador.corrida.pilotos); 
-                        gerenciador.telaQuali.tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());
-                        gerenciador.telaQuali.autorRecord.setText(gerenciador.corrida.pistaLocal.getRecordista());
-                    }
+                VoltasN = 0;
+                int voltaPrim = pilotos.get(0).getVoltas();
+                while(voltas>=0){     
+                    nVoltas.setText(Integer.toString(VoltasN)+ " de " + Integer.toString(gerenciador.corrida.getNumVoltas()) + " Voltas");
+                    VoltasN++;                    
+                    while(voltaPrim != VoltasN){
+                        voltaPrim = gerenciador.corrida.pilotos.get(0).getVoltas();
+                        gerenciador.telaCorrida.modelo.setArray(gerenciador.telaCorrida.pilotos);
+                        gerenciador.telaCorrida.autorRecord.setText(gerenciador.corrida.pistaLocal.getRecordista());
+                        gerenciador.telaCorrida.tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());
+                    }                    
+                    voltas--;                
                 }
-                while (tempoQuali==0){
-                    tempo.setText("0:00");
-                    gerenciador.telaQuali.modelo.setArray(gerenciador.telaQuali.pilotos);//gerenciador.corrida.pilotos);
-                    if(gerenciador.corrida.fimQuali){
-                        tempoQuali--;
-                    }
-                    gerenciador.telaQuali.tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());
-                    gerenciador.telaQuali.autorRecord.setText(gerenciador.corrida.pistaLocal.getRecordista());
+                //VoltasN++;  
+                nVoltas.setText(Integer.toString(VoltasN)+ " de " + Integer.toString(gerenciador.corrida.getNumVoltas()) + " Voltas");
+                nVoltas.setText("Acabou a corrida");
+                
+                while (!gerenciador.corrida.isFimCorrida()){
+                   gerenciador.telaCorrida.modelo.setArray(gerenciador.telaCorrida.pilotos);
+                   gerenciador.telaCorrida.autorRecord.setText(gerenciador.corrida.pistaLocal.getRecordista());
+                   gerenciador.telaCorrida.tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());
                 }
 
             return null;
@@ -264,7 +266,7 @@ public class TelaCorrida extends javax.swing.JFrame {
         };
 
         worker.execute();
-    }*/
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel autorRecord;
