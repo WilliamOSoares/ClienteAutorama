@@ -6,10 +6,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import org.json.JSONObject;
 
+/**
+ * Classe de cadastro.
+ * 
+ * @author Víctor César e William Soares.
+ */
 public class Cadastro extends javax.swing.JFrame {
 
     GerenciadorTelas gerenciador;
     
+    /**
+    * Construtor da classe cadastro.
+    * 
+    */
     public Cadastro() {
         initComponents();
         this.setTitle("Autorama");
@@ -25,18 +34,18 @@ public class Cadastro extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabCadastro = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         salvaVolta = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        irParaCarros = new javax.swing.JButton();
+        irParaPiloto = new javax.swing.JButton();
+        irParaEquipe = new javax.swing.JButton();
+        irParaCP = new javax.swing.JButton();
+        irParaPCE = new javax.swing.JButton();
+        irParaPista = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
+        voltarDoCarroParaCadastro = new javax.swing.JButton();
         cadastrarCarro = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         EPCcarroC = new javax.swing.JComboBox<>();
@@ -46,7 +55,7 @@ public class Cadastro extends javax.swing.JFrame {
         Ncarro = new javax.swing.JTextField();
         imagem1 = new ClienteAutorama.view.Imagem();
         jPanel3 = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
+        voltarDaEquipeParaCadastro = new javax.swing.JButton();
         cadastrarEquipe = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -58,7 +67,7 @@ public class Cadastro extends javax.swing.JFrame {
         anoE = new javax.swing.JTextField();
         nacEquipe = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
-        jButton10 = new javax.swing.JButton();
+        voltarDoPilotoParaCadastro = new javax.swing.JButton();
         cadastrarPiloto = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -69,7 +78,7 @@ public class Cadastro extends javax.swing.JFrame {
         nacPiloto = new javax.swing.JTextField();
         imagem2 = new ClienteAutorama.view.Imagem();
         jPanel5 = new javax.swing.JPanel();
-        jButton12 = new javax.swing.JButton();
+        voltarDaPistaParaCadastro = new javax.swing.JButton();
         cadastrarPista = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -82,7 +91,7 @@ public class Cadastro extends javax.swing.JFrame {
         tempoMinP = new javax.swing.JTextField();
         imagem3 = new ClienteAutorama.view.Imagem();
         jPanel6 = new javax.swing.JPanel();
-        jButton17 = new javax.swing.JButton();
+        voltarDoPCEParaCadastro = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         IDpilotoPE = new javax.swing.JTextField();
@@ -96,7 +105,7 @@ public class Cadastro extends javax.swing.JFrame {
         IDequipeEC = new javax.swing.JTextField();
         cadastrarCE = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
-        jButton20 = new javax.swing.JButton();
+        voltarDoCPParaCadastro = new javax.swing.JButton();
         cadastrarCP = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
@@ -108,8 +117,8 @@ public class Cadastro extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jTabbedPane1.setMinimumSize(new java.awt.Dimension(700, 430));
-        jTabbedPane1.setPreferredSize(new java.awt.Dimension(700, 430));
+        tabCadastro.setMinimumSize(new java.awt.Dimension(700, 430));
+        tabCadastro.setPreferredSize(new java.awt.Dimension(700, 430));
 
         salvaVolta.setText("Salvar e voltar para o menu");
         salvaVolta.addActionListener(new java.awt.event.ActionListener() {
@@ -120,45 +129,45 @@ public class Cadastro extends javax.swing.JFrame {
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecione um cadastro", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Ink Free", 1, 24))); // NOI18N
 
-        jButton1.setText("Cadastrar carros");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        irParaCarros.setText("Cadastrar carros");
+        irParaCarros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                irParaCarrosActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Cadastrar piloto");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        irParaPiloto.setText("Cadastrar piloto");
+        irParaPiloto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                irParaPilotoActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cadastrar equipe");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        irParaEquipe.setText("Cadastrar equipe");
+        irParaEquipe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                irParaEquipeActionPerformed(evt);
             }
         });
 
-        jButton15.setText("Cadastro dos carros dos pilotos");
-        jButton15.addActionListener(new java.awt.event.ActionListener() {
+        irParaCP.setText("Cadastro dos carros dos pilotos");
+        irParaCP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
+                irParaCPActionPerformed(evt);
             }
         });
 
-        jButton14.setText("Cadastro de pilotos e carros em equipe");
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
+        irParaPCE.setText("Cadastro de pilotos e carros em equipe");
+        irParaPCE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
+                irParaPCEActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Cadastrar Pista");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        irParaPista.setText("Cadastrar Pista");
+        irParaPista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                irParaPistaActionPerformed(evt);
             }
         });
 
@@ -169,17 +178,17 @@ public class Cadastro extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(irParaPCE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(irParaCarros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(irParaPista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(irParaPiloto, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(irParaEquipe, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(irParaCP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -187,16 +196,16 @@ public class Cadastro extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(irParaCarros, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(irParaPiloto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(irParaEquipe, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(irParaPista, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(irParaCP, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(irParaPCE, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -224,12 +233,12 @@ public class Cadastro extends javax.swing.JFrame {
                 .addContainerGap(64, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Cadastramento", jPanel1);
+        tabCadastro.addTab("Cadastramento", jPanel1);
 
-        jButton6.setText("Voltar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        voltarDoCarroParaCadastro.setText("Voltar");
+        voltarDoCarroParaCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                voltarDoCarroParaCadastroActionPerformed(evt);
             }
         });
 
@@ -325,7 +334,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(voltarDoCarroParaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cadastrarCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(129, Short.MAX_VALUE))
@@ -338,16 +347,16 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cadastrarCarro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(voltarDoCarroParaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(86, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Carro", jPanel2);
+        tabCadastro.addTab("Carro", jPanel2);
 
-        jButton8.setText("Voltar");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        voltarDaEquipeParaCadastro.setText("Voltar");
+        voltarDaEquipeParaCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                voltarDaEquipeParaCadastroActionPerformed(evt);
             }
         });
 
@@ -430,7 +439,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(0, 159, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(voltarDaEquipeParaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cadastrarEquipe, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -443,17 +452,17 @@ public class Cadastro extends javax.swing.JFrame {
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(voltarDaEquipeParaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cadastrarEquipe, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Equipe", jPanel3);
+        tabCadastro.addTab("Equipe", jPanel3);
 
-        jButton10.setText("Voltar");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        voltarDoPilotoParaCadastro.setText("Voltar");
+        voltarDoPilotoParaCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                voltarDoPilotoParaCadastroActionPerformed(evt);
             }
         });
 
@@ -546,7 +555,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(0, 129, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(voltarDoPilotoParaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cadastrarPiloto, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -560,16 +569,16 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cadastrarPiloto, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(voltarDoPilotoParaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Piloto", jPanel4);
+        tabCadastro.addTab("Piloto", jPanel4);
 
-        jButton12.setText("Voltar");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        voltarDaPistaParaCadastro.setText("Voltar");
+        voltarDaPistaParaCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                voltarDaPistaParaCadastroActionPerformed(evt);
             }
         });
 
@@ -672,7 +681,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(102, 102, 102)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(voltarDaPistaParaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cadastrarPista, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -685,17 +694,17 @@ public class Cadastro extends javax.swing.JFrame {
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(voltarDaPistaParaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cadastrarPista, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Pista", jPanel5);
+        tabCadastro.addTab("Pista", jPanel5);
 
-        jButton17.setText("Voltar");
-        jButton17.addActionListener(new java.awt.event.ActionListener() {
+        voltarDoPCEParaCadastro.setText("Voltar");
+        voltarDoPCEParaCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton17ActionPerformed(evt);
+                voltarDoPCEParaCadastroActionPerformed(evt);
             }
         });
 
@@ -823,7 +832,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addContainerGap(132, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(voltarDoPCEParaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(288, 288, 288))
         );
         jPanel6Layout.setVerticalGroup(
@@ -834,16 +843,16 @@ public class Cadastro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(voltarDoPCEParaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Piloto e carro na equipe", jPanel6);
+        tabCadastro.addTab("Piloto e carro na equipe", jPanel6);
 
-        jButton20.setText("Voltar");
-        jButton20.addActionListener(new java.awt.event.ActionListener() {
+        voltarDoCPParaCadastro.setText("Voltar");
+        voltarDoCPParaCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton20ActionPerformed(evt);
+                voltarDoCPParaCadastroActionPerformed(evt);
             }
         });
 
@@ -920,7 +929,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(86, 86, 86)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(voltarDoCPParaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cadastrarCP, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -933,62 +942,98 @@ public class Cadastro extends javax.swing.JFrame {
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(voltarDoCPParaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cadastrarCP, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(100, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Carro do piloto", jPanel7);
+        tabCadastro.addTab("Carro do piloto", jPanel7);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        getContentPane().add(jTabbedPane1, gridBagConstraints);
+        getContentPane().add(tabCadastro, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        this.jTabbedPane1.setSelectedIndex(0);
-    }//GEN-LAST:event_jButton20ActionPerformed
+    /**
+    * Volta da tela de cadastro do carro do piloto para a tela principal de cadastro.
+    * 
+    */
+    private void voltarDoCPParaCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarDoCPParaCadastroActionPerformed
+        this.tabCadastro.setSelectedIndex(0);
+    }//GEN-LAST:event_voltarDoCPParaCadastroActionPerformed
 
     private void IDequipeEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDequipeEPActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_IDequipeEPActionPerformed
 
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        this.jTabbedPane1.setSelectedIndex(0);
-    }//GEN-LAST:event_jButton17ActionPerformed
+    /**
+    * Volta da tela de cadastro do piloto e carro na equipe para a tela principal de cadastro.
+    * 
+    */
+    private void voltarDoPCEParaCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarDoPCEParaCadastroActionPerformed
+        this.tabCadastro.setSelectedIndex(0);
+    }//GEN-LAST:event_voltarDoPCEParaCadastroActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        this.jTabbedPane1.setSelectedIndex(0);
-    }//GEN-LAST:event_jButton12ActionPerformed
+    /**
+    * Volta da tela de cadastro da pista para a tela principal de cadastro.
+    * 
+    */
+    private void voltarDaPistaParaCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarDaPistaParaCadastroActionPerformed
+        this.tabCadastro.setSelectedIndex(0);
+    }//GEN-LAST:event_voltarDaPistaParaCadastroActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        this.jTabbedPane1.setSelectedIndex(0);
-    }//GEN-LAST:event_jButton10ActionPerformed
+    /**
+    * Volta da tela de cadastro do piloto para a tela principal de cadastro.
+    * 
+    */
+    private void voltarDoPilotoParaCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarDoPilotoParaCadastroActionPerformed
+        this.tabCadastro.setSelectedIndex(0);
+    }//GEN-LAST:event_voltarDoPilotoParaCadastroActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        this.jTabbedPane1.setSelectedIndex(0);
-    }//GEN-LAST:event_jButton8ActionPerformed
+    /**
+    * Volta da tela de cadastro da equipe para a tela principal de cadastro.
+    * 
+    */
+    private void voltarDaEquipeParaCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarDaEquipeParaCadastroActionPerformed
+        this.tabCadastro.setSelectedIndex(0);
+    }//GEN-LAST:event_voltarDaEquipeParaCadastroActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        this.jTabbedPane1.setSelectedIndex(0);
-    }//GEN-LAST:event_jButton6ActionPerformed
+    /**
+    * Volta da tela de cadastro do carro para a tela principal de cadastro.
+    * 
+    */
+    private void voltarDoCarroParaCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarDoCarroParaCadastroActionPerformed
+        this.tabCadastro.setSelectedIndex(0);
+    }//GEN-LAST:event_voltarDoCarroParaCadastroActionPerformed
 
     private void NcarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NcarroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NcarroActionPerformed
 
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        this.jTabbedPane1.setSelectedIndex(6);
-    }//GEN-LAST:event_jButton15ActionPerformed
+    /**
+    * Vai da tela principal de cadastro para a tela de cadastro de carro no piloto.
+    * 
+    */
+    private void irParaCPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irParaCPActionPerformed
+        this.tabCadastro.setSelectedIndex(6);
+    }//GEN-LAST:event_irParaCPActionPerformed
 
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        this.jTabbedPane1.setSelectedIndex(5);
-    }//GEN-LAST:event_jButton14ActionPerformed
+    /**
+    * Vai da tela principal de cadastro para a tela de cadastro de carro e piloto na equipe.
+    * 
+    */
+    private void irParaPCEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irParaPCEActionPerformed
+        this.tabCadastro.setSelectedIndex(5);
+    }//GEN-LAST:event_irParaPCEActionPerformed
 
+    /**
+    * Salva os dados dos cadastros e volta para a tela inicial.
+    * 
+    */
     private void salvaVoltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvaVoltaActionPerformed
         gerenciador = GerenciadorTelas.getInstance();
         if(gerenciador.salvarCadastro()==0){
@@ -1001,22 +1046,42 @@ public class Cadastro extends javax.swing.JFrame {
         gerenciador.abrirTelaInicialDoCadastro();
     }//GEN-LAST:event_salvaVoltaActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        this.jTabbedPane1.setSelectedIndex(4);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    /**
+    * Vai da tela principal de cadastro para a tela de cadastro de pista.
+    * 
+    */
+    private void irParaPistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irParaPistaActionPerformed
+        this.tabCadastro.setSelectedIndex(4);
+    }//GEN-LAST:event_irParaPistaActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        this.jTabbedPane1.setSelectedIndex(3);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    /**
+    * Vai da tela principal de cadastro para a tela de cadastro do piloto.
+    * 
+    */
+    private void irParaPilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irParaPilotoActionPerformed
+        this.tabCadastro.setSelectedIndex(3);
+    }//GEN-LAST:event_irParaPilotoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.jTabbedPane1.setSelectedIndex(2);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    /**
+    * Vai da tela principal de cadastro para a tela de cadastro de equipe.
+    * 
+    */
+    private void irParaEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irParaEquipeActionPerformed
+        this.tabCadastro.setSelectedIndex(2);
+    }//GEN-LAST:event_irParaEquipeActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.jTabbedPane1.setSelectedIndex(1);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    /**
+    * Vai da tela principal de cadastro para a tela de cadastro de carro.
+    * 
+    */
+    private void irParaCarrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irParaCarrosActionPerformed
+        this.tabCadastro.setSelectedIndex(1);
+    }//GEN-LAST:event_irParaCarrosActionPerformed
 
+    /**
+    * Cadastra um piloto no banco de dados.
+    * 
+    */
     private void cadastrarPilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarPilotoActionPerformed
         if(!IDpilotoP.getText().isEmpty() && !nomePiloto.getText().isEmpty() && !nacPiloto.getText().isEmpty()){    
             gerenciador = GerenciadorTelas.getInstance();
@@ -1033,6 +1098,10 @@ public class Cadastro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cadastrarPilotoActionPerformed
 
+    /**
+    * Cadastra uma equipe no banco de dados.
+    * 
+    */
     private void cadastrarEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarEquipeActionPerformed
         if(!IDequipeE.getText().isEmpty() && !nomeEquipe.getText().isEmpty() && !nacEquipe.getText().isEmpty() && !anoE.getText().isEmpty()){    
             gerenciador = GerenciadorTelas.getInstance();
@@ -1049,6 +1118,10 @@ public class Cadastro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cadastrarEquipeActionPerformed
 
+    /**
+    * Cadastra uma pista no banco de dados.
+    * 
+    */
     private void cadastrarPistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarPistaActionPerformed
         if(!IDpistaP.getText().isEmpty() && !nomePista.getText().isEmpty() && !paisPista.getText().isEmpty() && !tempoMinP.getText().isEmpty()){
             gerenciador = GerenciadorTelas.getInstance();
@@ -1065,6 +1138,10 @@ public class Cadastro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cadastrarPistaActionPerformed
 
+    /**
+    * Cadastra um piloto em uma equipe no banco de dados.
+    * 
+    */
     private void cadastroPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroPEActionPerformed
         if(!IDpilotoPE.getText().isEmpty() && !IDequipeEP.getText().isEmpty()){
             gerenciador = GerenciadorTelas.getInstance();
@@ -1083,6 +1160,10 @@ public class Cadastro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cadastroPEActionPerformed
 
+    /**
+    * Cadastra um carro na equipe no banco de dados.
+    * 
+    */
     private void cadastrarCEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarCEActionPerformed
         if(!IDcarroCE.getText().isEmpty() && !IDequipeEC.getText().isEmpty()){
             gerenciador = GerenciadorTelas.getInstance();
@@ -1101,6 +1182,10 @@ public class Cadastro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cadastrarCEActionPerformed
 
+    /**
+    * Cadastra um carro no piloto no banco de dados.
+    * 
+    */
     private void cadastrarCPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarCPActionPerformed
         if(!IDpilotoPC.getText().isEmpty() && !IDcarroCP.getText().isEmpty()){    
             gerenciador = GerenciadorTelas.getInstance();
@@ -1117,6 +1202,10 @@ public class Cadastro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cadastrarCPActionPerformed
 
+    /**
+    * Cadastra um carro no banco de dados.
+    * 
+    */
     private void cadastrarCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarCarroActionPerformed
         gerenciador = GerenciadorTelas.getInstance();
         if(!EPCcarroC.getSelectedItem().equals("<Selecione um EPC>")){    
@@ -1137,6 +1226,10 @@ public class Cadastro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cadastrarCarroActionPerformed
 
+    /**
+    * Requisita ao servidor os EPCs e coloca em uma caixa de seleção, deve haver pelo menos uma tag no sensor.
+    * 
+    */
     private void lerEPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lerEPCActionPerformed
         EPCcarroC.removeAllItems();
         EPCcarroC.addItem("<Selecione um EPC>");
@@ -1162,8 +1255,9 @@ public class Cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_nomePilotoActionPerformed
     
     /**
-     * @param args the command line arguments
-     */
+    * @deprecated Metódo de execução de tela para depuração 
+    * @param args Argumentos de entrada.
+    */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1220,18 +1314,12 @@ public class Cadastro extends javax.swing.JFrame {
     private ClienteAutorama.view.Imagem imagem2;
     private ClienteAutorama.view.Imagem imagem3;
     private ClienteAutorama.view.Imagem imagem4;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton20;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton irParaCP;
+    private javax.swing.JButton irParaCarros;
+    private javax.swing.JButton irParaEquipe;
+    private javax.swing.JButton irParaPCE;
+    private javax.swing.JButton irParaPiloto;
+    private javax.swing.JButton irParaPista;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -1266,7 +1354,6 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton lerEPC;
     private javax.swing.JTextField nacEquipe;
     private javax.swing.JTextField nacPiloto;
@@ -1275,6 +1362,13 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JTextField nomePista;
     private javax.swing.JTextField paisPista;
     private javax.swing.JButton salvaVolta;
+    private javax.swing.JTabbedPane tabCadastro;
     private javax.swing.JTextField tempoMinP;
+    private javax.swing.JButton voltarDaEquipeParaCadastro;
+    private javax.swing.JButton voltarDaPistaParaCadastro;
+    private javax.swing.JButton voltarDoCPParaCadastro;
+    private javax.swing.JButton voltarDoCarroParaCadastro;
+    private javax.swing.JButton voltarDoPCEParaCadastro;
+    private javax.swing.JButton voltarDoPilotoParaCadastro;
     // End of variables declaration//GEN-END:variables
 }

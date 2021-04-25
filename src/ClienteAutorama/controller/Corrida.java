@@ -1,4 +1,3 @@
-
 package ClienteAutorama.controller;
 
 import ClienteAutorama.model.Carro;
@@ -7,14 +6,16 @@ import ClienteAutorama.model.Pista;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.concurrent.Semaphore;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+/**
+ * Classe da corrida.
+ * 
+ * @author Víctor César e William Soares.
+ */
 public class Corrida implements Runnable{
     
     GerenciadorTelas gerenciador;
-    public ArrayList<Piloto> pilotos = new ArrayList<Piloto>();
+    public ArrayList<Piloto> pilotos = new ArrayList<>();
     public DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
     public Pista pistaLocal;
     public int numVoltas, ciclo = 0, nVolta = 0, retorno = 0;
@@ -24,75 +25,121 @@ public class Corrida implements Runnable{
     public boolean online = false;
     public ArrayList<Carro> leitura = new ArrayList<>();
     
-    
+    /**
+    * Construtor da classe corrida.
+    * 
+    */
     public Corrida() {
     }
     
+    //Criação da única instância.
     public static Corrida uniqueInstance = new Corrida();
 
+    /**
+    * Pega a única instância da classe existente no código, com isso faz a implementação do padrão de criação Singleton.
+    * 
+    * @return Retorna a única instância.
+    */
     public static Corrida getInstance() {
 	return uniqueInstance;
     }  
 
-    public void setDados() {
-        
-    }
-
+    /**
+    * Pega os pilotos que estão participando do qualificatório e da corrida.
+    * 
+    * @return Os corredores ativos.
+    */
     public ArrayList<Piloto> getPilotos() {
         return pilotos;
     }
 
-    public void setPilotos(ArrayList<Piloto> pilotos) {
-        this.pilotos = pilotos;
-    }
-
+    /**
+    * Pega a pista que sediará a corrida e o qualificatório.
+    * 
+    * @return a pista.
+    */
     public Pista getPistaLocal() {
         return pistaLocal;
     }
 
-    public void setPistaLocal(Pista pistaLocal) {
-        this.pistaLocal = pistaLocal;
-    }
-
+    /**
+    * Pega o número de voltas da corrida.
+    * 
+    * @return Um inteiro com o número de voltas.
+    */
     public int getNumVoltas() {
         return numVoltas;
     }
 
-    public void setNumVoltas(int numVoltas) {
-        this.numVoltas = numVoltas;
-    }
-
+    /**
+    * Pega o tempo do qualificatório.
+    * 
+    * @return Um inteiro com o tempo do qualificatório em minutos.
+    */
     public String getTempQuali() {
         return tempQuali;
     }
 
-    public void setTempQuali(String tempQuali) {
-        this.tempQuali = tempQuali;
-    }
-
+    /**
+    * Pega o estado do final do qualificatório.
+    * 
+    * @return True caso a qualificação acabou ou a corrida está em progresso e False caso o qualificatório não acabou.
+    */
     public boolean isFimQuali() {
         return fimQuali;
     }
 
+    /**
+    * Altera o estado do final do qualificatório.
+    * 
+    * @param fimQuali Novo estado do final do qualificatório.
+    */
     public void setFimQuali(boolean fimQuali) {
         this.fimQuali = fimQuali;
     }
 
+    /**
+    * Pega o estado do final da corrida.
+    * 
+    * @return True caso a corrida acabou ou o qualificatório está em progresso e False caso a corrida não acabou.
+    */
     public boolean isFimCorrida() {
         return fimCorrida;
     }
 
+    /**
+    * Altera o estado do final da corrida.
+    * 
+    * @param fimCorrida Novo estado da corrida.
+    */
     public void setFimCorrida(boolean fimCorrida) {
         this.fimCorrida = fimCorrida;
     }    
     
+    /**
+    * Atribuí os dados necessários para o qualificatório e a corrida.
+    * 
+    * @param corredores Pilotos que irão participar da corrida.
+    * @param nVoltas Número de voltas da corrida.
+    * @param tQuali Tempo do qualificatório em minutos.
+    * @param pista Pista que acontecerá o evento.
+    */
     public void dadosCorrida(ArrayList<Piloto> corredores, int nVoltas, String tQuali, Pista pista) {
         pilotos = corredores;
         numVoltas = nVoltas;
         tempQuali = tQuali;
         pistaLocal = pista;
-    }    
+    }  
 
+    /**
+    * Método que executará em uma thread que irá pegar em tempo real os dados dos carros da corrida.
+    * Também o método irá depurar os dados para que a volta do piloto seja maior que o tempo de conclusão mínimo da pistal.
+    * Além do mais. Este método é invocado de acordo com os dados, se isFimQuali for True e isFimCorrida for False, ele atualiza a corrida.
+    * se isFimQuali for False e isFimCorrida for True, ele atualiza o Qualificatório.
+    * Sendo assim este método é genérico de acordo com as informações fornecidas das telas de qualificatório e corrida.
+    * Por último, o método chama a ordenação de acordo com quem ele está atualizando para manter as tabelas coesas.
+    * 
+    */
     public  void getAtualizacao() {
         gerenciador = GerenciadorTelas.getInstance();
         while(!isFimQuali() || !isFimCorrida()){
@@ -180,6 +227,13 @@ public class Corrida implements Runnable{
         System.out.println("Passou direto");
     }
     
+    /**
+    * Ordena através do método de ordenação por inserção os corredores na execução da corrida.
+    * A ordenação é feita pelos tempos gerais dos pilotos, quem fica em primeiro é quem tem menos tempo de corrida ou mais voltas completas.
+    * 
+    * @param vetor Todos os corredores ativos.
+    * @return Todos os corredores de acordo com a ordenação.
+    */
     public ArrayList<Piloto> insertionSortCorrida(ArrayList<Piloto> vetor) {
         for(int i = 0; i<vetor.size();i++){
             Piloto aux = vetor.get(i);
@@ -245,6 +299,13 @@ public class Corrida implements Runnable{
         return vetor;
     }
     
+    /**
+    * Ordena através do método de ordenação por inserção os corredores na execução do qualificatório.
+    * A ordenação é feita pelos menores tempos de volta, quem fica em primeiro é quem fez a volta no menor tempmo possível.
+    * 
+    * @param vetor Todos os corredores ativos.
+    * @return Todos os corredores de acordo com a ordenação.
+    */
     public ArrayList<Piloto> insertionSort(ArrayList<Piloto> vetor) {
         for(int i = 0; i<vetor.size();i++){
             Piloto aux = vetor.get(i);
@@ -268,6 +329,10 @@ public class Corrida implements Runnable{
         return vetor;
     }
 
+    /**
+    * Trecho de código que a thread Corrida irá executar.
+    * 
+    */
     @Override
     public void run() {
         while(online){
@@ -275,6 +340,10 @@ public class Corrida implements Runnable{
         }
     }
     
+    /**
+    * Invocação da thread Corrida, ela previne que seja iniciadas várias instâncias da mesma thread.
+    * 
+    */
     public void start(){
         if(!online){
             this.online = true;
@@ -283,10 +352,18 @@ public class Corrida implements Runnable{
         
     }
     
+    /**
+    * Para thread Corrida.
+    * 
+    */
     public void stop(){
         this.online = false;       
     }
 
+    /**
+    * Método auxiliar do getAtualizacao que só informa os dados de tempo de volta dos corredares caso eles façam uma volta maior do quê o tempo mínimo permitido.
+    * 
+    */
     private boolean validaLeitura() {
         gerenciador = GerenciadorTelas.getInstance();
         if(leitura==null){

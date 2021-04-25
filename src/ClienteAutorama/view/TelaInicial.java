@@ -8,10 +8,19 @@ import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 
+/**
+* Classe da tela inicial.
+* 
+* @author Víctor César e William Soares.
+*/
 public class TelaInicial extends javax.swing.JFrame {
 
     GerenciadorTelas gerenciador;
     
+    /**
+    * Construtor da tela inicial e onde executa a musica.
+    * 
+    */
     public TelaInicial() {
         initComponents();
         this.setTitle("Autorama");
@@ -22,8 +31,8 @@ public class TelaInicial extends javax.swing.JFrame {
                 AudioInputStream audio = AudioSystem.getAudioInputStream(music);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audio);
-                //clip.start();
-                //clip.loop(clip.LOOP_CONTINUOUSLY);
+                clip.start();
+                clip.loop(clip.LOOP_CONTINUOUSLY);
                 
             } else {
                 System.out.println("Sem musica");
@@ -122,16 +131,28 @@ public class TelaInicial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+    * Abre a tela cadastro.
+    * 
+    */
     private void cadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroActionPerformed
         gerenciador = GerenciadorTelas.getInstance();
         gerenciador.setTelaInicial(this);
         gerenciador.abrirTelaCadastro();
     }//GEN-LAST:event_cadastroActionPerformed
 
+    /**
+    * Encerra a execução do programa.
+    * 
+    */
     private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_sairActionPerformed
 
+    /**
+    * Abre a tela de configuração da corrida.
+    * 
+    */
     private void botaoCorridaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCorridaActionPerformed
         gerenciador = GerenciadorTelas.getInstance();
         if(gerenciador.flag == 2){
@@ -144,8 +165,9 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoCorridaActionPerformed
 
     /**
-     * @param args the command line arguments
-     */
+    * @deprecated Metódo de execução de tela para depuração 
+    * @param args Argumentos de entrada.
+    */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

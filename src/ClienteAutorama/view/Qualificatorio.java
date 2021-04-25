@@ -6,6 +6,11 @@ import ClienteAutorama.model.Piloto;
 import java.util.ArrayList;
 import javax.swing.SwingWorker;
 
+/**
+ * Classe da tela do Qualificatório.
+ * 
+ * @author Víctor César e William Soares.
+ */
 public class Qualificatorio extends javax.swing.JFrame {
     
     GerenciadorTelas gerenciador;
@@ -14,7 +19,7 @@ public class Qualificatorio extends javax.swing.JFrame {
     public ArrayList<Piloto> pilotos; 
     
     /**
-     * Creates new form Qualificatorio
+     * Construtor da tela do Qualificatório configurada com os dados recebidos da configuração de corrida.
      */
     public Qualificatorio() {
         initComponents();
@@ -211,8 +216,9 @@ public class Qualificatorio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * @param args the command line arguments
-     */
+    * @deprecated Metódo de execução de tela para depuração. 
+    * @param args Argumentos de entrada.
+    */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -261,7 +267,9 @@ public class Qualificatorio extends javax.swing.JFrame {
     private javax.swing.JLabel tempoRecord;
     // End of variables declaration//GEN-END:variables
 
-    
+    /**
+    * Thread de SwingWorker para alteração dos dados na tela do qualificatório.
+    */
     private void start(){
         SwingWorker worker = new SwingWorker() {
             @Override

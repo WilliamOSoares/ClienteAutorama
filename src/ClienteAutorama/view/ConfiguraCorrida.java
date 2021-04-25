@@ -6,6 +6,11 @@ import ClienteAutorama.model.Pista;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
+/**
+ * Classe da tela de congiguração da corrida.
+ * 
+ * @author Víctor César e William Soares.
+ */
 public class ConfiguraCorrida extends javax.swing.JFrame {
 
     GerenciadorTelas gerenciador;
@@ -13,7 +18,7 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
     ArrayList<Piloto> pilotos = new ArrayList<>();
     
     /**
-     * Creates new form CofiguraCorrida
+     * Cria a tela Cofigura Corrida com apenas pilotos que tenham carro e as pistas.
      */
     public ConfiguraCorrida() {
         initComponents();
@@ -260,12 +265,20 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+    * Volta para a tela inicial.
+    * 
+    */
     private void voltarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarMenuActionPerformed
         gerenciador = GerenciadorTelas.getInstance();
         gerenciador.setTelaConfig(this);
         gerenciador.abrirTelaInicialDoConfig();
     }//GEN-LAST:event_voltarMenuActionPerformed
 
+    /**
+    * Avança para tela de Qualificatório e envia as informações da corrida para a classe corrida.
+    * 
+    */
     private void avancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avancarActionPerformed
         int i = 0;
         if(piloto1.getSelectedItem().equals("<Selecione um piloto>") && piloto2.getSelectedItem().equals("<Selecione um piloto>") && piloto3.getSelectedItem().equals("<Selecione um piloto>") && piloto4.getSelectedItem().equals("<Selecione um piloto>") && piloto5.getSelectedItem().equals("<Selecione um piloto>")){
@@ -355,8 +368,9 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
     }//GEN-LAST:event_piloto1ActionPerformed
 
     /**
-     * @param args the command line arguments
-     */
+    * @deprecated Metódo de execução de tela para depuração 
+    * @param args Argumentos de entrada.
+    */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

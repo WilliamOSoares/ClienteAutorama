@@ -1,18 +1,34 @@
+//Cliente Autorama//
+/*******************************************************************************
+Autores: Víctor César da Rocha Bastos e William Oliveira Soares
+Componente Curricular: MI de Concorrência e Conectividade
+Concluido em: 25/04/2021
+Declaro que este código foi elaborado por nós de forma coletiva e não contém nenhum
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+de outra autoria que não seja a nossa está destacado com uma citação para o autor e a fonte
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+***************************************************************************************/
 package ClienteAutorama.view;
 
 import ClienteAutorama.controller.GerenciadorTelas;
-import java.awt.Color;
 import static java.awt.image.ImageObserver.WIDTH;
 import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
 
-
+/**
+ * Classe onde há a primeira tela do programa.
+ * 
+ * @author Víctor César e William Soares.
+ */
 public class Principal extends javax.swing.JFrame {
 
     GerenciadorTelas gerenciador = GerenciadorTelas.getInstance();
     
+    /**
+    * Construtor da tela principal do programa. 
+    * 
+    */
     public Principal() {
-        //comunicacao.iniciaCliente();
         initComponents();
         this.setTitle("Autorama");
     }
@@ -27,9 +43,9 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jButton1 = new javax.swing.JButton();
+        botaAvancar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        botaoSair = new javax.swing.JButton();
         padraoBotao = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -55,10 +71,10 @@ public class Principal extends javax.swing.JFrame {
         setName("Autorama"); // NOI18N
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setText("Configurar Leitor");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botaAvancar.setText("Configurar Leitor");
+        botaAvancar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaAvancarActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -68,7 +84,7 @@ public class Principal extends javax.swing.JFrame {
         gridBagConstraints.ipady = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(18, 61, 27, 31);
-        getContentPane().add(jButton1, gridBagConstraints);
+        getContentPane().add(botaAvancar, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 153));
@@ -84,10 +100,10 @@ public class Principal extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(25, 85, 0, 0);
         getContentPane().add(jLabel1, gridBagConstraints);
 
-        jButton2.setText("Sair");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botaoSair.setText("Sair");
+        botaoSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botaoSairActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -97,7 +113,7 @@ public class Principal extends javax.swing.JFrame {
         gridBagConstraints.ipady = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(18, 42, 27, 0);
-        getContentPane().add(jButton2, gridBagConstraints);
+        getContentPane().add(botaoSair, gridBagConstraints);
 
         padraoBotao.setText("Padrão");
         padraoBotao.addActionListener(new java.awt.event.ActionListener() {
@@ -284,8 +300,11 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textIPActionPerformed
 
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    /**
+    * Inicia a conexão com o servidor e envia os dados de configuração para o leitor.
+    * 
+    */
+    private void botaAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaAvancarActionPerformed
         if (!textIP.getText().isEmpty() && !textPorta.getText().isEmpty() && !textPortaSerial.getText().isEmpty() && !textBaudrate.getText().isEmpty() && !textRegiao.getText().isEmpty() && !textAntena.getText().isEmpty() && !textProtocolo.getText().isEmpty() && !textPower.getText().isEmpty()){
             gerenciador.postConectConfiguraLeitor(textIP.getText(), textPorta.getText(), textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText());
             gerenciador.setTelaPrincipal(this);
@@ -293,7 +312,7 @@ public class Principal extends javax.swing.JFrame {
         } else{
             JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos ou use a configuração padrão", null, WIDTH);
         }                       
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botaAvancarActionPerformed
 
     private void textPortaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPortaActionPerformed
         // TODO add your handling code here:
@@ -315,12 +334,20 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textPortaSerialActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    /**
+    * Fecha o programa.
+    * 
+    */
+    private void botaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSairActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botaoSairActionPerformed
 
+    /**
+    * Preenche os campos com uma configuração padrão pré colocada para funcionar em um leitor RFID com a API mercury.
+    * 
+    */
     private void padraoBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_padraoBotaoActionPerformed
-        textIP.setText("augusto.ddns.net"); //augusto.ddns.net
+        textIP.setText("augusto.ddns.net");
         textPorta.setText("5021");
         textPortaSerial.setText("tmr:///dev/ttyUSB0");
         textBaudrate.setText("230400");
@@ -330,7 +357,11 @@ public class Principal extends javax.swing.JFrame {
         textPower.setText("1500");
     }//GEN-LAST:event_padraoBotaoActionPerformed
 
-    
+    /**
+    * Início do programa.
+    * 
+    * @param args Argumentos de entrada.
+    */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -366,8 +397,8 @@ public class Principal extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton botaAvancar;
+    private javax.swing.JButton botaoSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

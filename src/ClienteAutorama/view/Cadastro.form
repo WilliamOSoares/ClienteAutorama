@@ -23,7 +23,7 @@
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
   <SubComponents>
-    <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+    <Container class="javax.swing.JTabbedPane" name="tabCadastro">
       <Properties>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[700, 430]"/>
@@ -105,20 +105,20 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jButton14" max="32767" attributes="0"/>
-                              <Component id="jButton1" max="32767" attributes="0"/>
-                              <Component id="jButton4" alignment="0" max="32767" attributes="0"/>
+                              <Component id="irParaPCE" max="32767" attributes="0"/>
+                              <Component id="irParaCarros" max="32767" attributes="0"/>
+                              <Component id="irParaPista" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jButton3" min="-2" pref="253" max="-2" attributes="0"/>
-                                      <Component id="jButton2" min="-2" pref="253" max="-2" attributes="0"/>
+                                      <Component id="irParaPiloto" min="-2" pref="253" max="-2" attributes="0"/>
+                                      <Component id="irParaEquipe" min="-2" pref="253" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="jButton15" alignment="1" max="32767" attributes="0"/>
+                              <Component id="irParaCP" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -129,18 +129,18 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jButton1" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="jButton3" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="irParaCarros" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="irParaPiloto" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jButton2" min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="jButton4" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="irParaEquipe" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="irParaPista" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jButton15" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="jButton14" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="irParaCP" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="irParaPCE" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="12" max="32767" attributes="0"/>
                       </Group>
@@ -148,52 +148,52 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JButton" name="jButton1">
+                <Component class="javax.swing.JButton" name="irParaCarros">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cadastrar carros"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="irParaCarrosActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton3">
+                <Component class="javax.swing.JButton" name="irParaPiloto">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cadastrar piloto"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="irParaPilotoActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton2">
+                <Component class="javax.swing.JButton" name="irParaEquipe">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cadastrar equipe"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="irParaEquipeActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton15">
+                <Component class="javax.swing.JButton" name="irParaCP">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cadastro dos carros dos pilotos"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton15ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="irParaCPActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton14">
+                <Component class="javax.swing.JButton" name="irParaPCE">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cadastro de pilotos e carros em equipe"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton14ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="irParaPCEActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton4">
+                <Component class="javax.swing.JButton" name="irParaPista">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cadastrar Pista"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="irParaPistaActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -217,7 +217,7 @@
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="jButton6" min="-2" pref="123" max="-2" attributes="0"/>
+                              <Component id="voltarDoCarroParaCadastro" min="-2" pref="123" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="cadastrarCarro" min="-2" pref="116" max="-2" attributes="0"/>
                           </Group>
@@ -234,7 +234,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="cadastrarCarro" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="jButton6" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="voltarDoCarroParaCadastro" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="86" max="32767" attributes="0"/>
                   </Group>
@@ -242,12 +242,12 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButton6">
+            <Component class="javax.swing.JButton" name="voltarDoCarroParaCadastro">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Voltar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="voltarDoCarroParaCadastroActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="cadastrarCarro">
@@ -400,7 +400,7 @@
                       <EmptySpace min="0" pref="159" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jButton8" min="-2" pref="115" max="-2" attributes="0"/>
+                              <Component id="voltarDaEquipeParaCadastro" min="-2" pref="115" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="cadastrarEquipe" min="-2" pref="115" max="-2" attributes="0"/>
                           </Group>
@@ -417,7 +417,7 @@
                       <Component id="jPanel10" min="-2" pref="242" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton8" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="voltarDaEquipeParaCadastro" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="cadastrarEquipe" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="54" max="32767" attributes="0"/>
@@ -426,12 +426,12 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButton8">
+            <Component class="javax.swing.JButton" name="voltarDaEquipeParaCadastro">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Voltar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="voltarDaEquipeParaCadastroActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="cadastrarEquipe">
@@ -571,7 +571,7 @@
                       <EmptySpace min="0" pref="129" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jButton10" min="-2" pref="116" max="-2" attributes="0"/>
+                              <Component id="voltarDoPilotoParaCadastro" min="-2" pref="116" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="cadastrarPiloto" min="-2" pref="103" max="-2" attributes="0"/>
                           </Group>
@@ -589,7 +589,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cadastrarPiloto" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                          <Component id="jButton10" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="voltarDoPilotoParaCadastro" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="58" max="32767" attributes="0"/>
                   </Group>
@@ -597,12 +597,12 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButton10">
+            <Component class="javax.swing.JButton" name="voltarDoPilotoParaCadastro">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Voltar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton10ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="voltarDoPilotoParaCadastroActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="cadastrarPiloto">
@@ -754,7 +754,7 @@
                       <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jButton12" min="-2" pref="120" max="-2" attributes="0"/>
+                              <Component id="voltarDaPistaParaCadastro" min="-2" pref="120" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="cadastrarPista" min="-2" pref="120" max="-2" attributes="0"/>
                           </Group>
@@ -771,7 +771,7 @@
                       <Component id="jPanel12" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton12" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                          <Component id="voltarDaPistaParaCadastro" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="cadastrarPista" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="49" max="32767" attributes="0"/>
@@ -780,12 +780,12 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButton12">
+            <Component class="javax.swing.JButton" name="voltarDaPistaParaCadastro">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Voltar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton12ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="voltarDaPistaParaCadastroActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="cadastrarPista">
@@ -973,7 +973,7 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton17" min="-2" pref="112" max="-2" attributes="0"/>
+                      <Component id="voltarDoPCEParaCadastro" min="-2" pref="112" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="288" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -986,19 +986,19 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton17" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="voltarDoPCEParaCadastro" min="-2" pref="41" max="-2" attributes="0"/>
                       <EmptySpace pref="51" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButton17">
+            <Component class="javax.swing.JButton" name="voltarDoPCEParaCadastro">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Voltar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton17ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="voltarDoPCEParaCadastroActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel13">
@@ -1199,7 +1199,7 @@
                       <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jButton20" min="-2" pref="114" max="-2" attributes="0"/>
+                              <Component id="voltarDoCPParaCadastro" min="-2" pref="114" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="cadastrarCP" min="-2" pref="108" max="-2" attributes="0"/>
                           </Group>
@@ -1216,7 +1216,7 @@
                       <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton20" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="voltarDoCPParaCadastro" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                           <Component id="cadastrarCP" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="100" max="32767" attributes="0"/>
@@ -1225,12 +1225,12 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButton20">
+            <Component class="javax.swing.JButton" name="voltarDoCPParaCadastro">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Voltar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton20ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="voltarDoCPParaCadastroActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="cadastrarCP">

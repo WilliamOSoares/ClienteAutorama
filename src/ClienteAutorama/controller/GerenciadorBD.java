@@ -14,6 +14,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Classe do gerenciador do banco de dados do sistema.
+ * 
+ * @author Víctor César e William Soares.
+ */
 public class GerenciadorBD {
     
     public File configInicial;
@@ -21,21 +26,37 @@ public class GerenciadorBD {
     public File pilotos = new File("arquivos\\Pilotos.AutoramaBD");
     public File pistas = new File("arquivos\\Pistas.AutoramaBD");
     public File equipes = new File("arquivos\\Equipes.AutoramaBD");
-    public ArrayList<Carro> bdCarros = new ArrayList<Carro>();
-    public ArrayList<Piloto> bdPilotos = new ArrayList<Piloto>();
-    public ArrayList<Pista> bdPistas = new ArrayList<Pista>();
-    public ArrayList<Equipe> bdEquipes = new ArrayList<Equipe>();
+    public ArrayList<Carro> bdCarros = new ArrayList<>();
+    public ArrayList<Piloto> bdPilotos = new ArrayList<>();
+    public ArrayList<Pista> bdPistas = new ArrayList<>();
+    public ArrayList<Equipe> bdEquipes = new ArrayList<>();
     
+    /**
+    * Construtor da classe gerenciadora do banco de dados.
+    * 
+    */
     private GerenciadorBD() {
         
     }
     
+    //Criação da única instância.
     private static GerenciadorBD uniqueInstance = new GerenciadorBD();
 
+    /**
+    * Pega a única instância da classe existente no código, com isso faz a implementação do padrão de criação Singleton.
+    * 
+    * @return Retorna a única instância.
+    */
     public static GerenciadorBD getInstance() {
 	return uniqueInstance;
     }
     
+    /**
+    * Adiciona uma nova equipe no banco de dados.
+    * 
+    * @param equipe Novo equipe que pertencerá ao banco de dados.
+    * @return 0 se foi efetuado o cadastro, 1 caso id da equipe já exista e 2 caso o nome da equipe já exista.
+    */
     public int salvaEquipe(Equipe equipe){
         
         for(int i = 0; i<bdEquipes.size(); i++){
@@ -52,6 +73,12 @@ public class GerenciadorBD {
         return 0; // conseguiu fazer o cadastro
     }
     
+    /**
+    * Adiciona um novo piloto no banco de dados.
+    * 
+    * @param piloto Novo piloto que pertencerá ao banco de dados.
+    * @return 0 se foi efetuado o cadastro, 1 caso id do piloto já exista e 2 caso o nome do piloto já exista.
+    */
     public int salvaPiloto(Piloto piloto){
         for(int i = 0; i<bdPilotos.size(); i++){
             if(bdPilotos.get(i).getId().equals(piloto.getId())){
@@ -68,6 +95,12 @@ public class GerenciadorBD {
         return 0; // conseguiu fazer o cadastro
     }
     
+    /**
+    * Adiciona uma nova pista no banco de dados.
+    * 
+     * @param pista Nova pista que pertencerá ao banco de dados.
+    * @return 0 se foi efetuado o cadastro, 1 caso id da pista já exista e 2 caso o nome da pista já exista.
+    */
     public int salvaPista(Pista pista){
         for(int i = 0; i<bdPistas.size(); i++){
             if(bdPistas.get(i).getId().equals(pista.getId())){
@@ -83,6 +116,12 @@ public class GerenciadorBD {
         return 0; // conseguiu fazer o cadastro
     }
     
+    /**
+    * Adiciona um novo carro no banco de dados.
+    * 
+    * @param carro Novo carro que pertencerá ao banco de dados.
+    * @return 0 se foi efetuado o cadastro, 1 caso EPC do carro já exista e 2 caso o número do carro já exista.
+    */
     public int salvaCarro(Carro carro){
         for(int i = 0; i<bdCarros.size(); i++){
             if(bdCarros.get(i).getEPC().equals(carro.getEPC())){
@@ -98,6 +137,13 @@ public class GerenciadorBD {
         return 0; // conseguiu fazer o cadastro
     }
     
+    /**
+    * Adiciona um piloto na equipe e a equipe no piloto no banco de dados.
+    * 
+    * @param idPiloto id do piloto que será adicionado a equipe.
+    * @param idEquipe id da equipe que receberá o piloto.
+    * @return 0 se foi efetuado o cadastro, 1 caso não exista o piloto, 2 caso não exista a equipe e 3 caso o piloto já esteja na equipe.
+    */
     public int salvaPilotoEquipe(String idPiloto, String idEquipe){
         Piloto pilotoAux = null;
         int indiceAux = 0;
@@ -127,6 +173,14 @@ public class GerenciadorBD {
         }
         return 2; // Não Existe a equipe
     }
+    
+    /**
+    * Adiciona um carro na equipe e a equipe no carro no banco de dados.
+    * 
+    * @param idCarro Número do carro que será da equipe.
+    * @param idEquipe id da equipe que terá o carro.
+    * @return 0 se foi efetuado o cadastro, 1 caso não exista o carro, 2 caso não exista a equipe e 3 caso o carro já esteja na equipe.
+    */
     public int salvaCarroEquipe(String idCarro, String idEquipe){
         Carro carroAux = null;
         int indiceAux = 0;
@@ -157,6 +211,13 @@ public class GerenciadorBD {
         return 2; //Não existe a Equipe
     }
     
+    /**
+    * Adiciona um piloto no carro e o carro no piloto no banco de dados.
+    * 
+    * @param idPiloto id do piloto que será dono do carro.
+    * @param idCarro Número do carro que será do piloto.
+    * @return 0 se foi efetuado o cadastro, 1 caso não exista o piloto e 2 caso não exista o carro.
+    */
     public int salvaPilotoCarro(String idPiloto, String idCarro){
         Piloto pilotoAux = null;
         int indiceAux = 0;
@@ -182,6 +243,11 @@ public class GerenciadorBD {
         return 2; //não existe Carro
     }
     
+    /**
+    * Seraliza os dados existentes no banco, deletando os antigos.
+    * 
+    * @return 0 indicando o final da execução bem sucedida.
+    */
     public int serealiza(){
         
         if(equipes.exists()){
@@ -228,6 +294,11 @@ public class GerenciadorBD {
         return 0;
     }
     
+    /**
+    * Desserealiza os dados salvos para serem usados na execução do programa.
+    * 
+    * @return 0 caso a operação seja bem sucedida e 2 caso falhe no processo.
+    */
     public int desserealiza(){
         ObjectInputStream objInput;
         
@@ -253,7 +324,7 @@ public class GerenciadorBD {
                objInput.close();
            }
            else{
-               return 2; // Deu merda na desserealização
+               return 2; // Deu errado a desserealização
            }
         } catch (IOException ex) {
             Logger.getLogger(GerenciadorBD.class.getName()).log(Level.SEVERE, null, ex);
@@ -264,18 +335,38 @@ public class GerenciadorBD {
         return 0; // Deu certo a desserealização
     }
     
+    /**
+    * Pega todos os carros do banco de dados.
+    * 
+    * @return Um ArrayList com todos os carros.
+    */
     public ArrayList<Carro> getBdCarros() {
         return bdCarros;
     }
 
+    /**
+    * Pega todos os pilotos do banco de dados.
+    * 
+    * @return Um ArrayList com todos os pilotos.
+    */
     public ArrayList<Piloto> getBdPilotos() {
         return bdPilotos;
     }
 
+    /**
+    * Pega todas as pistas do banco de dados.
+    * 
+    * @return Um ArrayList com todas as pistas.
+    */
     public ArrayList<Pista> getBdPistas() {
         return bdPistas;
     }
 
+    /**
+    * Pega todas as equipes do banco de dados.
+    * 
+    * @return Um ArrayList com todas as equipes.
+    */
     public ArrayList<Equipe> getBdEquipes() {
         return bdEquipes;
     }   

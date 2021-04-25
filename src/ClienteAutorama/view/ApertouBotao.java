@@ -2,13 +2,20 @@ package ClienteAutorama.view;
 
 import ClienteAutorama.controller.GerenciadorTelas;
 
+/**
+ * Classe da tela do botão virtual.
+ * 
+ * @author Víctor César e William Soares.
+ */
 public class ApertouBotao extends javax.swing.JFrame {
 
     private int code;
     GerenciadorTelas gerenciador;
     
     /**
-     * Creates new form ApertouBotao
+     * Construtor da tela do botão de acordo com o código de invocação.
+     * 
+     * @param code código de invocação do botão, que muda o redirecionamento de execução de acordo com ele.
      */
     public ApertouBotao(int code) {
         initComponents();
@@ -63,6 +70,10 @@ public class ApertouBotao extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+    * Repasse de tela e execução de acordo com o código de invocação da tela.
+    * 
+    */
     private void simulaBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulaBotaoActionPerformed
         if(code == 0){
             gerenciador = GerenciadorTelas.getInstance();
@@ -81,8 +92,9 @@ public class ApertouBotao extends javax.swing.JFrame {
     }//GEN-LAST:event_simulaBotaoActionPerformed
 
     /**
-     * @param args the command line arguments
-     */
+    * @deprecated Metódo de execução de tela para depuração 
+    * @param args Argumentos de entrada.
+    */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

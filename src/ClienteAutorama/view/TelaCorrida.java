@@ -2,12 +2,15 @@ package ClienteAutorama.view;
 
 import ClienteAutorama.controller.GerenciadorTelas;
 import ClienteAutorama.model.ModeloTabelaCorrida;
-//teste
 import ClienteAutorama.model.Piloto;
 import java.util.ArrayList;
 import javax.swing.SwingWorker;
-//teste
 
+/**
+ * Classe da tela da corrida.
+ * 
+ * @author Víctor César e William Soares.
+ */
 public class TelaCorrida extends javax.swing.JFrame {
 
     GerenciadorTelas gerenciador;
@@ -16,7 +19,7 @@ public class TelaCorrida extends javax.swing.JFrame {
     public int voltas = 0, VoltasN =0;
 
     /**
-     * Creates new form Corrida
+     * Construtor da tela de corrida configurada com os dados recebidos da configuração de corrida e do qualificatório.
      */
     public TelaCorrida() {
         initComponents();
@@ -196,8 +199,9 @@ public class TelaCorrida extends javax.swing.JFrame {
         
     
     /**
-     * @param args the command line arguments
-     */
+    * @deprecated Metódo de execução de tela para depuração 
+    * @param args Argumentos de entrada.
+    */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -232,6 +236,9 @@ public class TelaCorrida extends javax.swing.JFrame {
         });
     }
     
+    /**
+    * Thread de SwingWorker para alteração dos dados na tela corrida.
+    */
     private void start(){
         SwingWorker worker = new SwingWorker() {
             @Override

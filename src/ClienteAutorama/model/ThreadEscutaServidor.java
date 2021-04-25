@@ -7,6 +7,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONObject;
 
+/**
+ * Thread que escuta o servidor.
+ * 
+ * @author Víctor César e William Soares.
+ */
 public class ThreadEscutaServidor implements Runnable{
 
     Comunication comunicacao;
@@ -14,10 +19,18 @@ public class ThreadEscutaServidor implements Runnable{
     public boolean online = false;
     public JSONObject msg;
     
+    /**
+    * Construtor da classe ThreadEscutaServidor.
+    * 
+    */
     public ThreadEscutaServidor() {
-        
+        //Criação da thread
     }
     
+    /**
+    * Código da execução da thread que espera a entrada de um JSON do servidor.
+    * 
+    */
     @Override
     public void run() {
         
@@ -38,15 +51,24 @@ public class ThreadEscutaServidor implements Runnable{
         }
     }
     
-    public void start(BufferedReader s){
+    /**
+    * Invocação de inicio da thread.
+    * 
+    * @param escuta Buffer de entrada de mensagem do servidor.
+    */
+    public void start(BufferedReader escuta){
         if(!online){
-            entrada = s;
+            entrada = escuta;
             this.online = true;
             new Thread(this).start();
         }
         
     }
     
+    /**
+    * Para a thread.
+    * 
+    */
     public void stop(){
         this.online = false;        
     }
