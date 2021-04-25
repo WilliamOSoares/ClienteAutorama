@@ -18,7 +18,7 @@ public class TelaInicial extends javax.swing.JFrame {
     GerenciadorTelas gerenciador;
     
     /**
-    * Construtor da tela inicial e onde executa a musica.
+    * Construtor da tela inicial e onde executa a musica do famoso jogo Top Gear.
     * 
     */
     public TelaInicial() {

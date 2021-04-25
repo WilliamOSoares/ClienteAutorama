@@ -133,7 +133,7 @@ public class Corrida implements Runnable{
 
     /**
     * Método que executará em uma thread que irá pegar em tempo real os dados dos carros da corrida.
-    * Também o método irá depurar os dados para que a volta do piloto seja maior que o tempo de conclusão mínimo da pistal.
+    * Também o método irá depurar os dados para que a volta do piloto seja maior que o tempo de conclusão mínimo da pista.
     * Além do mais. Este método é invocado de acordo com os dados, se isFimQuali for True e isFimCorrida for False, ele atualiza a corrida.
     * se isFimQuali for False e isFimCorrida for True, ele atualiza o Qualificatório.
     * Sendo assim este método é genérico de acordo com as informações fornecidas das telas de qualificatório e corrida.
