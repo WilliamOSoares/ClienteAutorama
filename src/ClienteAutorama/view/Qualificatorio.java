@@ -3,6 +3,7 @@ package ClienteAutorama.view;
 import ClienteAutorama.controller.GerenciadorTelas;
 import ClienteAutorama.model.ModeloTabela;
 import ClienteAutorama.model.Piloto;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.SwingWorker;
 
@@ -24,6 +25,7 @@ public class Qualificatorio extends javax.swing.JFrame {
     public Qualificatorio() {
         initComponents();
         this.setTitle("Autorama");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("car.png"));
         gerenciador = GerenciadorTelas.getInstance();
         localCorrida.setText(gerenciador.corrida.pistaLocal.getNome()+" - "+gerenciador.corrida.pistaLocal.getPais());
         tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());
@@ -250,7 +252,7 @@ public class Qualificatorio extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel autorRecord;
     private javax.swing.JLabel jLabel1;
@@ -276,12 +278,30 @@ public class Qualificatorio extends javax.swing.JFrame {
             protected Void doInBackground() throws Exception {
                 GerenciadorTelas gerenciador;
                 gerenciador = GerenciadorTelas.getInstance();
+                while(gerenciador.play){gerenciador = GerenciadorTelas.getInstance();}
+                Contagem cont;
+                for (int i = 0; i < 5; i++) {
+                    int s = 5 - i;
+                    cont = new Contagem(Integer.toString(s));
+                    cont.setLocationRelativeTo(gerenciador.telaQuali);
+                    cont.setVisible(true);
+                    cont.setEnabled(true);                    
+                    Thread.sleep(1000);
+                    cont.setVisible(false);
+                    cont.setEnabled(false);
+                }
+                cont = new Contagem("VAI");
+                cont.setLocationRelativeTo(gerenciador.telaQuali);
+                cont.setVisible(true);
+                cont.setEnabled(true);
                 while(tempoQuali>0){
                     int sec = 60;
                     tempoQuali--;
-                    //tempo.setText(tempoQuali + ":" + sec);
                     while(sec>0){
                         Thread.sleep(1000);
+                        cont.setVisible(false);
+                        cont.setEnabled(false);
+                        gerenciador.setPlay(true);
                         sec--;
                         if(sec<10){
                             tempo.setText(tempoQuali + ":0" + sec);

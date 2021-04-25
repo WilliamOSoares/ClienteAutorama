@@ -12,6 +12,7 @@ do código, e estou ciente que estes trechos não serão considerados para fins 
 package ClienteAutorama.view;
 
 import ClienteAutorama.controller.GerenciadorTelas;
+import java.awt.Toolkit;
 import static java.awt.image.ImageObserver.WIDTH;
 import javax.swing.JOptionPane;
 
@@ -31,6 +32,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         this.setTitle("Autorama");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("car.png"));
     }
     
     /**

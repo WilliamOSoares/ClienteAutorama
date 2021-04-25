@@ -3,6 +3,7 @@ package ClienteAutorama.view;
 import ClienteAutorama.controller.GerenciadorTelas;
 import ClienteAutorama.model.Piloto;
 import ClienteAutorama.model.Pista;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -23,6 +24,7 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
     public ConfiguraCorrida() {
         initComponents();
         this.setTitle("Autorama");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("car.png"));
         gerenciador = GerenciadorTelas.getInstance();
         pilotos = gerenciador.bancoDados.getBdPilotos();
         pistas = gerenciador.bancoDados.getBdPistas();
@@ -303,7 +305,17 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 String[] s = piloto1.getSelectedItem().toString().split(" - ");
                 for(int y = 0; y<this.pilotos.size(); y++){
                     if(pilotos.get(y).getNome().equals(s[0])){
-                       participantes.add(pilotos.get(y));
+                        boolean existe = false;
+                        for (int z = 0; z < participantes.size(); z++) {
+                            if(pilotos.get(y).getNome().equals(participantes.get(z).getNome())){
+                                existe = true;
+                            }
+                        }
+                        if (existe) {
+                            System.out.println("Piloto já está na corrida");
+                        } else {
+                            participantes.add(pilotos.get(y));
+                        }                        
                     }                    
                 }
             }
@@ -311,7 +323,17 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 String[] s = piloto2.getSelectedItem().toString().split(" - ");
                 for(int y = 0; y<this.pilotos.size(); y++){
                     if(pilotos.get(y).getNome().equals(s[0])){
-                       participantes.add(pilotos.get(y));
+                       boolean existe = false;
+                        for (int z = 0; z < participantes.size(); z++) {
+                            if(pilotos.get(y).getNome().equals(participantes.get(z).getNome())){
+                                existe = true;
+                            }
+                        }
+                        if (existe) {
+                            System.out.println("Piloto já está na corrida");
+                        } else {
+                            participantes.add(pilotos.get(y));
+                        } 
                     }                    
                 }
             }
@@ -319,7 +341,17 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 String[] s = piloto3.getSelectedItem().toString().split(" - ");
                 for(int y = 0; y<this.pilotos.size(); y++){
                     if(pilotos.get(y).getNome().equals(s[0])){
-                       participantes.add(pilotos.get(y));
+                       boolean existe = false;
+                        for (int z = 0; z < participantes.size(); z++) {
+                            if(pilotos.get(y).getNome().equals(participantes.get(z).getNome())){
+                                existe = true;
+                            }
+                        }
+                        if (existe) {
+                            System.out.println("Piloto já está na corrida");
+                        } else {
+                            participantes.add(pilotos.get(y));
+                        } 
                     }                    
                 }
             }
@@ -327,7 +359,17 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 String[] s = piloto4.getSelectedItem().toString().split(" - ");
                 for(int y = 0; y<this.pilotos.size(); y++){
                     if(pilotos.get(y).getNome().equals(s[0])){
-                       participantes.add(pilotos.get(y));
+                       boolean existe = false;
+                        for (int z = 0; z < participantes.size(); z++) {
+                            if(pilotos.get(y).getNome().equals(participantes.get(z).getNome())){
+                                existe = true;
+                            }
+                        }
+                        if (existe) {
+                            System.out.println("Piloto já está na corrida");
+                        } else {
+                            participantes.add(pilotos.get(y));
+                        } 
                     }                    
                 }
             }
@@ -335,7 +377,17 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 String[] s = piloto5.getSelectedItem().toString().split(" - ");
                 for(int y = 0; y<this.pilotos.size(); y++){
                     if(pilotos.get(y).getNome().equals(s[0])){
-                       participantes.add(pilotos.get(y));
+                       boolean existe = false;
+                        for (int z = 0; z < participantes.size(); z++) {
+                            if(pilotos.get(y).getNome().equals(participantes.get(z).getNome())){
+                                existe = true;
+                            }
+                        }
+                        if (existe) {
+                            System.out.println("Piloto já está na corrida");
+                        } else {
+                            participantes.add(pilotos.get(y));
+                        } 
                     }                    
                 }
             }
@@ -349,7 +401,7 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 }
             }            
             gerenciador = GerenciadorTelas.getInstance();
-            String s = gerenciador.getDadosCorrida(tQuali.getValue().toString(), nVoltas.getValue().toString(), local.getTempoMin(), Integer.toString(this.pilotos.size()));
+            String s = gerenciador.getDadosCorrida(tQuali.getValue().toString(), nVoltas.getValue().toString(), local.getTempoMin(), Integer.toString(participantes.size()));
             JOptionPane.showMessageDialog(null, s, null, WIDTH);
             if(s.equals("OK")){    
                 gerenciador = GerenciadorTelas.getInstance();

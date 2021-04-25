@@ -1,6 +1,7 @@
 package ClienteAutorama.view;
 
 import ClienteAutorama.controller.GerenciadorTelas;
+import java.awt.Toolkit;
 import static java.awt.image.ImageObserver.WIDTH;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -22,6 +23,7 @@ public class Cadastro extends javax.swing.JFrame {
     public Cadastro() {
         initComponents();
         this.setTitle("Autorama");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("car.png"));
     }
 
     /**

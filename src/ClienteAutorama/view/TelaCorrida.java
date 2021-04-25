@@ -3,7 +3,10 @@ package ClienteAutorama.view;
 import ClienteAutorama.controller.GerenciadorTelas;
 import ClienteAutorama.model.ModeloTabelaCorrida;
 import ClienteAutorama.model.Piloto;
+import java.awt.Toolkit;
+import static java.awt.image.ImageObserver.WIDTH;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 /**
@@ -17,13 +20,15 @@ public class TelaCorrida extends javax.swing.JFrame {
     ModeloTabelaCorrida modelo;
     public ArrayList<Piloto> pilotos; 
     public int voltas = 0, VoltasN =0;
+    public boolean play = true;
 
     /**
      * Construtor da tela de corrida configurada com os dados recebidos da configuração de corrida e do qualificatório.
      */
     public TelaCorrida() {
         initComponents();
-        this.setTitle("Autorama");        
+        this.setTitle("Autorama");  
+        setIconImage(Toolkit.getDefaultToolkit().getImage("car.png"));
         gerenciador = GerenciadorTelas.getInstance();
         localCorrida.setText(gerenciador.corrida.pistaLocal.getNome()+" - "+gerenciador.corrida.pistaLocal.getPais());
         tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());
@@ -245,9 +250,29 @@ public class TelaCorrida extends javax.swing.JFrame {
             protected Void doInBackground() throws Exception {
                 GerenciadorTelas gerenciador;
                 gerenciador = GerenciadorTelas.getInstance();
+                while(gerenciador.play){gerenciador = GerenciadorTelas.getInstance();}
+                Contagem cont;
+                for (int i = 0; i < 5; i++) {
+                    int s = 5 - i;
+                    cont = new Contagem(Integer.toString(s));
+                    cont.setLocationRelativeTo(gerenciador.telaQuali);
+                    cont.setVisible(true);
+                    cont.setEnabled(true);                    
+                    Thread.sleep(1000);
+                    cont.setVisible(false);
+                    cont.setEnabled(false);
+                }
+                cont = new Contagem("VAI");
+                cont.setLocationRelativeTo(gerenciador.telaQuali);
+                cont.setVisible(true);
+                cont.setEnabled(true);
                 VoltasN = 0;
                 int voltaPrim = pilotos.get(0).getVoltas();
-                while(voltas>=0){     
+                Thread.sleep(1000);
+                while(voltas>=0){
+                    cont.setVisible(false);
+                    cont.setEnabled(false);
+                    gerenciador.setPlay(true);
                     nVoltas.setText(Integer.toString(VoltasN)+ " de " + Integer.toString(gerenciador.corrida.getNumVoltas()) + " Voltas");
                     VoltasN++;                    
                     while(voltaPrim != VoltasN){

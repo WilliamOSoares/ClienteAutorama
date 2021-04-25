@@ -1,6 +1,7 @@
 package ClienteAutorama.view;
 
 import ClienteAutorama.controller.GerenciadorTelas;
+import java.awt.Toolkit;
 
 /**
  * Classe da tela do botão virtual.
@@ -19,6 +20,7 @@ public class ApertouBotao extends javax.swing.JFrame {
      */
     public ApertouBotao(int code) {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage("car.png"));
         this.code = code;
         
     }
@@ -77,12 +79,14 @@ public class ApertouBotao extends javax.swing.JFrame {
     private void simulaBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulaBotaoActionPerformed
         if(code == 0){
             gerenciador = GerenciadorTelas.getInstance();
-            gerenciador.mostrarQualificatorio();
+            gerenciador.setPlay(false);
+            gerenciador.mostrarQualificatorio();            
         } else if(code == 1){
             gerenciador = GerenciadorTelas.getInstance();
             gerenciador.mostrarCorrida();
         } else if(code == 2){
             gerenciador = GerenciadorTelas.getInstance();
+            gerenciador.setPlay(false);
             gerenciador.iniciarCorrida();
         } else if (code == 3){
             gerenciador = GerenciadorTelas.getInstance();

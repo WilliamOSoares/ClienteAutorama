@@ -1,6 +1,7 @@
 package ClienteAutorama.view;
 
 import ClienteAutorama.controller.GerenciadorTelas;
+import java.awt.Toolkit;
 import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -24,6 +25,7 @@ public class TelaInicial extends javax.swing.JFrame {
     public TelaInicial() {
         initComponents();
         this.setTitle("Autorama");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("car.png"));
         try {
             File music = new File("src//audio//TopGear.wav");
             
@@ -142,10 +144,12 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_cadastroActionPerformed
 
     /**
-    * Encerra a execução do programa.
+    * Encerra a conexão e a execução do programa.
     * 
     */
     private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
+        gerenciador = GerenciadorTelas.getInstance();
+        gerenciador.encerraConexao();
         System.exit(0);
     }//GEN-LAST:event_sairActionPerformed
 

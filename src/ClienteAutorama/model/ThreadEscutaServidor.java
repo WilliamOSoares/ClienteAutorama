@@ -70,7 +70,12 @@ public class ThreadEscutaServidor implements Runnable{
     * 
     */
     public void stop(){
-        this.online = false;        
+        this.online = false;
+        try {
+            entrada.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ThreadEscutaServidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

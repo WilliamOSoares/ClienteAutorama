@@ -190,4 +190,31 @@ public class Comunication{
             System.out.println(ex);
         }  
     }
+
+    /**
+    * Encerra a conexão com o servidor, para a thread que escuta servidor e fecha as conexões.
+    * 
+    */
+    public void PostEncerraConexao() {
+        JSONObject configLeitor = new JSONObject();
+        configLeitor.put("METODO", "POST");
+        configLeitor.put("URL", "encerra");
+        try {
+            saida.write(configLeitor.toString());
+            saida.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
+        this.thread.stop();
+        thread = null;
+        try{
+            saida.close();
+            entrada.close();
+            cliente.close();
+        } catch (Exception ex){
+            Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }        
+    }
 }

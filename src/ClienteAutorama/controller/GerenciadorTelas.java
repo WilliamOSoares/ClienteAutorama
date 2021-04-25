@@ -35,6 +35,7 @@ public class GerenciadorTelas {
     public ApertouBotao telaBotao;
     public Semaphore semaforo;
     public int flag = 2;
+    public boolean play = true;
     
     /**
     * Construtor da classe gerenciadora da telas, de repasse de função e de todos os dados do sistema.
@@ -56,7 +57,7 @@ public class GerenciadorTelas {
     }
     
     /**
-    * Repasse dos dados obtidos da tela principal para a classe comunicação.
+    * Repasse dos dados obtidos da tela principal para a classe comunication.
     * 
     * @param ip ip do outro computador.
     * @param porta Porta de acesso da comunicação entre o servidor.
@@ -74,7 +75,7 @@ public class GerenciadorTelas {
     }
     
     /**
-    * Repasse dos dados obtidos da tela configuração da corrida para a classe comunicação.
+    * Repasse dos dados obtidos da tela configuração da corrida para a classe comunication.
     * 
     * @param quali Tempo em minutos para a realização do qualificatório.
     * @param voltas Número de voltas da corrida.
@@ -326,7 +327,7 @@ public class GerenciadorTelas {
     }
 
     /**
-    * Repassa a solicitação de EPCs para a classe comunicação.
+    * Repassa a solicitação de EPCs para a classe comunication.
     * 
     * @return O JSON com EPCs.
     */
@@ -367,7 +368,7 @@ public class GerenciadorTelas {
     }
 
     /**
-    * Solicita o início da corrida na classe comunicação e inicia a corrida.
+    * Solicita o início da corrida na classe comunication e inicia a corrida.
     * 
     */
     public void iniciarCorrida() {
@@ -421,6 +422,22 @@ public class GerenciadorTelas {
         telaInicial.setVisible(true);      
                 
     }  
-    
 
+    /**
+    * Repassa o pedido de encerramento da conexão com o servidor atual para a classe comunication.
+    * 
+    */
+    public void encerraConexao() {
+        comunicacao.PostEncerraConexao();
+    }    
+    
+    /**
+    * Método que altera o booleando para determinar o começo da contagem regressiva.
+    * 
+    * @param play determina se a contagem regressiva começa ou não.
+    */
+    public void setPlay(boolean play){
+        this.play = play;
+    }
+    
 }
