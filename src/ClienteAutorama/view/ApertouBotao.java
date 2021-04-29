@@ -20,7 +20,8 @@ public class ApertouBotao extends javax.swing.JFrame {
      */
     public ApertouBotao(int code) {
         initComponents();
-        setIconImage(Toolkit.getDefaultToolkit().getImage("car.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagens/car.png")));
+        setResizable(false);
         this.code = code;
         
     }
@@ -38,7 +39,7 @@ public class ApertouBotao extends javax.swing.JFrame {
         simulaBotao = new javax.swing.JButton();
         mensagem = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         simulaBotao.setText("Botão virtual");

@@ -1,8 +1,13 @@
 package ClienteAutorama.view;
 
+import ClienteAutorama.controller.GerenciadorBD;
 import ClienteAutorama.controller.GerenciadorTelas;
+import ClienteAutorama.model.Carro;
+import ClienteAutorama.model.Equipe;
+import ClienteAutorama.model.Piloto;
 import java.awt.Toolkit;
 import static java.awt.image.ImageObserver.WIDTH;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import org.json.JSONObject;
@@ -15,6 +20,9 @@ import org.json.JSONObject;
 public class Cadastro extends javax.swing.JFrame {
 
     GerenciadorTelas gerenciador;
+    ArrayList<Piloto> pilotos = new ArrayList<>();
+    ArrayList<Equipe> equipes = new ArrayList<>();
+    ArrayList<Carro> carros = new ArrayList<>();
     
     /**
     * Construtor da classe cadastro.
@@ -23,7 +31,9 @@ public class Cadastro extends javax.swing.JFrame {
     public Cadastro() {
         initComponents();
         this.setTitle("Autorama");
-        setIconImage(Toolkit.getDefaultToolkit().getImage("car.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagens/car.png")));
+        setResizable(false);
+        atualizaComboBox();
     }
 
     /**
@@ -96,25 +106,25 @@ public class Cadastro extends javax.swing.JFrame {
         voltarDoPCEParaCadastro = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
-        IDpilotoPE = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        IDequipeEP = new javax.swing.JTextField();
         cadastroPE = new javax.swing.JButton();
+        comboPilotoE = new javax.swing.JComboBox<>();
+        comboEquipeP = new javax.swing.JComboBox<>();
         jPanel14 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
-        IDcarroCE = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
-        IDequipeEC = new javax.swing.JTextField();
         cadastrarCE = new javax.swing.JButton();
+        comboCarroE = new javax.swing.JComboBox<>();
+        comboEquipeC = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
         voltarDoCPParaCadastro = new javax.swing.JButton();
         cadastrarCP = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
-        IDcarroCP = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
-        IDpilotoPC = new javax.swing.JTextField();
         imagem4 = new ClienteAutorama.view.Imagem();
+        comboCarroCP = new javax.swing.JComboBox<>();
+        comboPilotoCP = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -274,7 +284,7 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
 
-        imagem1.setImg(new ImageIcon("src/imagens/carro.png"));
+        imagem1.setImg(new ImageIcon(getClass().getResource("/imagens/carro.png")));
 
         javax.swing.GroupLayout imagem1Layout = new javax.swing.GroupLayout(imagem1);
         imagem1.setLayout(imagem1Layout);
@@ -492,7 +502,7 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel13.setText("Nacionalidade:");
 
-        imagem2.setImg(new ImageIcon("src/imagens/piloto.png"));
+        imagem2.setImg(new ImageIcon(getClass().getResource("/imagens/piloto.png")));
 
         javax.swing.GroupLayout imagem2Layout = new javax.swing.GroupLayout(imagem2);
         imagem2.setLayout(imagem2Layout);
@@ -607,7 +617,7 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel27.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel27.setText("Tempo mínimo de conclusão em minutos:");
 
-        imagem3.setImg(new ImageIcon("src/imagens/pista.png"));
+        imagem3.setImg(new ImageIcon(getClass().getResource("/imagens/pista.png")));
 
         javax.swing.GroupLayout imagem3Layout = new javax.swing.GroupLayout(imagem3);
         imagem3.setLayout(imagem3Layout);
@@ -703,26 +713,30 @@ public class Cadastro extends javax.swing.JFrame {
 
         tabCadastro.addTab("Pista", jPanel5);
 
+        jPanel6.setLayout(new java.awt.GridBagLayout());
+
         voltarDoPCEParaCadastro.setText("Voltar");
         voltarDoPCEParaCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 voltarDoPCEParaCadastroActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 48;
+        gridBagConstraints.ipady = 9;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 298, 49, 0);
+        jPanel6.add(voltarDoPCEParaCadastro, gridBagConstraints);
 
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastre um piloto na equipe", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Ink Free", 1, 18))); // NOI18N
 
         jLabel20.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel20.setText("ID do piloto:");
+        jLabel20.setText("Piloto:");
 
         jLabel21.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel21.setText("ID da Equipe:");
-
-        IDequipeEP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IDequipeEPActionPerformed(evt);
-            }
-        });
+        jLabel21.setText("Equipe:");
 
         cadastroPE.setText("Cadastrar");
         cadastroPE.addActionListener(new java.awt.event.ActionListener() {
@@ -730,6 +744,15 @@ public class Cadastro extends javax.swing.JFrame {
                 cadastroPEActionPerformed(evt);
             }
         });
+
+        comboPilotoE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione um piloto>" }));
+        comboPilotoE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboPilotoEActionPerformed(evt);
+            }
+        });
+
+        comboEquipeP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione uma equipe>" }));
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -740,25 +763,25 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel20)
                     .addComponent(jLabel21))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(IDpilotoPE, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(IDequipeEP, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addComponent(cadastroPE, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                .addContainerGap())
+                    .addComponent(comboEquipeP, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboPilotoE, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(cadastroPE, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(IDpilotoPE, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel20)
+                    .addComponent(comboPilotoE, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(IDequipeEP, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21))
+                    .addComponent(jLabel21)
+                    .addComponent(comboEquipeP, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
                 .addGap(9, 9, 9))
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
@@ -766,13 +789,23 @@ public class Cadastro extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 10;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(45, 137, 0, 110);
+        jPanel6.add(jPanel13, gridBagConstraints);
+
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastre um carro na equipe", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Ink Free", 1, 18))); // NOI18N
 
         jLabel22.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel22.setText("Número do carro:");
+        jLabel22.setText("Carro:");
 
         jLabel23.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel23.setText("ID da Equipe:");
+        jLabel23.setText("Equipe:");
 
         cadastrarCE.setText("Cadastrar");
         cadastrarCE.addActionListener(new java.awt.event.ActionListener() {
@@ -781,6 +814,10 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
 
+        comboCarroE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione um carro>" }));
+
+        comboEquipeC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione uma equipe>" }));
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
@@ -788,18 +825,18 @@ public class Cadastro extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(IDcarroCE, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel23)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(IDequipeEC, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cadastrarCE, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                .addContainerGap())
+                        .addGap(14, 14, 14)
+                        .addComponent(comboEquipeC, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel22)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboCarroE, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cadastrarCE, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -807,47 +844,28 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(IDcarroCE, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboCarroE, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(IDequipeEC, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                            .addComponent(comboEquipeC)))
                     .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addGap(27, 27, 27)
                         .addComponent(cadastrarCE, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)))
-                .addContainerGap(132, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(voltarDoPCEParaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(288, 288, 288))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(voltarDoPCEParaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 21;
+        gridBagConstraints.ipady = 9;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 137, 0, 110);
+        jPanel6.add(jPanel14, gridBagConstraints);
 
         tabCadastro.addTab("Piloto e carro na equipe", jPanel6);
 
@@ -868,12 +886,12 @@ public class Cadastro extends javax.swing.JFrame {
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastre o carro do piloto", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Ink Free", 1, 18))); // NOI18N
 
         jLabel25.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel25.setText("Número do carro:");
+        jLabel25.setText("Carro:");
 
         jLabel26.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel26.setText("ID do piloto:");
+        jLabel26.setText("Piloto:");
 
-        imagem4.setImg(new ImageIcon("src/imagens/pilotoCarro.png"));
+        imagem4.setImg(new ImageIcon(getClass().getResource("/imagens/pilotoCarro.png")));
 
         javax.swing.GroupLayout imagem4Layout = new javax.swing.GroupLayout(imagem4);
         imagem4.setLayout(imagem4Layout);
@@ -886,25 +904,26 @@ public class Cadastro extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        comboCarroCP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione um carro>" }));
+
+        comboPilotoCP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione um piloto>" }));
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel25)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(IDcarroCP, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabel26)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(IDpilotoPC, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comboPilotoCP, 0, 207, Short.MAX_VALUE)
+                    .addComponent(comboCarroCP, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(imagem4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -912,13 +931,13 @@ public class Cadastro extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(IDcarroCP, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                            .addComponent(comboCarroCP, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(IDpilotoPC, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(comboPilotoCP, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(imagem4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -927,15 +946,15 @@ public class Cadastro extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(129, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(voltarDoCPParaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cadastrarCP, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addGap(118, 118, 118))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -967,10 +986,6 @@ public class Cadastro extends javax.swing.JFrame {
     private void voltarDoCPParaCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarDoCPParaCadastroActionPerformed
         this.tabCadastro.setSelectedIndex(0);
     }//GEN-LAST:event_voltarDoCPParaCadastroActionPerformed
-
-    private void IDequipeEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDequipeEPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_IDequipeEPActionPerformed
 
     /**
     * Volta da tela de cadastro do piloto e carro na equipe para a tela principal de cadastro.
@@ -1094,6 +1109,7 @@ public class Cadastro extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "O nome do piloto já existe", null, WIDTH);
             } else{
                 JOptionPane.showMessageDialog(null, "Piloto cadastrado com sucesso", null, WIDTH);
+                atualizaComboBox();
             } 
         } else {
             JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos", null, WIDTH);
@@ -1114,6 +1130,7 @@ public class Cadastro extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "O nome da equipe já existe", null, WIDTH);
             } else{
                 JOptionPane.showMessageDialog(null, "Equipe cadastrada com sucesso", null, WIDTH);
+                atualizaComboBox();
             } 
         } else {
             JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos", null, WIDTH);
@@ -1145,9 +1162,20 @@ public class Cadastro extends javax.swing.JFrame {
     * 
     */
     private void cadastroPEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroPEActionPerformed
-        if(!IDpilotoPE.getText().isEmpty() && !IDequipeEP.getText().isEmpty()){
+        if(!comboPilotoE.getSelectedItem().equals("<Selecione um piloto>") && !comboEquipeP.getSelectedItem().equals("<Selecione uma equipe>")){
             gerenciador = GerenciadorTelas.getInstance();
-            int alerta = gerenciador.cadastrarPilotoEquipe(IDpilotoPE.getText(), IDequipeEP.getText());
+            String idPiloto = "", idEquipe = "";
+            for (int i = 0; i < pilotos.size(); i++) {
+                if(comboPilotoE.getSelectedItem().equals(pilotos.get(i).getNome())){
+                    idPiloto = pilotos.get(i).getId();
+                }
+            }
+            for (int i = 0; i < equipes.size(); i++) {
+                if(comboEquipeP.getSelectedItem().equals(equipes.get(i).getNome())){
+                    idEquipe = equipes.get(i).getId();
+                }
+            }
+            int alerta = gerenciador.cadastrarPilotoEquipe(idPiloto, idEquipe);
             if(alerta == 1){
                 JOptionPane.showMessageDialog(null, "O ID do piloto não existe", null, WIDTH);
             }else if(alerta == 2){
@@ -1156,6 +1184,7 @@ public class Cadastro extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Piloto ja castrado na Equipe", null, WIDTH);
             } else{
                 JOptionPane.showMessageDialog(null, "Piloto atribuido na equipe com sucesso", null, WIDTH);
+                atualizaComboBox();
             } 
         } else {
             JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos", null, WIDTH);
@@ -1167,9 +1196,20 @@ public class Cadastro extends javax.swing.JFrame {
     * 
     */
     private void cadastrarCEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarCEActionPerformed
-        if(!IDcarroCE.getText().isEmpty() && !IDequipeEC.getText().isEmpty()){
+        if(!comboCarroE.getSelectedItem().equals("<Selecione um carro>") && !comboEquipeC.getSelectedItem().equals("<Selecione uma equipe>")){
             gerenciador = GerenciadorTelas.getInstance();
-            int alerta = gerenciador.cadastrarCarroEquipe(IDcarroCE.getText(), IDequipeEC.getText());
+            String idCarro = "", idEquipe = "";
+            for (int i = 0; i < carros.size(); i++) {
+                if(comboCarroE.getSelectedItem().equals(carros.get(i).getEPC())){
+                    idCarro = carros.get(i).getNumero();
+                }
+            }
+            for (int i = 0; i < equipes.size(); i++) {
+                if(comboEquipeC.getSelectedItem().equals(equipes.get(i).getNome())){
+                    idEquipe = equipes.get(i).getId();
+                }
+            }
+            int alerta = gerenciador.cadastrarCarroEquipe(idCarro, idEquipe);
             if(alerta == 1){
                 JOptionPane.showMessageDialog(null, "O ID do carro não existe", null, WIDTH);
             }else if(alerta == 2){
@@ -1178,6 +1218,7 @@ public class Cadastro extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Carro ja castrado na Equipe", null, WIDTH); 
             } else{
                 JOptionPane.showMessageDialog(null, "Carro atribuido na equipe com sucesso", null, WIDTH);
+                atualizaComboBox();
             } 
         } else {
             JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos", null, WIDTH);
@@ -1189,15 +1230,27 @@ public class Cadastro extends javax.swing.JFrame {
     * 
     */
     private void cadastrarCPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarCPActionPerformed
-        if(!IDpilotoPC.getText().isEmpty() && !IDcarroCP.getText().isEmpty()){    
+        if(!comboPilotoCP.getSelectedItem().equals("<Selecione um piloto>") && !comboCarroCP.getSelectedItem().equals("<Selecione um carro>")){    
             gerenciador = GerenciadorTelas.getInstance();
-            int alerta = gerenciador.cadastrarPilotoCarro(IDpilotoPC.getText(), IDcarroCP.getText());
+            String idPiloto = "", idCarro = "";
+            for (int i = 0; i < pilotos.size(); i++) {
+                if(comboPilotoCP.getSelectedItem().equals(pilotos.get(i).getNome())){
+                    idPiloto = pilotos.get(i).getId();
+                }
+            }
+            for (int i = 0; i < carros.size(); i++) {
+                if(comboCarroCP.getSelectedItem().equals(carros.get(i).getEPC())){
+                    idCarro = carros.get(i).getNumero();
+                }
+            }
+            int alerta = gerenciador.cadastrarPilotoCarro(idPiloto, idCarro);
             if(alerta == 1){
                 JOptionPane.showMessageDialog(null, "O ID do piloto não existe", null, WIDTH);
             }else if(alerta == 2){
                 JOptionPane.showMessageDialog(null, "O número do carro não existe", null, WIDTH);
             } else{
                 JOptionPane.showMessageDialog(null, "Carro atribuido no piloto com sucesso", null, WIDTH);
+                atualizaComboBox();
             } 
         } else {
             JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos", null, WIDTH);
@@ -1219,6 +1272,7 @@ public class Cadastro extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "O número do carro já existe", null, WIDTH);
                 } else{
                     JOptionPane.showMessageDialog(null, "Carro cadastrado com sucesso", null, WIDTH);
+                    atualizaComboBox();
                 } 
             } else{
                 JOptionPane.showMessageDialog(null, "Coloque um número", null, WIDTH);
@@ -1245,7 +1299,8 @@ public class Cadastro extends javax.swing.JFrame {
             if(EPCs.has(s)){
                 EPCcarroC.addItem(EPCs.getString(s));
             }
-        }        
+        }     
+        gerenciador.comunicacao.recebido.clear();
     }//GEN-LAST:event_lerEPCActionPerformed
 
     private void nacEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nacEquipeActionPerformed
@@ -1255,6 +1310,63 @@ public class Cadastro extends javax.swing.JFrame {
     private void nomePilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomePilotoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomePilotoActionPerformed
+
+    private void comboPilotoEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboPilotoEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboPilotoEActionPerformed
+    
+    /**
+    * Atualiza todas as combo box com os novos dados.
+    * 
+    */
+    private void atualizaComboBox(){        
+        comboCarroCP.removeAllItems();
+        comboCarroE.removeAllItems();
+        comboEquipeC.removeAllItems();
+        comboEquipeP.removeAllItems();
+        comboPilotoCP.removeAllItems(); 
+        comboPilotoE.removeAllItems();
+        gerenciador = GerenciadorTelas.getInstance();
+        pilotos = gerenciador.bancoDados.getBdPilotos();
+        equipes = gerenciador.bancoDados.getBdEquipes();
+        carros = gerenciador.bancoDados.getBdCarros();
+        
+        if(!pilotos.isEmpty()){
+            comboPilotoE.addItem("<Selecione um piloto>");
+            comboPilotoCP.addItem("<Selecione um piloto>");
+            for (int i = 0; i < pilotos.size(); i++) {
+                comboPilotoE.addItem(pilotos.get(i).getNome());
+                comboPilotoCP.addItem(pilotos.get(i).getNome());
+            }
+        } else{
+            comboPilotoE.addItem("<Selecione um piloto>");
+            comboPilotoCP.addItem("<Selecione um piloto>");
+        }
+        if(!equipes.isEmpty()){
+            comboEquipeC.addItem("<Selecione uma equipe>");
+            comboEquipeP.addItem("<Selecione uma equipe>");
+            for (int i = 0; i < equipes.size(); i++) {
+                comboEquipeC.addItem(equipes.get(i).getNome());
+                comboEquipeP.addItem(equipes.get(i).getNome());
+            }
+        } else{
+            comboEquipeC.addItem("<Selecione uma equipe>");
+            comboEquipeP.addItem("<Selecione uma equipe>");
+        }
+        if(!carros.isEmpty()){
+            comboCarroCP.addItem("<Selecione um carro>");
+            comboCarroE.addItem("<Selecione um carro>");
+            for (int i = 0; i < carros.size(); i++) {
+                comboCarroE.addItem(carros.get(i).getEPC());
+                comboCarroCP.addItem(carros.get(i).getEPC());
+            }
+        } else{
+            comboCarroCP.addItem("<Selecione um carro>");
+            comboCarroE.addItem("<Selecione um carro>");
+        }        
+        
+    }
+    
     
     /**
     * @deprecated Metódo de execução de tela para depuração 
@@ -1294,14 +1406,8 @@ public class Cadastro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> EPCcarroC;
-    private javax.swing.JTextField IDcarroCE;
-    private javax.swing.JTextField IDcarroCP;
     private javax.swing.JTextField IDequipeE;
-    private javax.swing.JTextField IDequipeEC;
-    private javax.swing.JTextField IDequipeEP;
     private javax.swing.JTextField IDpilotoP;
-    private javax.swing.JTextField IDpilotoPC;
-    private javax.swing.JTextField IDpilotoPE;
     private javax.swing.JTextField IDpistaP;
     private javax.swing.JTextField Ncarro;
     private javax.swing.JTextField anoE;
@@ -1312,6 +1418,12 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JButton cadastrarPiloto;
     private javax.swing.JButton cadastrarPista;
     private javax.swing.JButton cadastroPE;
+    private javax.swing.JComboBox<String> comboCarroCP;
+    private javax.swing.JComboBox<String> comboCarroE;
+    private javax.swing.JComboBox<String> comboEquipeC;
+    private javax.swing.JComboBox<String> comboEquipeP;
+    private javax.swing.JComboBox<String> comboPilotoCP;
+    private javax.swing.JComboBox<String> comboPilotoE;
     private ClienteAutorama.view.Imagem imagem1;
     private ClienteAutorama.view.Imagem imagem2;
     private ClienteAutorama.view.Imagem imagem3;

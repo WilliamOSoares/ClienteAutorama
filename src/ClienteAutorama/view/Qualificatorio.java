@@ -25,7 +25,8 @@ public class Qualificatorio extends javax.swing.JFrame {
     public Qualificatorio() {
         initComponents();
         this.setTitle("Autorama");
-        setIconImage(Toolkit.getDefaultToolkit().getImage("car.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagens/car.png")));
+        setResizable(false);
         gerenciador = GerenciadorTelas.getInstance();
         localCorrida.setText(gerenciador.corrida.pistaLocal.getNome()+" - "+gerenciador.corrida.pistaLocal.getPais());
         tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());

@@ -4,9 +4,7 @@ import ClienteAutorama.controller.GerenciadorTelas;
 import ClienteAutorama.model.ModeloTabelaCorrida;
 import ClienteAutorama.model.Piloto;
 import java.awt.Toolkit;
-import static java.awt.image.ImageObserver.WIDTH;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 /**
@@ -28,7 +26,8 @@ public class TelaCorrida extends javax.swing.JFrame {
     public TelaCorrida() {
         initComponents();
         this.setTitle("Autorama");  
-        setIconImage(Toolkit.getDefaultToolkit().getImage("car.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagens/car.png")));
+        setResizable(false);
         gerenciador = GerenciadorTelas.getInstance();
         localCorrida.setText(gerenciador.corrida.pistaLocal.getNome()+" - "+gerenciador.corrida.pistaLocal.getPais());
         tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());
@@ -283,7 +282,6 @@ public class TelaCorrida extends javax.swing.JFrame {
                     }                    
                     voltas--;                
                 }
-                //VoltasN++;  
                 nVoltas.setText(Integer.toString(VoltasN)+ " de " + Integer.toString(gerenciador.corrida.getNumVoltas()) + " Voltas");
                 nVoltas.setText("Acabou a corrida");
                 

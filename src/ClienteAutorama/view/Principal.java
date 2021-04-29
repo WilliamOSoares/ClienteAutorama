@@ -32,7 +32,8 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         this.setTitle("Autorama");
-        setIconImage(Toolkit.getDefaultToolkit().getImage("car.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagens/car.png")));
+        setResizable(false);
     }
     
     /**
@@ -308,7 +309,7 @@ public class Principal extends javax.swing.JFrame {
     */
     private void botaAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaAvancarActionPerformed
         if (!textIP.getText().isEmpty() && !textPorta.getText().isEmpty() && !textPortaSerial.getText().isEmpty() && !textBaudrate.getText().isEmpty() && !textRegiao.getText().isEmpty() && !textAntena.getText().isEmpty() && !textProtocolo.getText().isEmpty() && !textPower.getText().isEmpty()){
-            gerenciador.postConectConfiguraLeitor(textIP.getText(), textPorta.getText(), textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText());
+            //gerenciador.postConectConfiguraLeitor(textIP.getText(), textPorta.getText(), textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText());
             gerenciador.setTelaPrincipal(this);
             gerenciador.abrirTelaInicial();             
         } else{

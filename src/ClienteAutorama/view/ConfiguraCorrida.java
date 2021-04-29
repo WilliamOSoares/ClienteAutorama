@@ -24,7 +24,8 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
     public ConfiguraCorrida() {
         initComponents();
         this.setTitle("Autorama");
-        setIconImage(Toolkit.getDefaultToolkit().getImage("car.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagens/car.png")));
+        setResizable(false);
         gerenciador = GerenciadorTelas.getInstance();
         pilotos = gerenciador.bancoDados.getBdPilotos();
         pistas = gerenciador.bancoDados.getBdPistas();

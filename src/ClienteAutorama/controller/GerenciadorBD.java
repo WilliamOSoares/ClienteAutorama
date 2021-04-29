@@ -50,7 +50,7 @@ public class GerenciadorBD {
     public static GerenciadorBD getInstance() {
 	return uniqueInstance;
     }
-    
+   
     /**
     * Adiciona uma nova equipe no banco de dados.
     * 

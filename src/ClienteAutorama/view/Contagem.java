@@ -1,5 +1,6 @@
 package ClienteAutorama.view;
 
+import java.awt.Color;
 import java.awt.Toolkit;
 
 /**
@@ -16,7 +17,8 @@ public class Contagem extends javax.swing.JFrame {
     public Contagem(String cont) {
         initComponents();
         this.setTitle("Contagem Regressiva");
-        setIconImage(Toolkit.getDefaultToolkit().getImage("car.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagens/car.png")));
+        setBackground(new Color(0f, 0f, 0f, 0f));
         contador.setText(cont);
    }
 
@@ -31,7 +33,8 @@ public class Contagem extends javax.swing.JFrame {
 
         contador = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setUndecorated(true);
 
         contador.setFont(new java.awt.Font("Ink Free", 1, 100)); // NOI18N
         contador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

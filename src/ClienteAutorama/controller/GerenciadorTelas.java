@@ -28,7 +28,7 @@ public class GerenciadorTelas {
     public Corrida corrida = Corrida.getInstance();
     public Principal telaPrincipal;
     public TelaInicial telaInicial;
-    public Cadastro telaCadastro = new Cadastro();
+    public Cadastro telaCadastro;// = new Cadastro();
     public ConfiguraCorrida telaConfig;
     public Qualificatorio telaQuali;
     public TelaCorrida telaCorrida;
@@ -125,6 +125,7 @@ public class GerenciadorTelas {
     public void abrirTelaCadastro(){
         telaInicial.setEnabled(false);
         telaInicial.setVisible(false);
+        telaCadastro = new Cadastro();
         telaCadastro.setLocationRelativeTo(telaInicial);
         telaCadastro.setEnabled(true);
         telaCadastro.setVisible(true);

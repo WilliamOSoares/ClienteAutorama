@@ -25,9 +25,10 @@ public class TelaInicial extends javax.swing.JFrame {
     public TelaInicial() {
         initComponents();
         this.setTitle("Autorama");
-        setIconImage(Toolkit.getDefaultToolkit().getImage("car.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagens/car.png")));
+        setResizable(false);
         try {
-            File music = new File("src//audio//TopGear.wav");
+            File music = new File(getClass().getResource("/audio/TopGear.wav").toURI());//new File("D:\\Ecomp - Uefs\\7º semestre\\Tecnologicas\\TEC502 - MI - Concorrência e Conectividade\\PBL 1 git\\ClienteAutorama\\src\\audio\\TopGear.wav");
             
             if(music.exists()){
                 AudioInputStream audio = AudioSystem.getAudioInputStream(music);
@@ -63,7 +64,7 @@ public class TelaInicial extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(700, 430));
 
-        imagem1.setImg(new ImageIcon("src/imagens/autorama.jpg"));
+        imagem1.setImg(new ImageIcon(getClass().getResource("/imagens/autorama.jpg")));
 
         jLabel1.setFont(new java.awt.Font("Ink Free", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 0, 0));
