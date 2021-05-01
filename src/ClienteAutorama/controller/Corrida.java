@@ -18,7 +18,7 @@ public class Corrida implements Runnable{
     public ArrayList<Piloto> pilotos = new ArrayList<>();
     public DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
     public Pista pistaLocal;
-    public int numVoltas, ciclo = 0, nVolta = 0;
+    public int numVoltas, nVolta = 0;
     public String tempQuali;
     public boolean fimQuali = false;
     public boolean fimCorrida = false;
@@ -144,13 +144,8 @@ public class Corrida implements Runnable{
         gerenciador = GerenciadorTelas.getInstance();
         while(!isFimQuali() || !isFimCorrida()){
             while(!gerenciador.comunicacao.recebido.has("CicloLeitura") && !gerenciador.comunicacao.recebido.has("status")){ }
-            String obj = Integer.toString(ciclo);
-            System.out.println(obj);
-            if(ciclo>0){
-                while(!gerenciador.comunicacao.recebido.get("CicloLeitura").equals(obj) && !gerenciador.comunicacao.recebido.has("status")){ }
-            }
-            
-            if(validaLeitura()){            
+                        
+            if(validaLeitura()){
                 for (int i = 0; i < leitura.size(); i++) {
                     for (int j = 0; j < pilotos.size(); j++) {
                         if(leitura.get(i).getEPC().equals(pilotos.get(j).getCarro().getEPC())){
@@ -170,6 +165,9 @@ public class Corrida implements Runnable{
                     }
                 }
                 System.out.println("Ciclo pego: "+gerenciador.comunicacao.recebido.get("CicloLeitura"));
+                for (int i = 0; i < pilotos.size(); i++) {
+                    System.out.println(pilotos.get(i).getNome()+" - Primeira Leitura:"+pilotos.get(i).isPrimeiraLeitura()+" - Leitura:"+pilotos.get(i).getTempoInit());
+                }
                 leitura.clear();
             }           
                         
@@ -194,7 +192,6 @@ public class Corrida implements Runnable{
                     setFimQuali(true);
                     setFimCorrida(true);
                     gerenciador.comunicacao.recebido.clear();
-                    ciclo = 0;
                     this.stop();
                     for (int i = 0; i < gerenciador.bancoDados.getBdPistas().size(); i++) {
                         if(gerenciador.bancoDados.bdPistas.get(i).getNome().equals(pistaLocal.getNome())){
@@ -208,7 +205,6 @@ public class Corrida implements Runnable{
                     setFimQuali(true);
                     setFimCorrida(true);
                     gerenciador.comunicacao.recebido.clear();
-                    ciclo = 0;
                     for (int i = 0; i < pilotos.size(); i++) {
                         pilotos.get(i).setPrimeiraLeitura(true);
                     }
@@ -228,7 +224,6 @@ public class Corrida implements Runnable{
             if(gerenciador.comunicacao.recebido.has("CicloLeitura")){
                 System.out.println("Ciclo antes de apagar: "+gerenciador.comunicacao.recebido.get("CicloLeitura"));
             }    
-            ciclo++;
             gerenciador.comunicacao.recebido.clear();
         }
         System.out.println("Passou direto");
@@ -403,6 +398,9 @@ public class Corrida implements Runnable{
             }
         }
         if (leitura.size()>0) {
+            for (int i = 0; i < leitura.size(); i++) {
+                System.out.println("Depois:"+leitura.get(i).getEPC() +"-"+leitura.get(i).getTempoVolta().toString());
+            }
             return true;
         } else {
             return false;

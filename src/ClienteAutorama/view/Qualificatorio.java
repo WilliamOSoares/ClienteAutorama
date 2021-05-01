@@ -36,8 +36,13 @@ public class Qualificatorio extends javax.swing.JFrame {
         gerenciador.corrida.setFimQuali(false);
         gerenciador.corrida.setFimCorrida(true);
         gerenciador.corrida.leitura.clear();
+        for (int i = 0; i < gerenciador.corrida.pilotos.size(); i++) {
+            System.out.println("Antes:"+gerenciador.corrida.pilotos.get(i).isPrimeiraLeitura());
+            gerenciador.corrida.pilotos.get(i).setPrimeiraLeitura(true);
+            System.out.println("Depois:"+gerenciador.corrida.pilotos.get(i).isPrimeiraLeitura());
+        }
         this.pilotos = gerenciador.corrida.pilotos;//
-        this.modelo = new ModeloTabela(pilotos);
+        this.modelo = new ModeloTabela(gerenciador.corrida.pilotos);
         tabelaQuali.setModel(modelo);
         gerenciador.setTelaQuali(this);
         this.start();
@@ -309,7 +314,7 @@ public class Qualificatorio extends javax.swing.JFrame {
                         } else{
                             tempo.setText(tempoQuali + ":" + sec);
                         }  
-                        gerenciador.telaQuali.modelo.setArray(gerenciador.telaQuali.pilotos);//gerenciador.corrida.pilotos); 
+                        gerenciador.telaQuali.modelo.setArray(gerenciador.corrida.pilotos);//gerenciador.corrida.pilotos); 
                         gerenciador.telaQuali.tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());
                         gerenciador.telaQuali.autorRecord.setText(gerenciador.corrida.pistaLocal.getRecordista());
                     }

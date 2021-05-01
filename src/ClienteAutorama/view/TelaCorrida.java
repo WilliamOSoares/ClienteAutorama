@@ -35,13 +35,13 @@ public class TelaCorrida extends javax.swing.JFrame {
         nVoltas.setText("0 de "+Integer.toString(gerenciador.corrida.numVoltas)+" Voltas");
         this.pilotos = gerenciador.corrida.pilotos;
         voltas = gerenciador.corrida.getNumVoltas();
-        for (int i = 0; i < this.pilotos.size(); i++) {
-            pilotos.get(i).setMelhorMili(0);
-            pilotos.get(i).setMelhorSec(0);
-            pilotos.get(i).setVoltas(0);
-            pilotos.get(i).setTempoSec(0);
-            pilotos.get(i).setTempoMili(0);
-            pilotos.get(i).setPrimeiraLeitura(true);
+        for (int i = 0; i < this.gerenciador.corrida.pilotos.size(); i++) {
+            gerenciador.corrida.pilotos.get(i).setMelhorMili(0);
+            gerenciador.corrida.pilotos.get(i).setMelhorSec(0);
+            gerenciador.corrida.pilotos.get(i).setVoltas(0);
+            gerenciador.corrida.pilotos.get(i).setTempoSec(0);
+            gerenciador.corrida.pilotos.get(i).setTempoMili(0);
+            gerenciador.corrida.pilotos.get(i).setPrimeiraLeitura(true);
         }
         gerenciador.corrida.pilotos = this.pilotos;
         gerenciador.bancoDados.serealiza();
@@ -276,7 +276,7 @@ public class TelaCorrida extends javax.swing.JFrame {
                     VoltasN++;                    
                     while(voltaPrim != VoltasN){
                         voltaPrim = gerenciador.corrida.pilotos.get(0).getVoltas();
-                        gerenciador.telaCorrida.modelo.setArray(gerenciador.telaCorrida.pilotos);
+                        gerenciador.telaCorrida.modelo.setArray(gerenciador.corrida.pilotos);
                         gerenciador.telaCorrida.autorRecord.setText(gerenciador.corrida.pistaLocal.getRecordista());
                         gerenciador.telaCorrida.tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());
                     }                    
