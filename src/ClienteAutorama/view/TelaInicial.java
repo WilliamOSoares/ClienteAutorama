@@ -30,7 +30,7 @@ public class TelaInicial extends javax.swing.JFrame {
         try {
             File music = new File(getClass().getResource("/audio/TopGear.wav").toURI());//new File("D:\\Ecomp - Uefs\\7º semestre\\Tecnologicas\\TEC502 - MI - Concorrência e Conectividade\\PBL 1 git\\ClienteAutorama\\src\\audio\\TopGear.wav");
             
-            if(!music.exists()){ //Música desativada
+            if(music.exists()){
                 AudioInputStream audio = AudioSystem.getAudioInputStream(music);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audio);
