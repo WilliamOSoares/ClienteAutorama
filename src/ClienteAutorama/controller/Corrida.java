@@ -186,7 +186,7 @@ public class Corrida implements Runnable{
                     pistaLocal.novoRecord(pilotos.get(i));
                 } 
             } 
-                       
+            
             if (gerenciador.comunicacao.recebido.has("status")){
                 if (gerenciador.comunicacao.recebido.get("URL").equals("finalQuali")){    
                     setFimQuali(true);
@@ -406,30 +406,4 @@ public class Corrida implements Runnable{
             return false;
         }
     } 
-    
-    public static void main(String[] args) {
-        ArrayList<String> teste = new ArrayList();
-        if(teste.isEmpty()){
-            System.out.println("igual a null");
-        }
-        if(teste.size()==0){
-            System.out.println("sem nada");
-        }
-        teste.add("puta");
-        if(teste.isEmpty()){
-            System.out.println("diferente de null");
-        }
-        if(teste.size()>0){
-            System.out.println("tem algo");
-        }
-        teste.clear();
-        if(teste.isEmpty()){
-            System.out.println("zerado");
-        }
-        if(teste.size()>0){
-            System.out.println("tem algo");
-        }
-        
-        
-    }
 }
