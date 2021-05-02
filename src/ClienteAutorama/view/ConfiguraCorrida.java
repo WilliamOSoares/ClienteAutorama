@@ -3,9 +3,15 @@ package ClienteAutorama.view;
 import ClienteAutorama.controller.GerenciadorTelas;
 import ClienteAutorama.model.Piloto;
 import ClienteAutorama.model.Pista;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
+/**
+ * Classe da tela de congiguração da corrida.
+ * 
+ * @author Víctor César e William Soares.
+ */
 public class ConfiguraCorrida extends javax.swing.JFrame {
 
     GerenciadorTelas gerenciador;
@@ -13,21 +19,26 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
     ArrayList<Piloto> pilotos = new ArrayList<>();
     
     /**
-     * Creates new form CofiguraCorrida
+     * Cria a tela Cofigura Corrida com apenas pilotos que tenham carro e as pistas.
      */
     public ConfiguraCorrida() {
         initComponents();
         this.setTitle("Autorama");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagens/car.png")));
+        setResizable(false);
         gerenciador = GerenciadorTelas.getInstance();
         pilotos = gerenciador.bancoDados.getBdPilotos();
         pistas = gerenciador.bancoDados.getBdPistas();
         
         for(int i = 0; i<pilotos.size(); i++){
-            piloto1.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
-            piloto2.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
-            piloto3.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
-            piloto4.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
-            piloto5.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
+            if(pilotos.get(i).getCarro() != null){
+                System.out.println(pilotos.get(i).getNome()+" - "+ pilotos.get(i).getCarro().getEPC());
+                piloto1.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
+                piloto2.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
+                piloto3.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
+                piloto4.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
+                piloto5.addItem(pilotos.get(i).getNome()+" - "+pilotos.get(i).getEquipe().getNome());
+            }
         }
         for(int i = 0; i<pistas.size(); i++){
             localDaCorrida.addItem(pistas.get(i).getNome()+" - "+pistas.get(i).getPais());
@@ -73,6 +84,11 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
         jLabel5.setText("Piloto 1:");
 
         piloto1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione um piloto>" }));
+        piloto1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                piloto1ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Piloto 2:");
 
@@ -252,12 +268,20 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+    * Volta para a tela inicial.
+    * 
+    */
     private void voltarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarMenuActionPerformed
         gerenciador = GerenciadorTelas.getInstance();
         gerenciador.setTelaConfig(this);
         gerenciador.abrirTelaInicialDoConfig();
     }//GEN-LAST:event_voltarMenuActionPerformed
 
+    /**
+    * Avança para tela de Qualificatório e envia as informações da corrida para a classe corrida.
+    * 
+    */
     private void avancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avancarActionPerformed
         int i = 0;
         if(piloto1.getSelectedItem().equals("<Selecione um piloto>") && piloto2.getSelectedItem().equals("<Selecione um piloto>") && piloto3.getSelectedItem().equals("<Selecione um piloto>") && piloto4.getSelectedItem().equals("<Selecione um piloto>") && piloto5.getSelectedItem().equals("<Selecione um piloto>")){
@@ -282,7 +306,17 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 String[] s = piloto1.getSelectedItem().toString().split(" - ");
                 for(int y = 0; y<this.pilotos.size(); y++){
                     if(pilotos.get(y).getNome().equals(s[0])){
-                       participantes.add(pilotos.get(y));
+                        boolean existe = false;
+                        for (int z = 0; z < participantes.size(); z++) {
+                            if(pilotos.get(y).getNome().equals(participantes.get(z).getNome())){
+                                existe = true;
+                            }
+                        }
+                        if (existe) {
+                            System.out.println("Piloto já está na corrida");
+                        } else {
+                            participantes.add(pilotos.get(y));
+                        }                        
                     }                    
                 }
             }
@@ -290,7 +324,17 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 String[] s = piloto2.getSelectedItem().toString().split(" - ");
                 for(int y = 0; y<this.pilotos.size(); y++){
                     if(pilotos.get(y).getNome().equals(s[0])){
-                       participantes.add(pilotos.get(y));
+                       boolean existe = false;
+                        for (int z = 0; z < participantes.size(); z++) {
+                            if(pilotos.get(y).getNome().equals(participantes.get(z).getNome())){
+                                existe = true;
+                            }
+                        }
+                        if (existe) {
+                            System.out.println("Piloto já está na corrida");
+                        } else {
+                            participantes.add(pilotos.get(y));
+                        } 
                     }                    
                 }
             }
@@ -298,7 +342,17 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 String[] s = piloto3.getSelectedItem().toString().split(" - ");
                 for(int y = 0; y<this.pilotos.size(); y++){
                     if(pilotos.get(y).getNome().equals(s[0])){
-                       participantes.add(pilotos.get(y));
+                       boolean existe = false;
+                        for (int z = 0; z < participantes.size(); z++) {
+                            if(pilotos.get(y).getNome().equals(participantes.get(z).getNome())){
+                                existe = true;
+                            }
+                        }
+                        if (existe) {
+                            System.out.println("Piloto já está na corrida");
+                        } else {
+                            participantes.add(pilotos.get(y));
+                        } 
                     }                    
                 }
             }
@@ -306,7 +360,17 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 String[] s = piloto4.getSelectedItem().toString().split(" - ");
                 for(int y = 0; y<this.pilotos.size(); y++){
                     if(pilotos.get(y).getNome().equals(s[0])){
-                       participantes.add(pilotos.get(y));
+                       boolean existe = false;
+                        for (int z = 0; z < participantes.size(); z++) {
+                            if(pilotos.get(y).getNome().equals(participantes.get(z).getNome())){
+                                existe = true;
+                            }
+                        }
+                        if (existe) {
+                            System.out.println("Piloto já está na corrida");
+                        } else {
+                            participantes.add(pilotos.get(y));
+                        } 
                     }                    
                 }
             }
@@ -314,7 +378,17 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 String[] s = piloto5.getSelectedItem().toString().split(" - ");
                 for(int y = 0; y<this.pilotos.size(); y++){
                     if(pilotos.get(y).getNome().equals(s[0])){
-                       participantes.add(pilotos.get(y));
+                       boolean existe = false;
+                        for (int z = 0; z < participantes.size(); z++) {
+                            if(pilotos.get(y).getNome().equals(participantes.get(z).getNome())){
+                                existe = true;
+                            }
+                        }
+                        if (existe) {
+                            System.out.println("Piloto já está na corrida");
+                        } else {
+                            participantes.add(pilotos.get(y));
+                        } 
                     }                    
                 }
             }
@@ -328,10 +402,12 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 }
             }            
             gerenciador = GerenciadorTelas.getInstance();
-            String s = gerenciador.getDadosCorrida(tQuali.getValue().toString(), nVoltas.getValue().toString(), local.getTempoMin());
+            String s = gerenciador.getDadosCorrida(tQuali.getValue().toString(), nVoltas.getValue().toString(), local.getTempoMin(), Integer.toString(participantes.size()));
             JOptionPane.showMessageDialog(null, s, null, WIDTH);
             if(s.equals("OK")){    
                 gerenciador = GerenciadorTelas.getInstance();
+                gerenciador.corrida.setFimQuali(false);
+                gerenciador.corrida.setFimCorrida(false);
                 gerenciador.setTelaConfig(this);
                 gerenciador.abrirQualificatorio(participantes, (int)nVoltas.getValue(), tQuali.getValue().toString(), local);
             }
@@ -340,9 +416,14 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
         
     }//GEN-LAST:event_avancarActionPerformed
 
+    private void piloto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piloto1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_piloto1ActionPerformed
+
     /**
-     * @param args the command line arguments
-     */
+    * @deprecated Metódo de execução de tela para depuração 
+    * @param args Argumentos de entrada.
+    */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -1,17 +1,27 @@
 package ClienteAutorama.view;
 
 import ClienteAutorama.controller.GerenciadorTelas;
+import java.awt.Toolkit;
 
+/**
+ * Classe da tela do botão virtual.
+ * 
+ * @author Víctor César e William Soares.
+ */
 public class ApertouBotao extends javax.swing.JFrame {
 
     private int code;
     GerenciadorTelas gerenciador;
     
     /**
-     * Creates new form ApertouBotao
+     * Construtor da tela do botão de acordo com o código de invocação.
+     * 
+     * @param code código de invocação do botão, que muda o redirecionamento de execução de acordo com ele.
      */
     public ApertouBotao(int code) {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagens/car.png")));
+        setResizable(false);
         this.code = code;
         
     }
@@ -29,7 +39,7 @@ public class ApertouBotao extends javax.swing.JFrame {
         simulaBotao = new javax.swing.JButton();
         mensagem = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         simulaBotao.setText("Botão virtual");
@@ -44,10 +54,10 @@ public class ApertouBotao extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 101;
         gridBagConstraints.ipady = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(51, 240, 147, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 110, 34, 0);
         getContentPane().add(simulaBotao, gridBagConstraints);
 
-        mensagem.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        mensagem.setFont(new java.awt.Font("Ink Free", 1, 24)); // NOI18N
         mensagem.setForeground(new java.awt.Color(204, 0, 0));
         mensagem.setText("Esperando o aperto do botão!!!");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -55,28 +65,41 @@ public class ApertouBotao extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 20;
-        gridBagConstraints.ipady = 44;
+        gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(87, 184, 0, 189);
+        gridBagConstraints.insets = new java.awt.Insets(24, 44, 0, 56);
         getContentPane().add(mensagem, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+    * Repasse de tela e execução de acordo com o código de invocação da tela.
+    * 
+    */
     private void simulaBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulaBotaoActionPerformed
         if(code == 0){
             gerenciador = GerenciadorTelas.getInstance();
-            gerenciador.mostrarQualificatorio();
+            gerenciador.setPlay(false);
+            gerenciador.mostrarQualificatorio();            
         } else if(code == 1){
             gerenciador = GerenciadorTelas.getInstance();
-        } else{
+            gerenciador.mostrarCorrida();
+        } else if(code == 2){
             gerenciador = GerenciadorTelas.getInstance();
+            gerenciador.setPlay(false);
+            gerenciador.iniciarCorrida();
+        } else if (code == 3){
+            gerenciador = GerenciadorTelas.getInstance();
+            gerenciador.voltarParaTelaInicial();
         }
+        
     }//GEN-LAST:event_simulaBotaoActionPerformed
 
     /**
-     * @param args the command line arguments
-     */
+    * @deprecated Metódo de execução de tela para depuração 
+    * @param args Argumentos de entrada.
+    */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
