@@ -1,16 +1,20 @@
 package ClienteAutorama.controller;
 
+import ClienteAutorama.model.Carro;
 import ClienteAutorama.model.ThreadEscutaServidor;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.Socket;
+import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.json.JSONObject;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 /**
  * Classe de comunicação com o servidor.
@@ -18,9 +22,8 @@ import org.json.JSONObject;
  * @author Víctor César e William Soares.
  */
 public class Comunication{
-    public static Socket cliente;  
-    public String ip;
-    public int door;    
+    public MqttClient cliente;  
+    public String ip, respostaConfig = " ", respostaConfirm = " ", respostaQuali = " ", respostaCorrida = " ";   
     public BufferedWriter saida;
     public BufferedReader entrada;
     public JSONObject recebido = new JSONObject();
@@ -28,6 +31,7 @@ public class Comunication{
     public JSONObject teste;
     public ThreadEscutaServidor thread = new ThreadEscutaServidor();
     public Semaphore semaforo = new Semaphore(1);
+    public ArrayList<Carro> carros = new ArrayList();
     
     /**
     * Construtor da classe de comunicação.
@@ -52,19 +56,204 @@ public class Comunication{
     * Inicia a conexão através do ip e a porta fornecidas para se conectar com o outro computador.
     * 
     * @param ip ip do outro computador.
-    * @param porta Porta de acesso da comunicação entre o servidor.
+    * @param usuario Usuário de acesso da comunicação entre o servidor MQTT.
+    * @param senha Senha do usuário do servidor MQTT
     */
-    public void iniciaCliente(String ip, String porta){
+    public void iniciaCliente(String ip, String usuario, String senha){
+        /*
         try {
             this.ip = ip;
-            this.door = Integer.parseInt(porta);
-            cliente = new Socket(ip, door);
-            saida = new BufferedWriter(new OutputStreamWriter(cliente.getOutputStream()));
-            entrada = new BufferedReader (new InputStreamReader(cliente.getInputStream()));
+            cliente = new MqttClient(ip, "Cam1");//"Autorama2");
+            
+            cliente.setCallback(new MqttCallback() {
+
+                @Override
+                public void messageArrived(String string, MqttMessage mm) throws Exception {
+                    
+                    System.out.println(string);
+                    System.out.println(mm);
+                                       
+                    if("Resposta/Config".equals(string)){
+                        respostaConfig = mm.toString();
+                    } else if("Resposta/Confirm".equals(string)){
+                        respostaConfirm = mm.toString();
+                    } else if (string.contains("LeitorRFID")){
+                        String s[] = string.split("/");
+                        if(carros.isEmpty()){
+                            carros.add(new Carro(mm.toString()));                         
+                        } else {
+                            boolean tem = false;
+                            for (int i = 0; i < carros.size(); i++) {
+                                if(carros.get(i).getEPC().contains(s[1])){
+                                    tem = true;
+                                }
+                            }
+                            if(!tem){
+                                carros.add(new Carro(mm.toString())); 
+                            }
+                        }
+                        if(string.contains("Tempo")){
+                            for (int i = 0; i < carros.size(); i++) {
+                                if(carros.get(i).getEPC().contains(s[1])){
+                                    carros.get(i).setTempo(mm.toString());
+                                }    
+                            }
+                        }
+                        if(string.contains("Ciclo")){
+                            for (int i = 0; i < carros.size(); i++) {
+                                if(carros.get(i).getEPC().contains(s[1])){
+                                    carros.get(i).setCiclo(mm.toString());
+                                }    
+                            }
+                        }                        
+                    } else if("Resposta/Quali".equals(string)){
+                        respostaQuali = mm.toString();
+                    } else if("Resposta/Corrida".equals(string)){
+                        respostaCorrida = mm.toString();
+                    }
+                }
+
+                @Override
+                public void connectionLost(Throwable thrwbl) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+
+                @Override
+                public void deliveryComplete(IMqttDeliveryToken imdt) {
+                    try {
+                        System.out.println("Delivery complete");
+                        System.out.println(imdt.getClient());
+                        System.out.println(imdt.getMessage());
+                        System.out.println(imdt.getException());
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+            });
+            
+            MqttConnectOptions mqttOptions = new MqttConnectOptions();
+            mqttOptions.setUserName(usuario);
+            mqttOptions.setPassword(senha.toCharArray());
+            mqttOptions.setAutomaticReconnect(true);
+            mqttOptions.setCleanSession(false);
+            
+            cliente.connect(mqttOptions);
+            cliente.subscribe("Resposta/#", 0);
+            cliente.subscribe("Qualificatorio/#", 0); 
+            cliente.subscribe("Corrida/#", 0); 
+            cliente.subscribe("LeitorRFID/#", 0);
+            cliente.subscribe("Config/Botao", 0);
             System.out.println("Conectado");
-        } catch (IOException ex) {
+        } catch (MqttException ex) {
             System.out.println(ex);
         }
+        */
+        try{
+            this.ip = ip;
+            cliente = new MqttClient(ip, "Autorama2");//"Cam1");//"Autorama2");
+            MqttConnectOptions mqttOptions = new MqttConnectOptions();
+            mqttOptions.setUserName(usuario);
+            mqttOptions.setPassword(senha.toCharArray());
+            mqttOptions.setAutomaticReconnect(true);
+            mqttOptions.setCleanSession(false);            
+            cliente.connect(mqttOptions);
+            System.out.println("Conectado");
+        } catch (MqttException ex) {
+            System.out.println(ex);
+        }
+        
+        try{
+            cliente = new MqttClient(ip, "Autorama3");
+            cliente.setCallback(new MqttCallback() {
+
+                @Override
+                public void messageArrived(String string, MqttMessage mm) throws Exception {
+                    
+                    System.out.println(string);
+                    System.out.println(mm);
+                                       
+                    if("Resposta/Config".equals(string)){
+                        respostaConfig = mm.toString();
+                    } else if("Resposta/Confirm".equals(string)){
+                        respostaConfirm = mm.toString();
+                    } else if (string.contains("LeitorRFID")){
+                        String s[] = string.split("/");
+                        if(respostaQuali.equals("OK") || respostaCorrida.equals("OK")){
+                             
+                        } else{
+                            if(carros.isEmpty()){
+                                carros.add(new Carro(mm.toString()));                         
+                            } else {
+                                boolean tem = false;
+                                for (int i = 0; i < carros.size(); i++) {
+                                    if(carros.get(i).getEPC().contains(s[1])){
+                                        tem = true;
+                                    }
+                                }
+                                if(!tem){
+                                    carros.add(new Carro(mm.toString())); 
+                                }
+                            }
+                            if(string.contains("Tempo")){
+                                for (int i = 0; i < carros.size(); i++) {
+                                    if(carros.get(i).getEPC().contains(s[1])){
+                                        carros.get(i).setTempo(mm.toString());
+                                    }    
+                                }
+                            }
+                            if(string.contains("Ciclo")){
+                                for (int i = 0; i < carros.size(); i++) {
+                                    if(carros.get(i).getEPC().contains(s[1])){
+                                        carros.get(i).setCiclo(mm.toString());
+                                    }    
+                                }
+                            }   
+                        }
+                    } else if("Resposta/Quali".equals(string)){
+                        respostaQuali = mm.toString();
+                    } else if("Resposta/Corrida".equals(string)){
+                        respostaCorrida = mm.toString();
+                    }
+                }
+
+                @Override
+                public void connectionLost(Throwable thrwbl) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+
+                @Override
+                public void deliveryComplete(IMqttDeliveryToken imdt) {
+                    /*
+                    try {
+                        System.out.println("Delivery complete");
+                        System.out.println(imdt.getClient());
+                        System.out.println(imdt.getMessage());
+                        System.out.println(imdt.getException());
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }*/
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+            
+            MqttConnectOptions mqttOptions = new MqttConnectOptions();
+            mqttOptions.setUserName("Cliente3");
+            mqttOptions.setPassword("12345".toCharArray());
+            mqttOptions.setAutomaticReconnect(true);
+            mqttOptions.setCleanSession(false);
+            
+            cliente.connect(mqttOptions);
+            cliente.subscribe("Resposta/#", 0);
+            cliente.subscribe("Qualificatorio/#", 0); 
+            cliente.subscribe("Corrida/#", 0); 
+            cliente.subscribe("LeitorRFID/#", 0);
+            cliente.subscribe("Config/Botao", 0);
+            System.out.println("Conectado");
+            
+        } catch (MqttException ex) {
+            System.out.println(ex);
+        }
+        
     }
     
     /**
@@ -78,19 +267,38 @@ public class Comunication{
     * @param power Força de leitura do leitor.
     */
     public void POSTconfigLeitor(String portaSerial, String baudrate, String regiao, String antena, String protocolo, String power){
-        JSONObject configLeitor = new JSONObject();
-        configLeitor.put("METODO", "POST");
-        configLeitor.put("URL", "configLeitor");
-        configLeitor.put("portaSerial", portaSerial);
-        configLeitor.put("baudrate", baudrate);
-        configLeitor.put("regiao", regiao);
-        configLeitor.put("antena", antena);
-        configLeitor.put("protocolo", protocolo);
-        configLeitor.put("power", power);
+        MqttMessage msgPortaSerial = new MqttMessage((portaSerial).getBytes());
+        msgPortaSerial.setQos(0);
+        msgPortaSerial.setRetained(false);
+        MqttMessage msgBaudrate = new MqttMessage((baudrate).getBytes());
+        msgBaudrate.setQos(0);
+        msgBaudrate.setRetained(false);
+        MqttMessage msgRegiao = new MqttMessage((regiao).getBytes());
+        msgRegiao.setQos(0);
+        msgRegiao.setRetained(false);
+        MqttMessage msgAntena = new MqttMessage((antena).getBytes());
+        msgAntena.setQos(0);
+        msgAntena.setRetained(false);
+        MqttMessage msgProtocolo = new MqttMessage((protocolo).getBytes());
+        msgProtocolo.setQos(0);
+        msgProtocolo.setRetained(false);
+        MqttMessage msgPower = new MqttMessage((power).getBytes());
+        msgPower.setQos(0);
+        msgPower.setRetained(false);
+        MqttMessage msgConfigLeitor = new MqttMessage(("ConfigLeitor").getBytes());
+        msgConfigLeitor.setQos(0);
+        msgConfigLeitor.setRetained(false);
         try {
-            saida.write(configLeitor.toString());
-            saida.flush();
-        } catch (IOException ex) {
+            
+            cliente.publish("ConfigLeitor/ForcaLeitura", msgPower);
+            cliente.publish("ConfigLeitor/Protocolo", msgProtocolo);
+            cliente.publish("ConfigLeitor/Antena", msgAntena);
+            cliente.publish("ConfigLeitor/Regiao", msgRegiao);
+            cliente.publish("ConfigLeitor/Baudrate", msgBaudrate);
+            cliente.publish("ConfigLeitor/Serial", msgPortaSerial);
+            cliente.publish("Function", msgConfigLeitor);
+            
+        } catch (MqttException ex) {
             Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
@@ -121,21 +329,34 @@ public class Comunication{
     * @return Resposta do servidor para prosseguir a execução.
     */
     public String getDadosCorrida(String quali, String voltas, String tempoMIN, String nPilotos){
-        JSONObject dadosCorrida = new JSONObject();
-        dadosCorrida.put("METODO", "GET");
-        dadosCorrida.put("URL", "dadosCorrida");
-        dadosCorrida.put("Quali", quali);
-        dadosCorrida.put("Voltas", voltas);
-        dadosCorrida.put("TempoMin", tempoMIN);
-        dadosCorrida.put("CarrosQuant", nPilotos);
+        respostaConfig = " ";
+        MqttMessage msgQuali = new MqttMessage((quali).getBytes());
+        msgQuali.setQos(0);
+        msgQuali.setRetained(false);
+        MqttMessage msgVoltas = new MqttMessage((voltas).getBytes());
+        msgVoltas.setQos(0);
+        msgVoltas.setRetained(false);
+        MqttMessage msgTempoMin = new MqttMessage((tempoMIN).getBytes());
+        msgTempoMin.setQos(0);
+        msgTempoMin.setRetained(false);
+        MqttMessage msgNPilotos = new MqttMessage((nPilotos).getBytes());
+        msgNPilotos.setQos(0);
+        msgNPilotos.setRetained(false);
+        MqttMessage msgFuncao = new MqttMessage(("DadosCorrida").getBytes());
+        msgFuncao.setQos(0);
+        msgFuncao.setRetained(false);
         try {
-            saida.write(dadosCorrida.toString());
-            saida.flush();
-        } catch (IOException ex) {
+            cliente.publish("Config/TempoQuali", msgQuali);
+            cliente.publish("Config/NumeroVoltas", msgVoltas);
+            cliente.publish("Config/TempoMinimo", msgTempoMin);
+            cliente.publish("Config/QuantiCarros", msgNPilotos);
+            cliente.publish("Function", msgFuncao);
+        } catch (MqttException ex) {
             Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
-        while(!recebido.has("return")){ System.out.println(recebido.has("return")); }
-        return recebido.getString("return");
+        while(!respostaConfig.equals("OK")){ System.out.println(respostaConfig); }
+        return "OK";
     }
 
     /**
@@ -144,17 +365,28 @@ public class Comunication{
     * @return Um JSON com todas as EPCs das tags nominadas por EPCn, n sendo um número real.
     */
     public JSONObject getEPC() {
-        JSONObject getEPC = new JSONObject();
-        getEPC.put("METODO", "GET");
-        getEPC.put("URL", "retornaEPC");
+        MqttMessage msgFuncao = new MqttMessage(("PegaEPC").getBytes());
+        msgFuncao.setQos(0);
+        msgFuncao.setRetained(false);
         try {
-            saida.write(getEPC.toString());
-            saida.flush();
-        } catch (IOException ex) {
+            cliente.publish("Function", msgFuncao);
+        } catch (MqttException ex) {
             Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
-        while(!recebido.has("EPC0")){ System.out.println(recebido.has("EPC0")); }
-        return recebido;
+        while(!respostaConfig.equals("EPC")){ }
+        if(!carros.isEmpty()){
+            System.out.println(respostaConfig);
+        }
+        JSONObject retorno = new JSONObject();
+        String a = "EPC";
+        String b;
+        for (int i = 0; i < carros.size(); i++) {
+            b = a+i;
+            retorno.put(b, carros.get(i).getEPC());
+        }        
+        respostaConfig = " ";
+        return retorno;
     }
 
     /**
@@ -162,16 +394,15 @@ public class Comunication{
     * 
     */
     public void getComecaQuali() {
-        JSONObject comecaQuali = new JSONObject();
-        comecaQuali.put("METODO", "GET");
-        comecaQuali.put("URL", "comecaQuali");
+        MqttMessage msgFuncao = new MqttMessage(("ComecaQuali").getBytes());
+        msgFuncao.setQos(0);
+        msgFuncao.setRetained(false);
         try {
-            saida.write(comecaQuali.toString());
-            saida.flush();
-        } catch (IOException ex) {
+            cliente.publish("Function", msgFuncao);
+        } catch (MqttException ex) {
             Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
-        }   
+        }  
     }
     
     /**
@@ -179,16 +410,15 @@ public class Comunication{
     * 
     */
     public void getComecaCorrida() {
-        JSONObject comecaCorrida = new JSONObject();
-        comecaCorrida.put("METODO", "GET");
-        comecaCorrida.put("URL", "comecaCorrida");
+        MqttMessage msgFuncao = new MqttMessage(("ComecaCorrida").getBytes());
+        msgFuncao.setQos(0);
+        msgFuncao.setRetained(false);
         try {
-            saida.write(comecaCorrida.toString());
-            saida.flush();
-        } catch (IOException ex) {
+            cliente.publish("Function", msgFuncao);
+        } catch (MqttException ex) {
             Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
-        }  
+        }
     }
 
     /**
@@ -196,25 +426,15 @@ public class Comunication{
     * 
     */
     public void PostEncerraConexao() {
-        JSONObject configLeitor = new JSONObject();
-        configLeitor.put("METODO", "POST");
-        configLeitor.put("URL", "encerra");
+        MqttMessage msgFuncao = new MqttMessage(("EncerraConexao").getBytes());
+        msgFuncao.setQos(0);
+        msgFuncao.setRetained(false);
         try {
-            saida.write(configLeitor.toString());
-            saida.flush();
-        } catch (IOException ex) {
+            cliente.publish("Function", msgFuncao);
+            cliente.disconnect();            
+        } catch (MqttException ex) {
             Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
-        }
-        this.thread.stop();
-        thread = null;
-        try{
-            saida.close();
-            entrada.close();
-            cliente.close();
-        } catch (Exception ex){
-            Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println(ex);
-        }        
+        }     
     }
 }

@@ -60,7 +60,8 @@ public class GerenciadorTelas {
     * Repasse dos dados obtidos da tela principal para a classe comunication.
     * 
     * @param ip ip do outro computador.
-    * @param porta Porta de acesso da comunicação entre o servidor.
+    * @param usuario Usuario de acesso da comunicação entre o servidor MQTT.
+    * @param senha Senha de acesso ao usuário MQTT
     * @param portaSerial Identificação da porta serial do leitro.
     * @param baudrate Taxa de transmissão do servidor.
     * @param regiao Região de funcionamento do leitor.
@@ -68,9 +69,9 @@ public class GerenciadorTelas {
     * @param protocolo Nome do protocolo utilizado.
     * @param power Força de leitura do leitor.
     */
-    public void postConectConfiguraLeitor(String ip, String porta,String portaSerial, String baudrate, String regiao, String antena, String protocolo, String power){
-        comunicacao.iniciaCliente(ip, porta);
-        comunicacao.thread.start(comunicacao.entrada);
+    public void postConectConfiguraLeitor(String ip, String usuario, String senha,String portaSerial, String baudrate, String regiao, String antena, String protocolo, String power){
+        comunicacao.iniciaCliente(ip, usuario, senha);
+        //comunicacao.thread.start(comunicacao.cliente);
         comunicacao.POSTconfigLeitor(portaSerial, baudrate, regiao, antena, protocolo, power);
     }
     

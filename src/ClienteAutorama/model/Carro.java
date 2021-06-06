@@ -10,11 +10,20 @@ import java.time.LocalDateTime;
  */
 public class Carro implements Serializable {
     
-    private String EPC, numero; 
+    private String EPC, numero, ciclo, tempo; 
     private Piloto piloto;
     private Equipe equipe;
     private LocalDateTime tempoVolta;
-            
+    
+    /**
+    * Construtor do carro auxiliar da conexão.
+    * 
+    * @param EPC EPC da tag.
+    */
+    public Carro(String EPC) {
+        this.EPC = EPC;
+    }
+    
     /**
     * Construtor do carro.
     * 
@@ -117,7 +126,41 @@ public class Carro implements Serializable {
     public void setTempoVolta(LocalDateTime tempoVolta) {
         this.tempoVolta = tempoVolta;
     }
-    
-    
+
+    /**
+    * Pega o ciclo do carro.
+    * 
+    * @return Uma String com o ciclo.
+    */
+    public String getCiclo() {
+        return ciclo;
+    }
+
+    /**
+    * Altera o ciclo do carro.
+    * 
+    * @param ciclo Novo ciclo.
+    */
+    public void setCiclo(String ciclo) {
+        this.ciclo = ciclo;
+    }
+
+    /**
+    * Pega o tempo do carro.
+    * 
+    * @return Uma String com o tempo.
+    */
+    public String getTempo() {
+        return tempo;
+    }
+
+    /**
+    * Altera o tempo do carro.
+    * 
+    * @param tempo Novo tempo.
+    */
+    public void setTempo(String tempo) {
+        this.tempo = tempo;
+    }
     
 }

@@ -3,9 +3,11 @@ package ClienteAutorama.controller;
 import ClienteAutorama.model.Carro;
 import ClienteAutorama.model.Piloto;
 import ClienteAutorama.model.Pista;
+import static java.awt.image.ImageObserver.WIDTH;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  * Classe da corrida.
@@ -23,7 +25,9 @@ public class Corrida implements Runnable{
     public boolean fimQuali = false;
     public boolean fimCorrida = false;
     public boolean online = false;
+    public boolean botao = false;
     public ArrayList<Carro> leitura = new ArrayList<>();
+    public LocalDateTime tempoBotao;
     
     /**
     * Construtor da classe corrida.
@@ -186,6 +190,34 @@ public class Corrida implements Runnable{
                     pistaLocal.novoRecord(pilotos.get(i));
                 } 
             } 
+            
+            if (gerenciador.comunicacao.recebido.has("Botao")){
+                if (gerenciador.comunicacao.recebido.get("Botao").equals("True")){ 
+                    if(botao){
+                        LocalDateTime tempoAgora = LocalDateTime.now();
+                        tempoAgora = tempoAgora.minusHours(tempoBotao.getHour()).minusMinutes(tempoBotao.getMinute()).minusSeconds(tempoBotao.getSecond()).minusNanos(tempoBotao.getNano());
+                        if(tempoAgora.getSecond()<10){
+                            botao = false;
+                            gerenciador.comunicacao.recebido.clear();
+                            gerenciador.comunicacao.recebido.append("status", "True");
+                            if(isFimQuali()){
+                                gerenciador.comunicacao.recebido.append("URL", "finalCorrida");
+                                JOptionPane.showMessageDialog(null, "Acabou corrida", null, WIDTH);
+                            } else {
+                                gerenciador.comunicacao.recebido.append("URL", "finalQuali");
+                                JOptionPane.showMessageDialog(null, "Acabou qualificatório", null, WIDTH);
+                            }
+                        } else{
+                            System.out.println("Passou o tempo: "+tempoBotao.toString());
+                            botao = true;
+                            tempoBotao = LocalDateTime.now();
+                        }                        
+                    } else{
+                        botao = true;
+                        tempoBotao = LocalDateTime.now();
+                    }
+                }
+            }            
             
             if (gerenciador.comunicacao.recebido.has("status")){
                 if (gerenciador.comunicacao.recebido.get("URL").equals("finalQuali")){    
@@ -383,24 +415,13 @@ public class Corrida implements Runnable{
                             } else{
                                 tempoBase = LocalDateTime.parse(gerenciador.comunicacao.recebido.get(t).toString(), formatoData);
                             }
-                            if(this.pilotos.get(j).isPrimeiraLeitura()){
-                                leitura.add(new Carro(gerenciador.comunicacao.recebido.get(s).toString(), tempoBase));
-                            } else{
-                                LocalDateTime aux;
-                                aux = tempoBase.minusHours(this.pilotos.get(j).getTempoInit().getHour()).minusMinutes(this.pilotos.get(j).getTempoInit().getMinute()).minusSeconds(this.pilotos.get(j).getTempoInit().getSecond()).minusNanos(this.pilotos.get(j).getTempoInit().getNano());
-                                if(aux.getMinute()>=Integer.parseInt(pistaLocal.getTempoMin())){
-                                    leitura.add(new Carro(gerenciador.comunicacao.recebido.get(s).toString(), tempoBase));
-                                }
-                            }
+                            leitura.add(new Carro(gerenciador.comunicacao.recebido.get(s).toString(), tempoBase));
                         }
                     }
                 }
             }
         }
         if (leitura.size()>0) {
-            for (int i = 0; i < leitura.size(); i++) {
-                System.out.println("Depois:"+leitura.get(i).getEPC() +"-"+leitura.get(i).getTempoVolta().toString());
-            }
             return true;
         } else {
             return false;

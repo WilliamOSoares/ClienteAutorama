@@ -53,8 +53,10 @@ public class Principal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         textIP = new javax.swing.JTextField();
-        textPorta = new javax.swing.JTextField();
+        textUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        textSenha = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         textAntena = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -81,12 +83,12 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.gridwidth = 5;
         gridBagConstraints.ipady = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 61, 27, 31);
+        gridBagConstraints.insets = new java.awt.Insets(18, 62, 14, 0);
         getContentPane().add(botaAvancar, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -100,7 +102,7 @@ public class Principal extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 7;
         gridBagConstraints.ipady = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(25, 85, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(30, 117, 0, 0);
         getContentPane().add(jLabel1, gridBagConstraints);
 
         botaoSair.setText("Sair");
@@ -115,7 +117,7 @@ public class Principal extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 79;
         gridBagConstraints.ipady = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 42, 27, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 45, 14, 0);
         getContentPane().add(botaoSair, gridBagConstraints);
 
         padraoBotao.setText("Padrão");
@@ -130,12 +132,12 @@ public class Principal extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 59;
         gridBagConstraints.ipady = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 116, 27, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 116, 14, 0);
         getContentPane().add(padraoBotao, gridBagConstraints);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Configuração da conexão"));
 
-        jLabel5.setText("Porta:");
+        jLabel5.setText("Usuário:");
 
         textIP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,13 +145,21 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        textPorta.addActionListener(new java.awt.event.ActionListener() {
+        textUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textPortaActionPerformed(evt);
+                textUsuarioActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("IP:");
+        jLabel2.setText("URI:");
+
+        jLabel12.setText("Senha:");
+
+        textSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textSenhaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -157,15 +167,19 @@ public class Principal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textIP, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textPorta, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textIP, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(textUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(142, 142, 142)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -173,21 +187,23 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textIP, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textPorta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(textUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(31, 31, 31))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(textSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipady = -20;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipady = 5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 63, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(12, 108, 0, 0);
         getContentPane().add(jPanel1, gridBagConstraints);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Configuração do leitor"));
@@ -257,7 +273,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(textAntena, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
                     .addComponent(textPower)
                     .addComponent(textProtocolo))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,13 +305,13 @@ public class Principal extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 8;
+        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.ipadx = 32;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 51, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(18, 54, 0, 17);
         getContentPane().add(jPanel2, gridBagConstraints);
 
-        setSize(new java.awt.Dimension(716, 455));
+        setSize(new java.awt.Dimension(723, 465));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -308,8 +324,8 @@ public class Principal extends javax.swing.JFrame {
     * 
     */
     private void botaAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaAvancarActionPerformed
-        if (!textIP.getText().isEmpty() && !textPorta.getText().isEmpty() && !textPortaSerial.getText().isEmpty() && !textBaudrate.getText().isEmpty() && !textRegiao.getText().isEmpty() && !textAntena.getText().isEmpty() && !textProtocolo.getText().isEmpty() && !textPower.getText().isEmpty()){
-            gerenciador.postConectConfiguraLeitor(textIP.getText(), textPorta.getText(), textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText());
+        if (!textIP.getText().isEmpty() && !textUsuario.getText().isEmpty() && !textPortaSerial.getText().isEmpty() && !textBaudrate.getText().isEmpty() && !textRegiao.getText().isEmpty() && !textAntena.getText().isEmpty() && !textProtocolo.getText().isEmpty() && !textPower.getText().isEmpty() && !textSenha.getText().isEmpty()){
+            gerenciador.postConectConfiguraLeitor(textIP.getText(), textUsuario.getText(), textSenha.getText(), textPortaSerial.getText(), textBaudrate.getText(), textRegiao.getText(), textAntena.getText(), textProtocolo.getText(), textPower.getText());
             gerenciador.setTelaPrincipal(this);
             gerenciador.abrirTelaInicial();             
         } else{
@@ -317,9 +333,9 @@ public class Principal extends javax.swing.JFrame {
         }                       
     }//GEN-LAST:event_botaAvancarActionPerformed
 
-    private void textPortaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPortaActionPerformed
+    private void textUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textPortaActionPerformed
+    }//GEN-LAST:event_textUsuarioActionPerformed
 
     private void textProtocoloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textProtocoloActionPerformed
         // TODO add your handling code here:
@@ -350,8 +366,9 @@ public class Principal extends javax.swing.JFrame {
     * 
     */
     private void padraoBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_padraoBotaoActionPerformed
-        textIP.setText("augusto.ddns.net");
-        textPorta.setText("5021");
+        textIP.setText("tcp://node02.myqtthub.com:1883");//"tcp://pblredes.ddns.net:1883");//"tcp://node02.myqtthub.com:1883");
+        textUsuario.setText("Cliente2");//"pblredes");//"Cliente2");
+        textSenha.setText("12345");//"pblredes1234");//"12345");
         textPortaSerial.setText("tmr:///dev/ttyUSB0");
         textBaudrate.setText("230400");
         textRegiao.setText("NA2");
@@ -359,6 +376,10 @@ public class Principal extends javax.swing.JFrame {
         textProtocolo.setText("GEN2");
         textPower.setText("1500");
     }//GEN-LAST:event_padraoBotaoActionPerformed
+
+    private void textSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textSenhaActionPerformed
 
     /**
     * Início do programa.
@@ -405,6 +426,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -417,10 +439,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField textAntena;
     private javax.swing.JTextField textBaudrate;
     private javax.swing.JTextField textIP;
-    private javax.swing.JTextField textPorta;
     private javax.swing.JTextField textPortaSerial;
     private javax.swing.JTextField textPower;
     private javax.swing.JTextField textProtocolo;
     private javax.swing.JTextField textRegiao;
+    private javax.swing.JTextField textSenha;
+    private javax.swing.JTextField textUsuario;
     // End of variables declaration//GEN-END:variables
 }
