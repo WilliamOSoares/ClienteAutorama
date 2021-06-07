@@ -223,7 +223,6 @@ public class Comunication{
 
                 @Override
                 public void deliveryComplete(IMqttDeliveryToken imdt) {
-                    /*
                     try {
                         System.out.println("Delivery complete");
                         System.out.println(imdt.getClient());
@@ -231,8 +230,7 @@ public class Comunication{
                         System.out.println(imdt.getException());
                     } catch (Exception e) {
                         System.out.println(e);
-                    }*/
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
                 }
             });
             
@@ -365,6 +363,7 @@ public class Comunication{
     * @return Um JSON com todas as EPCs das tags nominadas por EPCn, n sendo um número real.
     */
     public JSONObject getEPC() {
+        //respostaConfig = " ";
         MqttMessage msgFuncao = new MqttMessage(("PegaEPC").getBytes());
         msgFuncao.setQos(0);
         msgFuncao.setRetained(false);
@@ -374,7 +373,7 @@ public class Comunication{
             Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
-        while(!respostaConfig.equals("EPC")){ }
+        while(!respostaConfig.equals("EPC")){System.out.println(respostaConfig);}
         if(!carros.isEmpty()){
             System.out.println(respostaConfig);
         }
