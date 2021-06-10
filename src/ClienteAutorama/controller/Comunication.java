@@ -169,8 +169,8 @@ public class Comunication{
                 @Override
                 public void messageArrived(String string, MqttMessage mm) throws Exception {
                     
-                    System.out.println(string);
-                    System.out.println(mm);
+                    //System.out.println(string);
+                    //System.out.println(mm);
                                        
                     if("Resposta/Config".equals(string)){
                         respostaConfig = mm.toString();
@@ -179,7 +179,56 @@ public class Comunication{
                     } else if (string.contains("LeitorRFID")){
                         String s[] = string.split("/");
                         if(respostaQuali.equals("OK") || respostaCorrida.equals("OK")){
-                             
+                            JSONObject recebe = new JSONObject();
+                            if(s.length == 2){
+                                if(carros.isEmpty()){
+                                    carros.add(new Carro(mm.toString()));                         
+                                } else {
+                                    boolean tem = false;
+                                    for (int i = 0; i < carros.size(); i++) {
+                                        if(carros.get(i).getEPC().contains(s[1])){
+                                            tem = true;
+                                        }
+                                    }
+                                    if(!tem){
+                                        carros.add(new Carro(mm.toString())); 
+                                    }
+                                }
+                            }
+                            else{
+                                if(string.contains("Tempo")){
+                                    for (int i = 0; i < carros.size(); i++) {
+                                        if(carros.get(i).getEPC().contains(s[1])){
+                                            carros.get(i).setTempo(mm.toString());
+                                        }    
+                                    }                                    
+                                } else if(string.contains("Ciclo")){
+                                    for (int i = 0; i < carros.size(); i++) {
+                                        if(carros.get(i).getEPC().contains(s[1])){
+                                            carros.get(i).setCiclo(mm.toString());
+                                        }    
+                                    }   
+                                } else {
+                                    System.out.println("rssi" +mm.toString());
+                                }   
+                                String a = "CARRO";
+                                String c = "TEMPO";
+                                String e = "CicloLeitura";
+                                String b;
+                                String d;
+                                for (int i = 0; i < carros.size(); i++) {
+                                    b = a+i;
+                                    d = c+i;
+                                    recebe.put(b, carros.get(i).getEPC());
+                                    recebe.put(d, carros.get(i).getTempo());
+                                    if(i==0){
+                                        recebe.put(e, carros.get(i).getCiclo());
+                                    }
+                                }
+                                //System.out.println(recebe.toString());
+                                recebido = recebe;
+                                //System.out.println(recebido.toString());
+                            }
                         } else{
                             if(carros.isEmpty()){
                                 carros.add(new Carro(mm.toString()));                         
@@ -194,25 +243,23 @@ public class Comunication{
                                     carros.add(new Carro(mm.toString())); 
                                 }
                             }
-                            if(string.contains("Tempo")){
-                                for (int i = 0; i < carros.size(); i++) {
-                                    if(carros.get(i).getEPC().contains(s[1])){
-                                        carros.get(i).setTempo(mm.toString());
-                                    }    
-                                }
-                            }
-                            if(string.contains("Ciclo")){
-                                for (int i = 0; i < carros.size(); i++) {
-                                    if(carros.get(i).getEPC().contains(s[1])){
-                                        carros.get(i).setCiclo(mm.toString());
-                                    }    
-                                }
-                            }   
                         }
                     } else if("Resposta/Quali".equals(string)){
                         respostaQuali = mm.toString();
+                        if(!respostaQuali.equals("OK")){
+                            JSONObject recebe = new JSONObject();
+                            recebe.put("status", respostaQuali);
+                            recebe.put("URL", "finalQuali");
+                            recebido = recebe;
+                        }
                     } else if("Resposta/Corrida".equals(string)){
                         respostaCorrida = mm.toString();
+                        if(!respostaCorrida.equals("OK")){
+                            JSONObject recebe = new JSONObject();
+                            recebe.put("status", respostaCorrida);
+                            recebe.put("URL", "finalCorrida");
+                            recebido = recebe;
+                        }
                     }
                 }
 

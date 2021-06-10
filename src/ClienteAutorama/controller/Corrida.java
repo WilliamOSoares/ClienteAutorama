@@ -146,9 +146,11 @@ public class Corrida implements Runnable{
     */
     public  void getAtualizacao() {
         gerenciador = GerenciadorTelas.getInstance();
+        
         while(!isFimQuali() || !isFimCorrida()){
+            
             while(!gerenciador.comunicacao.recebido.has("CicloLeitura") && !gerenciador.comunicacao.recebido.has("status")){ }
-                        
+            
             if(validaLeitura()){
                 for (int i = 0; i < leitura.size(); i++) {
                     for (int j = 0; j < pilotos.size(); j++) {
@@ -171,6 +173,7 @@ public class Corrida implements Runnable{
                 System.out.println("Ciclo pego: "+gerenciador.comunicacao.recebido.get("CicloLeitura"));
                 for (int i = 0; i < pilotos.size(); i++) {
                     System.out.println(pilotos.get(i).getNome()+" - Primeira Leitura:"+pilotos.get(i).isPrimeiraLeitura()+" - Leitura:"+pilotos.get(i).getTempoInit());
+                    //System.out.println(pilotos.get(i).getNome()+" - Tempo fim:"+pilotos.get(i).getTempoFinal()+" - tempo de volta:"+pilotos.get(i).getTempoVolta());
                 }
                 leitura.clear();
             }           
