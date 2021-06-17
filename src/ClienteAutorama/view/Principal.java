@@ -1,4 +1,4 @@
-//Cliente Autorama//
+//Cliente Autorama MQTT//
 /*******************************************************************************
 Autores: Víctor César da Rocha Bastos e William Oliveira Soares
 Componente Curricular: MI de Concorrência e Conectividade
@@ -366,9 +366,9 @@ public class Principal extends javax.swing.JFrame {
     * 
     */
     private void padraoBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_padraoBotaoActionPerformed
-        textIP.setText("tcp://node02.myqtthub.com:1883");//"tcp://pblredes.ddns.net:1883");//"tcp://node02.myqtthub.com:1883");
-        textUsuario.setText("Cliente2");//"pblredes");//"Cliente2");
-        textSenha.setText("12345");//"pblredes1234");//"12345");
+        textIP.setText("tcp://pblredes.ddns.net:1883");//"tcp://node02.myqtthub.com:1883");
+        textUsuario.setText("pblredes");//"Cliente2");
+        textSenha.setText("pblredes1234");//"12345");
         textPortaSerial.setText("tmr:///dev/ttyUSB0");
         textBaudrate.setText("230400");
         textRegiao.setText("NA2");

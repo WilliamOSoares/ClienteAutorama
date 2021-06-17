@@ -60,97 +60,10 @@ public class Comunication{
     * @param senha Senha do usuário do servidor MQTT
     */
     public void iniciaCliente(String ip, String usuario, String senha){
-        /*
-        try {
-            this.ip = ip;
-            cliente = new MqttClient(ip, "Cam1");//"Autorama2");
-            
-            cliente.setCallback(new MqttCallback() {
-
-                @Override
-                public void messageArrived(String string, MqttMessage mm) throws Exception {
-                    
-                    System.out.println(string);
-                    System.out.println(mm);
-                                       
-                    if("Resposta/Config".equals(string)){
-                        respostaConfig = mm.toString();
-                    } else if("Resposta/Confirm".equals(string)){
-                        respostaConfirm = mm.toString();
-                    } else if (string.contains("LeitorRFID")){
-                        String s[] = string.split("/");
-                        if(carros.isEmpty()){
-                            carros.add(new Carro(mm.toString()));                         
-                        } else {
-                            boolean tem = false;
-                            for (int i = 0; i < carros.size(); i++) {
-                                if(carros.get(i).getEPC().contains(s[1])){
-                                    tem = true;
-                                }
-                            }
-                            if(!tem){
-                                carros.add(new Carro(mm.toString())); 
-                            }
-                        }
-                        if(string.contains("Tempo")){
-                            for (int i = 0; i < carros.size(); i++) {
-                                if(carros.get(i).getEPC().contains(s[1])){
-                                    carros.get(i).setTempo(mm.toString());
-                                }    
-                            }
-                        }
-                        if(string.contains("Ciclo")){
-                            for (int i = 0; i < carros.size(); i++) {
-                                if(carros.get(i).getEPC().contains(s[1])){
-                                    carros.get(i).setCiclo(mm.toString());
-                                }    
-                            }
-                        }                        
-                    } else if("Resposta/Quali".equals(string)){
-                        respostaQuali = mm.toString();
-                    } else if("Resposta/Corrida".equals(string)){
-                        respostaCorrida = mm.toString();
-                    }
-                }
-
-                @Override
-                public void connectionLost(Throwable thrwbl) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                }
-
-                @Override
-                public void deliveryComplete(IMqttDeliveryToken imdt) {
-                    try {
-                        System.out.println("Delivery complete");
-                        System.out.println(imdt.getClient());
-                        System.out.println(imdt.getMessage());
-                        System.out.println(imdt.getException());
-                    } catch (Exception e) {
-                        System.out.println(e);
-                    }
-                }
-            });
-            
-            MqttConnectOptions mqttOptions = new MqttConnectOptions();
-            mqttOptions.setUserName(usuario);
-            mqttOptions.setPassword(senha.toCharArray());
-            mqttOptions.setAutomaticReconnect(true);
-            mqttOptions.setCleanSession(false);
-            
-            cliente.connect(mqttOptions);
-            cliente.subscribe("Resposta/#", 0);
-            cliente.subscribe("Qualificatorio/#", 0); 
-            cliente.subscribe("Corrida/#", 0); 
-            cliente.subscribe("LeitorRFID/#", 0);
-            cliente.subscribe("Config/Botao", 0);
-            System.out.println("Conectado");
-        } catch (MqttException ex) {
-            System.out.println(ex);
-        }
-        */
+        
         try{
             this.ip = ip;
-            cliente = new MqttClient(ip, "Autorama2");//"Cam1");//"Autorama2");
+            cliente = new MqttClient(ip, "ADM");//"Autorama2");
             MqttConnectOptions mqttOptions = new MqttConnectOptions();
             mqttOptions.setUserName(usuario);
             mqttOptions.setPassword(senha.toCharArray());
@@ -163,7 +76,7 @@ public class Comunication{
         }
         
         try{
-            cliente = new MqttClient(ip, "Autorama3");
+            cliente = new MqttClient(ip, "ADMsub");
             cliente.setCallback(new MqttCallback() {
 
                 @Override
@@ -282,8 +195,8 @@ public class Comunication{
             });
             
             MqttConnectOptions mqttOptions = new MqttConnectOptions();
-            mqttOptions.setUserName("Cliente3");
-            mqttOptions.setPassword("12345".toCharArray());
+            mqttOptions.setUserName("pblredes");
+            mqttOptions.setPassword("pblredes1234".toCharArray());
             mqttOptions.setAutomaticReconnect(true);
             mqttOptions.setCleanSession(false);
             
