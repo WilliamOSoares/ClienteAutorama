@@ -5,17 +5,22 @@
  */
 package clientetelespectador;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author willi
  */
 public class TelaInicial extends javax.swing.JFrame {
 
+    ClienteTelespectador gerenciador = ClienteTelespectador.getInstance();
+    
     /**
      * Creates new form TelaInicial
      */
     public TelaInicial() {
         initComponents();
+        ClienteTelespectador.getInstance().conectar();
     }
 
     /**
@@ -27,21 +32,62 @@ public class TelaInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jButton1.setText("Teste");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 765, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(321, 321, 321)
+                .addComponent(jButton1)
+                .addContainerGap(382, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 405, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(181, 181, 181)
+                .addComponent(jButton1)
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        gerenciador = ClienteTelespectador.getInstance();
+        System.out.println("################    Teste   #######################");
+        System.out.println("Etapa: " + gerenciador.getEtapa());
+        System.out.println("Tempo do Quali: " + gerenciador.getTempoQuali());
+        System.out.println("Num de Voltas: " + gerenciador.getNumVoltas());
+        System.out.println("Pista: " + gerenciador.getNomePista());
+        System.out.println("Autor do record: " + gerenciador.getRecordista());
+        System.out.println("Record: " + gerenciador.getRecord());
+        ArrayList<Piloto> pilotos = gerenciador.getPilotos();
+        for(int i=0; i < pilotos.size(); i++){
+            System.out.println("##################################");
+            System.out.println("Piloto: " + Integer.toString(i));
+            System.out.println("Nome: " +pilotos.get(i).getNome());
+            System.out.println("Carro: " +pilotos.get(i).getCarro());
+            System.out.println("Equipe: " +pilotos.get(i).getEquipe());
+            System.out.println("Pos: " +pilotos.get(i).getPos());
+            System.out.println("Voltas: " +pilotos.get(i).getVoltas());
+            System.out.println("Tempo da volta: " +pilotos.get(i).getTempoVolta());
+            System.out.println("Melhor volta: " +pilotos.get(i).getTempoMelhor());
+            System.out.println("Tempo geral: " +pilotos.get(i).getTempoGeral());
+            System.out.println("Tempo para o da frente: " +pilotos.get(i).getTempoCima());
+            System.out.println("Tempo para o de trás: " +pilotos.get(i).getTempoBaixo());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +125,6 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

@@ -151,6 +151,12 @@ public class Corrida implements Runnable{
             
             while(!gerenciador.comunicacao.recebido.has("CicloLeitura") && !gerenciador.comunicacao.recebido.has("status")){ }
             
+            //Dormir por 3 segundos
+            LocalDateTime antes = LocalDateTime.now();
+            LocalDateTime agora = LocalDateTime.now();
+            while((agora.minusHours(antes.getHour()).minusMinutes(antes.getMinute()).minusSeconds(antes.getSecond())).getSecond() < 3){agora = LocalDateTime.now(); }
+            
+            
             if(validaLeitura()){
                 for (int i = 0; i < leitura.size(); i++) {
                     for (int j = 0; j < pilotos.size(); j++) {
@@ -183,7 +189,8 @@ public class Corrida implements Runnable{
                 this.pilotos = this.insertionSort(pilotos);
                 if (pilotos.get(0).getMelhorSec()!=0){
                     pistaLocal.novoRecord(pilotos.get(0));
-                }                
+                }
+                gerenciador.enviaDadosFan(pilotos, pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), "quali");
             }    
             
             if(pilotos.get(0).getVoltas()>0 && !isFimCorrida()){
@@ -191,7 +198,8 @@ public class Corrida implements Runnable{
                 this.pilotos = this.insertionSortCorrida(pilotos);
                 for (int i = 0; i <pilotos.size(); i++) {
                     pistaLocal.novoRecord(pilotos.get(i));
-                } 
+                }
+                gerenciador.enviaDadosFan(pilotos, pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), "corrida");
             } 
             
             if (gerenciador.comunicacao.recebido.has("Botao")){
@@ -255,13 +263,12 @@ public class Corrida implements Runnable{
                 }                
             }
             
-            System.out.println(gerenciador.comunicacao.recebido.toString());
-            if(gerenciador.comunicacao.recebido.has("CicloLeitura")){
-                System.out.println("Ciclo antes de apagar: "+gerenciador.comunicacao.recebido.get("CicloLeitura"));
-            }    
+            System.out.println(gerenciador.comunicacao.recebido.toString());  
             gerenciador.comunicacao.recebido.clear();
         }
         System.out.println("Passou direto");
+        gerenciador.comunicacao.recebido.clear();
+        gerenciador.comunicacao.carros.clear();
     }
     
     /**

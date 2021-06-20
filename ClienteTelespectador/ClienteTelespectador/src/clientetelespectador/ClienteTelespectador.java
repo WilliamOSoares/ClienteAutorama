@@ -11,6 +11,7 @@ do código, e estou ciente que estes trechos não serão considerados para fins 
 ***************************************************************************************/
 package clientetelespectador;
 
+import java.util.ArrayList;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -26,6 +27,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 public class ClienteTelespectador {
 
     public MqttClient cliente; 
+    public ArrayList<Piloto> pilotos = new ArrayList();
+    public String etapa, tempoQuali, nomePista, recordista, record, numVoltas;
     
     /**
      * @param args the command line arguments
@@ -55,6 +58,9 @@ public class ClienteTelespectador {
 	return uniqueInstance;
     }
     
+    /**
+     * Conecta com o broker e se inscreve no tópico fan/#.
+     */
     public void conectar(){
         try{
             cliente = new MqttClient("tcp://pblredes.ddns.net:1883", "FanSub");
@@ -63,9 +69,167 @@ public class ClienteTelespectador {
                 @Override
                 public void messageArrived(String string, MqttMessage mm) throws Exception {
                     
-                    System.out.println(string);
-                    System.out.println(mm);
-                                 
+                    //System.out.println(string);
+                    //System.out.println(mm);
+                    
+                    if(string.contains("piloto")){
+                        String s[] = string.split("/");
+                        if(s[1].equals("piloto0")){
+                            if(s[2].equals("nome")){
+                                if(pilotos.isEmpty()){
+                                    pilotos.add(new Piloto(mm.toString()));
+                                } else {
+                                    pilotos.get(0).setNome(mm.toString());
+                                } 
+                            } else if(s[2].equals("equipe")){
+                                pilotos.get(0).setEquipe(mm.toString());
+                            } else if(s[2].equals("posicao")){
+                                pilotos.get(0).setPos(mm.toString());
+                            } else if(s[2].equals("carro")){
+                                pilotos.get(0).setCarro(mm.toString());
+                            } else if(s[2].equals("voltas")){
+                                pilotos.get(0).setVoltas(mm.toString());
+                            } else if(s[2].equals("tempoGeral")){
+                                pilotos.get(0).setTempoGeral(mm.toString());
+                            } else if(s[2].equals("tempoVolta")){
+                                pilotos.get(0).setTempoVolta(mm.toString());
+                            } else if(s[2].equals("tempoMelhor")){
+                                pilotos.get(0).setTempoMelhor(mm.toString());
+                            } else if(s[2].equals("tempoCima")){
+                                pilotos.get(0).setTempoCima(mm.toString());
+                            } else if(s[2].equals("tempoBaixo")){
+                                pilotos.get(0).setTempoBaixo(mm.toString());
+                            } else{
+                                System.out.println(mm.toString());
+                            }                            
+                        } else if(s[1].equals("piloto1")){
+                            if(s[2].equals("nome")){
+                                if(pilotos.size()==1){
+                                    pilotos.add(new Piloto(mm.toString()));
+                                } else {
+                                    pilotos.get(1).setNome(mm.toString());
+                                } 
+                            } else if(s[2].equals("equipe")){
+                                pilotos.get(1).setEquipe(mm.toString());
+                            } else if(s[2].equals("posicao")){
+                                pilotos.get(1).setPos(mm.toString());
+                            } else if(s[2].equals("carro")){
+                                pilotos.get(1).setCarro(mm.toString());
+                            } else if(s[2].equals("voltas")){
+                                pilotos.get(1).setVoltas(mm.toString());
+                            } else if(s[2].equals("tempoGeral")){
+                                pilotos.get(1).setTempoGeral(mm.toString());
+                            } else if(s[2].equals("tempoVolta")){
+                                pilotos.get(1).setTempoVolta(mm.toString());
+                            } else if(s[2].equals("tempoMelhor")){
+                                pilotos.get(1).setTempoMelhor(mm.toString());
+                            } else if(s[2].equals("tempoCima")){
+                                pilotos.get(1).setTempoCima(mm.toString());
+                            } else if(s[2].equals("tempoBaixo")){
+                                pilotos.get(1).setTempoBaixo(mm.toString());
+                            } else{
+                                System.out.println(mm.toString());
+                            }                            
+                        } else if(s[1].equals("piloto2")){
+                            if(s[2].equals("nome")){
+                                if(pilotos.size()==2){
+                                    pilotos.add(new Piloto(mm.toString()));
+                                } else {
+                                    pilotos.get(2).setNome(mm.toString());
+                                } 
+                            } else if(s[2].equals("equipe")){
+                                pilotos.get(2).setEquipe(mm.toString());
+                            } else if(s[2].equals("posicao")){
+                                pilotos.get(2).setPos(mm.toString());
+                            } else if(s[2].equals("carro")){
+                                pilotos.get(2).setCarro(mm.toString());
+                            } else if(s[2].equals("voltas")){
+                                pilotos.get(2).setVoltas(mm.toString());
+                            } else if(s[2].equals("tempoGeral")){
+                                pilotos.get(2).setTempoGeral(mm.toString());
+                            } else if(s[2].equals("tempoVolta")){
+                                pilotos.get(2).setTempoVolta(mm.toString());
+                            } else if(s[2].equals("tempoMelhor")){
+                                pilotos.get(2).setTempoMelhor(mm.toString());
+                            } else if(s[2].equals("tempoCima")){
+                                pilotos.get(2).setTempoCima(mm.toString());
+                            } else if(s[2].equals("tempoBaixo")){
+                                pilotos.get(2).setTempoBaixo(mm.toString());
+                            } else{
+                                System.out.println(mm.toString());
+                            }                            
+                        } else if(s[1].equals("piloto3")){
+                            if(s[2].equals("nome")){
+                                if(pilotos.size()==3){
+                                    pilotos.add(new Piloto(mm.toString()));
+                                } else {
+                                    pilotos.get(3).setNome(mm.toString());
+                                } 
+                            } else if(s[2].equals("equipe")){
+                                pilotos.get(3).setEquipe(mm.toString());
+                            } else if(s[2].equals("posicao")){
+                                pilotos.get(3).setPos(mm.toString());
+                            } else if(s[2].equals("carro")){
+                                pilotos.get(3).setCarro(mm.toString());
+                            } else if(s[2].equals("voltas")){
+                                pilotos.get(3).setVoltas(mm.toString());
+                            } else if(s[2].equals("tempoGeral")){
+                                pilotos.get(3).setTempoGeral(mm.toString());
+                            } else if(s[2].equals("tempoVolta")){
+                                pilotos.get(3).setTempoVolta(mm.toString());
+                            } else if(s[2].equals("tempoMelhor")){
+                                pilotos.get(3).setTempoMelhor(mm.toString());
+                            } else if(s[2].equals("tempoCima")){
+                                pilotos.get(3).setTempoCima(mm.toString());
+                            } else if(s[2].equals("tempoBaixo")){
+                                pilotos.get(3).setTempoBaixo(mm.toString());
+                            } else{
+                                System.out.println(mm.toString());
+                            }                            
+                        } else{
+                            if(s[2].equals("nome")){
+                                if(pilotos.size()==4){
+                                    pilotos.add(new Piloto(mm.toString()));
+                                } else {
+                                    pilotos.get(4).setNome(mm.toString());
+                                } 
+                            } else if(s[2].equals("equipe")){
+                                pilotos.get(4).setEquipe(mm.toString());
+                            } else if(s[2].equals("posicao")){
+                                pilotos.get(4).setPos(mm.toString());
+                            } else if(s[2].equals("carro")){
+                                pilotos.get(4).setCarro(mm.toString());
+                            } else if(s[2].equals("voltas")){
+                                pilotos.get(4).setVoltas(mm.toString());
+                            } else if(s[2].equals("tempoGeral")){
+                                pilotos.get(4).setTempoGeral(mm.toString());
+                            } else if(s[2].equals("tempoVolta")){
+                                pilotos.get(4).setTempoVolta(mm.toString());
+                            } else if(s[2].equals("tempoMelhor")){
+                                pilotos.get(4).setTempoMelhor(mm.toString());
+                            } else if(s[2].equals("tempoCima")){
+                                pilotos.get(4).setTempoCima(mm.toString());
+                            } else if(s[2].equals("tempoBaixo")){
+                                pilotos.get(4).setTempoBaixo(mm.toString());
+                            } else{
+                                System.out.println(mm.toString());
+                            }                            
+                        }                   
+                    } else if (string.equals("fan/tempoQuali")){
+                        tempoQuali = mm.toString();
+                    } else if (string.equals("fan/nomePista")){
+                        nomePista = mm.toString();
+                    } else if (string.equals("fan/recordista")){
+                        recordista = mm.toString();
+                    } else if (string.equals("fan/record")){
+                        record = mm.toString();
+                    } else if (string.equals("fan/numVoltas")){
+                        numVoltas = mm.toString();
+                    }  else if (string.equals("fan/etapa")){
+                        etapa = mm.toString();
+                    } else {
+                        System.out.println(mm.toString());
+                    }                   
                 }
 
                 @Override
@@ -93,11 +257,7 @@ public class ClienteTelespectador {
             mqttOptions.setCleanSession(false);
             
             cliente.connect(mqttOptions);
-            cliente.subscribe("ConfigLeitor/#", 0);
-            cliente.subscribe("Config/#", 0); 
-            cliente.subscribe("Function/#", 0); 
-            cliente.subscribe("LeitorRFID/#", 0);
-            cliente.subscribe("Config/Botao", 0);
+            cliente.subscribe("fan/#", 0);
             System.out.println("Conectado");
             
         } catch (MqttException ex) {
@@ -106,7 +266,61 @@ public class ClienteTelespectador {
     
     }
     
-    
+    /**
+     * Pega os pilotos
+     * @return pilotos
+     */
+    public ArrayList<Piloto> getPilotos(){
+        return pilotos;
+    }
+
+    /**
+     * Pega a etapa que está ocorrendo
+     * @return Quali ou Corrida
+     */
+    public String getEtapa() {
+        return etapa;
+    }
+
+    /**
+     * Pega o tempo do qualificatório
+     * @return tempo
+     */
+    public String getTempoQuali() {
+        return tempoQuali;
+    }
+
+    /**
+     * Pega o nome da pista
+     * @return nome da pista
+     */
+    public String getNomePista() {
+        return nomePista;
+    }
+
+    /**
+     * Pega o nome do autor do record
+     * @return nome do recordista
+     */
+    public String getRecordista() {
+        return recordista;
+    }
+
+    /**
+     * Pega o record da pista
+     * @return o tempo record
+     */
+    public String getRecord() {
+        return record;
+    }
+
+    /**
+     * Pega o numero de voltas da corrida
+     * @return numero de voltas
+     */
+    public String getNumVoltas() {
+        return numVoltas;
+    }    
     
     
 }

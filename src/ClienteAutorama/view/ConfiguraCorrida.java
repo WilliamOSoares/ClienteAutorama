@@ -409,6 +409,7 @@ public class ConfiguraCorrida extends javax.swing.JFrame {
                 gerenciador.corrida.setFimQuali(false);
                 gerenciador.corrida.setFimCorrida(false);
                 gerenciador.setTelaConfig(this);
+                gerenciador.enviaConfigFan(tQuali.getValue().toString(), nVoltas.getValue().toString(), local.getNome()+" - "+local.getPais(),local.getRecordista(), local.getTempoRecordPista(),participantes);
                 gerenciador.abrirQualificatorio(participantes, (int)nVoltas.getValue(), tQuali.getValue().toString(), local);
             }
         }

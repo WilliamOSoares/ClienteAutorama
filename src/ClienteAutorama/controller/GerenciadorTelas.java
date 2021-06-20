@@ -441,5 +441,33 @@ public class GerenciadorTelas {
     public void setPlay(boolean play){
         this.play = play;
     }
+
+    /**
+    * Manda as configurações inicias para o cliente telespectador.
+    * 
+    * 
+    * @param tQuali tempo do qualificatório
+    * @param nVoltas número de voltas
+    * @param pista nome da pista
+    * @param recordista nome do recordista
+    * @param tempoRecordPista tempo record da pista
+    * @param participantes corredores
+    */
+    public void enviaConfigFan(String tQuali, String nVoltas, String pista, String recordista, String tempoRecordPista, ArrayList<Piloto> participantes) {
+        comunicacao.enviaConfigFan(tQuali, nVoltas, pista, recordista, tempoRecordPista, participantes);
+    }
+
+    /**
+    * Manda as configurações da corrida e qualificatório para o cliente telespectador.
+    * 
+    * 
+    * @param pilotos pilotos da corrida
+    * @param recordista nome do recordista
+    * @param tempoRecordPista tempo record da pista
+    */
+    public void enviaDadosFan(ArrayList<Piloto> pilotos, String recordista, String tempoRecordPista, String etapa) {
+        comunicacao.enviaDadosFan(pilotos, recordista, tempoRecordPista, etapa);
+    }
+    
     
 }
