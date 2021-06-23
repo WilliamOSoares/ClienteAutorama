@@ -1,15 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package clientetelespectador;
 
+import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import org.eclipse.paho.client.mqttv3.MqttException;
 
 /**
- *
- * @author willi
+ * Classe da tela inicial.
+ * 
+ * @author Víctor César e William Soares.
  */
 public class TelaInicial extends javax.swing.JFrame {
 
@@ -19,8 +20,13 @@ public class TelaInicial extends javax.swing.JFrame {
      * Creates new form TelaInicial
      */
     public TelaInicial() {
-        initComponents();
+        initComponents();        
+        this.setTitle("Autorama");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("car.png")));
+        setResizable(false);
         ClienteTelespectador.getInstance().conectar();
+        gerenciador = ClienteTelespectador.getInstance();
+        gerenciador.setIni(this);
     }
 
     /**
@@ -32,9 +38,16 @@ public class TelaInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        quali = new javax.swing.JButton();
+        botaoCorrida = new javax.swing.JButton();
+        sair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButton1.setText("Teste");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -43,21 +56,81 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Ink Free", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel1.setText("TELA INICIAL");
+
+        quali.setText("QUALIFICATÓRIO");
+        quali.setToolTipText("");
+        quali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                qualiActionPerformed(evt);
+            }
+        });
+
+        botaoCorrida.setText("CORRIDA");
+        botaoCorrida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCorridaActionPerformed(evt);
+            }
+        });
+
+        sair.setText("SAIR");
+        sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sairActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(103, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(108, 108, 108)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botaoCorrida, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(quali, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(quali, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(botaoCorrida, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(321, 321, 321)
-                .addComponent(jButton1)
-                .addContainerGap(382, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(181, 181, 181)
-                .addComponent(jButton1)
-                .addContainerGap(192, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -67,7 +140,7 @@ public class TelaInicial extends javax.swing.JFrame {
         gerenciador = ClienteTelespectador.getInstance();
         System.out.println("################    Teste   #######################");
         System.out.println("Etapa: " + gerenciador.getEtapa());
-        System.out.println("Tempo do Quali: " + gerenciador.getTempoQuali());
+        System.out.println("Tempo do Quali: " + gerenciador.getTempoQualiMin()+":"+gerenciador.getTempoQualiSec());
         System.out.println("Num de Voltas: " + gerenciador.getNumVoltas());
         System.out.println("Pista: " + gerenciador.getNomePista());
         System.out.println("Autor do record: " + gerenciador.getRecordista());
@@ -88,6 +161,38 @@ public class TelaInicial extends javax.swing.JFrame {
             System.out.println("Tempo para o de trás: " +pilotos.get(i).getTempoBaixo());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void qualiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qualiActionPerformed
+        gerenciador = ClienteTelespectador.getInstance();
+        if(gerenciador.getEtapa()==null){
+            JOptionPane.showMessageDialog(null, "Nem o qualificatório e nem a corrida começou. Espere!!!", null, WIDTH); 
+        }else if(gerenciador.getEtapa().equals("quali")){
+            gerenciador.telaInicialParaQuali();           
+        } else if(gerenciador.getEtapa().equals("corrida")){
+            JOptionPane.showMessageDialog(null, "A corrida já começou!!!", null, WIDTH);
+        }
+    }//GEN-LAST:event_qualiActionPerformed
+
+    private void botaoCorridaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCorridaActionPerformed
+        gerenciador = ClienteTelespectador.getInstance();
+        if(gerenciador.getEtapa()==null){
+            JOptionPane.showMessageDialog(null, "Nem o qualificatório e nem a corrida começou. Espere!!!", null, WIDTH); 
+        }else if(gerenciador.getEtapa().equals("quali")){
+            JOptionPane.showMessageDialog(null, "O qualificatório está em andamento!!!", null, WIDTH);            
+        } else if(gerenciador.getEtapa().equals("corrida")){
+            gerenciador.telaInicialParaCorrida();
+        }
+    }//GEN-LAST:event_botaoCorridaActionPerformed
+
+    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
+        gerenciador = ClienteTelespectador.getInstance();
+        try {
+            gerenciador.cliente.disconnect();
+        } catch (MqttException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.exit(0);
+    }//GEN-LAST:event_sairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,6 +230,11 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoCorrida;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton quali;
+    private javax.swing.JButton sair;
     // End of variables declaration//GEN-END:variables
 }

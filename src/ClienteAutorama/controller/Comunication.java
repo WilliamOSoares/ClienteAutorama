@@ -469,6 +469,7 @@ public class Comunication{
     * @param recordista nome do recordista
     * @param tempoRecordPista tempo record da pista
     * @param pilotos corredores
+    * @param etapa etapa de corrida ou qualificatório
     */
     public void enviaDadosFan(ArrayList<Piloto> pilotos, String recordista, String tempoRecordPista, String etapa) {
         MqttMessage msgTempoRecord = new MqttMessage((tempoRecordPista).getBytes());
@@ -499,128 +500,131 @@ public class Comunication{
             clientePub.publish("fan/record", msgTempoRecord);
             clientePub.publish("fan/etapa", msgEtapa);
             
-            for(int i = 0; i < pilotos.size(); i++){
-                
-                msgNome = new MqttMessage((pilotos.get(i).getNome()).getBytes());
-                msgNome.setQos(0);
-                msgNome.setRetained(false);
-                msgEquipe = new MqttMessage((pilotos.get(i).getEquipe().getNome()).getBytes());
-                msgEquipe.setQos(0);
-                msgEquipe.setRetained(false);
-                msgPos = new MqttMessage(Integer.toString(i+1).getBytes());
-                msgPos.setQos(0);
-                msgPos.setRetained(false);
-                msgCarro = new MqttMessage(pilotos.get(i).getCarro().getEPC().getBytes());
-                msgCarro.setQos(0);
-                msgCarro.setRetained(false);
-                msgVoltas = new MqttMessage(Integer.toString(pilotos.get(i).getVoltas()).getBytes());
-                msgVoltas.setQos(0);
-                msgVoltas.setRetained(false);
-                msgTempoGeral = new MqttMessage(pilotos.get(i).getTempoGeral().getBytes());
-                msgTempoGeral.setQos(0);
-                msgTempoGeral.setRetained(false);
-                msgTempoVolta = new MqttMessage(pilotos.get(i).getTempoVolta().getBytes());
-                msgTempoVolta.setQos(0);
-                msgTempoVolta.setRetained(false);
-                String s = ".";
-                int segundo = pilotos.get(i).getMelhorSec();
-                int min = segundo/60;
-                int sec = segundo%60;
-                if(pilotos.get(i).getMelhorMili() <10){
-                    s = ".00";
-                } else if(pilotos.get(i).getMelhorMili() <100){
-                    s = ".0";
-                }
-                String melhorVolta = min +":"+sec+s+pilotos.get(i).getMelhorMili();
-                msgTempoMelhor = new MqttMessage(melhorVolta.getBytes());
-                msgTempoMelhor.setQos(0);
-                msgTempoMelhor.setRetained(false);
-                if(i==0){
-                    msgTempoCima = new MqttMessage("0".getBytes());
-                    msgTempoCima.setQos(0);
-                    msgTempoCima.setRetained(false);
-                } else{
-                    int first, second;
-                    String k = ".";
-                    if(pilotos.get(i).getMelhorMili() < pilotos.get(i-1).getMelhorMili()){
-                        second = (pilotos.get(i).getMelhorMili()+1000) - pilotos.get(i-1).getMelhorMili();
-                        first = (pilotos.get(i).getMelhorSec()-1) - pilotos.get(i-1).getMelhorSec();
-                        if(second <10){
-                            k = ".00";
-                        } else if(second<100){
-                            k = ".0";
-                        }
-                    } else{
-                        first = pilotos.get(i).getMelhorSec() - pilotos.get(i-1).getMelhorSec();
-                        second = pilotos.get(i).getMelhorMili() - pilotos.get(i-1).getMelhorMili();
-                        if(second <10){
-                            k = ".00";
-                        } else if(second<100){
-                            k = ".0";
-                        }
+            if(pilotos.get(0).getTempoVolta()==null){
+                System.out.println("Enviando a corrida acabada");
+            } else {
+                for(int i = 0; i < pilotos.size(); i++){
 
-                    }                                          
-                    String msg = "+" + first + k + second;
-                    msgTempoCima = new MqttMessage(msg.getBytes());
-                    msgTempoCima.setQos(0);
-                    msgTempoCima.setRetained(false);
-                }
-                if(i==pilotos.size()-1){
-                    msgTempoBaixo = new MqttMessage("0".getBytes());
-                    msgTempoBaixo.setQos(0);
-                    msgTempoBaixo.setRetained(false);
-                } else{
-                    int first, second;
-                    String k = ".";
-                    if(pilotos.get(i+1).getMelhorMili() < pilotos.get(i).getMelhorMili()){
-                        second = (pilotos.get(i+1).getMelhorMili()+1000) - pilotos.get(i).getMelhorMili();
-                        first = (pilotos.get(i+1).getMelhorSec()-1) - pilotos.get(i).getMelhorSec();
-                        if(second <10){
-                            k = ".00";
-                        } else if(second<100){
-                            k = ".0";
-                        }
+                    msgNome = new MqttMessage((pilotos.get(i).getNome()).getBytes());
+                    msgNome.setQos(0);
+                    msgNome.setRetained(false);
+                    msgEquipe = new MqttMessage((pilotos.get(i).getEquipe().getNome()).getBytes());
+                    msgEquipe.setQos(0);
+                    msgEquipe.setRetained(false);
+                    msgPos = new MqttMessage(Integer.toString(i+1).getBytes());
+                    msgPos.setQos(0);
+                    msgPos.setRetained(false);
+                    msgCarro = new MqttMessage(pilotos.get(i).getCarro().getEPC().getBytes());
+                    msgCarro.setQos(0);
+                    msgCarro.setRetained(false);
+                    msgVoltas = new MqttMessage(Integer.toString(pilotos.get(i).getVoltas()).getBytes());
+                    msgVoltas.setQos(0);
+                    msgVoltas.setRetained(false);
+                    msgTempoGeral = new MqttMessage(pilotos.get(i).getTempoGeral().getBytes());
+                    msgTempoGeral.setQos(0);
+                    msgTempoGeral.setRetained(false);
+                    msgTempoVolta = new MqttMessage(pilotos.get(i).getTempoVolta().getBytes());
+                    msgTempoVolta.setQos(0);
+                    msgTempoVolta.setRetained(false);
+                    String s = ".";
+                    int segundo = pilotos.get(i).getMelhorSec();
+                    int min = segundo/60;
+                    int sec = segundo%60;
+                    if(pilotos.get(i).getMelhorMili() <10){
+                        s = ".00";
+                    } else if(pilotos.get(i).getMelhorMili() <100){
+                        s = ".0";
+                    }
+                    String melhorVolta = min +":"+sec+s+pilotos.get(i).getMelhorMili();
+                    msgTempoMelhor = new MqttMessage(melhorVolta.getBytes());
+                    msgTempoMelhor.setQos(0);
+                    msgTempoMelhor.setRetained(false);
+                    if(i==0){
+                        msgTempoCima = new MqttMessage("0".getBytes());
+                        msgTempoCima.setQos(0);
+                        msgTempoCima.setRetained(false);
                     } else{
-                        first = pilotos.get(i+1).getMelhorSec() - pilotos.get(i).getMelhorSec();
-                        second = pilotos.get(i+1).getMelhorMili() - pilotos.get(i).getMelhorMili();
-                        if(second <10){
-                            k = ".00";
-                        } else if(second<100){
-                            k = ".0";
-                        }
+                        int first, second;
+                        String k = ".";
+                        if(pilotos.get(i).getMelhorMili() < pilotos.get(i-1).getMelhorMili()){
+                            second = (pilotos.get(i).getMelhorMili()+1000) - pilotos.get(i-1).getMelhorMili();
+                            first = (pilotos.get(i).getMelhorSec()-1) - pilotos.get(i-1).getMelhorSec();
+                            if(second <10){
+                                k = ".00";
+                            } else if(second<100){
+                                k = ".0";
+                            }
+                        } else{
+                            first = pilotos.get(i).getMelhorSec() - pilotos.get(i-1).getMelhorSec();
+                            second = pilotos.get(i).getMelhorMili() - pilotos.get(i-1).getMelhorMili();
+                            if(second <10){
+                                k = ".00";
+                            } else if(second<100){
+                                k = ".0";
+                            }
 
-                    }                                          
-                    String msg = "+" + first + k + second;
-                    msgTempoBaixo = new MqttMessage(msg.getBytes());
-                    msgTempoBaixo.setQos(0);
-                    msgTempoBaixo.setRetained(false);
-                }
-                
-                
-                
-                topico = topic + Integer.toString(i) + "/nome";                
-                clientePub.publish(topico, msgNome);
-                topico = topic + Integer.toString(i) + "/equipe"; 
-                clientePub.publish(topico, msgEquipe);
-                topico = topic + Integer.toString(i) + "/posicao"; 
-                clientePub.publish(topico, msgPos);
-                topico = topic + Integer.toString(i) + "/carro"; 
-                clientePub.publish(topico, msgCarro);
-                topico = topic + Integer.toString(i) + "/voltas"; 
-                clientePub.publish(topico, msgVoltas);
-                topico = topic + Integer.toString(i) + "/tempoGeral"; 
-                clientePub.publish(topico, msgTempoGeral);
-                topico = topic + Integer.toString(i) + "/tempoVolta"; 
-                clientePub.publish(topico, msgTempoVolta);
-                topico = topic + Integer.toString(i) + "/tempoMelhor"; 
-                clientePub.publish(topico, msgTempoMelhor);
-                topico = topic + Integer.toString(i) + "/tempoCima"; 
-                clientePub.publish(topico, msgTempoCima);
-                topico = topic + Integer.toString(i) + "/tempoBaixo"; 
-                clientePub.publish(topico, msgTempoBaixo);
-                
-            }            
-            
+                        }                                          
+                        String msg = "+" + first + k + second;
+                        msgTempoCima = new MqttMessage(msg.getBytes());
+                        msgTempoCima.setQos(0);
+                        msgTempoCima.setRetained(false);
+                    }
+                    if(i==pilotos.size()-1){
+                        msgTempoBaixo = new MqttMessage("0".getBytes());
+                        msgTempoBaixo.setQos(0);
+                        msgTempoBaixo.setRetained(false);
+                    } else{
+                        int first, second;
+                        String k = ".";
+                        if(pilotos.get(i+1).getMelhorMili() < pilotos.get(i).getMelhorMili()){
+                            second = (pilotos.get(i+1).getMelhorMili()+1000) - pilotos.get(i).getMelhorMili();
+                            first = (pilotos.get(i+1).getMelhorSec()-1) - pilotos.get(i).getMelhorSec();
+                            if(second <10){
+                                k = ".00";
+                            } else if(second<100){
+                                k = ".0";
+                            }
+                        } else{
+                            first = pilotos.get(i+1).getMelhorSec() - pilotos.get(i).getMelhorSec();
+                            second = pilotos.get(i+1).getMelhorMili() - pilotos.get(i).getMelhorMili();
+                            if(second <10){
+                                k = ".00";
+                            } else if(second<100){
+                                k = ".0";
+                            }
+
+                        }                                          
+                        String msg = "+" + first + k + second;
+                        msgTempoBaixo = new MqttMessage(msg.getBytes());
+                        msgTempoBaixo.setQos(0);
+                        msgTempoBaixo.setRetained(false);
+                    }
+
+
+
+                    topico = topic + Integer.toString(i) + "/nome";                
+                    clientePub.publish(topico, msgNome);
+                    topico = topic + Integer.toString(i) + "/equipe"; 
+                    clientePub.publish(topico, msgEquipe);
+                    topico = topic + Integer.toString(i) + "/posicao"; 
+                    clientePub.publish(topico, msgPos);
+                    topico = topic + Integer.toString(i) + "/carro"; 
+                    clientePub.publish(topico, msgCarro);
+                    topico = topic + Integer.toString(i) + "/voltas"; 
+                    clientePub.publish(topico, msgVoltas);
+                    topico = topic + Integer.toString(i) + "/tempoGeral"; 
+                    clientePub.publish(topico, msgTempoGeral);
+                    topico = topic + Integer.toString(i) + "/tempoVolta"; 
+                    clientePub.publish(topico, msgTempoVolta);
+                    topico = topic + Integer.toString(i) + "/tempoMelhor"; 
+                    clientePub.publish(topico, msgTempoMelhor);
+                    topico = topic + Integer.toString(i) + "/tempoCima"; 
+                    clientePub.publish(topico, msgTempoCima);
+                    topico = topic + Integer.toString(i) + "/tempoBaixo"; 
+                    clientePub.publish(topico, msgTempoBaixo);
+
+                }            
+            }
         } catch (MqttException ex) {
             Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);

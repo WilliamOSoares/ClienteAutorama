@@ -1,6 +1,7 @@
 package ClienteAutorama.controller;
 
 import ClienteAutorama.model.Carro;
+import ClienteAutorama.model.Equipe;
 import ClienteAutorama.model.Piloto;
 import ClienteAutorama.model.Pista;
 import static java.awt.image.ImageObserver.WIDTH;
@@ -149,7 +150,21 @@ public class Corrida implements Runnable{
         
         while(!isFimQuali() || !isFimCorrida()){
             
-            while(!gerenciador.comunicacao.recebido.has("CicloLeitura") && !gerenciador.comunicacao.recebido.has("status")){ }
+            LocalDateTime antesDoEnvio = LocalDateTime.now();
+            int tempoDeEnvio = 5;
+            while(!gerenciador.comunicacao.recebido.has("CicloLeitura") && !gerenciador.comunicacao.recebido.has("status")){ 
+                LocalDateTime EnviaAgora = LocalDateTime.now();
+                if((EnviaAgora.minusHours(antesDoEnvio.getHour()).minusMinutes(antesDoEnvio.getMinute()).minusSeconds(antesDoEnvio.getSecond())).getSecond() > tempoDeEnvio){
+                    if(!isFimQuali()){
+                        gerenciador.enviaConfigFan(tempQuali, Integer.toString(numVoltas), pistaLocal.getNome() +" - "+ pistaLocal.getPais(), pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), pilotos);
+                        gerenciador.enviaDadosFan(pilotos, pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), "quali");
+                    } else{
+                        gerenciador.enviaConfigFan(tempQuali, Integer.toString(numVoltas), pistaLocal.getNome() +" - "+ pistaLocal.getPais(), pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), pilotos);
+                        gerenciador.enviaDadosFan(pilotos, pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), "corrida");
+                    }
+                    tempoDeEnvio = tempoDeEnvio + 5;
+                }
+            }
             
             //Dormir por 3 segundos
             LocalDateTime antes = LocalDateTime.now();
@@ -190,6 +205,7 @@ public class Corrida implements Runnable{
                 if (pilotos.get(0).getMelhorSec()!=0){
                     pistaLocal.novoRecord(pilotos.get(0));
                 }
+                gerenciador.enviaConfigFan(tempQuali, Integer.toString(numVoltas), pistaLocal.getNome() +" - "+ pistaLocal.getPais(), pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), pilotos);
                 gerenciador.enviaDadosFan(pilotos, pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), "quali");
             }    
             
@@ -199,6 +215,7 @@ public class Corrida implements Runnable{
                 for (int i = 0; i <pilotos.size(); i++) {
                     pistaLocal.novoRecord(pilotos.get(i));
                 }
+                gerenciador.enviaConfigFan(tempQuali, Integer.toString(numVoltas), pistaLocal.getNome() +" - "+ pistaLocal.getPais(), pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), pilotos);
                 gerenciador.enviaDadosFan(pilotos, pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), "corrida");
             } 
             
@@ -244,6 +261,14 @@ public class Corrida implements Runnable{
                     gerenciador.comunicacao.recebido.clear();
                     gerenciador.bancoDados.serealiza();
                     gerenciador.abrirBotaoParaCorrida();
+                    ArrayList<Piloto> corredores = new ArrayList<>();
+                    for (int i = 0; i < pilotos.size(); i++) {
+                        Piloto p = new Piloto("0",pilotos.get(i).getNome(),"0");
+                        p.setEquipe(new Equipe("0",pilotos.get(i).getEquipe().getNome(),"0","0"));
+                        corredores.add(p);
+                    }                    
+                    gerenciador.enviaConfigFan(tempQuali, Integer.toString(numVoltas), pistaLocal.getNome() +" - "+ pistaLocal.getPais(), pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), corredores);
+                    gerenciador.enviaDadosFan(corredores, pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), "corrida");
                 } else if (gerenciador.comunicacao.recebido.get("URL").equals("finalCorrida")){
                     setFimQuali(true);
                     setFimCorrida(true);
@@ -260,6 +285,8 @@ public class Corrida implements Runnable{
                     gerenciador.comunicacao.recebido.clear();
                     gerenciador.bancoDados.serealiza();
                     gerenciador.abrirBotaoParaInicio();
+                    gerenciador.enviaConfigFan(tempQuali, Integer.toString(numVoltas), pistaLocal.getNome() +" - "+ pistaLocal.getPais(), pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), pilotos);
+                    gerenciador.enviaDadosFan(pilotos, pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), null);
                 }                
             }
             

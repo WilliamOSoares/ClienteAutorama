@@ -313,7 +313,8 @@ public class Qualificatorio extends javax.swing.JFrame {
                             tempo.setText(tempoQuali + ":0" + sec);
                         } else{
                             tempo.setText(tempoQuali + ":" + sec);
-                        }  
+                        } 
+                        gerenciador.corrida.tempQuali = tempo.getText();
                         gerenciador.telaQuali.modelo.setArray(gerenciador.corrida.pilotos);//gerenciador.corrida.pilotos); 
                         gerenciador.telaQuali.tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());
                         gerenciador.telaQuali.autorRecord.setText(gerenciador.corrida.pistaLocal.getRecordista());

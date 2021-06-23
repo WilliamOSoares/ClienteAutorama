@@ -28,17 +28,12 @@ public class ClienteTelespectador {
 
     public MqttClient cliente; 
     public ArrayList<Piloto> pilotos = new ArrayList();
-    public String etapa, tempoQuali, nomePista, recordista, record, numVoltas;
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        
-        ClienteTelespectador.getInstance().conectar();        
-        
-    }
-        
+    public String etapa, tempoQualiMin, tempoQualiSec, nomePista, recordista, record, numVoltas;
+    public TelaQuali quali;
+    public TelaInicial ini;
+    public TelaCorrida corrida;
+    public TelaPiloto pilot;
+            
     /**
     * Construtor da classe de ClienteTelespectador.
     * 
@@ -216,7 +211,9 @@ public class ClienteTelespectador {
                             }                            
                         }                   
                     } else if (string.equals("fan/tempoQuali")){
-                        tempoQuali = mm.toString();
+                        String s[] = mm.toString().split(":");
+                        tempoQualiMin = s[0];
+                        tempoQualiSec = s[1];
                     } else if (string.equals("fan/nomePista")){
                         nomePista = mm.toString();
                     } else if (string.equals("fan/recordista")){
@@ -283,11 +280,19 @@ public class ClienteTelespectador {
     }
 
     /**
-     * Pega o tempo do qualificatório
+     * Pega o tempo do qualificatório em minutos
      * @return tempo
      */
-    public String getTempoQuali() {
-        return tempoQuali;
+    public String getTempoQualiMin() {
+        return tempoQualiMin;
+    }
+    
+    /**
+     * Pega o tempo do qualificatório em segundos
+     * @return tempo
+     */
+    public String getTempoQualiSec() {
+        return tempoQualiSec;
     }
 
     /**
@@ -321,6 +326,144 @@ public class ClienteTelespectador {
     public String getNumVoltas() {
         return numVoltas;
     }    
+
+    /**
+     * Altera a tela do qualificatório
+     * @param quali nova tela
+     */    
+    public void setQuali(TelaQuali quali) {
+        this.quali = quali;
+    }
+
+    /**
+     * Altera a tela do início
+     * @param ini nova tela
+     */
+    public void setIni(TelaInicial ini) {
+        this.ini = ini;
+    }
+
+    /**
+     * Altera a tela corrida
+     * @param corrida nova tela
+     */
+    public void setCorrida(TelaCorrida corrida) {
+        this.corrida = corrida;
+    }
+
+    /**
+     * Altera a tela do piloto
+     * @param pilot nova tela
+     */
+    public void setPilot(TelaPiloto pilot) {
+        this.pilot = pilot;
+    }   
+
+    /**
+     * Troca tela inicial pela tela do qualificatório
+     */
+    public void telaInicialParaQuali() {
+        ini.setEnabled(false);
+        ini.setVisible(false);
+        quali = new TelaQuali();
+        quali.setLocationRelativeTo(ini);
+        quali.setEnabled(true);
+        quali.setVisible(true);
+    }
+
+    /**
+     * Troca tela inicial pela tela da corrida
+     */
+    public void telaInicialParaCorrida() {
+        ini.setEnabled(false);
+        ini.setVisible(false);
+        corrida = new TelaCorrida();
+        corrida.setLocationRelativeTo(ini);
+        corrida.setEnabled(true);
+        corrida.setVisible(true);
+    }
+
+    /**
+     * Troca tela de qualificatório pela tela do início
+     */
+    public void telaQualiParaInicio() {
+        quali.setEnabled(false);
+        quali.setVisible(false);
+        ini = new TelaInicial();
+        ini.setLocationRelativeTo(quali);
+        ini.setEnabled(true);
+        ini.setVisible(true);
+    }
+
+    /**
+     * Troca tela de qualificatório pela tela da corrida
+     */
+    public void telaQualiParaCorrida() {
+        quali.setEnabled(false);
+        quali.setVisible(false);
+        corrida = new TelaCorrida();
+        corrida.setLocationRelativeTo(ini);
+        corrida.setEnabled(true);
+        corrida.setVisible(true);
+    }
+
+    /**
+     * Troca tela de corrida pela tela do início
+     */
+    public void telaCorridaParaInicio() {
+        corrida.setEnabled(false);
+        corrida.setVisible(false);
+        ini = new TelaInicial();
+        ini.setLocationRelativeTo(corrida);
+        ini.setEnabled(true);
+        ini.setVisible(true);
+    }      
+
+    /**
+     * Troca a tela de piloto para tela do qualificatório
+     */
+    public void telaPilotoParaQuali() {
+        pilot.setEnabled(false);
+        pilot.setVisible(false);
+        quali = new TelaQuali();
+        quali.setLocationRelativeTo(pilot);
+        quali.setEnabled(true);
+        quali.setVisible(true);
+    }
+
+    /**
+     * Troca a tela de qualificatório para tela do piloto
+     */
+    public void telaQualiParaPiloto() {
+        quali.setEnabled(false);
+        quali.setVisible(false);
+        pilot.setLocationRelativeTo(quali);
+        pilot.setEnabled(true);
+        pilot.setVisible(true);
+    }
+
+    /**
+     * Troca a tela piloto para tela da corrida
+     */
+    public void telaPilotoParaCorrida() {
+        pilot.setEnabled(false);
+        pilot.setVisible(false);
+        corrida = new TelaCorrida();
+        corrida.setLocationRelativeTo(pilot);
+        corrida.setEnabled(true);
+        corrida.setVisible(true);
+    }
+    
+    /**
+     * Troca a tela corrida para tela do piloto
+     */
+    public void telaCorridaParaPiloto() {
+        corrida.setEnabled(false);
+        corrida.setVisible(false);
+        pilot.setLocationRelativeTo(corrida);
+        pilot.setEnabled(true);
+        pilot.setVisible(true);
+    }
     
     
 }

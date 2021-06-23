@@ -1,21 +1,56 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package clientetelespectador;
 
+import java.awt.Toolkit;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
+import org.eclipse.paho.client.mqttv3.MqttException;
+
 /**
- *
- * @author willi
+ * Classe da tela corrida.
+ * 
+ * @author Víctor César e William Soares.
  */
 public class TelaCorrida extends javax.swing.JFrame {
 
+    ClienteTelespectador gerenciador;
+    public ModeloTabelaCorrida modelo;
+    public ArrayList<Piloto> pilotos;
+    public int voltas = 0, VoltasN = 0;
+    
     /**
      * Creates new form TelaCorrida
      */
     public TelaCorrida() {
         initComponents();
+        this.setTitle("Autorama");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("car.png")));
+        setResizable(false);
+        gerenciador = ClienteTelespectador.getInstance();
+        localCorrida.setText(gerenciador.getNomePista());
+        tempoRecord.setText(gerenciador.getRecord());
+        autorRecord.setText(gerenciador.getRecordista());
+        nVoltas.setText("0 de "+gerenciador.getNumVoltas()+" Voltas");
+        this.pilotos = gerenciador.getPilotos();
+        voltas = Integer.parseInt(gerenciador.getNumVoltas());
+        this.modelo = new ModeloTabelaCorrida(pilotos);
+        tabelaCorrida.setModel(modelo);
+        for (int i = 0; i < pilotos.size(); i++) {
+            if(i==0){
+                piloto1.setText(pilotos.get(i).getNome());
+            } else if(i==1){
+                piloto2.setText(pilotos.get(i).getNome());
+            } else if(i==2){
+                piloto3.setText(pilotos.get(i).getNome());
+            } else if(i==3){
+                piloto4.setText(pilotos.get(i).getNome());
+            } else if(i==4){
+                piloto5.setText(pilotos.get(i).getNome());
+            }
+        }
+        gerenciador.setCorrida(this);
+        this.start();
+        
     }
 
     /**
@@ -27,21 +62,332 @@ public class TelaCorrida extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        nVoltas = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        localCorrida = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        autorRecord = new javax.swing.JLabel();
+        tempoRecord = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaCorrida = new javax.swing.JTable();
+        voltar = new javax.swing.JButton();
+        sair = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        piloto5 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        piloto4 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        piloto3 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        piloto2 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        piloto1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Corrida", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Ink Free", 1, 24))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel1.setText("Sessão de Corrida:");
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel2.setText("Local da corrida:");
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel4.setText("Record da pista:");
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel5.setText("Autor:");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(localCorrida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nVoltas, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tempoRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(autorRecord, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nVoltas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tempoRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(localCorrida, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(autorRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
+        jLabel3.setFont(new java.awt.Font("Ink Free", 1, 36)); // NOI18N
+        jLabel3.setText("Classificação");
+
+        tabelaCorrida.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tabelaCorrida);
+
+        voltar.setText("Início");
+        voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                voltarActionPerformed(evt);
+            }
+        });
+
+        sair.setText("Sair");
+        sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sairActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        piloto5.setText("Sem Piloto");
+        piloto5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                piloto5ActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("5º");
+
+        piloto4.setText("Sem Piloto");
+        piloto4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                piloto4ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("4º");
+
+        piloto3.setText("Sem Piloto");
+        piloto3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                piloto3ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("3º");
+
+        piloto2.setText("Sem Piloto");
+        piloto2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                piloto2ActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("2º");
+
+        piloto1.setText("Sem Piloto");
+        piloto1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                piloto1ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("1º");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(piloto1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(piloto2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(piloto3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(piloto4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(piloto5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(117, 117, 117)
+                .addComponent(jLabel8)
+                .addGap(120, 120, 120)
+                .addComponent(jLabel9)
+                .addGap(115, 115, 115)
+                .addComponent(jLabel10)
+                .addGap(54, 54, 54))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(piloto1)
+                    .addComponent(piloto2)
+                    .addComponent(piloto3)
+                    .addComponent(piloto4)
+                    .addComponent(piloto5))
+                .addGap(32, 32, 32))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 760, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(voltar)
+                        .addGap(140, 140, 140)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(sair)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 416, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(voltar)
+                    .addComponent(sair))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
+        gerenciador = ClienteTelespectador.getInstance();
+        gerenciador.telaCorridaParaInicio();
+    }//GEN-LAST:event_voltarActionPerformed
+
+    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
+        gerenciador = ClienteTelespectador.getInstance();
+        try {
+            gerenciador.cliente.close();
+        } catch (MqttException ex) {
+            System.out.println(ex);
+        }
+        System.exit(0);
+    }//GEN-LAST:event_sairActionPerformed
+
+    private void piloto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piloto1ActionPerformed
+        gerenciador = ClienteTelespectador.getInstance();
+        if(gerenciador.getPilotos().size()>=1){ 
+            TelaPiloto piloto = new TelaPiloto(pilotos,0, "Corrida");
+            gerenciador.setPilot(piloto);
+            gerenciador.telaCorridaParaPiloto();
+        } else{
+            JOptionPane.showMessageDialog(null, "Só existem "+ gerenciador.getPilotos().size() +" pilotos!!", null, WIDTH); 
+        }
+    }//GEN-LAST:event_piloto1ActionPerformed
+
+    private void piloto2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piloto2ActionPerformed
+        gerenciador = ClienteTelespectador.getInstance();
+        if(gerenciador.getPilotos().size()>=2){ 
+            TelaPiloto piloto = new TelaPiloto(pilotos,1, "Corrida");
+            gerenciador.setPilot(piloto);
+            gerenciador.telaCorridaParaPiloto();
+        } else{
+            JOptionPane.showMessageDialog(null, "Só existem "+ gerenciador.getPilotos().size() +" pilotos!!", null, WIDTH); 
+        }
+    }//GEN-LAST:event_piloto2ActionPerformed
+
+    private void piloto3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piloto3ActionPerformed
+        gerenciador = ClienteTelespectador.getInstance();
+        if(gerenciador.getPilotos().size()>=3){ 
+            TelaPiloto piloto = new TelaPiloto(pilotos,2, "Corrida");
+            gerenciador.setPilot(piloto);
+            gerenciador.telaCorridaParaPiloto();
+        } else{
+            JOptionPane.showMessageDialog(null, "Só existem "+ gerenciador.getPilotos().size() +" pilotos!!", null, WIDTH); 
+        }
+    }//GEN-LAST:event_piloto3ActionPerformed
+
+    private void piloto4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piloto4ActionPerformed
+        gerenciador = ClienteTelespectador.getInstance();
+        if(gerenciador.getPilotos().size()>=4){ 
+            TelaPiloto piloto = new TelaPiloto(pilotos,3, "Corrida");
+            gerenciador.setPilot(piloto);
+            gerenciador.telaCorridaParaPiloto();
+        } else{
+            JOptionPane.showMessageDialog(null, "Só existem "+ gerenciador.getPilotos().size() +" pilotos!!", null, WIDTH); 
+        }
+    }//GEN-LAST:event_piloto4ActionPerformed
+
+    private void piloto5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piloto5ActionPerformed
+        gerenciador = ClienteTelespectador.getInstance();
+        if(gerenciador.getPilotos().size()>=5){ 
+            TelaPiloto piloto = new TelaPiloto(pilotos,4, "Corrida");
+            gerenciador.setPilot(piloto);
+            gerenciador.telaCorridaParaPiloto();
+        } else{
+            JOptionPane.showMessageDialog(null, "Só existem "+ gerenciador.getPilotos().size() +" pilotos!!", null, WIDTH); 
+        }
+    }//GEN-LAST:event_piloto5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +425,70 @@ public class TelaCorrida extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel autorRecord;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel localCorrida;
+    private javax.swing.JLabel nVoltas;
+    private javax.swing.JButton piloto1;
+    private javax.swing.JButton piloto2;
+    private javax.swing.JButton piloto3;
+    private javax.swing.JButton piloto4;
+    private javax.swing.JButton piloto5;
+    private javax.swing.JButton sair;
+    private javax.swing.JTable tabelaCorrida;
+    private javax.swing.JLabel tempoRecord;
+    private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
+
+    /**
+    * Thread de SwingWorker para alteração dos dados na tela corrida.
+    */
+    private void start(){
+        SwingWorker worker = new SwingWorker() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                ClienteTelespectador gerenciador;
+                gerenciador = ClienteTelespectador.getInstance();               
+                VoltasN = 0;
+                int voltaPrim = Integer.parseInt(pilotos.get(0).getVoltas());
+                Thread.sleep(1000);
+                while(voltas>=0){
+                    nVoltas.setText(Integer.toString(VoltasN)+ " de " + gerenciador.getNumVoltas() + " Voltas");
+                    VoltasN++;                    
+                    while(voltaPrim != VoltasN){
+                        voltaPrim = Integer.parseInt(gerenciador.pilotos.get(0).getVoltas());
+                        gerenciador.corrida.modelo.setArray(gerenciador.corrida.pilotos);
+                        gerenciador.corrida.autorRecord.setText(gerenciador.getRecordista());
+                        gerenciador.corrida.tempoRecord.setText(gerenciador.getRecord());
+                    }                    
+                    voltas--;                
+                }
+                nVoltas.setText(Integer.toString(VoltasN)+ " de " + gerenciador.getNumVoltas() + " Voltas");
+                nVoltas.setText("Acabou a corrida");
+                
+                while (gerenciador.etapa.equals("corrida")){
+                   gerenciador.corrida.modelo.setArray(gerenciador.corrida.pilotos);
+                   gerenciador.corrida.autorRecord.setText(gerenciador.getRecordista());
+                   gerenciador.corrida.tempoRecord.setText(gerenciador.getRecord());
+                }
+
+            return null;
+            }
+        };
+
+        worker.execute();
+    }
+    
 }

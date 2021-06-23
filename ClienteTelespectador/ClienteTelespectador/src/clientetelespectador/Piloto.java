@@ -1,6 +1,6 @@
 package clientetelespectador;
 
-import java.time.LocalDateTime;
+//import java.time.LocalDateTime;
 
 /**
  * Classe do piloto, onde guarda as informações do piloto.
@@ -180,7 +180,7 @@ public class Piloto {
         this.tempoBaixo = tempoBaixo;
     }
     
-    
+    /*
     public static void main(String[] args) {
         System.out.println("Teste");
         LocalDateTime antes = LocalDateTime.now();
@@ -188,5 +188,5 @@ public class Piloto {
         while((agora.minusHours(antes.getHour()).minusMinutes(antes.getMinute()).minusSeconds(antes.getSecond())).getSecond() < 5){agora = LocalDateTime.now(); }
         System.out.println("5 segundos");
     }
-    
+    */
 }

@@ -464,6 +464,7 @@ public class GerenciadorTelas {
     * @param pilotos pilotos da corrida
     * @param recordista nome do recordista
     * @param tempoRecordPista tempo record da pista
+    * @param etapa etapa de corrida ou qualificatório
     */
     public void enviaDadosFan(ArrayList<Piloto> pilotos, String recordista, String tempoRecordPista, String etapa) {
         comunicacao.enviaDadosFan(pilotos, recordista, tempoRecordPista, etapa);
