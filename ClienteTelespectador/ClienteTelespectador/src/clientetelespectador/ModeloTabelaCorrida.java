@@ -68,8 +68,6 @@ public class ModeloTabelaCorrida extends AbstractTableModel{
             case 4:
                 if(corredores.get(linha).getTempoVolta()==null){
                     return "0:00.000";
-                }else if(linha>0){ 
-                    return corredores.get(linha).getTempoCima();
                 }else {
                     return corredores.get(linha).getTempoVolta();
                 }

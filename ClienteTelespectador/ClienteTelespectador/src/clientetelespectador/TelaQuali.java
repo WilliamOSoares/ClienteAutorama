@@ -372,7 +372,7 @@ public class TelaQuali extends javax.swing.JFrame {
     private void piloto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piloto1ActionPerformed
         gerenciador = ClienteTelespectador.getInstance();
         if(gerenciador.getPilotos().size()>=1){    
-            TelaPiloto piloto = new TelaPiloto(pilotos,0, "Quali");
+            TelaPiloto piloto = new TelaPiloto(gerenciador.getPilotos(),0, "Quali");
             gerenciador.setPilot(piloto);
             gerenciador.telaQualiParaPiloto();
         } else{
@@ -383,7 +383,7 @@ public class TelaQuali extends javax.swing.JFrame {
     private void piloto2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piloto2ActionPerformed
         gerenciador = ClienteTelespectador.getInstance();
         if(gerenciador.getPilotos().size()>=2){ 
-            TelaPiloto piloto = new TelaPiloto(pilotos,1, "Quali");
+            TelaPiloto piloto = new TelaPiloto(gerenciador.getPilotos(),1, "Quali");
             gerenciador.setPilot(piloto);
             gerenciador.telaQualiParaPiloto();
         } else{
@@ -394,7 +394,7 @@ public class TelaQuali extends javax.swing.JFrame {
     private void piloto3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piloto3ActionPerformed
         gerenciador = ClienteTelespectador.getInstance();
         if(gerenciador.getPilotos().size()>=3){ 
-            TelaPiloto piloto = new TelaPiloto(pilotos,2, "Quali");
+            TelaPiloto piloto = new TelaPiloto(gerenciador.getPilotos(),2, "Quali");
             gerenciador.setPilot(piloto);
             gerenciador.telaQualiParaPiloto();
         } else{
@@ -405,7 +405,7 @@ public class TelaQuali extends javax.swing.JFrame {
     private void piloto4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piloto4ActionPerformed
         gerenciador = ClienteTelespectador.getInstance();
         if(gerenciador.getPilotos().size()>=4){ 
-            TelaPiloto piloto = new TelaPiloto(pilotos,3, "Quali");
+            TelaPiloto piloto = new TelaPiloto(gerenciador.getPilotos(),3, "Quali");
             gerenciador.setPilot(piloto);
             gerenciador.telaQualiParaPiloto();
         } else{
@@ -416,7 +416,7 @@ public class TelaQuali extends javax.swing.JFrame {
     private void piloto5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piloto5ActionPerformed
         gerenciador = ClienteTelespectador.getInstance();
         if(gerenciador.getPilotos().size()>=5){ 
-            TelaPiloto piloto = new TelaPiloto(pilotos,4, "Quali");
+            TelaPiloto piloto = new TelaPiloto(gerenciador.getPilotos(),4, "Quali");
             gerenciador.setPilot(piloto);
             gerenciador.telaQualiParaPiloto();
         } else{
@@ -496,28 +496,35 @@ public class TelaQuali extends javax.swing.JFrame {
             protected Void doInBackground() throws Exception {
                 ClienteTelespectador gerenciador;
                 gerenciador = ClienteTelespectador.getInstance();
-                tempoDoQualiMin = Integer.parseInt(gerenciador.getTempoQualiSec());
-                while(tempoDoQualiMin>0){
-                    int sec = 60;
-                    sec = Integer.parseInt(gerenciador.getTempoQualiSec());
-                    tempoDoQualiMin--;
-                    while(sec>0){
-                        Thread.sleep(1000);
-                        if(Integer.parseInt(gerenciador.getTempoQualiSec())>0){
-                            sec = Integer.parseInt(gerenciador.getTempoQualiSec());
+                Thread.sleep(1000);
+                tempoDoQualiMin = Integer.parseInt(gerenciador.getTempoQualiMin());
+                int sec = Integer.parseInt(gerenciador.getTempoQualiSec());
+                while(tempoDoQualiMin>0 || tempoDoQualiSec>0){
+                    gerenciador = ClienteTelespectador.getInstance();          
+                    tempoDoQualiMin = Integer.parseInt(gerenciador.getTempoQualiMin());
+                    sec = Integer.parseInt(gerenciador.getTempoQualiSec());                    
+                    if(sec<10 && !(sec==0)){
+                        gerenciador.quali.tempoQuali.setText(tempoDoQualiMin + ":0" + sec);
+                    } else{
+                        gerenciador.quali.tempoQuali.setText(tempoDoQualiMin + ":" + sec);
+                    } 
+                    gerenciador.quali.modelo.setArray(gerenciador.getPilotos());//gerenciador.corrida.pilotos); 
+                    gerenciador.quali.tempoRecord.setText(gerenciador.getRecord());
+                    gerenciador.quali.autorRecord.setText(gerenciador.getRecordista());
+                    for (int i = 0; i < gerenciador.pilotos.size(); i++) {
+                        if(i==0){
+                            gerenciador.quali.piloto1.setText(gerenciador.pilotos.get(i).getNome());
+                        } else if(i==1){
+                            gerenciador.quali.piloto2.setText(gerenciador.pilotos.get(i).getNome());
+                        } else if(i==2){
+                            gerenciador.quali.piloto3.setText(gerenciador.pilotos.get(i).getNome());
+                        } else if(i==3){
+                            gerenciador.quali.piloto4.setText(gerenciador.pilotos.get(i).getNome());
+                        } else if(i==4){
+                            gerenciador.quali.piloto5.setText(gerenciador.pilotos.get(i).getNome());
                         }
-                        sec--;
-                        if(sec<10){
-                            tempoQuali.setText(tempoDoQualiMin + ":0" + sec);
-                        } else{
-                            tempoQuali.setText(tempoDoQualiMin + ":" + sec);
-                        }  
-                        gerenciador.quali.modelo.setArray(gerenciador.getPilotos());//gerenciador.corrida.pilotos); 
-                        gerenciador.quali.tempoRecord.setText(gerenciador.getRecord());
-                        gerenciador.quali.autorRecord.setText(gerenciador.getRecordista());
-                    }
-                }
-                tempoDoQualiMin = Integer.parseInt(gerenciador.getTempoQualiSec());                
+                    }  
+                }               
                 while (tempoDoQualiMin==0){
                     tempoQuali.setText("0:00");
                     gerenciador.quali.modelo.setArray(gerenciador.quali.pilotos);//gerenciador.corrida.pilotos);

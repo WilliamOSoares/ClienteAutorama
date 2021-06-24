@@ -1,6 +1,8 @@
 package clientetelespectador;
 
+import static java.awt.image.ImageObserver.WIDTH;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 /**
@@ -48,17 +50,18 @@ public class TelaPiloto extends javax.swing.JFrame {
             tempoGeral.setText(piloto.get(indice).getTempoGeral());
             if(indice==0){
                 frente.setText(piloto.get(indice).getNome()+" está na 1º posição");
-                tras.setText(piloto.get(indice+1).getNome()+" - "+piloto.get(indice).getTempoBaixo());
+                tras.setText(piloto.get(indice+1).getNome()+": "+piloto.get(indice).getTempoBaixo());
             } else if(indice+1 == piloto.size()){            
-                frente.setText(piloto.get(indice-1).getNome()+" - "+piloto.get(indice).getTempoCima());
+                frente.setText(piloto.get(indice-1).getNome()+": "+piloto.get(indice).getTempoCima());
                 tras.setText(piloto.get(indice).getNome()+" está na última posição ");
             } else{
-                frente.setText(piloto.get(indice-1).getNome()+" - "+piloto.get(indice).getTempoCima());
-                tras.setText(piloto.get(indice+1).getNome()+" - "+piloto.get(indice).getTempoBaixo());
+                frente.setText(piloto.get(indice-1).getNome()+": "+piloto.get(indice).getTempoCima());
+                tras.setText(piloto.get(indice+1).getNome()+": "+piloto.get(indice).getTempoBaixo());
             }            
         }
         gerenciador = ClienteTelespectador.getInstance();
         gerenciador.setPilot(this);
+        this.start();
     }
 
     /**
@@ -174,10 +177,10 @@ public class TelaPiloto extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(equipe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(equipe, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(voltas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(6, 6, 6)))
@@ -338,45 +341,49 @@ public class TelaPiloto extends javax.swing.JFrame {
             protected Void doInBackground() throws Exception {
                 ClienteTelespectador gerenciador;  
                 gerenciador = ClienteTelespectador.getInstance();  
-                String etapaAgora = gerenciador.getEtapa();
+                String etapaInicio = gerenciador.getEtapa();
                 int indice = gerenciador.pilot.indice;
                 ArrayList<Piloto> piloto = gerenciador.pilot.pilotos;
-                while(gerenciador.getEtapa().equals(etapaAgora)){
+                String etapaAgora = gerenciador.getEtapa();
+                while(etapaAgora.equals(etapaInicio)){
                     gerenciador = ClienteTelespectador.getInstance();  
+                    piloto = gerenciador.pilot.pilotos;
+                    indice = gerenciador.pilot.indice;
+                    etapaAgora = gerenciador.getEtapa();
                     if(piloto.get(indice).getCarro()==null){
-                    nomePiloto.setText(piloto.get(indice).getNome());
-                    equipe.setText(piloto.get(indice).getEquipe());
-                    posicao.setText("?");
-                    carro.setText("Ainda não começou");
-                    voltas.setText("0");
-                    ultVolta.setText("Sem dados");
-                    melhorVolta.setText("Sem dados");
-                    tempoGeral.setText("Sem dados");
-                    frente.setText("Sem dados");
-                    tras.setText("Sem dados");
-                } else{
-                    nomePiloto.setText(piloto.get(indice).getNome());
-                    equipe.setText(piloto.get(indice).getEquipe());
-                    posicao.setText(piloto.get(indice).getPos());
-                    carro.setText("carro: "+piloto.get(indice).getCarro());
-                    voltas.setText(piloto.get(indice).getVoltas());
-                    ultVolta.setText(piloto.get(indice).getTempoVolta());
-                    melhorVolta.setText(piloto.get(indice).getTempoMelhor());
-                    tempoGeral.setText(piloto.get(indice).getTempoGeral());
-                    if(indice==0){
-                        frente.setText(piloto.get(indice).getNome()+" está na 1º posição");
-                        tras.setText(piloto.get(indice+1).getNome()+" - "+piloto.get(indice).getTempoBaixo());
-                    } else if(indice+1 == piloto.size()){            
-                        frente.setText(piloto.get(indice-1).getNome()+" - "+piloto.get(indice).getTempoCima());
-                        tras.setText(piloto.get(indice).getNome()+" está na última posição ");
+                        gerenciador.pilot.nomePiloto.setText(piloto.get(indice).getNome());
+                        gerenciador.pilot.equipe.setText(piloto.get(indice).getEquipe());
+                        gerenciador.pilot.posicao.setText("?");
+                        gerenciador.pilot.carro.setText("Ainda não começou");
+                        gerenciador.pilot.voltas.setText("0");
+                        gerenciador.pilot.ultVolta.setText("Sem dados");
+                        gerenciador.pilot.melhorVolta.setText("Sem dados");
+                        gerenciador.pilot.tempoGeral.setText("Sem dados");
+                        gerenciador.pilot.frente.setText("Sem dados");
+                        gerenciador.pilot.tras.setText("Sem dados");
                     } else{
-                        frente.setText(piloto.get(indice-1).getNome()+" - "+piloto.get(indice).getTempoCima());
-                        tras.setText(piloto.get(indice+1).getNome()+" - "+piloto.get(indice).getTempoBaixo());
-                    }            
-                }
+                        gerenciador.pilot.nomePiloto.setText(piloto.get(indice).getNome());
+                        gerenciador.pilot.equipe.setText(piloto.get(indice).getEquipe());
+                        gerenciador.pilot.posicao.setText(piloto.get(indice).getPos());
+                        gerenciador.pilot.carro.setText("carro: "+piloto.get(indice).getCarro());
+                        gerenciador.pilot.voltas.setText(piloto.get(indice).getVoltas());
+                        gerenciador.pilot.ultVolta.setText(piloto.get(indice).getTempoVolta());
+                        gerenciador.pilot.melhorVolta.setText(piloto.get(indice).getTempoMelhor());
+                        gerenciador.pilot.tempoGeral.setText(piloto.get(indice).getTempoGeral());
+                        if(indice==0){
+                            gerenciador.pilot.frente.setText(piloto.get(indice).getNome()+" está na 1º posição");
+                            gerenciador.pilot.tras.setText(piloto.get(indice+1).getNome()+": "+piloto.get(indice).getTempoBaixo());
+                        } else if(indice+1 == piloto.size()){            
+                            gerenciador.pilot.frente.setText(piloto.get(indice-1).getNome()+": "+piloto.get(indice).getTempoCima());
+                            gerenciador.pilot.tras.setText(piloto.get(indice).getNome()+" está na última posição ");
+                        } else{
+                            gerenciador.pilot.frente.setText(piloto.get(indice-1).getNome()+": "+piloto.get(indice).getTempoCima());
+                            gerenciador.pilot.tras.setText(piloto.get(indice+1).getNome()+": "+piloto.get(indice).getTempoBaixo());
+                        }            
+                    }
                     Thread.sleep(5000);
                 }              
-                
+                JOptionPane.showMessageDialog(null, "Já acabou esta etapa", null, WIDTH);
 
             return null;
             }

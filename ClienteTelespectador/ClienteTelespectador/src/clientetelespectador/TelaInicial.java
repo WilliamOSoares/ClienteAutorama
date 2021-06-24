@@ -170,6 +170,8 @@ public class TelaInicial extends javax.swing.JFrame {
             gerenciador.telaInicialParaQuali();           
         } else if(gerenciador.getEtapa().equals("corrida")){
             JOptionPane.showMessageDialog(null, "A corrida já começou!!!", null, WIDTH);
+        } else{
+             JOptionPane.showMessageDialog(null, "Nem o qualificatório e nem a corrida começou. Espere!!!", null, WIDTH);
         }
     }//GEN-LAST:event_qualiActionPerformed
 
@@ -181,6 +183,8 @@ public class TelaInicial extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "O qualificatório está em andamento!!!", null, WIDTH);            
         } else if(gerenciador.getEtapa().equals("corrida")){
             gerenciador.telaInicialParaCorrida();
+        } else{
+             JOptionPane.showMessageDialog(null, "Nem o qualificatório e nem a corrida começou. Espere!!!", null, WIDTH);
         }
     }//GEN-LAST:event_botaoCorridaActionPerformed
 

@@ -281,6 +281,7 @@ public class TelaCorrida extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(voltar)
@@ -288,8 +289,7 @@ public class TelaCorrida extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(sair)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(36, 36, 36))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
@@ -337,7 +337,7 @@ public class TelaCorrida extends javax.swing.JFrame {
     private void piloto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piloto1ActionPerformed
         gerenciador = ClienteTelespectador.getInstance();
         if(gerenciador.getPilotos().size()>=1){ 
-            TelaPiloto piloto = new TelaPiloto(pilotos,0, "Corrida");
+            TelaPiloto piloto = new TelaPiloto(gerenciador.getPilotos(),0, "Corrida");
             gerenciador.setPilot(piloto);
             gerenciador.telaCorridaParaPiloto();
         } else{
@@ -348,7 +348,7 @@ public class TelaCorrida extends javax.swing.JFrame {
     private void piloto2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piloto2ActionPerformed
         gerenciador = ClienteTelespectador.getInstance();
         if(gerenciador.getPilotos().size()>=2){ 
-            TelaPiloto piloto = new TelaPiloto(pilotos,1, "Corrida");
+            TelaPiloto piloto = new TelaPiloto(gerenciador.getPilotos(),1, "Corrida");
             gerenciador.setPilot(piloto);
             gerenciador.telaCorridaParaPiloto();
         } else{
@@ -359,7 +359,7 @@ public class TelaCorrida extends javax.swing.JFrame {
     private void piloto3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piloto3ActionPerformed
         gerenciador = ClienteTelespectador.getInstance();
         if(gerenciador.getPilotos().size()>=3){ 
-            TelaPiloto piloto = new TelaPiloto(pilotos,2, "Corrida");
+            TelaPiloto piloto = new TelaPiloto(gerenciador.getPilotos(),2, "Corrida");
             gerenciador.setPilot(piloto);
             gerenciador.telaCorridaParaPiloto();
         } else{
@@ -370,7 +370,7 @@ public class TelaCorrida extends javax.swing.JFrame {
     private void piloto4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piloto4ActionPerformed
         gerenciador = ClienteTelespectador.getInstance();
         if(gerenciador.getPilotos().size()>=4){ 
-            TelaPiloto piloto = new TelaPiloto(pilotos,3, "Corrida");
+            TelaPiloto piloto = new TelaPiloto(gerenciador.getPilotos(),3, "Corrida");
             gerenciador.setPilot(piloto);
             gerenciador.telaCorridaParaPiloto();
         } else{
@@ -381,7 +381,7 @@ public class TelaCorrida extends javax.swing.JFrame {
     private void piloto5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piloto5ActionPerformed
         gerenciador = ClienteTelespectador.getInstance();
         if(gerenciador.getPilotos().size()>=5){ 
-            TelaPiloto piloto = new TelaPiloto(pilotos,4, "Corrida");
+            TelaPiloto piloto = new TelaPiloto(gerenciador.getPilotos(),4, "Corrida");
             gerenciador.setPilot(piloto);
             gerenciador.telaCorridaParaPiloto();
         } else{
@@ -465,19 +465,49 @@ public class TelaCorrida extends javax.swing.JFrame {
                 int voltaPrim = Integer.parseInt(pilotos.get(0).getVoltas());
                 Thread.sleep(1000);
                 while(voltas>=0){
+                    gerenciador = ClienteTelespectador.getInstance(); 
                     nVoltas.setText(Integer.toString(VoltasN)+ " de " + gerenciador.getNumVoltas() + " Voltas");
                     VoltasN++;                    
                     while(voltaPrim != VoltasN){
+                        gerenciador = ClienteTelespectador.getInstance(); 
                         voltaPrim = Integer.parseInt(gerenciador.pilotos.get(0).getVoltas());
                         gerenciador.corrida.modelo.setArray(gerenciador.corrida.pilotos);
                         gerenciador.corrida.autorRecord.setText(gerenciador.getRecordista());
                         gerenciador.corrida.tempoRecord.setText(gerenciador.getRecord());
+                        gerenciador = ClienteTelespectador.getInstance(); 
+                        for (int i = 0; i < gerenciador.pilotos.size(); i++) {
+                            if(i==0){
+                                gerenciador.corrida.piloto1.setText(gerenciador.pilotos.get(i).getNome());
+                            } else if(i==1){
+                                gerenciador.corrida.piloto2.setText(gerenciador.pilotos.get(i).getNome());
+                            } else if(i==2){
+                                gerenciador.corrida.piloto3.setText(gerenciador.pilotos.get(i).getNome());
+                            } else if(i==3){
+                                gerenciador.corrida.piloto4.setText(gerenciador.pilotos.get(i).getNome());
+                            } else if(i==4){
+                                gerenciador.corrida.piloto5.setText(gerenciador.pilotos.get(i).getNome());
+                            }
+                        } 
                     }                    
-                    voltas--;                
+                    voltas--;     
+                    gerenciador = ClienteTelespectador.getInstance(); 
+                    for (int i = 0; i < gerenciador.pilotos.size(); i++) {
+                        if(i==0){
+                            gerenciador.corrida.piloto1.setText(gerenciador.pilotos.get(i).getNome());
+                        } else if(i==1){
+                            gerenciador.corrida.piloto2.setText(gerenciador.pilotos.get(i).getNome());
+                        } else if(i==2){
+                            gerenciador.corrida.piloto3.setText(gerenciador.pilotos.get(i).getNome());
+                        } else if(i==3){
+                            gerenciador.corrida.piloto4.setText(gerenciador.pilotos.get(i).getNome());
+                        } else if(i==4){
+                            gerenciador.corrida.piloto5.setText(gerenciador.pilotos.get(i).getNome());
+                        }
+                    } 
                 }
                 nVoltas.setText(Integer.toString(VoltasN)+ " de " + gerenciador.getNumVoltas() + " Voltas");
                 nVoltas.setText("Acabou a corrida");
-                
+                gerenciador = ClienteTelespectador.getInstance();                
                 while (gerenciador.etapa.equals("corrida")){
                    gerenciador.corrida.modelo.setArray(gerenciador.corrida.pilotos);
                    gerenciador.corrida.autorRecord.setText(gerenciador.getRecordista());

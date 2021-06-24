@@ -389,7 +389,7 @@ public class ClienteTelespectador {
     public void telaQualiParaInicio() {
         quali.setEnabled(false);
         quali.setVisible(false);
-        ini = new TelaInicial();
+        //ini = new TelaInicial();
         ini.setLocationRelativeTo(quali);
         ini.setEnabled(true);
         ini.setVisible(true);
@@ -413,7 +413,7 @@ public class ClienteTelespectador {
     public void telaCorridaParaInicio() {
         corrida.setEnabled(false);
         corrida.setVisible(false);
-        ini = new TelaInicial();
+        //ini = new TelaInicial();
         ini.setLocationRelativeTo(corrida);
         ini.setEnabled(true);
         ini.setVisible(true);
@@ -425,7 +425,7 @@ public class ClienteTelespectador {
     public void telaPilotoParaQuali() {
         pilot.setEnabled(false);
         pilot.setVisible(false);
-        quali = new TelaQuali();
+        //quali = new TelaQuali();
         quali.setLocationRelativeTo(pilot);
         quali.setEnabled(true);
         quali.setVisible(true);
@@ -448,7 +448,7 @@ public class ClienteTelespectador {
     public void telaPilotoParaCorrida() {
         pilot.setEnabled(false);
         pilot.setVisible(false);
-        corrida = new TelaCorrida();
+        //corrida = new TelaCorrida();
         corrida.setLocationRelativeTo(pilot);
         corrida.setEnabled(true);
         corrida.setVisible(true);
