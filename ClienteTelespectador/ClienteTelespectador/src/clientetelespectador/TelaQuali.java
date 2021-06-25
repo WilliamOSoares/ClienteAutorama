@@ -506,6 +506,7 @@ public class TelaQuali extends javax.swing.JFrame {
                 gerenciador = ClienteTelespectador.getInstance();
                 Thread.sleep(1000);
                 tempoDoQualiMin = Integer.parseInt(gerenciador.getTempoQualiMin());
+                Boolean flag = false;
                 int sec = Integer.parseInt(gerenciador.getTempoQualiSec());
                 while(tempoDoQualiMin>=0 || tempoDoQualiSec>0){
                     gerenciador = ClienteTelespectador.getInstance();          
@@ -532,12 +533,12 @@ public class TelaQuali extends javax.swing.JFrame {
                             gerenciador.quali.piloto5.setText(gerenciador.pilotos.get(i).getNome());
                         }
                     }
-                    if(tempoDoQualiMin==0 && tempoDoQualiSec==0){
+                    if(gerenciador.etapa.equals("corrida")){
                         break;
                     }
                 }               
                 while (tempoDoQualiMin==0){
-                    tempoQuali.setText("Finalizando o qualificatório");
+                    tempoQuali.setText("Qualificatório finalizado");
                     gerenciador.quali.modelo.setArray(gerenciador.quali.pilotos);
                     if(gerenciador.etapa.equals("corrida")){
                         tempoDoQualiMin--;

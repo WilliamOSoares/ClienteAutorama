@@ -426,7 +426,7 @@ public class ClienteTelespectador {
     public void telaPilotoParaQuali() {
         pilot.setEnabled(false);
         pilot.setVisible(false);
-        //quali = new TelaQuali();
+        pilot = null;
         quali.setLocationRelativeTo(pilot);
         quali.setEnabled(true);
         quali.setVisible(true);
@@ -449,7 +449,7 @@ public class ClienteTelespectador {
     public void telaPilotoParaCorrida() {
         pilot.setEnabled(false);
         pilot.setVisible(false);
-        //corrida = new TelaCorrida();
+        pilot = null;
         corrida.setLocationRelativeTo(pilot);
         corrida.setEnabled(true);
         corrida.setVisible(true);
