@@ -33,6 +33,7 @@ public class ClienteTelespectador {
     public TelaInicial ini;
     public TelaCorrida corrida;
     public TelaPiloto pilot;
+    public Boolean conectado = false;
             
     /**
     * Construtor da classe de ClienteTelespectador.
@@ -56,9 +57,9 @@ public class ClienteTelespectador {
     /**
      * Conecta com o broker e se inscreve no tópico fan/#.
      */
-    public void conectar(){
+    public void conectar(String id){
         try{
-            cliente = new MqttClient("tcp://pblredes.ddns.net:1883", "FanSub");
+            cliente = new MqttClient("tcp://pblredes.ddns.net:1883", id);
             cliente.setCallback(new MqttCallback() {
 
                 @Override
@@ -256,7 +257,7 @@ public class ClienteTelespectador {
             cliente.connect(mqttOptions);
             cliente.subscribe("fan/#", 0);
             System.out.println("Conectado");
-            
+            this.conectado = true;
         } catch (MqttException ex) {
             System.out.println(ex);
         }

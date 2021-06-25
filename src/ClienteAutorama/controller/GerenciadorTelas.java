@@ -199,7 +199,7 @@ public class GerenciadorTelas {
     */
     public void abrirQualificatorio(ArrayList<Piloto> corredores, int nVoltas, String tQuali, Pista pista) {
         corrida = Corrida.getInstance();
-        corrida.dadosCorrida(corredores, nVoltas, tQuali, pista);        
+        corrida.dadosCorrida(corredores, nVoltas, tQuali+":00", pista);        
         telaConfig.setEnabled(false);
         telaConfig.setVisible(false);
         telaQuali = new Qualificatorio();

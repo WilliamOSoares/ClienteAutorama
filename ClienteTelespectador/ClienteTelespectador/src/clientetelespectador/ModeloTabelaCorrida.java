@@ -60,13 +60,13 @@ public class ModeloTabelaCorrida extends AbstractTableModel{
             case 2: 
                 return corredores.get(linha).equipe;
             case 3:
-                if(corredores.get(linha).getTempoGeral()==null){
+                if(corredores.get(linha).getTempoGeral()==null || corredores.get(linha).getVoltas().equals("0")){
                     return "0:00.000";
                 }else {
                     return corredores.get(linha).getTempoGeral();
                 }
             case 4:
-                if(corredores.get(linha).getTempoVolta()==null){
+                if(corredores.get(linha).getTempoVolta()==null || corredores.get(linha).getVoltas().equals("0")){
                     return "0:00.000";
                 }else {
                     return corredores.get(linha).getTempoVolta();

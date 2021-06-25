@@ -365,6 +365,14 @@ public class TelaQuali extends javax.swing.JFrame {
         }else if(gerenciador.getEtapa().equals("quali")){
             JOptionPane.showMessageDialog(null, "O qualificatório ainda não acabou!!!", null, WIDTH);            
         } else if(gerenciador.getEtapa().equals("corrida")){
+            for (int i = 0; i < gerenciador.pilotos.size(); i++) {
+                gerenciador.pilotos.get(i).setVoltas("0");
+                gerenciador.pilotos.get(i).setTempoVolta("0:00.000");
+                gerenciador.pilotos.get(i).setTempoMelhor("0:00.000");
+                gerenciador.pilotos.get(i).setTempoGeral("00:00.000");
+                gerenciador.pilotos.get(i).setTempoCima("00.000");
+                gerenciador.pilotos.get(i).setTempoBaixo("00.000");
+            }            
             gerenciador.telaQualiParaCorrida();
         }
     }//GEN-LAST:event_corridaActionPerformed
@@ -499,15 +507,16 @@ public class TelaQuali extends javax.swing.JFrame {
                 Thread.sleep(1000);
                 tempoDoQualiMin = Integer.parseInt(gerenciador.getTempoQualiMin());
                 int sec = Integer.parseInt(gerenciador.getTempoQualiSec());
-                while(tempoDoQualiMin>0 || tempoDoQualiSec>0){
+                while(tempoDoQualiMin>=0 || tempoDoQualiSec>0){
                     gerenciador = ClienteTelespectador.getInstance();          
                     tempoDoQualiMin = Integer.parseInt(gerenciador.getTempoQualiMin());
-                    sec = Integer.parseInt(gerenciador.getTempoQualiSec());                    
-                    if(sec<10 && !(sec==0)){
+                    sec = Integer.parseInt(gerenciador.getTempoQualiSec()); 
+                    if(sec<10){
                         gerenciador.quali.tempoQuali.setText(tempoDoQualiMin + ":0" + sec);
                     } else{
                         gerenciador.quali.tempoQuali.setText(tempoDoQualiMin + ":" + sec);
                     } 
+                    gerenciador.quali.tempoQuali.setText(tempoDoQualiMin + ":" + sec);
                     gerenciador.quali.modelo.setArray(gerenciador.getPilotos());//gerenciador.corrida.pilotos); 
                     gerenciador.quali.tempoRecord.setText(gerenciador.getRecord());
                     gerenciador.quali.autorRecord.setText(gerenciador.getRecordista());

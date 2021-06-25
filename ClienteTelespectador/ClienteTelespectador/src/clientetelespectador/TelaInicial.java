@@ -24,7 +24,6 @@ public class TelaInicial extends javax.swing.JFrame {
         this.setTitle("Autorama");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("car.png")));
         setResizable(false);
-        ClienteTelespectador.getInstance().conectar();
         gerenciador = ClienteTelespectador.getInstance();
         gerenciador.setIni(this);
     }
@@ -39,22 +38,17 @@ public class TelaInicial extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         quali = new javax.swing.JButton();
         botaoCorrida = new javax.swing.JButton();
         sair = new javax.swing.JButton();
+        Conectar = new javax.swing.JButton();
+        id = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jButton1.setText("Teste");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Ink Free", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 0, 0));
@@ -82,38 +76,63 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
+        Conectar.setText("CONECTAR");
+        Conectar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConectarActionPerformed(evt);
+            }
+        });
+
+        id.setToolTipText("");
+
+        jLabel2.setText("Identificação:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(103, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(botaoCorrida, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(quali, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(botaoCorrida, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(quali, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(Conectar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(Conectar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(quali, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(botaoCorrida, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -123,44 +142,18 @@ public class TelaInicial extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        gerenciador = ClienteTelespectador.getInstance();
-        System.out.println("################    Teste   #######################");
-        System.out.println("Etapa: " + gerenciador.getEtapa());
-        System.out.println("Tempo do Quali: " + gerenciador.getTempoQualiMin()+":"+gerenciador.getTempoQualiSec());
-        System.out.println("Num de Voltas: " + gerenciador.getNumVoltas());
-        System.out.println("Pista: " + gerenciador.getNomePista());
-        System.out.println("Autor do record: " + gerenciador.getRecordista());
-        System.out.println("Record: " + gerenciador.getRecord());
-        ArrayList<Piloto> pilotos = gerenciador.getPilotos();
-        for(int i=0; i < pilotos.size(); i++){
-            System.out.println("##################################");
-            System.out.println("Piloto: " + Integer.toString(i));
-            System.out.println("Nome: " +pilotos.get(i).getNome());
-            System.out.println("Carro: " +pilotos.get(i).getCarro());
-            System.out.println("Equipe: " +pilotos.get(i).getEquipe());
-            System.out.println("Pos: " +pilotos.get(i).getPos());
-            System.out.println("Voltas: " +pilotos.get(i).getVoltas());
-            System.out.println("Tempo da volta: " +pilotos.get(i).getTempoVolta());
-            System.out.println("Melhor volta: " +pilotos.get(i).getTempoMelhor());
-            System.out.println("Tempo geral: " +pilotos.get(i).getTempoGeral());
-            System.out.println("Tempo para o da frente: " +pilotos.get(i).getTempoCima());
-            System.out.println("Tempo para o de trás: " +pilotos.get(i).getTempoBaixo());
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void qualiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qualiActionPerformed
         gerenciador = ClienteTelespectador.getInstance();
@@ -182,9 +175,19 @@ public class TelaInicial extends javax.swing.JFrame {
         }else if(gerenciador.getEtapa().equals("quali")){
             JOptionPane.showMessageDialog(null, "O qualificatório está em andamento!!!", null, WIDTH);            
         } else if(gerenciador.getEtapa().equals("corrida")){
+            if(gerenciador.corrida!=null){
+                for (int i = 0; i < gerenciador.pilotos.size(); i++) {
+                    gerenciador.pilotos.get(i).setVoltas("0");
+                    gerenciador.pilotos.get(i).setTempoVolta("0:00.000");
+                    gerenciador.pilotos.get(i).setTempoMelhor("0:00.000");
+                    gerenciador.pilotos.get(i).setTempoGeral("00:00.000");
+                    gerenciador.pilotos.get(i).setTempoCima("00.000");
+                    gerenciador.pilotos.get(i).setTempoBaixo("00.000");
+                } 
+            }
             gerenciador.telaInicialParaCorrida();
         } else{
-             JOptionPane.showMessageDialog(null, "Nem o qualificatório e nem a corrida começou. Espere!!!", null, WIDTH);
+            JOptionPane.showMessageDialog(null, "Nem o qualificatório e nem a corrida começou. Espere!!!", null, WIDTH);
         }
     }//GEN-LAST:event_botaoCorridaActionPerformed
 
@@ -197,6 +200,18 @@ public class TelaInicial extends javax.swing.JFrame {
         }
         System.exit(0);
     }//GEN-LAST:event_sairActionPerformed
+
+    private void ConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConectarActionPerformed
+        gerenciador = ClienteTelespectador.getInstance();
+        if(id.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Insira uma identificação, Por Favor.", null, WIDTH);
+        } else if(!gerenciador.conectado){
+            gerenciador.conectar(id.getText());
+            JOptionPane.showMessageDialog(null, "Conectado com sucesso!", null, WIDTH);
+        } else if(gerenciador.conectado){
+            JOptionPane.showMessageDialog(null, "Você já está conectado", null, WIDTH);
+        }        
+    }//GEN-LAST:event_ConectarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,9 +249,11 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Conectar;
     private javax.swing.JButton botaoCorrida;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton quali;
     private javax.swing.JButton sair;

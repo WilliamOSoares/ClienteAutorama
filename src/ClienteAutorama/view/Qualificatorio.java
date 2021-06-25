@@ -31,8 +31,9 @@ public class Qualificatorio extends javax.swing.JFrame {
         localCorrida.setText(gerenciador.corrida.pistaLocal.getNome()+" - "+gerenciador.corrida.pistaLocal.getPais());
         tempoRecord.setText(gerenciador.corrida.pistaLocal.getTempoRecordPista());
         autorRecord.setText(gerenciador.corrida.pistaLocal.getRecordista());
-        tempoQuali = Integer.parseInt(gerenciador.corrida.getTempQuali());
-        tempo.setText(gerenciador.corrida.getTempQuali()+":00");
+        String s[] = gerenciador.corrida.getTempQuali().split(":");        
+        tempoQuali = Integer.parseInt(s[0]);
+        tempo.setText(s[0]+":00");
         gerenciador.corrida.setFimQuali(false);
         gerenciador.corrida.setFimCorrida(true);
         gerenciador.corrida.leitura.clear();
