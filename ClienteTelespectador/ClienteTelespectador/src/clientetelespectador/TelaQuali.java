@@ -516,8 +516,7 @@ public class TelaQuali extends javax.swing.JFrame {
                     } else{
                         gerenciador.quali.tempoQuali.setText(tempoDoQualiMin + ":" + sec);
                     } 
-                    gerenciador.quali.tempoQuali.setText(tempoDoQualiMin + ":" + sec);
-                    gerenciador.quali.modelo.setArray(gerenciador.getPilotos());//gerenciador.corrida.pilotos); 
+                    gerenciador.quali.modelo.setArray(gerenciador.getPilotos());
                     gerenciador.quali.tempoRecord.setText(gerenciador.getRecord());
                     gerenciador.quali.autorRecord.setText(gerenciador.getRecordista());
                     for (int i = 0; i < gerenciador.pilotos.size(); i++) {
@@ -532,11 +531,14 @@ public class TelaQuali extends javax.swing.JFrame {
                         } else if(i==4){
                             gerenciador.quali.piloto5.setText(gerenciador.pilotos.get(i).getNome());
                         }
-                    }  
+                    }
+                    if(tempoDoQualiMin==0 && tempoDoQualiSec==0){
+                        break;
+                    }
                 }               
                 while (tempoDoQualiMin==0){
-                    tempoQuali.setText("0:00");
-                    gerenciador.quali.modelo.setArray(gerenciador.quali.pilotos);//gerenciador.corrida.pilotos);
+                    tempoQuali.setText("Finalizando o qualificatório");
+                    gerenciador.quali.modelo.setArray(gerenciador.quali.pilotos);
                     if(gerenciador.etapa.equals("corrida")){
                         tempoDoQualiMin--;
                     }
