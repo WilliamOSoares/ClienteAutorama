@@ -361,7 +361,22 @@ public class TelaPiloto extends javax.swing.JFrame {
                         gerenciador.pilot.tempoGeral.setText("Sem dados");
                         gerenciador.pilot.frente.setText("Sem dados");
                         gerenciador.pilot.tras.setText("Sem dados");
-                    } else{
+                    } else if (piloto.get(indice).getVoltas().equals("0")){
+                        gerenciador.pilot.nomePiloto.setText(piloto.get(indice).getNome());
+                        gerenciador.pilot.equipe.setText(piloto.get(indice).getEquipe());
+                        gerenciador.pilot.posicao.setText(piloto.get(indice).getPos());
+                        gerenciador.pilot.carro.setText("carro: "+piloto.get(indice).getCarro());
+                        gerenciador.pilot.voltas.setText(piloto.get(indice).getVoltas());
+                        gerenciador.pilot.ultVolta.setText("Sem dados");
+                        gerenciador.pilot.melhorVolta.setText("Sem dados");
+                        gerenciador.pilot.tempoGeral.setText("Sem dados");
+                        gerenciador.pilot.frente.setText(piloto.get(indice-1).getNome());
+                        if(indice+1 == piloto.size()){  
+                            gerenciador.pilot.tras.setText(piloto.get(indice).getNome()+" está na última posição");
+                        } else{
+                            gerenciador.pilot.tras.setText(piloto.get(indice+1).getNome());
+                        }
+                    }else{
                         gerenciador.pilot.nomePiloto.setText(piloto.get(indice).getNome());
                         gerenciador.pilot.equipe.setText(piloto.get(indice).getEquipe());
                         gerenciador.pilot.posicao.setText(piloto.get(indice).getPos());

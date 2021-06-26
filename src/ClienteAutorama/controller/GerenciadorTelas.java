@@ -469,6 +469,14 @@ public class GerenciadorTelas {
     public void enviaDadosFan(ArrayList<Piloto> pilotos, String recordista, String tempoRecordPista, String etapa) {
         comunicacao.enviaDadosFan(pilotos, recordista, tempoRecordPista, etapa);
     }
+
+    /**
+     * Envia as voltas para encerrar a corrida no servidor
+     * @param voltas numero de voltas do primeiro
+     */
+    public void enviaFinalCorrida(int voltas) {
+        comunicacao.enviaFinalCorrida(voltas);
+    }
     
     
 }

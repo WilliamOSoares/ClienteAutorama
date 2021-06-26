@@ -161,6 +161,7 @@ public class Corrida implements Runnable{
                     } else{
                         gerenciador.enviaConfigFan(tempQuali, Integer.toString(numVoltas), pistaLocal.getNome() +" - "+ pistaLocal.getPais(), pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), pilotos);
                         gerenciador.enviaDadosFan(pilotos, pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), "corrida");
+                        gerenciador.enviaFinalCorrida(pilotos.get(0).getVoltas());
                     }
                     tempoDeEnvio = tempoDeEnvio + 1;
                 }
@@ -217,6 +218,7 @@ public class Corrida implements Runnable{
                 }
                 gerenciador.enviaConfigFan(tempQuali, Integer.toString(numVoltas), pistaLocal.getNome() +" - "+ pistaLocal.getPais(), pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), pilotos);
                 gerenciador.enviaDadosFan(pilotos, pistaLocal.getRecordista(), pistaLocal.getTempoRecordPista(), "corrida");
+                gerenciador.enviaFinalCorrida(pilotos.get(0).getVoltas());
             } 
             
             if (gerenciador.comunicacao.recebido.has("Botao")){
@@ -326,45 +328,45 @@ public class Corrida implements Runnable{
                 comparado[1] = Integer.parseInt(todo[1]);
                 comparado[2] = Integer.parseInt(parte[0]);
                 comparado[3] = Integer.parseInt(parte[1]);
-                if(compara.getVoltas()>=aux.getVoltas()){
-                    if(compara.getVoltas()==aux.getVoltas()){
-                        if(comparado[0]<=atual[0]){ //Comparando hora
-                            if(comparado[0]==atual[0]){
-                                if(comparado[1]<=atual[1]){ //Comparando minuto
-                                    if(comparado[1]==atual[1]){
-                                        if(comparado[2]<=atual[2]){ //Comparando segundo
-                                            if(comparado[2]==atual[2]){
-                                                if(comparado[3]<=atual[3]){ //Comparando milesimo
-                                                    if(comparado[3]<atual[3]){
-                                                        vetor.set((i),compara);
-                                                        vetor.set((j),aux);
-                                                        aux = vetor.get(i);
-                                                    }  
-                                                }
-                                            } else{
-                                                vetor.set((i),compara);
-                                                vetor.set((j),aux);
-                                                aux = vetor.get(i);
-                                            }  
-                                        }
-                                    } else{
-                                        vetor.set((i),compara);
-                                        vetor.set((j),aux);
-                                        aux = vetor.get(i);
+                
+                if(compara.getVoltas()>aux.getVoltas()){
+                    vetor.set((i),compara);
+                    vetor.set((j),aux);
+                    aux = vetor.get(i);
+                } else if(compara.getVoltas()==aux.getVoltas()){
+                    if(comparado[0]<=atual[0]){ //Comparando hora
+                        if(comparado[0]==atual[0]){
+                            if(comparado[1]<=atual[1]){ //Comparando minuto
+                                if(comparado[1]==atual[1]){
+                                    if(comparado[2]<=atual[2]){ //Comparando segundo
+                                        if(comparado[2]==atual[2]){
+                                            if(comparado[3]<=atual[3]){ //Comparando milesimo
+                                                if(comparado[3]<atual[3]){
+                                                    vetor.set((i),compara);
+                                                    vetor.set((j),aux);
+                                                    aux = vetor.get(i);
+                                                }  
+                                            }
+                                        } else{
+                                            vetor.set((i),compara);
+                                            vetor.set((j),aux);
+                                            aux = vetor.get(i);
+                                        }  
                                     }
+                                } else{
+                                    vetor.set((i),compara);
+                                    vetor.set((j),aux);
+                                    aux = vetor.get(i);
                                 }
-                            } else{
-                                vetor.set((i),compara);
-                                vetor.set((j),aux);
-                                aux = vetor.get(i);
-                            } 
-                        }  
-                    } else{
-                        vetor.set((i),compara);
-                        vetor.set((j),aux);
-                        aux = vetor.get(i);
-                    }
-                }    
+                            }
+                        } else{
+                            vetor.set((i),compara);
+                            vetor.set((j),aux);
+                            aux = vetor.get(i);
+                        } 
+                    }  
+                }
+                
             }        
         }
         return vetor;
@@ -382,12 +384,16 @@ public class Corrida implements Runnable{
             Piloto aux = vetor.get(i);
             for(int j = i+1; j<=vetor.size()-1;j++){
                 Piloto compara = vetor.get(j);
-                if (compara.getMelhorSec()<= aux.getMelhorSec()){
+                if(aux.getVoltas()==0){
+                    vetor.set((i),compara);
+                    vetor.set((j),aux);
+                    aux = vetor.get(i);
+                }else if (compara.getMelhorSec()<= aux.getMelhorSec() && compara.getVoltas()>0){
                     if(compara.getMelhorSec()== aux.getMelhorSec()){
                         if(compara.getMelhorMili()< aux.getMelhorMili()){
-                             vetor.set((i),compara);
-                             vetor.set((j),aux);
-                             aux = vetor.get(i);
+                            vetor.set((i),compara);
+                            vetor.set((j),aux);
+                            aux = vetor.get(i);
                         }
                     }else {
                         vetor.set((i),compara);

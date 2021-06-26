@@ -77,7 +77,7 @@ public class ModeloTabela extends AbstractTableModel{
                 } else {
                     if(corredores.get(0).getTempoVolta()==null){
                         return "+00.000";
-                    } else if (corredores.get(linha).getTempoVolta()==null){
+                    } else if (corredores.get(linha).getTempoVolta()==null || corredores.get(linha).getVoltas()==0){
                         return "00.000";
                     } else{
                         int first, second;

@@ -304,11 +304,15 @@ public class Comunication{
         MqttMessage msgFuncao = new MqttMessage(("DadosCorrida").getBytes());
         msgFuncao.setQos(0);
         msgFuncao.setRetained(false);
+        MqttMessage msgFinalCorrida = new MqttMessage(("0").getBytes());
+        msgFinalCorrida.setQos(0);
+        msgFinalCorrida.setRetained(false);
         try {
             clientePub.publish("Config/TempoQuali", msgQuali);
             clientePub.publish("Config/NumeroVoltas", msgVoltas);
             clientePub.publish("Config/TempoMinimo", msgTempoMin);
             clientePub.publish("Config/QuantiCarros", msgNPilotos);
+            clientePub.publish("Config/AcabouCorrida", msgFinalCorrida);
             clientePub.publish("Function", msgFuncao);
         } catch (MqttException ex) {
             Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
@@ -629,5 +633,21 @@ public class Comunication{
             Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);
         }
+    }
+
+    /**
+     * Envia as voltas para encerrar a corrida no servidor
+     * @param voltas numero de voltas do primeiro
+     */
+    public void enviaFinalCorrida(int voltas) {
+        MqttMessage msgVoltas = new MqttMessage((Integer.toString(voltas)).getBytes());
+        msgVoltas.setQos(0);
+        msgVoltas.setRetained(false);
+        try {
+            clientePub.publish("Config/AcabouCorrida", msgVoltas);
+        } catch (MqttException ex) {
+            Logger.getLogger(Comunication.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        } 
     }
 }
