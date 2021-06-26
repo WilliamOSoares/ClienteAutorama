@@ -193,10 +193,12 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
         gerenciador = ClienteTelespectador.getInstance();
-        try {
-            gerenciador.cliente.disconnect();
-        } catch (MqttException ex) {
-            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        if(gerenciador.conectado){      
+            try {
+                gerenciador.cliente.disconnect();
+            } catch (MqttException ex) {
+                Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         System.exit(0);
     }//GEN-LAST:event_sairActionPerformed

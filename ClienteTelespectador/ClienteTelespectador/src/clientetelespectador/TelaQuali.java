@@ -546,7 +546,6 @@ public class TelaQuali extends javax.swing.JFrame {
                     gerenciador.quali.tempoRecord.setText(gerenciador.getRecord());
                     gerenciador.quali.autorRecord.setText(gerenciador.getRecordista());
                 }
-
             return null;
             }
         };
