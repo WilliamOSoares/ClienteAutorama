@@ -56,6 +56,7 @@ public class ClienteTelespectador {
     
     /**
      * Conecta com o broker e se inscreve no tópico fan/#.
+     * @param id Identificação do dispositivo
      */
     public void conectar(String id){
         try{
