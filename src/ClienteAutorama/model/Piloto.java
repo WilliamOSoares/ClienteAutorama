@@ -136,6 +136,10 @@ public class Piloto implements Serializable {
         int hora, min, sec, mili;
         String horas, mins, secs, milis;
         
+        if(this.tempoFinal==null){
+            return "00:00.000";
+        }
+        
         aux = this.tempoFinal.minusHours(this.tempoGeral.getHour()).minusMinutes(this.tempoGeral.getMinute()).minusSeconds(this.tempoGeral.getSecond()).minusNanos(this.tempoGeral.getNano());
         hora = aux.getHour();
         min = aux.getMinute();

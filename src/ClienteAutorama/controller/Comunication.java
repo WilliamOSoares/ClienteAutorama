@@ -24,7 +24,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
  */
 public class Comunication{
     public MqttClient clientePub;  
-    public String ip, respostaConfig = " ", respostaConfirm = " ", respostaQuali = " ", respostaCorrida = " ";   
+    public String ip, respostaConfig = " ", respostaConfirm = " ", respostaQuali = " ", respostaCorrida = " ", botao = " ";   
     public BufferedWriter saida;
     public BufferedReader entrada;
     public JSONObject recebido = new JSONObject();
@@ -174,6 +174,11 @@ public class Comunication{
                             recebe.put("URL", "finalCorrida");
                             recebido = recebe;
                         }
+                    } else if("Config/Botao".equals(string)){
+                        botao = mm.toString();
+                        JSONObject recebe = new JSONObject();
+                        recebe.put("Botao", botao);
+                        recebido = recebe;
                     }
                 }
 
@@ -504,9 +509,7 @@ public class Comunication{
             clientePub.publish("fan/record", msgTempoRecord);
             clientePub.publish("fan/etapa", msgEtapa);
             
-            if(pilotos.get(0).getTempoVolta()==null){
-                System.out.println("Enviando a corrida acabada");
-            } else {
+            if(!(pilotos.get(0).getTempoVolta()==null)){
                 for(int i = 0; i < pilotos.size(); i++){
 
                     msgNome = new MqttMessage((pilotos.get(i).getNome()).getBytes());
@@ -527,7 +530,11 @@ public class Comunication{
                     msgTempoGeral = new MqttMessage(pilotos.get(i).getTempoGeral().getBytes());
                     msgTempoGeral.setQos(0);
                     msgTempoGeral.setRetained(false);
-                    msgTempoVolta = new MqttMessage(pilotos.get(i).getTempoVolta().getBytes());
+                    if(pilotos.get(i).getTempoVolta()==null){
+                        msgTempoVolta = new MqttMessage(pilotos.get(i).getTempoVolta().getBytes());
+                    } else{
+                        msgTempoVolta = new MqttMessage(pilotos.get(i).getTempoVolta().getBytes());
+                    }
                     msgTempoVolta.setQos(0);
                     msgTempoVolta.setRetained(false);
                     String s = ".";

@@ -165,6 +165,33 @@ public class Corrida implements Runnable{
                     }
                     tempoDeEnvio = tempoDeEnvio + 1;
                 }
+                if (gerenciador.comunicacao.recebido.has("Botao")){
+                    if (gerenciador.comunicacao.recebido.get("Botao").equals("True")){ 
+                        if(botao){
+                            LocalDateTime tempoAgora = LocalDateTime.now();
+                            tempoAgora = tempoAgora.minusHours(tempoBotao.getHour()).minusMinutes(tempoBotao.getMinute()).minusSeconds(tempoBotao.getSecond()).minusNanos(tempoBotao.getNano());
+                            if(tempoAgora.getSecond()<10){
+                                botao = false;
+                                gerenciador.comunicacao.recebido.clear();
+                                gerenciador.comunicacao.recebido.append("status", "True");
+                                if(isFimQuali()){
+                                    gerenciador.comunicacao.recebido.append("URL", "finalCorrida");
+                                    JOptionPane.showMessageDialog(null, "Acabou corrida", null, WIDTH);
+                                } else {
+                                    gerenciador.comunicacao.recebido.append("URL", "finalQuali");
+                                    JOptionPane.showMessageDialog(null, "Acabou qualificatório", null, WIDTH);
+                                }
+                            } else{
+                                System.out.println("Passou o tempo: "+tempoBotao.toString());
+                                botao = true;
+                                tempoBotao = LocalDateTime.now();
+                            }                        
+                        } else{
+                            botao = true;
+                            tempoBotao = LocalDateTime.now();
+                        }
+                    }
+                } 
             }
             
             //Dormir por 3 segundos
