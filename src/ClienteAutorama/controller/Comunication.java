@@ -530,11 +530,7 @@ public class Comunication{
                     msgTempoGeral = new MqttMessage(pilotos.get(i).getTempoGeral().getBytes());
                     msgTempoGeral.setQos(0);
                     msgTempoGeral.setRetained(false);
-                    if(pilotos.get(i).getTempoVolta()==null){
-                        msgTempoVolta = new MqttMessage(pilotos.get(i).getTempoVolta().getBytes());
-                    } else{
-                        msgTempoVolta = new MqttMessage(pilotos.get(i).getTempoVolta().getBytes());
-                    }
+                    msgTempoVolta = new MqttMessage(pilotos.get(i).getTempoVolta().getBytes());
                     msgTempoVolta.setQos(0);
                     msgTempoVolta.setRetained(false);
                     String s = ".";

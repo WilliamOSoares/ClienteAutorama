@@ -123,7 +123,11 @@ public class Piloto implements Serializable {
     * @return Uma String com tempo da volta do piloto.
     */
     public String getTempoVolta() {
-        return tempoVolta;
+        if(tempoVolta==null){
+            return "0:00.000";
+        } else{
+            return tempoVolta;
+        }
     }
 
     /**
